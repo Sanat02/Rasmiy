@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.example.demo.enums.AccountType;
 import lombok.*;
 
 
@@ -10,6 +11,6 @@ import lombok.*;
 public class User {
     private String accountName;
     private String email;
-    private String accountType;
+    private AccountType accountType;
     private String password;
 }
