@@ -5,7 +5,6 @@ import lombok.*;
 import java.util.Date;
 
 @Data
-@Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 

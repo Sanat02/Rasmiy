@@ -4,7 +4,6 @@ import com.example.demo.enums.ContactType;
 import lombok.*;
 
 @Data
-@Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 
