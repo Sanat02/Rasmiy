@@ -2,7 +2,8 @@ package com.example.demo.model;
 
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -11,5 +12,5 @@ import java.util.Date;
 public class JobList {
     private Employer employer;
     private String category;
-    private Date date;
+    private LocalDateTime date;
 }
