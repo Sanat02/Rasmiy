@@ -8,7 +8,7 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 
-public class JobSeeker {
+public class Resume {
     private User author;
     private String job;
     private Integer expectedSalary;

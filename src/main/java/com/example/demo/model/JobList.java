@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 
 public class JobList {
-    private User user;
+    private User publisher;
     private String category;
     private LocalDateTime date;
 }

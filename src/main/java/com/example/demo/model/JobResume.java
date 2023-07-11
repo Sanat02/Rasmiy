@@ -6,7 +6,7 @@ import lombok.*;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 
-public class Employer {
+public class JobResume {
     private User author;
     private String jobTitle;
     private Integer salary;

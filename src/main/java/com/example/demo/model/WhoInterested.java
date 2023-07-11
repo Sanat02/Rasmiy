@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 
 public class WhoInterested {
-    private User whoIsInterested;
-    private JobList whatIsInterested;
+    private User applicant;
+    private JobResume jobResume;
     private LocalDateTime date;
 }
