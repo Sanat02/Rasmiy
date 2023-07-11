@@ -22,4 +22,16 @@ public class JobResumeDao {
         String sql="select * from jobresume where category = ?";
         return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(JobResume.class),category);
     }
+
+    //поиск резюме где зарплата <
+    public List<JobResume> getResumeByCategory(Integer salary){
+        String sql="select * from jobresume where salary < ?";
+        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(JobResume.class),salary);
+    }
+
+    //поиск резюме где опыт >
+    public List<JobResume> getResumeByCategory(int year){
+        String sql="select * from jobresume where experience > ?";
+        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(JobResume.class),year);
+    }
 }
