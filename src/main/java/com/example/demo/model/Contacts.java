@@ -1,13 +1,14 @@
 package com.example.demo.model;
 
 import com.example.demo.enums.ContactType;
-import lombok.*;
+import lombok.Data;
 
 @Data
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+
 
 public class Contacts {
     private ContactType type;
     private String value;
+    private int bracnch50;
+    private int bracnch51;
 }
