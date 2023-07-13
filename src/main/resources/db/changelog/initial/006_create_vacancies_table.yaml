@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 06-create-vacancies-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: vacancies
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: publisher_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_vacancies_publisher
+                    references: users(id)
+              - column:
+                  name: category
+                  type: varchar(255)
+              - column:
+                  name: date
+                  type: date
+
+
+

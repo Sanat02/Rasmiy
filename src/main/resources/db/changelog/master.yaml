@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/initial/001_create_users_table.yaml
+  - include:
+      file: db/changelog/initial/002_create_resume_table.yaml
+  - include:
+      file: db/changelog/initial/003_create_job_resume_table.yaml
+  - include:
+      file: db/changelog/initial/004_create_contacts_table.yaml
+  - include:
+      file: db/changelog/initial/005_create_whointerested_table.yaml
+  - include:
+      file: db/changelog/initial/006_create_vacancies_table.yaml
+  - include:
+      file: db/changelog/initial/007_add_column.yaml
+
+
+#    - includeAll:
+#      path: db/changelog/initial

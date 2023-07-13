@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: 03-create-job_resume-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: job_resumes
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_job_resumes_user
+                    references: users(id)
+              - column:
+                  name: job_title
+                  type: varchar(255)
+              - column:
+                  name: salary
+                  type: int
+              - column:
+                  name: job_description
+                  type: varchar(255)
+              - column:
+                  name: experience
+                  type: int
+              - column:
+                  name: category
+                  type: varchar(255)
+
+

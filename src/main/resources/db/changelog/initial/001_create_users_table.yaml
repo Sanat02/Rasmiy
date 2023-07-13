@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: 01-create-users-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: account_name
+                  type: varchar(255)
+              - column:
+                  name: email
+                  type: varchar(255)
+              - column:
+                  name: account_type
+                  type: varchar(255)
+              - column:
+                  name: password
+                  type: varchar(255)
+
+

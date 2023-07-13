@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 05-create-whointerested-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: who_interested
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: applicant_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_whointerested_applicant
+                    references: users(id)
+              - column:
+                  name: job_resume_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_whointerested_job
+                    references: job_resumes(id)
+              - column:
+                  name: date
+                  type: date

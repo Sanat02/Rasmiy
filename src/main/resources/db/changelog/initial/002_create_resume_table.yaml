@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: 02-create-resume-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: resumes
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_resumes_user
+                    references: users(id)
+              - column:
+                  name: expected_salary
+                  type: int
+              - column:
+                  name: job_experience
+                  type: int
+              - column:
+                  name: education
+                  type: varchar(255)
+
+

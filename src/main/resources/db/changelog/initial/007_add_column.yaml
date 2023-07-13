@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: addColumn
+      author: Sanat
+      changes:
+        - addColumn:
+            tableName: resumes
+            columns:
+                name: job
+                type: varchar(50)

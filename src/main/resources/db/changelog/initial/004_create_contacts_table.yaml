@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 04-create-contacts-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: contacts
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: resume_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_contacts_resume
+                    references: resumes(id)
+              - column:
+                  name: type
+                  type: varchar(255)
+              - column:
+                  name: value
+                  type: varchar(255)
+
+
+
