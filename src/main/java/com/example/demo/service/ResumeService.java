@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.ResumeDao;
+import com.example.demo.dto.JobListDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.enums.ContactType;
 import com.example.demo.model.Resume;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Data
@@ -22,9 +24,24 @@ public class ResumeService {
     private final ContactsService contactsService;
 
     //BONUS
-    public Optional<Resume> getResumeById(int resumeId) {
-        // TODO: Реализовать получение резюме по идентификатору
-        return Optional.empty();
+    public ResumeDto getResumeById(int resumeId) {
+        Resume resume = resumeDao.getResumeById(resumeId);
+        ResumeDto resumeDto = ResumeDto.builder()
+                .id(resume.getId())
+                .job(resume.getJob())
+                .jobExperience(resume.getJob_experience())
+                .expectedSalary(resume.getExpected_salary())
+                .applicant(userService.getUserById(resume.getUser_id()))
+                .contacts(contactsService.getContactsById(resume.getId()))
+                .education(resume.getEducation())
+                .build();
+        return resumeDto;
+    }
+
+    public List<ResumeDto> getResumeByUser(String email){
+        List<ResumeDto> resumeDtos=getAllResumes().stream()
+                .filter(e->e.getApplicant().getEmail()==email).collect(Collectors.toList());
+        return resumeDtos;
     }
 
 
