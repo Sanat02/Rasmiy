@@ -11,12 +11,9 @@ import java.util.List;
 
 public class Resume {
     private int id;
-    private User user;
+    private int user_id;
     private String job;
-    private Integer expectedSalary;
-    private String jobExperience;
+    private Integer expected_salary;
+    private String job_experience;
     private String education;
-    private List<Contacts> contacts=new ArrayList<>();
-
-
 }

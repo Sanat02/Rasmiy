@@ -20,49 +20,11 @@ public class WhoIsInterestedDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    //Выборка откликнувшихся соискателей на вакансию.
-    public List<User> getInterestedJobSeekers() {
-        List<User> interestedJobSeekers = new ArrayList<>();
-        List<User> users = getAllUsers();
-        List<WhoInterested> interesteds = getAllInterestedList();
-        interesteds.forEach(whoInterested -> {
-            var user = users.stream().filter(e -> e.getId() == whoInterested.getApplicant_id())
-                    .findFirst().orElse(null);
-            whoInterested.setApplicant(user);
-            interestedJobSeekers.add(user);
-        });
-
-        return interestedJobSeekers;
-    }
-
-    //Выборка вакансий на которые откликнулся пользователь.
-    public List<JobResume> getInterestedJobs() {
-        List<JobResume> interestedJobs = new ArrayList<>();
-        List<JobResume> jobResumes = getAllJobResumes();
-        List<WhoInterested> interesteds = getAllInterestedList();
-        interesteds.forEach(whoInterested -> {
-            var job = jobResumes.stream().filter(e -> e.getId() == whoInterested.getJob_resume_id())
-                    .findFirst().orElse(null);
-            whoInterested.setJob_resume(job);
-            interestedJobs.add(job);
-        });
-
-        return interestedJobs;
-    }
-
-    private List<User> getAllUsers() {
-        String sql = "select * from users";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
-    }
-
-    private List<JobResume> getAllJobResumes() {
-        String sql = "select * from jobresume";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(JobResume.class));
-    }
 
     //Выборка всех отликнувшихся пользователей
     public List<WhoInterested> getAllInterestedList() {
-        String sql = "select * from whointerested";
+        String sql = "select * from who_interested";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(WhoInterested.class));
     }
+
 }

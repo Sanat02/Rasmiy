@@ -1,9 +1,10 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.UserDao;
+import com.example.demo.dto.ResumeDto;
+import com.example.demo.enums.ContactType;
 import com.example.demo.model.User;
-import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -11,13 +12,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Data
+@RequiredArgsConstructor
 public class UserService {
-    @Autowired
+
     private final UserDao userDao;
-    public UserService(UserDao userDao) {
-        this.userDao = userDao;
-    }
 
 
     public List<User> getAllUsers(){
@@ -46,6 +44,12 @@ public class UserService {
             return "Not exists";
         }
     }
+
+    public User getUserById(int id){
+        return userDao.getUserById(id);
+    }
+
+
 
 
 }

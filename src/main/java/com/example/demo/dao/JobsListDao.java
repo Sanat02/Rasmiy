@@ -19,25 +19,11 @@ public class JobsListDao {
 
     //Выборка всех вакансий.
     public List<JobList> getAllJobs() {
-
-        String sql = "select * from job_listings";
-        List<User> listUsers = getAllUsers();
-
-
-        var list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(JobList.class));
-        list.forEach(jobList -> {
-            User publisher = listUsers.stream().filter(user -> user.getId() == jobList.getPublisher_id())
-                    .findFirst().orElse(null);
-            jobList.setPublisher(publisher);
-        });
-        return list;
+        String sql="select * from vacancies";
+        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(JobList.class));
     }
 
 
-    public List<User> getAllUsers() {
-        String sql = "select * from users";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
-    }
 
     //Выборка вакансий по категориям.
     public List<JobList> getJobByCategory(String category){

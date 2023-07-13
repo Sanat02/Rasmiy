@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 
 public class JobList {
+    private int id;
     private int publisher_id;
-    private User publisher;
     private String category;
     private LocalDateTime date;
 }

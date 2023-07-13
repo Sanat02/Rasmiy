@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.JobResumeDto;
+import com.example.demo.dto.WhoInterestedDto;
 import com.example.demo.model.JobResume;
 import com.example.demo.model.User;
 import com.example.demo.service.WhoInterestedService;
@@ -19,14 +21,9 @@ public class WhoInterestedController {
     public WhoInterestedController(WhoInterestedService whoInterestedService) {
         this.whoInterestedService = whoInterestedService;
     }
-    @GetMapping("/jobseekers")
-    public List<User> getInterestedJobSeekers()
-    {
-        return whoInterestedService.getInterestedJobSeekers();
-    }
-    @GetMapping("/jobs")
-    public List<JobResume> getInterestedJobs()
-    {
-        return whoInterestedService.getInterestedJobs();
+
+    @GetMapping
+    public List<WhoInterestedDto> getInterestedJobs() {
+        return whoInterestedService.getAllInterested();
     }
 }
