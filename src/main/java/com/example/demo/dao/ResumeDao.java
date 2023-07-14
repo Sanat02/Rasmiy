@@ -3,6 +3,7 @@ package com.example.demo.dao;
 
 import com.example.demo.model.Resume;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,15 +12,10 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 @Component
-
+@RequiredArgsConstructor
 
 public class ResumeDao {
-    @Autowired
     private final JdbcTemplate jdbcTemplate;
-
-    public ResumeDao(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
     //выборка всех резюме
     public List<Resume> getAllResumes() {
@@ -53,7 +49,7 @@ public class ResumeDao {
     //обновление резюме
     public void updateResume(Resume resume) {
         String sql = "UPDATE resumes SET user_id = ?, job = ?, expected_salary = ? WHERE id = ?";
-        int rowsAffected = jdbcTemplate.update(sql, resume.getUser_id(), resume.getJob(), resume.getExpected_salary(),  resume.getId());
+        int rowsAffected = jdbcTemplate.update(sql, resume.getUser_id(), resume.getJob(), resume.getExpected_salary(), resume.getId());
 
         if (rowsAffected != 1) {
             throw new RuntimeException("Failed to update resume with ID: " + resume.getId());

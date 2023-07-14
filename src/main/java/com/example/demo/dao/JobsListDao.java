@@ -3,6 +3,7 @@ package com.example.demo.dao;
 import com.example.demo.model.JobList;
 import com.example.demo.model.JobResume;
 import com.example.demo.model.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -12,26 +13,21 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class JobsListDao {
     private final JdbcTemplate jdbcTemplate;
 
-
-    public JobsListDao(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
-
     //Выборка всех вакансий.
     public List<JobList> getAllJobs() {
-        String sql="select * from vacancies";
-        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(JobList.class));
+        String sql = "select * from vacancies";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(JobList.class));
     }
-
 
 
     //Выборка вакансий по категориям.
-    public List<JobList> getJobByCategory(String category){
-        String sql="select * from vacancies where category = ?";
-        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(JobList.class),category);
+    public List<JobList> getJobByCategory(String category) {
+        String sql = "select * from vacancies where category = ?";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(JobList.class), category);
     }
 
     //удаление вакансии по id
@@ -44,6 +40,7 @@ public class JobsListDao {
             throw new RuntimeException("Failed to delete job: " + e.getMessage(), e);
         }
     }
+
     //поиск вакансии по id
     public JobList getJobById(int jobId) {
         String sql = "SELECT * FROM jobs WHERE id = ?";
@@ -53,7 +50,6 @@ public class JobsListDao {
             return null;
         }
     }
-
 
 
 }

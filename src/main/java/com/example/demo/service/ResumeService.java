@@ -48,15 +48,14 @@ public class ResumeService {
 
     }
 
-    public Resume updateResume(Resume resume) {
-        // TODO: Реализовать обновление информации в резюме
-        return null;
+    public void updateResume(Resume resume) {
+        resumeDao.updateResume(resume);
     }
 
     public void deleteResume(int resumeId) {
-        // TODO: Реализовать удаление резюме по идентификатору
+        resumeDao.deleteResume(resumeId);
     }
-    //Bonus окончен
+
 
     public List<ResumeDto> getAllResumes() {
         List<Resume> resumes = resumeDao.getAllResumes();
@@ -71,8 +70,6 @@ public class ResumeService {
                 ).toList();
         return resumeDtos;
     }
-
-
 
 
 }
