@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 015-create-education-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: education
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: resume_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_education_resume
+                    references: resumes(id)
+              - column:
+                  name: institution_name
+                  type: varchar(55)
+              - column:
+                  name: start_date
+                  type: date
+              - column:
+                  name: end_date
+                  type: date
+              - column:
+                  name: degree
+                  type: varchar(55)
+
+
+

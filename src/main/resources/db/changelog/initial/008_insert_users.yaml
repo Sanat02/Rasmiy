@@ -21,6 +21,12 @@ databaseChangeLog:
               - column:
                   name: password
                   value: 12345
+              - column:
+                  name: phone_number
+                  value: 7777777
+              - column:
+                  name: profile_photo
+                  value: photo1
         - insert:
             tableName: users
             columns:
@@ -39,3 +45,9 @@ databaseChangeLog:
               - column:
                   name: password
                   value: 54321
+              - column:
+                  name: phone_number
+                  value: 88888
+              - column:
+                  name: profile_photo
+                  value: photo2

@@ -22,11 +22,6 @@ databaseChangeLog:
               - column:
                   name: expected_salary
                   type: int
-              - column:
-                  name: job_experience
-                  type: int
-              - column:
-                  name: education
-                  type: varchar(255)
+
 
 

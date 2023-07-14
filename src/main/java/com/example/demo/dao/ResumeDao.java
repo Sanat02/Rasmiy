@@ -35,9 +35,8 @@ public class ResumeDao {
 
     //добавление резюме
     public void addResume(Resume resume) {
-        String sql = "INSERT INTO resumes (id, user_id, expected_salary,job_experience,education,job) VALUES (?, ?, ?, ?, ?, ?)";
-        int rowsAffected = jdbcTemplate.update(sql, resume.getId(), resume.getUser_id(), resume.getExpected_salary()
-                , resume.getJob_experience(), resume.getEducation(), resume.getJob());
+        String sql = "INSERT INTO resumes (id, user_id, expected_salary,job) VALUES (?, ?, ?, ?, ?, ?)";
+        int rowsAffected = jdbcTemplate.update(sql, resume.getId(), resume.getUser_id(), resume.getExpected_salary(), resume.getJob());
 
     }
 
@@ -53,8 +52,8 @@ public class ResumeDao {
 
     //обновление резюме
     public void updateResume(Resume resume) {
-        String sql = "UPDATE resumes SET user_id = ?, job = ?, expected_salary = ?, job_experience = ?, education = ? WHERE id = ?";
-        int rowsAffected = jdbcTemplate.update(sql, resume.getUser_id(), resume.getJob(), resume.getExpected_salary(), resume.getJob_experience(), resume.getEducation(), resume.getId());
+        String sql = "UPDATE resumes SET user_id = ?, job = ?, expected_salary = ? WHERE id = ?";
+        int rowsAffected = jdbcTemplate.update(sql, resume.getUser_id(), resume.getJob(), resume.getExpected_salary(),  resume.getId());
 
         if (rowsAffected != 1) {
             throw new RuntimeException("Failed to update resume with ID: " + resume.getId());

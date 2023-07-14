@@ -2,6 +2,8 @@ databaseChangeLog:
   - include:
       file: db/changelog/initial/001_create_users_table.yaml
   - include:
+      file: db/changelog/initial/014_add_column_users.yaml
+  - include:
       file: db/changelog/initial/002_create_resume_table.yaml
   - include:
       file: db/changelog/initial/003_create_job_resume_table.yaml
@@ -25,6 +27,16 @@ databaseChangeLog:
       file: db/changelog/initial/012_insert_jobr.yaml
   - include:
       file: db/changelog/initial/013_insert_who.yaml
+  - include:
+      file: db/changelog/initial/015_create_education_table.yaml
+  - include:
+      file: db/changelog/initial/016_insert_education.yaml
+  - include:
+      file: db/changelog/initial/017_create_jobexp_table.yaml
+  - include:
+      file: db/changelog/initial/018_insert_jobexp.yaml
+
+
 
 
 

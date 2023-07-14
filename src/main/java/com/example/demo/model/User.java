@@ -12,4 +12,6 @@ public class User {
     private String email;
     private AccountType accountType;
     private String password;
+    private String phone_number;
+    private String profile_photo;
 }

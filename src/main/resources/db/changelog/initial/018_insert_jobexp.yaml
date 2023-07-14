@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 18-insert-job_experience-table
+      author: Sanat
+      changes:
+        - insert:
+            tableName: job_experience
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: resume_id
+                  value: 1
+              - column:
+                  name: position
+                  value: Junior python developer
+              - column:
+                  name: start_date
+                  value: '2019-07-15'
+              - column:
+                  name: end_date
+                  value: '2023-07-15'
+
+

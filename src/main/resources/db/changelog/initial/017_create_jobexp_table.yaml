@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 017-create-job-experience-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: job_experience
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: resume_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_jobexperience_resume
+                    references: resumes(id)
+              - column:
+                  name: position
+                  type: varchar(55)
+              - column:
+                  name: start_date
+                  type: date
+              - column:
+                  name: end_date
+                  type: date
+
+
+

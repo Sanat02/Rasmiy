@@ -29,11 +29,11 @@ public class ResumeService {
         ResumeDto resumeDto = ResumeDto.builder()
                 .id(resume.getId())
                 .job(resume.getJob())
-                .jobExperience(resume.getJob_experience())
+                //.jobExperience(resume.getJob_experience())
                 .expectedSalary(resume.getExpected_salary())
                 .applicant(userService.getUserById(resume.getUser_id()))
                 .contacts(contactsService.getContactsById(resume.getId()))
-                .education(resume.getEducation())
+                //.education(resume.getEducation())
                 .build();
         return resumeDto;
     }
@@ -65,10 +65,10 @@ public class ResumeService {
         List<ResumeDto> resumeDtos = resumes.stream()
                 .map(e -> ResumeDto.builder()
                         .id(e.getId())
-                        .jobExperience(e.getJob_experience())
+                       // .jobExperience(e.getJob_experience())
                         .expectedSalary(e.getExpected_salary())
                         .job(e.getJob())
-                        .education(e.getEducation())
+                       // .education(e.getEducation())
                         .applicant(userService.getUserById(e.getId()))
                         .contacts(contactsService.getContactsById(e.getId()))
                         .build()

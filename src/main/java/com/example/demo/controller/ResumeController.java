@@ -30,7 +30,7 @@ public class ResumeController {
 
     @PostMapping
     public void createResume(@RequestBody Resume resume){
-       log.info(resume.getEducation(),resume.getUser_id(),resume.getExpected_salary());
+       log.info(resume.getJob(),resume.getUser_id(),resume.getExpected_salary());
        resumeService.createResume(resume);
     }
 

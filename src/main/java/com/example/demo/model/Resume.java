@@ -14,6 +14,5 @@ public class Resume {
     private int user_id;
     private String job;
     private Integer expected_salary;
-    private String job_experience;
-    private String education;
+
 }
