@@ -38,16 +38,16 @@ public class ResumeService {
         return resumeDto;
     }
 
-    public List<ResumeDto> getResumeByUser(String email){
-        List<ResumeDto> resumeDtos=getAllResumes().stream()
-                .filter(e->e.getApplicant().getEmail()==email).collect(Collectors.toList());
+    public List<ResumeDto> getResumeByUser(String email) {
+        List<ResumeDto> resumeDtos = getAllResumes().stream()
+                .filter(e -> e.getApplicant().getEmail() == email).collect(Collectors.toList());
         return resumeDtos;
     }
 
 
-    public Resume createResume(Resume resume) {
-        // TODO: Реализовать создание нового резюме
-        return null;
+    public void createResume(Resume resume) {
+        resumeDao.addResume(resume);
+
     }
 
     public Resume updateResume(Resume resume) {
@@ -76,7 +76,7 @@ public class ResumeService {
         return resumeDtos;
     }
 
-    public User getUserByPhone(String phone){
+    public User getUserByPhone(String phone) {
         List<ResumeDto> resumeDtos = getAllResumes();
         return resumeDtos.stream()
                 .filter(resumeDto -> resumeDto.getContacts().stream()

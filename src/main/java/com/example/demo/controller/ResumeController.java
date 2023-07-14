@@ -5,15 +5,13 @@ import com.example.demo.model.Resume;
 import com.example.demo.model.User;
 import com.example.demo.service.ResumeService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+@Slf4j
 @RestController
 @RequestMapping("/resumes")
 @RequiredArgsConstructor
@@ -28,6 +26,12 @@ public class ResumeController {
     @GetMapping("/getById/{id}")
     public ResumeDto getAllResumes(@PathVariable int id){
         return resumeService.getResumeById(id);
+    }
+
+    @PostMapping
+    public void createResume(@RequestBody Resume resume){
+       log.info(resume.getEducation(),resume.getUser_id(),resume.getExpected_salary());
+       resumeService.createResume(resume);
     }
 
 }

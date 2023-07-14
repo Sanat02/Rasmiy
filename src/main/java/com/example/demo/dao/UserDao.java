@@ -3,6 +3,7 @@ package com.example.demo.dao;
 import com.example.demo.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -64,6 +65,15 @@ public class UserDao {
 
         User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), id);
         return user;
+    }
+
+    public void updateAccountName(int userId, String newAccountName) {
+        String sql = "UPDATE users SET account_name = ? WHERE id = ?";
+        try {
+            jdbcTemplate.update(sql, newAccountName, userId);
+        } catch (DataAccessException e) {
+            throw new RuntimeException("Failed to update account name for user with ID: " + userId, e);
+        }
     }
 
 
