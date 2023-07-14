@@ -1,7 +1,5 @@
 package com.example.demo.dao;
 
-import com.example.demo.model.Contacts;
-import com.example.demo.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
