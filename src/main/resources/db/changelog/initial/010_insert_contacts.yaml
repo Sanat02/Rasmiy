@@ -1,0 +1,68 @@
+databaseChangeLog:
+  - changeSet:
+      id: 10-insert-contacts-data
+      author: Sanat
+      changes:
+        - insert:
+            tableName: contacts
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: resume_id
+                  value: 1
+              - column:
+                  name: type
+                  value: 'TELEGRAM'
+              - column:
+                  name: value
+                  value: 'wolfiesuless'
+
+        - insert:
+            tableName: contacts
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: resume_id
+                  value: 1
+              - column:
+                  name: type
+                  value: 'EMAIL'
+              - column:
+                  name: value
+                  value: 'Jojo@gmail.com'
+
+        - insert:
+            tableName: contacts
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: resume_id
+                  value: 2
+              - column:
+                  name: type
+                  value: 'PHONE'
+              - column:
+                  name: value
+                  value: '04567889'
+
+        - insert:
+            tableName: contacts
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: resume_id
+                  value: 2
+              - column:
+                  name: type
+                  value: 'LINKEDIN'
+              - column:
+                  name: value
+                  value: 'bunny'

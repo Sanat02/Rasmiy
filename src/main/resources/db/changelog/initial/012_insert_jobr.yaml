@@ -1,0 +1,53 @@
+databaseChangeLog:
+  - changeSet:
+      id: 03-create-job_resume-table
+      author: Sanat
+      changes:
+        - insert:
+            tableName: job_resumes
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: job_title
+                  value: 'IT'
+              - column:
+                  name: salary
+                  value: 50000
+              - column:
+                  name: job_description
+                  value: 'Job Description 1'
+              - column:
+                  name: experience
+                  value: 3
+              - column:
+                  name: category
+                  value: 'Category 1'
+        - insert:
+            tableName: job_resumes
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: job_title
+                  value: 'Managment'
+              - column:
+                  name: salary
+                  value: 60000
+              - column:
+                  name: job_description
+                  value: 'Job Description 2'
+              - column:
+                  name: experience
+                  value: 4
+              - column:
+                  name: category
+                  value: 'Category 2'

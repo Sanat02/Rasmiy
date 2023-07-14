@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 05-insert-who_interested-data
+      author: Sanat
+      changes:
+        - insert:
+            tableName: who_interested
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: applicant_id
+                  value: 1
+              - column:
+                  name: job_resume_id
+                  value: 1
+              - column:
+                  name: date
+                  value: '2023-07-15'
+        - insert:
+            tableName: who_interested
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: applicant_id
+                  value: 1
+              - column:
+                  name: job_resume_id
+                  value: 2
+              - column:
+                  name: date
+                  value: '2023-07-16'

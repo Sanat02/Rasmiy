@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: 09-insert-resumes
+      author: Sanat
+      changes:
+        - insert:
+            tableName: resumes
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: expected_salary
+                  value: 150000
+              - column:
+                  name: job
+                  value: "It-specialist"
+              - column:
+                  name: education
+                  value: "KNU"
+        - insert:
+            tableName: resumes
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: expected_salary
+                  value: 250000
+              - column:
+                  name: job
+                  value: "Mentor"
+              - column:
+                  name: education
+                  value: "KNU"
+        - insert:
+            tableName: resumes
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: expected_salary
+                  value: 20000
+              - column:
+                  name: job
+                  value: "QA Engineer"
+              - column:
+                  name: education
+                  value: "KNU"

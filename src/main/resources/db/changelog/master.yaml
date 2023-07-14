@@ -13,6 +13,20 @@ databaseChangeLog:
       file: db/changelog/initial/006_create_vacancies_table.yaml
   - include:
       file: db/changelog/initial/007_add_column.yaml
+  - include:
+      file: db/changelog/initial/008_insert_users.yaml
+  - include:
+      file: db/changelog/initial/009_insert_resumes.yaml
+  - include:
+      file: db/changelog/initial/010_insert_contacts.yaml
+  - include:
+      file: db/changelog/initial/011_insert_vacancies.yaml
+  - include:
+      file: db/changelog/initial/012_insert_jobr.yaml
+  - include:
+      file: db/changelog/initial/013_insert_who.yaml
+
+
 
 
 #    - includeAll:

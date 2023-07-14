@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 07-insert-vacancies-data
+      author: Sanat
+      changes:
+        - insert:
+            tableName: vacancies
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: publisher_id
+                  value: 2
+              - column:
+                  name: category
+                  value: 'K2'
+              - column:
+                  name: date
+                  value: '2023-07-14'
+        - insert:
+            tableName: vacancies
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: publisher_id
+                  value: 2
+              - column:
+                  name: category
+                  value: 'K1'
+              - column:
+                  name: date
+                  value: '2023-07-15'

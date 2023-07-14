@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: 00-insert-userss
+      author: Sanat
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: account_name
+                  value: wolfiesuless
+              - column:
+                  name: email
+                  value: s@gmail.com
+              - column:
+                  name: account_type
+                  value: JOB_SEEKER
+              - column:
+                  name: password
+                  value: 12345
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: account_name
+                  value: niranova
+              - column:
+                  name: email
+                  value: n@gmail.com
+              - column:
+                  name: account_type
+                  value: EMPLOYER
+              - column:
+                  name: password
+                  value: 54321
