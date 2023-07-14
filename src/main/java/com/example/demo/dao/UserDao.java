@@ -76,5 +76,12 @@ public class UserDao {
         }
     }
 
+    public User getUserByPhone(int phone) {
+        String sql = "select* from users where phone_number = ?";
+
+        User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), phone);
+        return user;
+    }
+
 
 }

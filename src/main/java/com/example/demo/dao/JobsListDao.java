@@ -30,7 +30,7 @@ public class JobsListDao {
 
     //Выборка вакансий по категориям.
     public List<JobList> getJobByCategory(String category){
-        String sql="select * from job_listings where category = ?";
+        String sql="select * from vacancies where category = ?";
         return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(JobList.class),category);
     }
 

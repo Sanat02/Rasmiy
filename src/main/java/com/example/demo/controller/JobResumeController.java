@@ -21,7 +21,7 @@ public class JobResumeController {
 
 
 
-    @GetMapping("/getByCategory/{category}")
+    @GetMapping("/category/{category}")
     public List<JobResume> getResumesByCategory(@PathVariable String category) {
         return jobResumeService.getResumeByCategory(category);
     }

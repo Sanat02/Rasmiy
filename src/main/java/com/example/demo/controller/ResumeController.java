@@ -23,7 +23,7 @@ public class ResumeController {
     public List<ResumeDto> getAllResumes(){
        return resumeService.getAllResumes();
    }
-    @GetMapping("/getById/{id}")
+    @GetMapping("/id/{id}")
     public ResumeDto getAllResumes(@PathVariable int id){
         return resumeService.getResumeById(id);
     }

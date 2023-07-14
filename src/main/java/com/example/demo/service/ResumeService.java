@@ -29,11 +29,9 @@ public class ResumeService {
         ResumeDto resumeDto = ResumeDto.builder()
                 .id(resume.getId())
                 .job(resume.getJob())
-                //.jobExperience(resume.getJob_experience())
                 .expectedSalary(resume.getExpected_salary())
                 .applicant(userService.getUserById(resume.getUser_id()))
                 .contacts(contactsService.getContactsById(resume.getId()))
-                //.education(resume.getEducation())
                 .build();
         return resumeDto;
     }
@@ -65,26 +63,16 @@ public class ResumeService {
         List<ResumeDto> resumeDtos = resumes.stream()
                 .map(e -> ResumeDto.builder()
                         .id(e.getId())
-                       // .jobExperience(e.getJob_experience())
                         .expectedSalary(e.getExpected_salary())
                         .job(e.getJob())
-                       // .education(e.getEducation())
-                        .applicant(userService.getUserById(e.getId()))
+                        .applicant(userService.getUserById(e.getUser_id()))
                         .contacts(contactsService.getContactsById(e.getId()))
                         .build()
                 ).toList();
         return resumeDtos;
     }
 
-    public User getUserByPhone(String phone) {
-        List<ResumeDto> resumeDtos = getAllResumes();
-        return resumeDtos.stream()
-                .filter(resumeDto -> resumeDto.getContacts().stream()
-                        .anyMatch(contact -> contact.getType().equals(ContactType.PHONE) && contact.getValue().equals(phone)))
-                .map(ResumeDto::getApplicant)
-                .findFirst()
-                .orElse(null);
 
-    }
+
 
 }

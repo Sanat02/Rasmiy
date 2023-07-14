@@ -23,7 +23,7 @@ public class JobsListController {
         return jobsListService.getAllJobs();
    }
 
-    @GetMapping("/getByCategory/{category}")
+    @GetMapping("/category/{category}")
     public List<JobList> getByCategory(@PathVariable String category){
         return jobsListService.getByCategory(category);
     }
