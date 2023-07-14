@@ -31,13 +31,13 @@ public class ResumeDao {
 
     //добавление резюме
     public void addResume(Resume resume) {
-        String sql = "INSERT INTO resumes (id, user_id, expected_salary,job) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO resumes (id, user_id, expected_salary,job) VALUES (?, ?, ?, ?)";
         int rowsAffected = jdbcTemplate.update(sql, resume.getId(), resume.getUser_id(), resume.getExpected_salary(), resume.getJob());
 
     }
 
     //удаление резюме по id
-    public void deleteResume(int resumeId) {
+    public void deleteResumeById(int resumeId) {
         String sql = "DELETE FROM resumes WHERE id = ?";
         int rowsAffected = jdbcTemplate.update(sql, resumeId);
 
@@ -47,9 +47,9 @@ public class ResumeDao {
     }
 
     //обновление резюме
-    public void updateResume(Resume resume) {
+    public void updateResume(Resume resume,int id) {
         String sql = "UPDATE resumes SET user_id = ?, job = ?, expected_salary = ? WHERE id = ?";
-        int rowsAffected = jdbcTemplate.update(sql, resume.getUser_id(), resume.getJob(), resume.getExpected_salary(), resume.getId());
+        int rowsAffected = jdbcTemplate.update(sql, resume.getUser_id(), resume.getJob(), resume.getExpected_salary(),id);
 
         if (rowsAffected != 1) {
             throw new RuntimeException("Failed to update resume with ID: " + resume.getId());

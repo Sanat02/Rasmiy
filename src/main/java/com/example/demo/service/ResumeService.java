@@ -48,12 +48,12 @@ public class ResumeService {
 
     }
 
-    public void updateResume(Resume resume) {
-        resumeDao.updateResume(resume);
+    public void updateResume(Resume resume,int id) {
+        resumeDao.updateResume(resume,id);
     }
 
     public void deleteResume(int resumeId) {
-        resumeDao.deleteResume(resumeId);
+        resumeDao.deleteResumeById(resumeId);
     }
 
 
