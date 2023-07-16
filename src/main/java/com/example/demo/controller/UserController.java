@@ -21,9 +21,6 @@ import java.util.Optional;
 public class UserController {
     private final UserService userService;
 
-
-
-
     @GetMapping
     public List<User> getUsers() {
         return userService.getAllUsers();

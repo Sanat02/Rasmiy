@@ -1,6 +1,8 @@
 package com.example.demo.dto;
 
 import com.example.demo.model.Contacts;
+import com.example.demo.model.Education;
+import com.example.demo.model.JobExperience;
 import com.example.demo.model.User;
 import lombok.Builder;
 import lombok.Data;
@@ -16,8 +18,8 @@ public class ResumeDto {
     private User applicant;
     private String job;
     private Integer expectedSalary;
-//    private String jobExperience;
-//    private String education;
+    private JobExperienceDto jobExperience;
+    private EducationDto education;
     private List<Contacts> contacts=new ArrayList<>();
 
 }

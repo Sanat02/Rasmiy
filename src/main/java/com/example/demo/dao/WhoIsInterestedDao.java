@@ -23,4 +23,9 @@ public class WhoIsInterestedDao {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(WhoInterested.class));
     }
 
+    public List<WhoInterested> getInterestedApplicants(int id) {
+        String sql = "select * from who_interested where job_resume_id = ?";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(WhoInterested.class),id);
+    }
+
 }

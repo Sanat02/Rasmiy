@@ -1,9 +1,11 @@
 package com.example.demo.service;
 
+import com.example.demo.dao.EducationDao;
 import com.example.demo.dao.ResumeDao;
 import com.example.demo.dto.JobListDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.enums.ContactType;
+import com.example.demo.model.Education;
 import com.example.demo.model.Resume;
 import com.example.demo.model.User;
 import lombok.Data;
@@ -22,6 +24,8 @@ public class ResumeService {
     private final ResumeDao resumeDao;
     private final UserService userService;
     private final ContactsService contactsService;
+    private final EducationService educationService;
+    private final JobExperienceService jobExperienceService;
 
     //BONUS
     public ResumeDto getResumeById(int resumeId) {
@@ -65,11 +69,26 @@ public class ResumeService {
                         .expectedSalary(e.getExpected_salary())
                         .job(e.getJob())
                         .applicant(userService.getUserById(e.getUser_id()))
+                        .education(educationService.getEducationById(e.getId()))
+                        .jobExperience(jobExperienceService.getJobExperienceById(e.getId()))
                         .contacts(contactsService.getContactsById(e.getId()))
                         .build()
                 ).toList();
         return resumeDtos;
     }
+
+    public ResumeDto getResumeByJob(String job) {
+        Resume resume = resumeDao.getResumeByJob(job);
+        ResumeDto resumeDto = ResumeDto.builder()
+                .id(resume.getId())
+                .job(resume.getJob())
+                .expectedSalary(resume.getExpected_salary())
+                .applicant(userService.getUserById(resume.getUser_id()))
+                .contacts(contactsService.getContactsById(resume.getId()))
+                .build();
+        return resumeDto;
+    }
+
 
 
 }

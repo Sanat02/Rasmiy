@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import com.example.demo.enums.AccountType;
 import com.example.demo.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,12 +84,18 @@ public class UserDao {
         return user;
     }
 
-    public User createUser(User user){
+    public void createUser(User user){
         String sql="insert into users(id,account_name,email,account_type,password,phone_number,profile_photo)" +
                 " values(?,?,?,?,?,?,?)";
         int row=jdbcTemplate.update(sql,user.getId(),user.getAccount_name()
-        ,user.getEmail(), user.getAccount_type().getValue(),user.getPassword(),user.getPhone_number(),user.getProfile_photo());
-        return user;
+        ,user.getEmail(), String.valueOf(user.getAccount_type()),user.getPassword(),user.getPhone_number(),user.getProfile_photo());
+
+    }
+
+    public List<User> getAllJobSeekers(){
+        String sql="SELECT * FROM users WHERE account_type = ?";
+        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(User.class), String.valueOf(AccountType.JOB_SEEKER));
+
     }
 
 

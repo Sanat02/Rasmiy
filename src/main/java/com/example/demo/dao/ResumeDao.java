@@ -56,5 +56,12 @@ public class ResumeDao {
         }
     }
 
+    public Resume getResumeByJob(String job){
+        String sql="SELECT * FROM resumes where job = ?";
+        return jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<>(Resume.class),job);
+    }
+
+
+
 
 }

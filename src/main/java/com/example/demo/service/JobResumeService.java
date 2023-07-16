@@ -35,11 +35,11 @@ public class JobResumeService {
                 .map(e->JobResumeDto.builder()
                         .id(e.getId())
                         .job_description(e.getJob_description())
-                        .job_tile(e.getJob_tile())
+                        .job_tile(e.getJob_title())
                         .salary(e.getSalary())
                         .experience(e.getExperience())
                         .category(e.getCategory())
-                        .job_tile(e.getJob_tile())
+                        .job_tile(e.getJob_title())
                         .employer(userService.getUserById(e.getUser_id()))
                         .build()
                 ).toList();
@@ -50,8 +50,16 @@ public class JobResumeService {
         JobResumeDto jobResumeDto=jobResumeDtos.stream().filter(e->e.getId()==id)
                 .findFirst().orElse(null);
         return jobResumeDto;
+    }
 
-
+    public void createJobResume(JobResume jobResume){
+        jobResumeDao.createJobResume(jobResume);
+    }
+    public void updateJobResume(JobResume jobResume){
+        jobResumeDao.updateJobResume(jobResume);
+    }
+    public void deleteJobResume(int id){
+        jobResumeDao.deleteJobResume(id);
     }
 
 

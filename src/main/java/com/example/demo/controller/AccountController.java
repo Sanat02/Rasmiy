@@ -5,8 +5,10 @@ import com.example.demo.enums.AccountType;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
 @RequestMapping("/account")
 @RequiredArgsConstructor
@@ -18,15 +20,17 @@ public class AccountController {
 
     //соискатель
     @PostMapping("/applicant")
-    public User createAccountApplicant(@RequestBody User user){
+    public void createAccountApplicant(@RequestBody User user) {
+        log.info("Applicant:" + user.getAccount_name() + " created succesfully!");
         user.setAccount_type(AccountType.JOB_SEEKER);
-        return userService.createUser(user);
+        userService.createUser(user);
     }
 
     //работадатель
     @PostMapping("/employer")
-    public User createAccountEmployer(@RequestBody User user){
+    public void createAccountEmployer(@RequestBody User user) {
+        log.info("Employer:" + user.getAccount_name() + " created succesfully!");
         user.setAccount_type(AccountType.EMPLOYER);
-        return userService.createUser(user);
+        userService.createUser(user);
     }
 }

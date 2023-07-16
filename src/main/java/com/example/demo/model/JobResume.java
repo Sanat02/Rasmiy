@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class JobResume {
     private int id;
     private int user_id;
-    private String job_tile;
+    private String job_title;
     private Integer salary;
     private String job_description;
     private Integer experience;

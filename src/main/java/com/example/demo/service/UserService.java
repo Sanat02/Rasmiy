@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import com.example.demo.dao.UserDao;
 import com.example.demo.dto.ResumeDto;
+import com.example.demo.dto.UserDto;
+import com.example.demo.enums.AccountType;
 import com.example.demo.enums.ContactType;
 import com.example.demo.model.User;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +19,8 @@ public class UserService {
 
     private final UserDao userDao;
 
-    public User createUser(User user){
-        return userDao.createUser(user);
+    public void createUser(User user){
+       userDao.createUser(user);
     }
 
 
@@ -51,6 +53,23 @@ public class UserService {
 
     public User getUserById(int id){
         return userDao.getUserById(id);
+    }
+
+
+    public List<UserDto> getAllJobSeekers(){
+        List<User> users=userDao.getAllJobSeekers();
+        List<UserDto> userDtos=users.stream()
+                .map(e->UserDto.builder()
+                        .id(e.getId())
+                        .account_name(e.getAccount_name())
+                        .account_type(AccountType.JOB_SEEKER)
+                        .password(e.getPassword())
+                        .phone_number(e.getPassword())
+                        .email(e.getEmail())
+                        .profile_photo(e.getProfile_photo())
+                        .build()
+                ).toList();
+        return userDtos;
     }
 
 

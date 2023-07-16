@@ -44,4 +44,29 @@ public class JobResumeDao {
         String sql = "select * from job_resumes";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(JobResume.class));
     }
+    public void createJobResume(JobResume jobResume){
+        String sql="INSERT INTO job_resumes(id,user_id,job_title,salary,job_description,experience,category)" +
+                "VALUES(?,?,?,?,?,?,?)";
+        int row=jdbcTemplate.update(sql,jobResume.getId(),jobResume.getUser_id(),jobResume.getJob_title()
+        ,jobResume.getSalary(),jobResume.getJob_description(),jobResume.getExperience(),jobResume.getCategory());
+    }
+    public void updateJobResume(JobResume jobResume){
+        String sql = "UPDATE job_resumes SET job_title = ?, salary = ?," +
+                " job_description = ? , experience = ? ,category = ? WHERE id = ?";
+        int rowsAffected = jdbcTemplate.update(sql, jobResume.getJob_title(), jobResume.getSalary(),
+                jobResume.getJob_description(),jobResume.getExperience(),jobResume.getCategory(),jobResume.getId());
+
+        if (rowsAffected != 1) {
+            throw new RuntimeException("Failed to update resume with ID: " + jobResume.getId());
+        }
+    }
+
+    public void deleteJobResume(int resumeId){
+        String sql = "DELETE FROM job_resumes WHERE id = ?";
+        int rowsAffected = jdbcTemplate.update(sql, resumeId);
+
+        if (rowsAffected != 1) {
+            throw new RuntimeException("Failed to delete resume with ID: " + resumeId);
+        }
+    }
 }

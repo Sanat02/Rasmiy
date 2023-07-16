@@ -41,6 +41,18 @@ public class WhoInterestedService {
                 .filter(e->e.getApplicant().getEmail().equals(email)).map(e->e.getJob_resume()).collect(Collectors.toList());
         return jobResumeDtos;
     }
+    public List<WhoInterestedDto> getInterestedApplicants(int job_id){
+        List<WhoInterested> whoInteresteds=whoIsInterestedDao.getInterestedApplicants(job_id);
+        List<WhoInterestedDto> whoInterestedDtos=whoInteresteds.stream()
+                .map(e->WhoInterestedDto.builder()
+                        .id(e.getApplicant_id())
+                        .applicant(userService.getUserById(e.getApplicant_id()))
+                        .date(e.getDate())
+                        .job_resume(jobResumeService.getJobResumeById(e.getJob_resume_id()))
+                        .build()
+                ).toList();
+        return whoInterestedDtos;
+    }
 
 
 }
