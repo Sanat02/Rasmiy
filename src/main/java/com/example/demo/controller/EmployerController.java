@@ -4,16 +4,17 @@ import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.dto.WhoInterestedDto;
 import com.example.demo.model.JobResume;
-import com.example.demo.model.User;
 import com.example.demo.service.JobResumeService;
 import com.example.demo.service.ResumeService;
 import com.example.demo.service.UserService;
 import com.example.demo.service.WhoInterestedService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/employer")
 @RequiredArgsConstructor
@@ -27,6 +28,7 @@ public class EmployerController {
     //Создание вакансии для работадателя с user_id={user_id}
     @PostMapping("{user_id}/vacancy")
     public void createJobResume(@PathVariable int user_id, @RequestBody JobResume jobResume) {
+        log.info("Job resume:"+jobResume.getId()+" created!");
         jobResume.setUser_id(user_id);
         jobResumeService.createJobResume(jobResume);
     }
@@ -34,6 +36,7 @@ public class EmployerController {
     //Редактирование вакансии для работадателя с user_id={user_id}  и job_resume с id={id}
     @PutMapping("{user_id}/vacancy/{id}")
     public void updateJobResume(@PathVariable int id,@PathVariable int user_id,@RequestBody JobResume jobResume) {
+        log.info("Job resume:"+jobResume.getId()+" updated!");
         jobResume.setUser_id(user_id);
         jobResume.setId(id);
         jobResumeService.updateJobResume(jobResume);
@@ -42,6 +45,7 @@ public class EmployerController {
     //Удаление вакансии для работадателя
     @DeleteMapping("/vacancy/{id}")
     public void deleteJobResume(@PathVariable int id) {
+        log.info("Job resume:"+id+" deleted!");
         jobResumeService.deleteJobResume(id);
     }
 
