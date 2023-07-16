@@ -17,6 +17,10 @@ public class UserService {
 
     private final UserDao userDao;
 
+    public User createUser(User user){
+        return userDao.createUser(user);
+    }
+
 
     public List<User> getAllUsers(){
         return userDao.getAllUsers();

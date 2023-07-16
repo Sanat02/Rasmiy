@@ -83,5 +83,13 @@ public class UserDao {
         return user;
     }
 
+    public User createUser(User user){
+        String sql="insert into users(id,account_name,email,account_type,password,phone_number,profile_photo)" +
+                " values(?,?,?,?,?,?,?)";
+        int row=jdbcTemplate.update(sql,user.getId(),user.getAccount_name()
+        ,user.getEmail(), user.getAccount_type().getValue(),user.getPassword(),user.getPhone_number(),user.getProfile_photo());
+        return user;
+    }
+
 
 }

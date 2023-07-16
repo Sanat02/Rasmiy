@@ -8,9 +8,9 @@ import lombok.Data;
 
 public class User {
     private  int id;
-    private String accountName;
+    private String account_name;
     private String email;
-    private AccountType accountType;
+    private AccountType account_type;
     private String password;
     private String phone_number;
     private String profile_photo;
