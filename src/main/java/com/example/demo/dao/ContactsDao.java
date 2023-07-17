@@ -13,7 +13,7 @@ import java.util.List;
 public class ContactsDao {
     private final JdbcTemplate jdbcTemplate;
 
-    public List<Contacts> getContactsById(int id) {
+    public List<Contacts> getContactsByResumeId(int id) {
         String sql="select * from contacts where resume_id = ?";
         return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(Contacts.class),id);
     }

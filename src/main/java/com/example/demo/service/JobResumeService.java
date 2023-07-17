@@ -18,7 +18,7 @@ public class JobResumeService {
 
     private final JobResumeDao jobResumeDao;
     private final  UserService userService;
-
+    private final CategoryService categoryService;
 
 
 
@@ -32,6 +32,8 @@ public class JobResumeService {
                         .jobTitle(e.getJobTitle())
                         .salary(e.getSalary())
                         .employer(userService.getUserById(e.getUserId()))
+                        .category(categoryService.getCategoryById(e.getCategoryId()))
+                        .experience(e.getExperience())
                         .build()
                 ).toList();
 

@@ -35,7 +35,7 @@ public class ResumeService {
                 .job(resume.getJob())
                 .expectedSalary(resume.getExpectedSalary())
                 .applicant(userService.getUserById(resume.getUserId()))
-                .contacts(contactsService.getContactsById(resume.getId()))
+                .contacts(contactsService.getContactsByResumeId(resume.getId()))
                 .build();
         return resumeDto;
     }
@@ -69,9 +69,9 @@ public class ResumeService {
                         .expectedSalary(e.getExpectedSalary())
                         .job(e.getJob())
                         .applicant(userService.getUserById(e.getUserId()))
-                        .education(educationService.getEducationById(e.getId()))
+                        .education(educationService.getEducationByResumeId(e.getId()))
                         .jobExperience(jobExperienceService.getJobExperienceById(e.getId()))
-                        .contacts(contactsService.getContactsById(e.getId()))
+                        .contacts(contactsService.getContactsByResumeId(e.getId()))
                         .build())
                 .collect(Collectors.toList());
         return resumeDtos;
@@ -85,7 +85,7 @@ public class ResumeService {
                 .job(resume.getJob())
                 .expectedSalary(resume.getExpectedSalary())
                 .applicant(userService.getUserById(resume.getUserId()))
-                .contacts(contactsService.getContactsById(resume.getId()))
+                .contacts(contactsService.getContactsByResumeId(resume.getId()))
                 .build();
         return resumeDto;
     }

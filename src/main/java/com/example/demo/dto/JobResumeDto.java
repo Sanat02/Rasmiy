@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import com.example.demo.model.Category;
 import com.example.demo.model.User;
 import lombok.Builder;
 import lombok.Data;
@@ -12,5 +13,6 @@ public class JobResumeDto {
     private String jobTitle;
     private Integer salary;
     private String jobDescription;
-    private Integer categoryId;
+    private Integer experience;
+    private CategoryDto category;
 }

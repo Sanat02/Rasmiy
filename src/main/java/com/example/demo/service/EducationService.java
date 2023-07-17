@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 public class EducationService {
     private final EducationDao educationDao;
 
-    public EducationDto getEducationById(int id) {
-        Education education = educationDao.getEducationById(id);
+    public EducationDto getEducationByResumeId(int id) {
+        Education education = educationDao.getEducationByResumeId(id);
         if (education == null) {
             return null;
         }

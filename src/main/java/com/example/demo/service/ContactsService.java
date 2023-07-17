@@ -12,7 +12,7 @@ import java.util.List;
 public class ContactsService {
     private final ContactsDao contactsDao;
 
-    public List<Contacts> getContactsById(int id){
-        return contactsDao.getContactsById(id);
+    public List<Contacts> getContactsByResumeId(int id){
+        return contactsDao.getContactsByResumeId(id);
     }
 }
