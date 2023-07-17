@@ -20,8 +20,12 @@ databaseChangeLog:
                     foreignKeyName: fk_vacancies_publisher
                     references: users(id)
               - column:
-                  name: category
-                  type: varchar(255)
+                  name: category_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_vacancies_category
+                    references: categories(id)
               - column:
                   name: date
                   type: date

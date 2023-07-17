@@ -13,8 +13,8 @@ databaseChangeLog:
                   name: publisher_id
                   value: 2
               - column:
-                  name: category
-                  value: 'K2'
+                  name: category_id
+                  value: 1
               - column:
                   name: date
                   value: '2023-07-14'
@@ -28,8 +28,8 @@ databaseChangeLog:
                   name: publisher_id
                   value: 2
               - column:
-                  name: category
-                  value: 'K1'
+                  name: category_id
+                  value: 2
               - column:
                   name: date
                   value: '2023-07-15'

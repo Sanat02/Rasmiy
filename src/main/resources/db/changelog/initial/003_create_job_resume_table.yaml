@@ -32,7 +32,11 @@ databaseChangeLog:
                   name: experience
                   type: int
               - column:
-                  name: category
-                  type: varchar(255)
+                  name: category_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_job_resume_category
+                    references: categories(id)
 
 

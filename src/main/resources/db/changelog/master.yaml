@@ -1,5 +1,10 @@
 databaseChangeLog:
   - include:
+      file: db/changelog/initial/019_create_categories_table.yaml
+  - include:
+      file: db/changelog/initial/020_insert_categories.yaml
+
+  - include:
       file: db/changelog/initial/001_create_users_table.yaml
   - include:
       file: db/changelog/initial/014_add_column_users.yaml
@@ -41,5 +46,4 @@ databaseChangeLog:
 
 
 
-#    - includeAll:
-#      path: db/changelog/initial
+

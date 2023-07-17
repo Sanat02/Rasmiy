@@ -25,8 +25,8 @@ databaseChangeLog:
                   name: experience
                   value: 3
               - column:
-                  name: category
-                  value: 'Category 1'
+                  name: category_id
+                  value: 1
         - insert:
             tableName: job_resumes
             columns:
@@ -49,5 +49,5 @@ databaseChangeLog:
                   name: experience
                   value: 4
               - column:
-                  name: category
-                  value: 'Category 2'
+                  name: category_id
+                  value: 2

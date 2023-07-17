@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20-insert-categories-table
+      author: Sanat
+      changes:
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: name
+                  value: IT
+              - column:
+                  name: description
+                  value: 'it description'
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: name
+                  value: Marketing
+              - column:
+                  name: description
+                  value: 'marketing description'
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: name
+                  value: Finance
+              - column:
+                  name: description
+                  value: 'finance description'
+
+
+
