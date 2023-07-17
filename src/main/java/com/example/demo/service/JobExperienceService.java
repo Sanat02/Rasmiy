@@ -18,8 +18,8 @@ public class JobExperienceService {
         }
         JobExperienceDto jobExperienceDto= JobExperienceDto.builder()
                 .position(jobExperience.getPosition())
-                .end_date(jobExperience.getEnd_date())
-                .start_date(jobExperience.getStart_date())
+                .endDate(jobExperience.getEndDate())
+                .startDate(jobExperience.getStartDate())
                 .build();
         return jobExperienceDto;
     }

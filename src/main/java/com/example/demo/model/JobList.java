@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 public class JobList {
     private int id;
-    private int publisher_id;
-    private String category;
+    private int publisherId;
+    private int categoryId;
     private LocalDateTime date;
 }

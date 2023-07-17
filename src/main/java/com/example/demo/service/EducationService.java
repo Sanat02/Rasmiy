@@ -18,10 +18,10 @@ public class EducationService {
             return null;
         }
         EducationDto educationDto = EducationDto.builder()
-                .institution_name(education.getInstitution_name())
+                .institutionName(education.getInstitutionName())
                 .degree(education.getDegree())
-                .start_date(education.getStart_date())
-                .end_date(education.getEnd_date())
+                .startDate(education.getStartDate())
+                .endDate(education.getEndDate())
                 .build();
         return educationDto;
 

@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 
 public class JobResume {
     private int id;
-    private int user_id;
-    private String job_title;
+    private int userId;
+    private String jobTitle;
     private Integer salary;
-    private String job_description;
+    private String jobDescription;
     private Integer experience;
-    private String category;
+    private int categoryId;
 }

@@ -9,6 +9,6 @@ import java.time.LocalDate;
 @Builder
 public class JobExperienceDto {
     private String position;
-    private LocalDate start_date;
-    private LocalDate end_date;
+    private LocalDate startDate;
+    private LocalDate endDate;
 }

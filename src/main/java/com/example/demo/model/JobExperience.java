@@ -11,8 +11,8 @@ import java.time.LocalDate;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class JobExperience {
     private int id;
-    private int resume_id;
+    private int resumeId;
     private String position;
-    private LocalDate start_date;
-    private LocalDate end_date;
+    private LocalDate startDate;
+    private LocalDate endDate;
 }

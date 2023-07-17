@@ -61,12 +61,12 @@ public class UserService {
         List<UserDto> userDtos=users.stream()
                 .map(e->UserDto.builder()
                         .id(e.getId())
-                        .account_name(e.getAccount_name())
-                        .account_type(AccountType.JOB_SEEKER)
+                        .accountName(e.getAccountName())
+                        .accountType(AccountType.JOB_SEEKER)
                         .password(e.getPassword())
-                        .phone_number(e.getPassword())
+                        .phoneNumber(e.getPassword())
                         .email(e.getEmail())
-                        .profile_photo(e.getProfile_photo())
+                        .profilePhoto(e.getProfilePhoto())
                         .build()
                 ).toList();
         return userDtos;

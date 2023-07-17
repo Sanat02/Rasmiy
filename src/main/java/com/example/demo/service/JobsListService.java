@@ -26,7 +26,7 @@ public class JobsListService {
                 .map(e->JobListDto.builder()
                         .id(e.getId())
                         .date(e.getDate())
-                        .category(e.getCategory())
+                        .categoryId(e.getCategoryId())
                         .publisher(userService.getUserById(e.getId())).build()
                 ).toList();
         return jobListDtos;

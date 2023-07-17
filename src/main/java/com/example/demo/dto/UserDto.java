@@ -8,10 +8,10 @@ import lombok.Data;
 @Builder
 public class UserDto {
     private  int id;
-    private String account_name;
+    private String accountName;
     private String email;
-    private AccountType account_type;
+    private AccountType accountType;
     private String password;
-    private String phone_number;
-    private String profile_photo;
+    private String phoneNumber;
+    private String profilePhoto;
 }

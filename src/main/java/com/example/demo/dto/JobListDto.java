@@ -10,6 +10,6 @@ import java.time.LocalDateTime;
 public class JobListDto {
     private int id;
     private User publisher;
-    private String category;
+    private int categoryId;
     private LocalDateTime date;
 }

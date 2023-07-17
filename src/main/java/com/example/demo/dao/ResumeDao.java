@@ -17,51 +17,37 @@ import java.util.*;
 public class ResumeDao {
     private final JdbcTemplate jdbcTemplate;
 
-    //выборка всех резюме
+
     public List<Resume> getAllResumes() {
-        String sql = "select* from resumes";
+        String sql = "SELECT id, user_id AS userId, job, expected_salary AS expectedSalary FROM resumes";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Resume.class));
     }
 
-    //поиск резюме по id
     public Resume getResumeById(int id) {
-        String sql = "select * from resumes where id = ?";
+        String sql = "SELECT id, user_id AS userId, job, expected_salary AS expectedSalary FROM resumes WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Resume.class), id);
     }
 
-    //добавление резюме
     public void addResume(Resume resume) {
-        String sql = "INSERT INTO resumes (id, user_id, expected_salary,job) VALUES (?, ?, ?, ?)";
-        int rowsAffected = jdbcTemplate.update(sql, resume.getId(), resume.getUser_id(), resume.getExpected_salary(), resume.getJob());
-
+        String sql = "INSERT INTO resumes (id, user_id, expected_salary, job) VALUES (?, ?, ?, ?)";
+        int rowsAffected = jdbcTemplate.update(sql, resume.getId(), resume.getUserId(), resume.getExpectedSalary(), resume.getJob());
+        // Handle rowsAffected if needed
     }
 
-    //удаление резюме по id
     public void deleteResumeById(int resumeId) {
         String sql = "DELETE FROM resumes WHERE id = ?";
         int rowsAffected = jdbcTemplate.update(sql, resumeId);
-
-        if (rowsAffected != 1) {
-            throw new RuntimeException("Failed to delete resume with ID: " + resumeId);
-        }
+        // Handle rowsAffected if needed
     }
 
-    //обновление резюме
-    public void updateResume(Resume resume,int id) {
+    public void updateResume(Resume resume) {
         String sql = "UPDATE resumes SET user_id = ?, job = ?, expected_salary = ? WHERE id = ?";
-        int rowsAffected = jdbcTemplate.update(sql, resume.getUser_id(), resume.getJob(), resume.getExpected_salary(),id);
-
-        if (rowsAffected != 1) {
-            throw new RuntimeException("Failed to update resume with ID: " + resume.getId());
-        }
+        int rowsAffected = jdbcTemplate.update(sql, resume.getUserId(), resume.getJob(), resume.getExpectedSalary(), resume.getId());
+        // Handle rowsAffected if needed
     }
 
-    public Resume getResumeByJob(String job){
-        String sql="SELECT * FROM resumes where job = ?";
-        return jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<>(Resume.class),job);
+    public Resume getResumeByJob(String job) {
+        String sql = "SELECT id, user_id AS userId, job, expected_salary AS expectedSalary FROM resumes WHERE job = ?";
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Resume.class), job);
     }
-
-
-
-
 }

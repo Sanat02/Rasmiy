@@ -33,8 +33,8 @@ public class ResumeService {
         ResumeDto resumeDto = ResumeDto.builder()
                 .id(resume.getId())
                 .job(resume.getJob())
-                .expectedSalary(resume.getExpected_salary())
-                .applicant(userService.getUserById(resume.getUser_id()))
+                .expectedSalary(resume.getExpectedSalary())
+                .applicant(userService.getUserById(resume.getUserId()))
                 .contacts(contactsService.getContactsById(resume.getId()))
                 .build();
         return resumeDto;
@@ -52,8 +52,8 @@ public class ResumeService {
 
     }
 
-    public void updateResume(Resume resume,int id) {
-        resumeDao.updateResume(resume,id);
+    public void updateResume(Resume resume) {
+        resumeDao.updateResume(resume);
     }
 
     public void deleteResume(int resumeId) {
@@ -66,24 +66,25 @@ public class ResumeService {
         List<ResumeDto> resumeDtos = resumes.stream()
                 .map(e -> ResumeDto.builder()
                         .id(e.getId())
-                        .expectedSalary(e.getExpected_salary())
+                        .expectedSalary(e.getExpectedSalary())
                         .job(e.getJob())
-                        .applicant(userService.getUserById(e.getUser_id()))
+                        .applicant(userService.getUserById(e.getUserId()))
                         .education(educationService.getEducationById(e.getId()))
                         .jobExperience(jobExperienceService.getJobExperienceById(e.getId()))
                         .contacts(contactsService.getContactsById(e.getId()))
-                        .build()
-                ).toList();
+                        .build())
+                .collect(Collectors.toList());
         return resumeDtos;
     }
+
 
     public ResumeDto getResumeByJob(String job) {
         Resume resume = resumeDao.getResumeByJob(job);
         ResumeDto resumeDto = ResumeDto.builder()
                 .id(resume.getId())
                 .job(resume.getJob())
-                .expectedSalary(resume.getExpected_salary())
-                .applicant(userService.getUserById(resume.getUser_id()))
+                .expectedSalary(resume.getExpectedSalary())
+                .applicant(userService.getUserById(resume.getUserId()))
                 .contacts(contactsService.getContactsById(resume.getId()))
                 .build();
         return resumeDto;

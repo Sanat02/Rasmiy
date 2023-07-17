@@ -46,7 +46,7 @@ public class ResumeController {
     public Resume updateResume(@PathVariable int id, @RequestBody Resume updatedResume) {
         updatedResume.setId(id);
         log.info("Updated resume with id:" + id);
-        resumeService.updateResume(updatedResume, id);
+        resumeService.updateResume(updatedResume);
         return updatedResume;
     }
 

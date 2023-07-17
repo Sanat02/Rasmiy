@@ -21,53 +21,51 @@ public class UserDao {
     private final JdbcTemplate jdbcTemplate;
 
 
-    //поиск всех пользователей
+    // Get all users
     public List<User> getAllUsers() {
-        String sql = "select * from users";
+        String sql = "SELECT id, account_name as accountName, email, account_type as accountType, " +
+                "password, phone_number as phoneNumber, profile_photo as profilePhoto FROM users";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
     }
 
-    //поиск пользователей по имени
-    public Optional<User> getUserByName(String accountname) {
-        String sql = "select * from users where accountname=?";
+    // Get user by name
+    public Optional<User> getUserByName(String accountName) {
+        String sql = "SELECT id, account_name as accountName, email, account_type as accountType, " +
+                "password, phone_number as phoneNumber, profile_photo as profilePhoto FROM users WHERE account_name = ?";
         try {
-            User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), accountname);
+            User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), accountName);
             return Optional.ofNullable(user);
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
     }
 
-    //поиск пользователей по почте
+    // Get user by email
     public Optional<User> getUserByEmail(String email) {
-        String sql = "select * from users where email = ?";
+        String sql = "SELECT id, account_name as accountName, email, account_type as accountType, " +
+                "password, phone_number as phoneNumber, profile_photo as profilePhoto FROM users WHERE email = ?";
         try {
             User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
-            return Optional.of(user);
+            return Optional.ofNullable(user);
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
     }
 
-    //Проверка на наличие пользователя в системе. Пользователи уникально идентифицируются по email.
-    public Boolean isExists(String email) {
-        String sql = "select case\n" +
-                "           when exists(select *\n" +
-                "                       from users\n" +
-                "                       where email = ?)\n" +
-                "               then true\n" +
-                "           else false\n" +
-                "           end";
-        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Boolean.class), email);
+    // Check if a user exists based on email
+    public boolean isExists(String email) {
+        String sql = "SELECT CASE WHEN EXISTS(SELECT * FROM users WHERE email = ?) THEN TRUE ELSE FALSE END";
+        return jdbcTemplate.queryForObject(sql, Boolean.class, email);
     }
 
+    // Get user by ID
     public User getUserById(int id) {
-        String sql = "select* from users where id = ?";
-
-        User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), id);
-        return user;
+        String sql = "SELECT id, account_name as accountName, email, account_type as accountType, " +
+                "password, phone_number as phoneNumber, profile_photo as profilePhoto FROM users WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), id);
     }
 
+    // Update user's account name
     public void updateAccountName(int userId, String newAccountName) {
         String sql = "UPDATE users SET account_name = ? WHERE id = ?";
         try {
@@ -77,26 +75,25 @@ public class UserDao {
         }
     }
 
-    public User getUserByPhone(int phone) {
-        String sql = "select* from users where phone_number = ?";
-
-        User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), phone);
-        return user;
+    // Get user by phone number
+    public User getUserByPhoneNumber(String phoneNumber) {
+        String sql = "SELECT id, account_name as accountName, email, account_type as accountType, " +
+                "password, phone_number as phoneNumber, profile_photo as profilePhoto FROM users WHERE phone_number = ?";
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), phoneNumber);
     }
 
-    public void createUser(User user){
-        String sql="insert into users(id,account_name,email,account_type,password,phone_number,profile_photo)" +
-                " values(?,?,?,?,?,?,?)";
-        int row=jdbcTemplate.update(sql,user.getId(),user.getAccount_name()
-        ,user.getEmail(), String.valueOf(user.getAccount_type()),user.getPassword(),user.getPhone_number(),user.getProfile_photo());
-
+    // Create a new user
+    public void createUser(User user) {
+        String sql = "INSERT INTO users (id, account_name, email, account_type, password, phone_number, profile_photo) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, user.getId(), user.getAccountName(), user.getEmail(), String.valueOf(user.getAccountType()),
+                user.getPassword(), user.getPhoneNumber(), user.getProfilePhoto());
     }
 
-    public List<User> getAllJobSeekers(){
-        String sql="SELECT * FROM users WHERE account_type = ?";
-        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(User.class), String.valueOf(AccountType.JOB_SEEKER));
-
+    // Get all jobseekers
+    public List<User> getAllJobSeekers() {
+        String sql = "SELECT id, account_name as accountName, email, account_type as accountType, " +
+                "password, phone_number as phoneNumber, profile_photo as profilePhoto FROM users WHERE account_type = ?";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class), String.valueOf(AccountType.JOB_SEEKER));
     }
-
-
 }

@@ -8,9 +8,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
-@RequestMapping("/account")
+@RequestMapping("/accounts")
 @RequiredArgsConstructor
 
 public class AccountController {
@@ -21,16 +23,23 @@ public class AccountController {
     //соискатель
     @PostMapping("/applicant")
     public void createAccountApplicant(@RequestBody User user) {
-        log.info("Applicant:" + user.getAccount_name() + " created succesfully!");
-        user.setAccount_type(AccountType.JOB_SEEKER);
+        log.info("Applicant:" + user.getAccountName() + " created succesfully!");
+        user.setAccountType(AccountType.JOB_SEEKER);
         userService.createUser(user);
     }
 
     //работадатель
     @PostMapping("/employer")
     public void createAccountEmployer(@RequestBody User user) {
-        log.info("Employer:" + user.getAccount_name() + " created succesfully!");
-        user.setAccount_type(AccountType.EMPLOYER);
+        log.info("Employer:" + user.getAccountName() + " created succesfully!");
+        user.setAccountType(AccountType.EMPLOYER);
         userService.createUser(user);
     }
+
+    //посмореть всех accounts
+    @GetMapping
+    public List<User> getAllAccounts() {
+        return userService.getAllUsers();
+    }
+
 }

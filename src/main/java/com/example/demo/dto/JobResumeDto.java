@@ -9,9 +9,8 @@ import lombok.Data;
 public class JobResumeDto {
     private int id;
     private User employer;
-    private String job_tile;
+    private String jobTitle;
     private Integer salary;
-    private String job_description;
-    private Integer experience;
-    private String category;
+    private String jobDescription;
+    private Integer categoryId;
 }

@@ -19,9 +19,11 @@ public class JobsListDao {
 
     //Выборка всех вакансий.
     public List<JobList> getAllJobs() {
-        String sql = "select * from vacancies";
+        String sql = "SELECT id, publisher_id as publisherId, category_id as categoryId, date " +
+                "FROM vacancies";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(JobList.class));
     }
+
 
 
     //Выборка вакансий по категориям.

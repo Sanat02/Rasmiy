@@ -29,7 +29,7 @@ public class EmployerController {
     @PostMapping("{user_id}/vacancy")
     public void createJobResume(@PathVariable int user_id, @RequestBody JobResume jobResume) {
         log.info("Job resume:"+jobResume.getId()+" created!");
-        jobResume.setUser_id(user_id);
+        jobResume.setUserId(user_id);
         jobResumeService.createJobResume(jobResume);
     }
 
@@ -37,7 +37,7 @@ public class EmployerController {
     @PutMapping("{user_id}/vacancy/{id}")
     public void updateJobResume(@PathVariable int id,@PathVariable int user_id,@RequestBody JobResume jobResume) {
         log.info("Job resume:"+jobResume.getId()+" updated!");
-        jobResume.setUser_id(user_id);
+        jobResume.setUserId(user_id);
         jobResume.setId(id);
         jobResumeService.updateJobResume(jobResume);
     }

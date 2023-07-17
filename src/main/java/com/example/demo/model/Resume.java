@@ -14,9 +14,7 @@ import java.util.List;
 
 public class Resume {
     private int id;
-    private int user_id;
+    private int userId;
     private String job;
-    private Integer expected_salary;
-
-
+    private Integer expectedSalary;
 }

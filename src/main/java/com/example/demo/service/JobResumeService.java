@@ -16,31 +16,22 @@ import static java.util.stream.Collectors.toList;
 @RequiredArgsConstructor
 public class JobResumeService {
 
-    private JobResumeDao jobResumeDao;
-    private UserService userService;
-    @Autowired
-    public JobResumeService(JobResumeDao jobResumeDao,UserService userService) {
-        this.jobResumeDao = jobResumeDao;
-        this.userService = userService;
-    }
+    private final JobResumeDao jobResumeDao;
+    private final  UserService userService;
 
 
-    public List<JobResume> getResumeByCategory(String category){
-        return jobResumeDao.getResumeByCategory(category);
-    }
+
+
 
     public List<JobResumeDto> gettAllJobResumes(){
         List<JobResume> jobResumes=jobResumeDao.getAllJobResumes();
        return jobResumes.stream()
                 .map(e->JobResumeDto.builder()
                         .id(e.getId())
-                        .job_description(e.getJob_description())
-                        .job_tile(e.getJob_title())
+                        .jobDescription(e.getJobDescription())
+                        .jobTitle(e.getJobTitle())
                         .salary(e.getSalary())
-                        .experience(e.getExperience())
-                        .category(e.getCategory())
-                        .job_tile(e.getJob_title())
-                        .employer(userService.getUserById(e.getUser_id()))
+                        .employer(userService.getUserById(e.getUserId()))
                         .build()
                 ).toList();
 

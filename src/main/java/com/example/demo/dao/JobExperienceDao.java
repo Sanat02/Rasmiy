@@ -15,8 +15,9 @@ public class JobExperienceDao {
 
     public JobExperience getExperienceById(int id) {
         try {
-            String sql = "SELECT * from job_experience" +
-                    " where resume_id = ? ";
+            String sql = "SELECT id, resume_id as resumeId, position, start_date as startDate, end_date as endDate " +
+                    "FROM job_experience " +
+                    "WHERE resume_id = ?";
             return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(JobExperience.class), id);
         } catch (EmptyResultDataAccessException e) {
             return null;
