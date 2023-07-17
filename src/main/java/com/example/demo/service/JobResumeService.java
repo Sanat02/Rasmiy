@@ -45,6 +45,15 @@ public class JobResumeService {
         return jobResumeDto;
     }
 
+    public List<JobResumeDto> getJobResumeByCategoryName(String categoryName){
+        List<JobResumeDto> jobResumeDtos=gettAllJobResumes().
+                stream().
+                filter(e->e.getCategory().getName().equalsIgnoreCase(categoryName)).
+                collect(toList());
+        return jobResumeDtos;
+
+    }
+
     public void createJobResume(JobResume jobResume){
         jobResumeDao.createJobResume(jobResume);
     }

@@ -25,7 +25,14 @@ public class WhoIsInterestedDao {
 
     public List<WhoInterested> getInterestedApplicants(int id) {
         String sql = "select * from who_interested where job_resume_id = ?";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(WhoInterested.class),id);
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(WhoInterested.class), id);
+    }
+
+    public void createInterested(WhoInterested whoInterested) {
+        String sql = "INSERT INTO who_interested(id,applicant_id,job_resume_id,date) " +
+                "VALUES(?,?,?,?)";
+        jdbcTemplate.update(sql, whoInterested.getId(), whoInterested.getApplicant_id(),
+                whoInterested.getJob_resume_id(), whoInterested.getDate());
     }
 
 }

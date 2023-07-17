@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.dto.UserDto;
 import com.example.demo.enums.AccountType;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
@@ -38,7 +39,7 @@ public class AccountController {
 
     //посмореть всех accounts
     @GetMapping
-    public List<User> getAllAccounts() {
+    public List<UserDto> getAllAccounts() {
         return userService.getAllUsers();
     }
 

@@ -53,6 +53,9 @@ public class WhoInterestedService {
                 ).toList();
         return whoInterestedDtos;
     }
+    public void createInterested(WhoInterested whoInterested){
+        whoIsInterestedDao.createInterested(whoInterested);
+    }
 
 
 }
