@@ -17,6 +17,9 @@ import java.util.List;
 @RequiredArgsConstructor
 
 public class AccountController {
+    //TODO Добавить автоинкремент в таблицы
+    //TODO Удалить поле profile_image из таблицы users,также удалить из классов
+
     private final UserService userService;
 
 
