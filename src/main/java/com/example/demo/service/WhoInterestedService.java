@@ -1,14 +1,12 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.WhoIsInterestedDao;
-import com.example.demo.dto.JobResumeDto;
 import com.example.demo.dto.WhoInterestedDto;
 import com.example.demo.model.WhoInterested;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

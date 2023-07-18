@@ -9,6 +9,7 @@ import com.example.demo.model.Education;
 import com.example.demo.model.Resume;
 import com.example.demo.model.User;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@Data
+@RequiredArgsConstructor
 public class ResumeService {
 
     private final ResumeDao resumeDao;
