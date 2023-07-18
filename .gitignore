@@ -35,3 +35,4 @@ build/
 /db/my_db.trace.db
 /db/my_db.lock.db
 /logs/
+/data/
