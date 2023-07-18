@@ -19,9 +19,7 @@ import java.util.List;
 public class AccountController {
     private final UserService userService;
 
-    //Создание учётной записи (с выбором типа соискатель/работодатель)
 
-    //соискатель
     @PostMapping("/applicant")
     public void createAccountApplicant(@RequestBody User user) {
         log.info("Applicant:" + user.getAccountName() + " created succesfully!");
@@ -29,7 +27,7 @@ public class AccountController {
         userService.createUser(user);
     }
 
-    //работадатель
+
     @PostMapping("/employer")
     public void createAccountEmployer(@RequestBody User user) {
         log.info("Employer:" + user.getAccountName() + " created succesfully!");
@@ -37,7 +35,7 @@ public class AccountController {
         userService.createUser(user);
     }
 
-    //посмореть всех accounts
+
     @GetMapping
     public List<UserDto> getAllAccounts() {
         return userService.getAllUsers();

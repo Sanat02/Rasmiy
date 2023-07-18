@@ -17,7 +17,7 @@ import java.util.List;
 public class WhoIsInterestedDao {
     private final JdbcTemplate jdbcTemplate;
 
-    //Выборка всех отликнувшихся пользователей
+
     public List<WhoInterested> getAllInterestedList() {
         String sql = "select * from who_interested";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(WhoInterested.class));

@@ -17,7 +17,7 @@ import java.util.List;
 public class JobsListDao {
     private final JdbcTemplate jdbcTemplate;
 
-    //Выборка всех вакансий.
+
     public List<JobList> getAllJobs() {
         String sql = "SELECT id, publisher_id as publisherId, category_id as categoryId, date " +
                 "FROM vacancies";
@@ -26,13 +26,13 @@ public class JobsListDao {
 
 
 
-    //Выборка вакансий по категориям.
+
     public List<JobList> getJobByCategory(String category) {
         String sql = "select * from vacancies where category = ?";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(JobList.class), category);
     }
 
-    //удаление вакансии по id
+
     public void deleteJob(int jobId) {
         String sql = "DELETE FROM vacancies WHERE id = ?";
         try {
@@ -43,7 +43,7 @@ public class JobsListDao {
         }
     }
 
-    //поиск вакансии по id
+
     public JobList getJobById(int jobId) {
         String sql = "SELECT * FROM jobs WHERE id = ?";
         try {

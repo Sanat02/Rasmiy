@@ -31,19 +31,19 @@ public class ResumeDao {
     public void addResume(Resume resume) {
         String sql = "INSERT INTO resumes (id, user_id, expected_salary, job) VALUES (?, ?, ?, ?)";
         int rowsAffected = jdbcTemplate.update(sql, resume.getId(), resume.getUserId(), resume.getExpectedSalary(), resume.getJob());
-        // Handle rowsAffected if needed
+
     }
 
     public void deleteResumeById(int resumeId) {
         String sql = "DELETE FROM resumes WHERE id = ?";
         int rowsAffected = jdbcTemplate.update(sql, resumeId);
-        // Handle rowsAffected if needed
+
     }
 
     public void updateResume(Resume resume) {
         String sql = "UPDATE resumes SET user_id = ?, job = ?, expected_salary = ? WHERE id = ?";
         int rowsAffected = jdbcTemplate.update(sql, resume.getUserId(), resume.getJob(), resume.getExpectedSalary(), resume.getId());
-        // Handle rowsAffected if needed
+
     }
 
     public Resume getResumeByJob(String job) {

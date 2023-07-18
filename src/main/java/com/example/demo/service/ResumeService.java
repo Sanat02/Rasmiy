@@ -28,7 +28,7 @@ public class ResumeService {
     private final EducationService educationService;
     private final JobExperienceService jobExperienceService;
 
-    //BONUS
+
     public ResumeDto getResumeById(int resumeId) {
         Resume resume = resumeDao.getResumeById(resumeId);
         ResumeDto resumeDto = ResumeDto.builder()

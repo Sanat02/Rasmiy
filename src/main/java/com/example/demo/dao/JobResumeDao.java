@@ -16,28 +16,27 @@ public class JobResumeDao {
     private final JdbcTemplate jdbcTemplate;
 
 
-    // Search resumes where salary is less than a given value
     public List<JobResume> getResumeBySalary(Integer salary) {
         String sql = "SELECT id, user_id AS userId, job_title AS jobTitle, salary, job_description AS jobDescription, " +
                 "experience, category_id AS categoryId FROM job_resumes WHERE salary < ?";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(JobResume.class), salary);
     }
 
-    // Search resumes where experience is greater than a given value
+
     public List<JobResume> getResumeByExperience(int experience) {
         String sql = "SELECT id, user_id AS userId, job_title AS jobTitle, salary, job_description AS jobDescription, " +
                 "experience, category_id AS categoryId FROM job_resumes WHERE experience > ?";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(JobResume.class), experience);
     }
 
-    // Search resumes by ID
+
     public JobResume getJobResumeById(int id) {
         String sql = "SELECT id, user_id AS userId, job_title AS jobTitle, salary, job_description AS jobDescription, " +
                 "experience, category_id AS categoryId FROM job_resumes WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(JobResume.class), id);
     }
 
-    // Get all job resumes
+
     public List<JobResume> getAllJobResumes() {
         String sql = "SELECT id, user_id AS userId, job_title AS jobTitle, salary, job_description AS jobDescription, " +
                 "experience, category_id AS categoryId FROM job_resumes";
