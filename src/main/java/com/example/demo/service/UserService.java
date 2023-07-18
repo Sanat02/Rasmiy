@@ -1,10 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.UserDao;
-import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.enums.AccountType;
-import com.example.demo.enums.ContactType;
 import com.example.demo.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;

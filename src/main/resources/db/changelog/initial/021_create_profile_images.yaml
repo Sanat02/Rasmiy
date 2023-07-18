@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: 021-create-profile-images-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: profile_images
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: userId
+                  type: int
+                  constraints:
+                    foreignKeyName: fk-images-user-id
+                    nullable: false
+                    references: users(id)
+              - column:
+                  name: fileName
+                  type: varchar(255)

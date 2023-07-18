@@ -40,6 +40,8 @@ databaseChangeLog:
       file: db/changelog/initial/017_create_jobexp_table.yaml
   - include:
       file: db/changelog/initial/018_insert_jobexp.yaml
+  - include:
+      file: db/changelog/initial/021_create_profile_images.yaml
 
 
 
