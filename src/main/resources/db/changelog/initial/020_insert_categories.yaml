@@ -7,9 +7,6 @@ databaseChangeLog:
             tableName: categories
             columns:
               - column:
-                  name: id
-                  value: 1
-              - column:
                   name: name
                   value: IT
               - column:
@@ -19,9 +16,6 @@ databaseChangeLog:
             tableName: categories
             columns:
               - column:
-                  name: id
-                  value: 2
-              - column:
                   name: name
                   value: Marketing
               - column:
@@ -30,9 +24,6 @@ databaseChangeLog:
         - insert:
             tableName: categories
             columns:
-              - column:
-                  name: id
-                  value: 3
               - column:
                   name: name
                   value: Finance

@@ -9,6 +9,7 @@ databaseChangeLog:
               - column:
                   name: id
                   type: int
+                  autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -19,6 +20,8 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: fk_resumes_user
                     references: users(id)
+                    onDelete: CASCADE
+                    onUpdate: CASCADE
               - column:
                   name: expected_salary
                   type: int

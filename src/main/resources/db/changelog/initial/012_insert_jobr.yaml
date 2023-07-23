@@ -7,9 +7,6 @@ databaseChangeLog:
             tableName: job_resumes
             columns:
               - column:
-                  name: id
-                  value: 1
-              - column:
                   name: user_id
                   value: 2
               - column:
@@ -30,9 +27,6 @@ databaseChangeLog:
         - insert:
             tableName: job_resumes
             columns:
-              - column:
-                  name: id
-                  value: 2
               - column:
                   name: user_id
                   value: 2

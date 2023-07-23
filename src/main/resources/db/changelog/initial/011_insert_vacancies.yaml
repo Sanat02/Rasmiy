@@ -7,9 +7,6 @@ databaseChangeLog:
             tableName: vacancies
             columns:
               - column:
-                  name: id
-                  value: 1
-              - column:
                   name: publisher_id
                   value: 2
               - column:
@@ -21,9 +18,6 @@ databaseChangeLog:
         - insert:
             tableName: vacancies
             columns:
-              - column:
-                  name: id
-                  value: 2
               - column:
                   name: publisher_id
                   value: 2

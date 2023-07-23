@@ -7,9 +7,6 @@ databaseChangeLog:
             tableName: users
             columns:
               - column:
-                  name: id
-                  value: 1
-              - column:
                   name: account_name
                   value: wolfiesuless
               - column:
@@ -24,15 +21,9 @@ databaseChangeLog:
               - column:
                   name: phone_number
                   value: 7777777
-              - column:
-                  name: profile_photo
-                  value: photo1
         - insert:
             tableName: users
             columns:
-              - column:
-                  name: id
-                  value: 2
               - column:
                   name: account_name
                   value: niranova
@@ -48,6 +39,3 @@ databaseChangeLog:
               - column:
                   name: phone_number
                   value: 88888
-              - column:
-                  name: profile_photo
-                  value: photo2

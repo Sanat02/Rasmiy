@@ -9,6 +9,7 @@ databaseChangeLog:
               - column:
                   name: id
                   type: int
+                  autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -19,6 +20,8 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: fk_job_resumes_user
                     references: users(id)
+                    onDelete: CASCADE
+                    onUpdate: CASCADE
               - column:
                   name: job_title
                   type: varchar(255)
@@ -38,5 +41,7 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: fk_job_resume_category
                     references: categories(id)
+                    onDelete: CASCADE
+                    onUpdate: CASCADE
 
 

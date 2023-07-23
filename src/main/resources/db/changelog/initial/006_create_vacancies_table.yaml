@@ -9,6 +9,7 @@ databaseChangeLog:
               - column:
                   name: id
                   type: int
+                  autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -19,6 +20,8 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: fk_vacancies_publisher
                     references: users(id)
+                    onDelete: CASCADE
+                    onUpdate: CASCADE
               - column:
                   name: category_id
                   type: int
@@ -26,6 +29,8 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: fk_vacancies_category
                     references: categories(id)
+                    onDelete: CASCADE
+                    onUpdate: CASCADE
               - column:
                   name: date
                   type: date

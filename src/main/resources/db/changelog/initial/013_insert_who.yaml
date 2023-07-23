@@ -7,9 +7,6 @@ databaseChangeLog:
             tableName: who_interested
             columns:
               - column:
-                  name: id
-                  value: 1
-              - column:
                   name: applicant_id
                   value: 1
               - column:
@@ -21,9 +18,6 @@ databaseChangeLog:
         - insert:
             tableName: who_interested
             columns:
-              - column:
-                  name: id
-                  value: 2
               - column:
                   name: applicant_id
                   value: 1

@@ -9,6 +9,7 @@ databaseChangeLog:
               - column:
                   name: id
                   type: int
+                  autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -19,6 +20,8 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: fk_contacts_resume
                     references: resumes(id)
+                    onDelete: CASCADE
+                    onUpdate: CASCADE
               - column:
                   name: type
                   type: varchar(255)

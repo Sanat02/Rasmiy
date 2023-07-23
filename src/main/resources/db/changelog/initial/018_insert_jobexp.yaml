@@ -7,9 +7,6 @@ databaseChangeLog:
             tableName: job_experience
             columns:
               - column:
-                  name: id
-                  value: 1
-              - column:
                   name: resume_id
                   value: 1
               - column:

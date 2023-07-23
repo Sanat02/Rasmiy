@@ -7,9 +7,6 @@ databaseChangeLog:
             tableName: contacts
             columns:
               - column:
-                  name: id
-                  value: 1
-              - column:
                   name: resume_id
                   value: 1
               - column:
@@ -22,9 +19,6 @@ databaseChangeLog:
         - insert:
             tableName: contacts
             columns:
-              - column:
-                  name: id
-                  value: 2
               - column:
                   name: resume_id
                   value: 1
@@ -39,9 +33,6 @@ databaseChangeLog:
             tableName: contacts
             columns:
               - column:
-                  name: id
-                  value: 3
-              - column:
                   name: resume_id
                   value: 2
               - column:
@@ -54,9 +45,6 @@ databaseChangeLog:
         - insert:
             tableName: contacts
             columns:
-              - column:
-                  name: id
-                  value: 4
               - column:
                   name: resume_id
                   value: 2
