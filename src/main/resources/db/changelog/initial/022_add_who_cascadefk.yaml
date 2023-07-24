@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: drop  fk_whointerested_applicant
+      author: Sanat
+      changes:
+        - dropForeignKeyConstraint:
+            baseTableName: who_interested
+            constraintName:  fk_whointerested_applicant
+  - changeSet:
+      id: drop fk_whointerested_job
+      author: Sanat
+      changes:
+        - dropForeignKeyConstraint:
+            baseTableName: who_interested
+            constraintName: fk_whointerested_job
+  - changeSet:
+      id: add new fk_whointerested_applicant
+      author: Sanat
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: who_interested
+            baseColumnNames: applicant_id
+            constraintName: fk_whointerested_applicant
+            referencedTableName: users
+            referencedColumnNames: id
+            onDelete: cascade
+            onUpdate: cascade
+  - changeSet:
+      id: add new fk_whointerested_job
+      author: Sanat
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: who_interested
+            baseColumnNames: job_resume_id
+            constraintName: fk_whointerested_job
+            referencedTableName: job_resumes
+            referencedColumnNames: id
+            onDelete: cascade
+            onUpdate: cascade
+

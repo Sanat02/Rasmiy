@@ -42,6 +42,8 @@ databaseChangeLog:
       file: db/changelog/initial/018_insert_jobexp.yaml
   - include:
       file: db/changelog/initial/021_create_profile_images.yaml
+  - include:
+      file: db/changelog/initial/022_add_who_cascadefk.yaml
 
 
 

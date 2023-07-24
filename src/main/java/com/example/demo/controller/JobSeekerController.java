@@ -27,52 +27,52 @@ public class JobSeekerController {
     private final UserService userService;
 
 
-    @PostMapping("{userId}/resume")
-    public void createJobResume(@PathVariable int userId, @RequestBody Resume resume) {
-        log.info("User resume:" + resume.getId() + " created!");
-        resume.setUserId(userId);
-        resumeService.createResume(resume);
-    }
+//    @PostMapping("{userId}/resume")
+//    public void createJobResume(@PathVariable int userId, @RequestBody Resume resume) {
+//        log.info("User resume:" + resume.getId() + " created!");
+//        resume.setUserId(userId);
+//        resumeService.createResume(resume);
+//    }
+//
+//
+//
+//    @PutMapping("{user_id}/resume/{resume_id}")
+//    public void updateResume(@PathVariable int resume_id, @PathVariable int user_id, @RequestBody Resume resume) {
+//        log.info("Resume:" + resume.getId() + " updated!");
+//        resume.setUserId(user_id);
+//        resume.setId(resume_id);
+//        resumeService.updateResume(resume);
+//    }
+//
+
+//    @DeleteMapping("/resume/{resume_id}")
+//    public void deleteResume(@PathVariable int resume_id) {
+//        log.info("Resume id:" + resume_id + " is deleted! ");
+//        resumeService.deleteResume(resume_id);
+//    }
 
 
-
-    @PutMapping("{user_id}/resume/{resume_id}")
-    public void updateResume(@PathVariable int resume_id, @PathVariable int user_id, @RequestBody Resume resume) {
-        log.info("Resume:" + resume.getId() + " updated!");
-        resume.setUserId(user_id);
-        resume.setId(resume_id);
-        resumeService.updateResume(resume);
-    }
+//    @GetMapping("/jobresumes")
+//    public List<JobResumeDto> getAllJobResumes() {
+//        return jobResumeService.gettAllJobResumes();
+//    }
 
 
-    @DeleteMapping("/resume/{resume_id}")
-    public void deleteResume(@PathVariable int resume_id) {
-        log.info("Resume id:" + resume_id + " is deleted! ");
-        resumeService.deleteResume(resume_id);
-    }
-
-
-    @GetMapping("/jobresumes")
-    public List<JobResumeDto> getAllJobResumes() {
-        return jobResumeService.gettAllJobResumes();
-    }
-
-
-    @GetMapping("jobresumes/category/{category_name}")
-    public List<JobResumeDto> getJobResumesByCategoryName(@PathVariable String category_name) {
-        return jobResumeService.getJobResumeByCategoryName(category_name);
-    }
+//    @GetMapping("jobresumes/category/{category_name}")
+//    public List<JobResumeDto> getJobResumesByCategoryName(@PathVariable String category_name) {
+//        return jobResumeService.getJobResumeByCategoryName(category_name);
+//    }
 
 
     //TODO сделать автоинкремент
-    @PostMapping("/{user_id}/apply/{job_resume_id}")
-    public void applyForJobResume(@PathVariable int user_id, @PathVariable int job_resume_id,
-                                  @RequestBody WhoInterested whoInterested) {
-        whoInterested.setApplicant_id(user_id);
-        whoInterested.setJob_resume_id(job_resume_id);
-        whoInterested.setDate(LocalDateTime.now());
-        whoInterestedService.createInterested(whoInterested);
-    }
+//    @PostMapping("/{user_id}/apply/{job_resume_id}")
+//    public void applyForJobResume(@PathVariable int user_id, @PathVariable int job_resume_id,
+//                                  @RequestBody WhoInterested whoInterested) {
+//        whoInterested.setApplicant_id(user_id);
+//        whoInterested.setJob_resume_id(job_resume_id);
+//        whoInterested.setDate(LocalDateTime.now());
+//        whoInterestedService.createInterested(whoInterested);
+//    }
 
 
     @GetMapping("/employers")

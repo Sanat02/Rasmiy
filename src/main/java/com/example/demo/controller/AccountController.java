@@ -17,31 +17,31 @@ import java.util.List;
 @RequiredArgsConstructor
 
 public class AccountController {
-    //TODO Добавить автоинкремент в таблицы
-    //TODO Удалить поле profile_image из таблицы users,также удалить из классов
-
     private final UserService userService;
 
-
     @PostMapping("/applicant")
-    public void createAccountApplicant(@RequestBody User user) {
+    public void createAccountApplicant(@RequestBody UserDto user) {
         log.info("Applicant:" + user.getAccountName() + " created succesfully!");
         user.setAccountType(AccountType.JOB_SEEKER);
-        userService.createUser(user);
+        userService.save(user);
     }
 
 
     @PostMapping("/employer")
-    public void createAccountEmployer(@RequestBody User user) {
+    public void createAccountEmployer(@RequestBody UserDto user) {
         log.info("Employer:" + user.getAccountName() + " created succesfully!");
         user.setAccountType(AccountType.EMPLOYER);
-        userService.createUser(user);
+        userService.save(user);
     }
 
 
     @GetMapping
     public List<UserDto> getAllAccounts() {
         return userService.getAllUsers();
+    }
+    @GetMapping("/jobseekers")
+    public List<UserDto> getAllJobSeekers(){
+        return userService.getAllJobSeekers();
     }
 
 }

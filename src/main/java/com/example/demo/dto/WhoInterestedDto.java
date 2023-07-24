@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 public class WhoInterestedDto {
     private int id;
-    private User applicant;
+    private UserDto applicant;
     private JobResumeDto job_resume;
     private LocalDateTime date;
 

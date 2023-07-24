@@ -13,5 +13,5 @@ public class UserDto {
     private AccountType accountType;
     private String password;
     private String phoneNumber;
-    private String profilePhoto;
+
 }

@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.UserDao;
+import com.example.demo.dto.JobResumeDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.enums.AccountType;
 import com.example.demo.model.User;
@@ -18,17 +19,12 @@ public class UserService {
 
     private final UserDao userDao;
 
-    public void createUser(User user) {
-        userDao.createUser(user);
-    }
-
 
     public List<UserDto> getAllUsers() {
         List<User> users = userDao.getAllUsers();
-        List<UserDto> userDtos=users.stream()
-                .map(e->UserDto.builder()
+        List<UserDto> userDtos = users.stream()
+                .map(e -> UserDto.builder()
                         .id(e.getId())
-                        .profilePhoto(e.getProfilePhoto())
                         .phoneNumber(e.getPhoneNumber())
                         .accountType(e.getAccountType())
                         .password(e.getPassword())
@@ -40,9 +36,8 @@ public class UserService {
         return userDtos;
     }
 
-    public Optional<User> getUserByName(String name) {
-        Optional<User> mayBeUser = userDao.getUserByName(name);
-        return mayBeUser;
+    public User getUserByName(String name) {
+        return userDao.getUserByName(name);
     }
 
     public Optional<User> getUserByEmail(String email) {
@@ -63,7 +58,7 @@ public class UserService {
         }
     }
 
-    public User getUserById(int id) {
+    public Optional<User> getUserById(int id) {
         return userDao.getUserById(id);
     }
 
@@ -78,7 +73,6 @@ public class UserService {
                         .password(e.getPassword())
                         .phoneNumber(e.getPassword())
                         .email(e.getEmail())
-                        .profilePhoto(e.getProfilePhoto())
                         .build()
                 ).toList();
         return userDtos;
@@ -86,9 +80,39 @@ public class UserService {
 
     public List<UserDto> getAllEmployers() {
         List<UserDto> employers = getAllUsers().stream()
-                .filter(e->e.getAccountType().equals(AccountType.EMPLOYER)).collect(Collectors.toList());
+                .filter(e -> e.getAccountType().equals(AccountType.EMPLOYER)).collect(Collectors.toList());
         return employers;
     }
 
 
+    public int save(UserDto userDto) {
+        return userDao.save(User.builder()
+                .accountName(userDto.getAccountName())
+                .accountType(AccountType.EMPLOYER)
+                .email(userDto.getEmail())
+                .password(userDto.getPassword())
+                .phoneNumber(userDto.getPhoneNumber())
+                .build());
+    }
+
+    public void update(UserDto userDto) {
+        userDao.update(User.builder()
+                .accountName(userDto.getAccountName())
+                .email(userDto.getEmail())
+                .password(userDto.getPassword())
+                .phoneNumber(userDto.getPhoneNumber())
+                .id(userDto.getId())
+                .build());
+    }
+
+    public UserDto mapToUserDto(User user) {
+        return UserDto.builder()
+                .id(user.getId())
+                .accountName(user.getAccountName())
+                .email(user.getEmail())
+                .accountType(user.getAccountType())
+                .password(user.getPassword())
+                .phoneNumber(user.getPhoneNumber())
+                .build();
+    }
 }

@@ -20,15 +20,15 @@ public class JobsListService {
         return jobsListDao.getJobByCategory(category);
     }
 
-    public List<JobListDto> getAllJobs(){
-        List<JobList> jobLists=jobsListDao.getAllJobs();
-        List<JobListDto> jobListDtos=jobLists.stream()
-                .map(e->JobListDto.builder()
-                        .id(e.getId())
-                        .date(e.getDate())
-                        .categoryId(e.getCategoryId())
-                        .publisher(userService.getUserById(e.getId())).build()
-                ).toList();
-        return jobListDtos;
-    }
+//    public List<JobListDto> getAllJobs(){
+//        List<JobList> jobLists=jobsListDao.getAllJobs();
+//        List<JobListDto> jobListDtos=jobLists.stream()
+//                .map(e->JobListDto.builder()
+//                        .id(e.getId())
+//                        .date(e.getDate())
+//                        .categoryId(e.getCategoryId())
+//                        .publisher(userService.getUserById(e.getId())).build()
+//                ).toList();
+//        return jobListDtos;
+//    }
 }

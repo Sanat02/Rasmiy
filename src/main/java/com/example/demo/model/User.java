@@ -1,10 +1,13 @@
 package com.example.demo.model;
 
 import com.example.demo.enums.AccountType;
-import lombok.Data;
+import lombok.*;
 
 
 @Data
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 
 public class User {
     private  int id;
@@ -13,5 +16,5 @@ public class User {
     private AccountType accountType;
     private String password;
     private String phoneNumber;
-    private String profilePhoto;
+
 }

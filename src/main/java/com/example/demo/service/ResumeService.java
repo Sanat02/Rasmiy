@@ -29,39 +29,39 @@ public class ResumeService {
     private final JobExperienceService jobExperienceService;
 
 
-    public ResumeDto getResumeById(int resumeId) {
-        Resume resume = resumeDao.getResumeById(resumeId);
-        ResumeDto resumeDto = ResumeDto.builder()
-                .id(resume.getId())
-                .job(resume.getJob())
-                .expectedSalary(resume.getExpectedSalary())
-                .applicant(userService.getUserById(resume.getUserId()))
-                .contacts(contactsService.getContactsByResumeId(resume.getId()))
-                .build();
-        return resumeDto;
-    }
-
-    public List<ResumeDto> getResumeByUser(String email) {
-        List<ResumeDto> resumeDtos = getAllResumes().stream()
-                .filter(e -> e.getApplicant().getEmail() == email).collect(Collectors.toList());
-        return resumeDtos;
-    }
-
-
-    public void createResume(Resume resume) {
-        resumeDao.addResume(resume);
-
-    }
-
-    public void updateResume(Resume resume) {
-        resumeDao.updateResume(resume);
-    }
-
-    public void deleteResume(int resumeId) {
-        resumeDao.deleteResumeById(resumeId);
-    }
-
-
+    //    public ResumeDto getResumeById(int resumeId) {
+//        Resume resume = resumeDao.getResumeById(resumeId);
+//        ResumeDto resumeDto = ResumeDto.builder()
+//                .id(resume.getId())
+//                .job(resume.getJob())
+//                .expectedSalary(resume.getExpectedSalary())
+//                .applicant(userService.getUserById(resume.getUserId()))
+//                .contacts(contactsService.getContactsByResumeId(resume.getId()))
+//                .build();
+//        return resumeDto;
+//    }
+//
+//    public List<ResumeDto> getResumeByUser(String email) {
+//        List<ResumeDto> resumeDtos = getAllResumes().stream()
+//                .filter(e -> e.getApplicant().getEmail() == email).collect(Collectors.toList());
+//        return resumeDtos;
+//    }
+//
+//
+//    public void createResume(Resume resume) {
+//        resumeDao.addResume(resume);
+//
+//    }
+//
+//    public void updateResume(Resume resume) {
+//        resumeDao.updateResume(resume);
+//    }
+//
+//    public void deleteResume(int resumeId) {
+//        resumeDao.deleteResumeById(resumeId);
+//    }
+//
+//
     public List<ResumeDto> getAllResumes() {
         List<Resume> resumes = resumeDao.getAllResumes();
         List<ResumeDto> resumeDtos = resumes.stream()
@@ -69,7 +69,7 @@ public class ResumeService {
                         .id(e.getId())
                         .expectedSalary(e.getExpectedSalary())
                         .job(e.getJob())
-                        .applicant(userService.getUserById(e.getUserId()))
+                        .applicant(userService.getUserById(e.getUserId()).get())
                         .education(educationService.getEducationByResumeId(e.getId()))
                         .jobExperience(jobExperienceService.getJobExperienceById(e.getId()))
                         .contacts(contactsService.getContactsByResumeId(e.getId()))
@@ -79,18 +79,19 @@ public class ResumeService {
     }
 
 
-    public ResumeDto getResumeByJob(String job) {
-        Resume resume = resumeDao.getResumeByJob(job);
-        ResumeDto resumeDto = ResumeDto.builder()
-                .id(resume.getId())
-                .job(resume.getJob())
-                .expectedSalary(resume.getExpectedSalary())
-                .applicant(userService.getUserById(resume.getUserId()))
-                .contacts(contactsService.getContactsByResumeId(resume.getId()))
-                .build();
-        return resumeDto;
+    public List<ResumeDto> getResumeByJob(String job) {
+        List<Resume> resumes = resumeDao.getResumeByJob(job);
+        List<ResumeDto> resumeDtos = resumes.stream()
+                .map(e -> ResumeDto.builder()
+                        .id(e.getId())
+                        .job(e.getJob())
+                        .expectedSalary(e.getExpectedSalary())
+                        .applicant(userService.getUserById(e.getUserId()).get())
+                        .contacts(contactsService.getContactsByResumeId(e.getId()))
+                        .build()
+                ).toList();
+        return resumeDtos;
     }
-
 
 
 }

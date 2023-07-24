@@ -3,23 +3,31 @@ package com.example.demo.dao;
 import com.example.demo.enums.AccountType;
 import com.example.demo.model.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.SneakyThrows;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
+import java.sql.PreparedStatement;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 
 @Component
-@RequiredArgsConstructor
-public class UserDao {
 
-    private final JdbcTemplate jdbcTemplate;
+public class UserDao extends BaseDao {
 
+
+    UserDao(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+        super(jdbcTemplate, namedParameterJdbcTemplate);
+    }
 
     public List<User> getAllUsers() {
         String sql = "SELECT id, account_name as accountName, email, account_type as accountType, " +
@@ -28,21 +36,19 @@ public class UserDao {
     }
 
 
-    public Optional<User> getUserByName(String accountName) {
+    public User getUserByName(String accountName) {
         String sql = "SELECT id, account_name as accountName, email, account_type as accountType, " +
-                "password, phone_number as phoneNumber, profile_photo as profilePhoto FROM users WHERE account_name = ?";
-        try {
-            User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), accountName);
-            return Optional.ofNullable(user);
-        } catch (EmptyResultDataAccessException e) {
-            return Optional.empty();
-        }
+                "password, phone_number as phoneNumber FROM users WHERE account_name = ?";
+
+        User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), accountName);
+        return user;
+
     }
 
 
     public Optional<User> getUserByEmail(String email) {
         String sql = "SELECT id, account_name as accountName, email, account_type as accountType, " +
-                "password, phone_number as phoneNumber, profile_photo as profilePhoto FROM users WHERE email = ?";
+                "password, phone_number as phoneNumber FROM users WHERE email = ?";
         try {
             User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
             return Optional.ofNullable(user);
@@ -58,10 +64,15 @@ public class UserDao {
     }
 
 
-    public User getUserById(int id) {
+    @SneakyThrows
+    public Optional<User> getUserById(int id) {
         String sql = "SELECT id, account_name as accountName, email, account_type as accountType, " +
-                "password, phone_number as phoneNumber, profile_photo as profilePhoto FROM users WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), id);
+                "password, phone_number as phoneNumber FROM users WHERE id = ?";
+
+        return Optional.ofNullable(DataAccessUtils.singleResult(
+                jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class), id)
+        ));
+
     }
 
 
@@ -77,22 +88,49 @@ public class UserDao {
 
     public User getUserByPhoneNumber(String phoneNumber) {
         String sql = "SELECT id, account_name as accountName, email, account_type as accountType, " +
-                "password, phone_number as phoneNumber, profile_photo as profilePhoto FROM users WHERE phone_number = ?";
+                "password, phone_number as phoneNumber FROM users WHERE phone_number = ?";
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), phoneNumber);
-    }
-
-
-    public void createUser(User user) {
-        String sql = "INSERT INTO users (id, account_name, email, account_type, password, phone_number, profile_photo) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, user.getId(), user.getAccountName(), user.getEmail(), String.valueOf(user.getAccountType()),
-                user.getPassword(), user.getPhoneNumber(), user.getProfilePhoto());
     }
 
 
     public List<User> getAllJobSeekers() {
         String sql = "SELECT id, account_name as accountName, email, account_type as accountType, " +
-                "password, phone_number as phoneNumber, profile_photo as profilePhoto FROM users WHERE account_type = ?";
+                "password, phone_number as phoneNumber FROM users WHERE account_type = ?";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class), String.valueOf(AccountType.JOB_SEEKER));
+    }
+
+
+    @Override
+    public int save(Object obj) {
+        User user = (User) obj;
+        String sql = "INSERT INTO users (account_name, email, account_type, password, phone_number) " +
+                "VALUES (?, ?, ?, ?, ?)";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(con -> {
+            PreparedStatement ps = con.prepareStatement(sql, new String[]{"id"});
+            ps.setString(1, user.getAccountName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, String.valueOf(user.getAccountType()));
+            ps.setString(4, user.getPassword());
+            ps.setString(5, user.getPhoneNumber());
+            return ps;
+        }, keyHolder);
+        return Objects.requireNonNull(keyHolder.getKey()).intValue();
+    }
+
+
+    @Override
+    public void delete(int id) {
+
+    }
+
+    @Override
+    public void update(Object obj) {
+        User user = (User) obj;
+        String sql = "UPDATE users SET account_name = ? , email = ?, " +
+                " account_type = ?, password = ? , phone_number = ? WHERE id = ?";
+
+        jdbcTemplate.update(sql, user.getAccountName(), user.getEmail(), String.valueOf(AccountType.EMPLOYER),
+                user.getPassword(), user.getPhoneNumber(), user.getId());
     }
 }

@@ -46,8 +46,8 @@ public class ResumeDao {
 
     }
 
-    public Resume getResumeByJob(String job) {
+    public List<Resume> getResumeByJob(String job) {
         String sql = "SELECT id, user_id AS userId, job, expected_salary AS expectedSalary FROM resumes WHERE job = ?";
-        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Resume.class), job);
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Resume.class), job);
     }
 }
