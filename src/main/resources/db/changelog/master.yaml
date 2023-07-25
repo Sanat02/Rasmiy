@@ -44,6 +44,12 @@ databaseChangeLog:
       file: db/changelog/initial/021_create_profile_images.yaml
   - include:
       file: db/changelog/initial/022_add_who_cascadefk.yaml
+  - include:
+      file: db/changelog/initial/023_create_authorities.yaml
+  - include:
+      file: db/changelog/initial/024_create_roles.yaml
+  - include:
+      file: db/changelog/initial/025_modify_users.yaml
 
 
 
