@@ -62,10 +62,12 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(authorize -> {
                     authorize
-//                            .requestMatchers("/accounts/**").permitAll()
-//                            .requestMatchers(HttpMethod.GET,"/jobresume").permitAll()
-                            .requestMatchers(HttpMethod.POST,"/resumes").hasAuthority("JOB_SEEKER")
-                            .requestMatchers(HttpMethod.POST,"/jobresume").hasAuthority("EMPLOYER")
+                            .requestMatchers(HttpMethod.POST, "/resumes").hasAuthority("JOB_SEEKER")
+                            .requestMatchers(HttpMethod.DELETE,"/resumes").hasAuthority("JOB_SEEKER")
+                            .requestMatchers(HttpMethod.PUT,"/resumes").hasAuthority("JOB_SEEKER")
+                            .requestMatchers(HttpMethod.POST, "/jobresume").hasAuthority("EMPLOYER")
+                            .requestMatchers(HttpMethod.DELETE, "/jobresume").hasAuthority("EMPLOYER")
+                            .requestMatchers(HttpMethod.PUT, "/jobresume").hasAuthority("EMPLOYER")
                             .anyRequest().permitAll();
                 });
         return http.build();
