@@ -99,11 +99,11 @@ public class JobResumeService {
             int userId;
             if (!mayBeUser.isPresent()) {
                 userId=userService.save(jobResumeDto.getUser());
-                System.out.println("NOT PRESENT");
+
             } else {
                 userService.update(jobResumeDto.getUser());
                 userId=jobResumeDto.getUser().getId();
-                System.out.println("IS PRESENT");
+
             }
 
             Optional<Category> mayBeCategory = categoryService.getCategoryById(jobResumeDto.getCategory().getId());

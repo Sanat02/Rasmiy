@@ -27,23 +27,7 @@ public class JobSeekerController {
     private final UserService userService;
 
 
-//    @PostMapping("{userId}/resume")
-//    public void createJobResume(@PathVariable int userId, @RequestBody Resume resume) {
-//        log.info("User resume:" + resume.getId() + " created!");
-//        resume.setUserId(userId);
-//        resumeService.createResume(resume);
-//    }
-//
-//
-//
-//    @PutMapping("{user_id}/resume/{resume_id}")
-//    public void updateResume(@PathVariable int resume_id, @PathVariable int user_id, @RequestBody Resume resume) {
-//        log.info("Resume:" + resume.getId() + " updated!");
-//        resume.setUserId(user_id);
-//        resume.setId(resume_id);
-//        resumeService.updateResume(resume);
-//    }
-//
+
 
 //    @DeleteMapping("/resume/{resume_id}")
 //    public void deleteResume(@PathVariable int resume_id) {

@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Builder
 
 public class EducationDto {
+    private int id;
     private String institutionName;
     private LocalDate startDate;
     private LocalDate endDate;

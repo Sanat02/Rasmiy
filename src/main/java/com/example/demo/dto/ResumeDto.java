@@ -15,11 +15,11 @@ import java.util.List;
 
 public class ResumeDto {
     private int id;
-    private User applicant;
+    private UserDto applicant;
     private String job;
     private Integer expectedSalary;
     private JobExperienceDto jobExperience;
     private EducationDto education;
-    private List<Contacts> contacts=new ArrayList<>();
+    private List<ContactDto> contacts;
 
 }

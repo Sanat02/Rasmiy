@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Data
 @Builder
 public class JobExperienceDto {
+    private int id;
     private String position;
     private LocalDate startDate;
     private LocalDate endDate;

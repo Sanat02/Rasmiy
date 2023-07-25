@@ -2,12 +2,12 @@ package com.example.demo.service;
 
 import com.example.demo.dao.EducationDao;
 import com.example.demo.dao.ResumeDao;
+import com.example.demo.dto.EducationDto;
+import com.example.demo.dto.JobExperienceDto;
 import com.example.demo.dto.JobListDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.enums.ContactType;
-import com.example.demo.model.Education;
-import com.example.demo.model.Resume;
-import com.example.demo.model.User;
+import com.example.demo.model.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,20 +48,7 @@ public class ResumeService {
 //    }
 //
 //
-//    public void createResume(Resume resume) {
-//        resumeDao.addResume(resume);
-//
-//    }
-//
-//    public void updateResume(Resume resume) {
-//        resumeDao.updateResume(resume);
-//    }
-//
-//    public void deleteResume(int resumeId) {
-//        resumeDao.deleteResumeById(resumeId);
-//    }
-//
-//
+
     public List<ResumeDto> getAllResumes() {
         List<Resume> resumes = resumeDao.getAllResumes();
         List<ResumeDto> resumeDtos = resumes.stream()
@@ -69,10 +56,10 @@ public class ResumeService {
                         .id(e.getId())
                         .expectedSalary(e.getExpectedSalary())
                         .job(e.getJob())
-                        .applicant(userService.getUserById(e.getUserId()).get())
-                        .education(educationService.getEducationByResumeId(e.getId()))
-                        .jobExperience(jobExperienceService.getJobExperienceById(e.getId()))
-                        .contacts(contactsService.getContactsByResumeId(e.getId()))
+                        .applicant(userService.mapToUserDto(userService.getUserById(e.getUserId()).get()))
+                        .education(educationService.getEducationByResumeId(e.getId()).get())
+                        .jobExperience(jobExperienceService.getJobExperienceById(e.getId()).get())
+                        .contacts(contactsService.getContactsDtoByResumeId(e.getId()))
                         .build())
                 .collect(Collectors.toList());
         return resumeDtos;
@@ -86,12 +73,80 @@ public class ResumeService {
                         .id(e.getId())
                         .job(e.getJob())
                         .expectedSalary(e.getExpectedSalary())
-                        .applicant(userService.getUserById(e.getUserId()).get())
-                        .contacts(contactsService.getContactsByResumeId(e.getId()))
+                        .applicant(userService.mapToUserDto(userService.getUserById(e.getUserId()).get()))
+                        .contacts(contactsService.getContactsDtoByResumeId(e.getId()))
                         .build()
                 ).toList();
         return resumeDtos;
     }
 
 
+    public void saveResume(ResumeDto resumeDto) {
+        Optional<User> mayBeUser = userService.getUserById(resumeDto.getApplicant().getId());
+        int userId;
+        if (!mayBeUser.isPresent()) {
+            userId = userService.save(resumeDto.getApplicant());
+        } else {
+            userId = userService.getUserByEmail(resumeDto.getApplicant().getEmail()).get().getId();
+        }
+
+
+        int resumeId = resumeDao.save(Resume.builder()
+                .expectedSalary(resumeDto.getExpectedSalary())
+                .job(resumeDto.getJob())
+                .userId(userId)
+                .build()
+        );
+        if (resumeDto.getJobExperience() != null) {
+            jobExperienceService.saveJobExperience(resumeDto.getJobExperience(), resumeId);
+        }
+        if (resumeDto.getEducation() != null) {
+            educationService.saveEducation(resumeDto.getEducation(), resumeId);
+        }
+
+    }
+
+    public void updateResume(ResumeDto resumeDto) {
+        Optional<Resume> resumeId = resumeDao.getResumeById(resumeDto.getId());
+        if (resumeId.isPresent()) {
+            Optional<User> mayBeUser = userService.getUserById(resumeDto.getId());
+            int userId;
+            if (!mayBeUser.isPresent()) {
+                userId = userService.save(resumeDto.getApplicant());
+            } else {
+                userService.update(resumeDto.getApplicant());
+                userId = resumeDto.getApplicant().getId();
+            }
+            resumeDao.update(Resume.builder()
+                    .expectedSalary(resumeDto.getExpectedSalary())
+                    .job(resumeDto.getJob())
+                    .userId(userId)
+                    .id(resumeDto.getId())
+                    .build());
+            if (resumeDto.getEducation() != null) {
+                Optional<EducationDto> educationDto = educationService.getEducationByResumeId(resumeDto.getId());
+                if (!educationDto.isPresent()) {
+                    educationService.saveEducation(resumeDto.getEducation(), resumeDto.getId());
+                } else {
+
+                    educationService.updateEducation(resumeDto.getEducation(),resumeDto.getEducation().getId());
+                }
+            }
+
+            if (resumeDto.getJobExperience() != null) {
+                Optional<JobExperienceDto> jobExperience = jobExperienceService.getJobExperienceById(resumeDto.getId());
+                if (!jobExperience.isPresent()) {
+                    jobExperienceService.saveJobExperience(resumeDto.getJobExperience(), resumeDto.getId());
+                } else {
+                    jobExperienceService.updateEducation(resumeDto.getJobExperience(),resumeDto.getJobExperience().getId());
+                }
+            }
+        } else {
+            throw new IllegalArgumentException("Job Resume with ID " + resumeDto.getId() + " not found.");
+        }
+    }
+
+    public void deleteResume(int resumeId) {
+        resumeDao.delete(resumeId);
+    }
 }

@@ -61,7 +61,6 @@ public class JobResumeDao extends BaseDao {
         JobResume jobResume = (JobResume) obj;
         String sql = "INSERT INTO job_resumes(user_id,job_title,salary,job_description,experience,category_id)" +
                 "VALUES(?,?,?,?,?,?)";
-        //  KeyHolder keyHolder = new GeneratedKeyHolder();
 
         jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(sql, new String[]{"id"});
