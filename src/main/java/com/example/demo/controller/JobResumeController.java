@@ -4,6 +4,7 @@ import com.example.demo.dto.JobResumeDto;
 import com.example.demo.enums.AccountType;
 import com.example.demo.service.JobResumeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,9 +18,10 @@ public class JobResumeController {
 
     //adding jobresume
     @PostMapping
-    public void createJobResume(@RequestBody JobResumeDto jobResumeDto) {
+    public HttpStatus createJobResume(@RequestBody JobResumeDto jobResumeDto) {
         jobResumeDto.getUser().setAccountType(AccountType.EMPLOYER);
         jobResumeService.saveJobResume(jobResumeDto);
+        return HttpStatus.OK;
     }
 
     //updating jobresume

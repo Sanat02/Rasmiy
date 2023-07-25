@@ -62,11 +62,11 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(authorize -> {
                     authorize
-                            .requestMatchers("/accounts/**").permitAll()
-                            .requestMatchers(HttpMethod.GET,"/jobresume").permitAll()
+//                            .requestMatchers("/accounts/**").permitAll()
+//                            .requestMatchers(HttpMethod.GET,"/jobresume").permitAll()
                             .requestMatchers(HttpMethod.POST,"/resumes").hasAuthority("JOB_SEEKER")
                             .requestMatchers(HttpMethod.POST,"/jobresume").hasAuthority("EMPLOYER")
-                            .anyRequest().authenticated();
+                            .anyRequest().permitAll();
                 });
         return http.build();
     }
