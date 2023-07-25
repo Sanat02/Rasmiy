@@ -1,8 +1,7 @@
 package com.example.demo.dao;
 
-import com.example.demo.model.Education;
+
 import com.example.demo.model.JobExperience;
-import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -52,6 +51,8 @@ public class JobExperienceDao extends BaseDao {
 
     @Override
     public void delete(int id) {
+        String sql = "DELETE FROM job_experience WHERE id = ? ";
+        jdbcTemplate.update(sql, id);
 
     }
 

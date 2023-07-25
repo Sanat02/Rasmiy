@@ -1,8 +1,6 @@
 package com.example.demo.dao;
 
 import com.example.demo.model.Education;
-import lombok.RequiredArgsConstructor;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,7 +8,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -51,6 +48,8 @@ public class EducationDao extends BaseDao {
 
     @Override
     public void delete(int id) {
+        String sql = "DELETE FROM education WHERE id = ? ";
+        jdbcTemplate.update(sql, id);
 
     }
 

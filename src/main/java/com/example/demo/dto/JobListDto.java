@@ -4,12 +4,12 @@ import com.example.demo.model.User;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 @Data
 @Builder
 public class JobListDto {
     private int id;
     private User publisher;
     private int categoryId;
-    private LocalDateTime date;
+    private LocalDate date;
 }

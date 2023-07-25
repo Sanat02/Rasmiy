@@ -23,10 +23,10 @@ public class WhoInterestedService {
         List<WhoInterested> whoInteresteds=whoIsInterestedDao.getInterestedApplicants(job_id);
         List<WhoInterestedDto> whoInterestedDtos=whoInteresteds.stream()
                 .map(e->WhoInterestedDto.builder()
-                        .id(e.getApplicant_id())
-                        .applicant(userService.mapToUserDto(userService.getUserById(e.getApplicant_id()).get()))
+                        .id(e.getApplicantId())
+                        .applicant(userService.mapToUserDto(userService.getUserById(e.getApplicantId()).get()))
                         .date(e.getDate())
-                        .job_resume(jobResumeService.mapToJobResumeDto(jobResumeService.getJobResumeById(e.getJob_resume_id()).get()))
+                        .job_resume(jobResumeService.mapToJobResumeDto(jobResumeService.getJobResumeById(e.getJobResumeId()).get()))
                         .build()
                 ).toList();
         return whoInterestedDtos;

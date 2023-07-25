@@ -25,19 +25,6 @@ public class JobResumeDao extends BaseDao {
         super(jdbcTemplate, namedParameterJdbcTemplate);
     }
 
-    public List<JobResume> getResumeBySalary(Integer salary) {
-        String sql = "SELECT id, user_id AS userId, job_title AS jobTitle, salary, job_description AS jobDescription, " +
-                "experience, category_id AS categoryId FROM job_resumes WHERE salary < ?";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(JobResume.class), salary);
-    }
-
-
-    public List<JobResume> getResumeByExperience(int experience) {
-        String sql = "SELECT id, user_id AS userId, job_title AS jobTitle, salary, job_description AS jobDescription, " +
-                "experience, category_id AS categoryId FROM job_resumes WHERE experience > ?";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(JobResume.class), experience);
-    }
-
 
     public Optional<JobResume> getJobResumeById(int id) {
         String sql = "SELECT id, user_id AS userId, job_title AS jobTitle, salary, job_description AS jobDescription, " +

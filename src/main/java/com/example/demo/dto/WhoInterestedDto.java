@@ -5,6 +5,7 @@ import com.example.demo.model.User;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Builder
@@ -13,6 +14,6 @@ public class WhoInterestedDto {
     private int id;
     private UserDto applicant;
     private JobResumeDto job_resume;
-    private LocalDateTime date;
+    private LocalDate date;
 
 }

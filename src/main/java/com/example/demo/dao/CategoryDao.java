@@ -51,6 +51,8 @@ public class CategoryDao extends BaseDao {
 
     @Override
     public void delete(int id) {
+        String sql = "DELETE FROM categories WHERE id = ?";
+        jdbcTemplate.update(sql,id);
 
     }
 

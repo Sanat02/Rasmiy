@@ -1,22 +1,23 @@
 package com.example.demo.dao;
 
 import com.example.demo.model.JobList;
-import com.example.demo.model.JobResume;
-import com.example.demo.model.User;
-import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataAccessException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.sql.PreparedStatement;
 import java.util.List;
+import java.util.Objects;
 
 @Component
-@RequiredArgsConstructor
-public class JobsListDao {
-    private final JdbcTemplate jdbcTemplate;
 
+public class JobsListDao extends BaseDao {
+
+
+    JobsListDao(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+        super(jdbcTemplate, namedParameterJdbcTemplate);
+    }
 
     public List<JobList> getAllJobs() {
         String sql = "SELECT id, publisher_id as publisherId, category_id as categoryId, date " +
@@ -25,33 +26,41 @@ public class JobsListDao {
     }
 
 
-
-
     public List<JobList> getJobByCategory(String category) {
         String sql = "select * from vacancies where category = ?";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(JobList.class), category);
     }
 
 
-    public void deleteJob(int jobId) {
-        String sql = "DELETE FROM vacancies WHERE id = ?";
-        try {
-            jdbcTemplate.update(sql, jobId);
-        } catch (DataAccessException e) {
-            // Handle any exceptions
-            throw new RuntimeException("Failed to delete job: " + e.getMessage(), e);
-        }
+    @Override
+    public int save(Object obj) {
+        JobList jobList = (JobList) obj;
+        String sql = "INSERT INTO vacancies(publisher_id,category_id,date) " +
+                " VALUES(?,?,?)";
+        jdbcTemplate.update(con -> {
+            PreparedStatement ps = con.prepareStatement(sql, new String[]{"id"});
+            ps.setInt(1, jobList.getPublisherId());
+            ps.setInt(2, jobList.getCategoryId());
+            ps.setDate(3, java.sql.Date.valueOf(jobList.getDate()));
+            return ps;
+        }, keyHolder);
+        return Objects.requireNonNull(keyHolder.getKey()).intValue();
     }
 
+    @Override
+    public void delete(int id) {
+        String sql = "DELETE FROM vacancies WHERE id=?";
+        jdbcTemplate.update(sql, id);
 
-    public JobList getJobById(int jobId) {
-        String sql = "SELECT * FROM jobs WHERE id = ?";
-        try {
-            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(JobList.class), jobId);
-        } catch (EmptyResultDataAccessException e) {
-            return null;
-        }
     }
 
+    @Override
+    public void update(Object obj) {
+        JobList jobList = (JobList) obj;
+        String sql = "UPDATE vacancies SET publisher_id = ? ,category_id = ? , " +
+                "date = ? WHERE id = ?";
+        jdbcTemplate.update(sql, jobList.getPublisherId(), jobList.getCategoryId(),
+                jobList.getDate(), jobList.getId());
 
+    }
 }

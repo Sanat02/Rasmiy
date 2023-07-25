@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -16,5 +17,5 @@ public class JobList {
     private int id;
     private int publisherId;
     private int categoryId;
-    private LocalDateTime date;
+    private LocalDate date;
 }

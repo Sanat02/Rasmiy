@@ -123,7 +123,12 @@ public class UserDao extends BaseDao {
 
     @Override
     public void delete(int id) {
+        String sql = "DELETE FROM users WHERE id = ?";
+        int rowsAffected = jdbcTemplate.update(sql, id);
 
+        if (rowsAffected != 1) {
+            throw new RuntimeException("Failed to delete resume with ID: " + id);
+        }
     }
 
     @Override
