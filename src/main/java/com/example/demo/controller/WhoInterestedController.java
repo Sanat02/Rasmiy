@@ -22,13 +22,5 @@ public class WhoInterestedController {
     public List<WhoInterestedDto> getInterestedApplicants(@PathVariable int jobId) {
         return whoInterestedService.getInterestedApplicants(jobId);
     }
-    //TODO сделать автоинкремент
-//    @PostMapping("/{user_id}/apply/{job_resume_id}")
-//    public void applyForJobResume(@PathVariable int user_id, @PathVariable int job_resume_id,
-//                                  @RequestBody WhoInterested whoInterested) {
-//        whoInterested.setApplicant_id(user_id);
-//        whoInterested.setJob_resume_id(job_resume_id);
-//        whoInterested.setDate(LocalDateTime.now());
-//        whoInterestedService.createInterested(whoInterested);
-//    }
+
 }

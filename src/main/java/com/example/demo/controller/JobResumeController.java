@@ -42,7 +42,7 @@ public class JobResumeController {
 
 
     //get job resume by category
-    @GetMapping("/category/{category_name}")
+    @GetMapping("/category/{categoryName}")
     public List<JobResumeDto> getJobResumesByCategoryName(@PathVariable String categoryName) {
         return jobResumeService.getJobResumeByCategoryName(categoryName);
     }
