@@ -6,12 +6,14 @@ import com.example.demo.dto.UserDto;
 import com.example.demo.model.Category;
 import com.example.demo.model.User;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CategoryService {
     private final CategoryDao categoryDao;
 
@@ -28,9 +30,11 @@ public class CategoryService {
     }
 
     public int save(CategoryDto category) {
-        return categoryDao.save(Category.builder()
+        int categoryId=categoryDao.save(Category.builder()
                 .name(category.getName())
                 .description(category.getDescription()).build());
+        log.info("Category saved with id:"+categoryId);
+        return categoryId;
     }
 
     public void update(CategoryDto category) {
@@ -39,5 +43,6 @@ public class CategoryService {
                 .description(category.getDescription())
                 .build()
         );
+        log.info("Category updated with id:"+category.getId());
     }
 }

@@ -8,7 +8,7 @@ import com.example.demo.model.*;
 
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 
 import org.springframework.stereotype.Service;
@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ResumeService {
 
     private final ResumeDao resumeDao;
@@ -28,28 +29,8 @@ public class ResumeService {
     private final EducationService educationService;
     private final JobExperienceService jobExperienceService;
 
-
-    //    public ResumeDto getResumeById(int resumeId) {
-//        Resume resume = resumeDao.getResumeById(resumeId);
-//        ResumeDto resumeDto = ResumeDto.builder()
-//                .id(resume.getId())
-//                .job(resume.getJob())
-//                .expectedSalary(resume.getExpectedSalary())
-//                .applicant(userService.getUserById(resume.getUserId()))
-//                .contacts(contactsService.getContactsByResumeId(resume.getId()))
-//                .build();
-//        return resumeDto;
-//    }
-//
-//    public List<ResumeDto> getResumeByUser(String email) {
-//        List<ResumeDto> resumeDtos = getAllResumes().stream()
-//                .filter(e -> e.getApplicant().getEmail() == email).collect(Collectors.toList());
-//        return resumeDtos;
-//    }
-//
-//
-
     public List<ResumeDto> getAllResumes() {
+        log.info("Got all users");
         List<Resume> resumes = resumeDao.getAllResumes();
         List<ResumeDto> resumeDtos = resumes.stream()
                 .map(e -> ResumeDto.builder()
@@ -67,6 +48,7 @@ public class ResumeService {
 
 
     public List<ResumeDto> getResumeByJob(String job) {
+        log.info("Got job:" + job);
         List<Resume> resumes = resumeDao.getResumeByJob(job);
         List<ResumeDto> resumeDtos = resumes.stream()
                 .map(e -> ResumeDto.builder()
@@ -105,6 +87,7 @@ public class ResumeService {
         if (resumeDto.getEducation() != null) {
             educationService.saveEducation(resumeDto.getEducation(), resumeId);
         }
+        log.info("The resume:" +resumeId + " is saved!");
 
     }
 
@@ -142,13 +125,17 @@ public class ResumeService {
                 } else {
                     jobExperienceService.updateEducation(resumeDto.getJobExperience(), resumeDto.getJobExperience().getId());
                 }
+                log.info("The resume:" + resumeDto.getId() + " is updated!");
             }
         } else {
+            log.error("The resume id does not exits:" + resumeId.get().getId());
             throw new IllegalArgumentException("Job Resume with ID " + resumeDto.getId() + " not found.");
+
         }
     }
 
     public void deleteResume(int resumeId) {
+        log.info("Deleted resume with id:" + resumeId);
         resumeDao.delete(resumeId);
     }
 }

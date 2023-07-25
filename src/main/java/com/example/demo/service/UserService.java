@@ -1,11 +1,11 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.UserDao;
-import com.example.demo.dto.JobResumeDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.enums.AccountType;
 import com.example.demo.model.User;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +15,14 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
 
     private final UserDao userDao;
 
 
     public List<UserDto> getAllUsers() {
+        log.info("Gol all users");
         List<User> users = userDao.getAllUsers();
         List<UserDto> userDtos = users.stream()
                 .map(e -> UserDto.builder()
@@ -36,34 +38,38 @@ public class UserService {
         return userDtos;
     }
 
-    public User getUserByName(String name) {
-        return userDao.getUserByName(name);
-    }
 
     public Optional<User> getUserByEmail(String email) {
+        log.info("Gol user by email:"+email);
         Optional<User> mayBeUser = userDao.getUserByEmail(email);
         return mayBeUser;
     }
 
     public String isUserExist(String email) {
         try {
+
             Optional<User> user = userDao.getUserByEmail(email);
             if (user != null) {
+                log.error("User:"+email+" does not exist!");
                 return "Exists";
             } else {
+                log.info("User:"+email+" exists!");
                 return "Not exists";
             }
         } catch (EmptyResultDataAccessException e) {
+            log.error("Empty Result!");
             return "Not exists";
         }
     }
 
     public Optional<User> getUserById(int id) {
+        log.info("Got user by id:"+id);
         return userDao.getUserById(id);
     }
 
 
     public List<UserDto> getAllJobSeekers() {
+        log.info("Got all job seekers");
         List<User> users = userDao.getAllJobSeekers();
         List<UserDto> userDtos = users.stream()
                 .map(e -> UserDto.builder()
@@ -79,6 +85,7 @@ public class UserService {
     }
 
     public List<UserDto> getAllEmployers() {
+        log.info("Got all job employers");
         List<UserDto> employers = getAllUsers().stream()
                 .filter(e -> e.getAccountType().equals(AccountType.EMPLOYER)).collect(Collectors.toList());
         return employers;
@@ -87,7 +94,7 @@ public class UserService {
 
     public int save(UserDto userDto) {
         int roleId = userDto.getAccountType().equals(AccountType.JOB_SEEKER) ? 2 : 1;
-
+        log.info("The user:"+userDto.getEmail()+" is saved!");
         return userDao.save(User.builder()
                 .accountName(userDto.getAccountName())
                 .accountType(userDto.getAccountType())
@@ -97,9 +104,11 @@ public class UserService {
                 .enabled(true)
                 .roleId(roleId)
                 .build());
+
     }
 
     public void update(UserDto userDto) {
+        log.info("The user:"+userDto.getEmail()+" is updated!");
         userDao.update(User.builder()
                 .accountName(userDto.getAccountName())
                 .email(userDto.getEmail())

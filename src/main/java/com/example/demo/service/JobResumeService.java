@@ -2,20 +2,19 @@ package com.example.demo.service;
 
 import com.example.demo.dao.JobResumeDao;
 import com.example.demo.dto.JobResumeDto;
-import com.example.demo.dto.UserDto;
 import com.example.demo.model.Category;
 import com.example.demo.model.JobResume;
 import com.example.demo.model.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 import static java.util.stream.Collectors.toList;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class JobResumeService {
@@ -42,14 +41,8 @@ public class JobResumeService {
 
     }
 
-    //    public JobResumeDto getJobResumeById(int id){
-//        List<JobResumeDto> jobResumeDtos=gettAllJobResumes();
-//        JobResumeDto jobResumeDto=jobResumeDtos.stream().filter(e->e.getId()==id)
-//                .findFirst().orElse(null);
-//        return jobResumeDto;
-//    }
-//
     public List<JobResumeDto> getJobResumeByCategoryName(String categoryName) {
+        log.info("Got job with category:"+categoryName);
         List<JobResumeDto> jobResumeDtos = gettAllJobResumes().
                 stream().
                 filter(e -> e.getCategory().getName().equalsIgnoreCase(categoryName)).
@@ -75,7 +68,7 @@ public class JobResumeService {
             categoryId = categoryService.getCategoryById(jobResumeDto.getCategory().getId()).get().getId();
         }
 
-        jobResumeDao.save(JobResume.builder()
+        int jobResumeId=jobResumeDao.save(JobResume.builder()
                 .jobTitle(jobResumeDto.getJobTitle())
                 .jobDescription(jobResumeDto.getJobDescription())
                 .salary(jobResumeDto.getSalary())
@@ -83,6 +76,7 @@ public class JobResumeService {
                 .userId(userId)
                 .categoryId(categoryId)
                 .build());
+        log.info("Job resume saved with id:"+jobResumeId);
 
     }
 

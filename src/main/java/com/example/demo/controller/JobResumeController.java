@@ -4,12 +4,11 @@ import com.example.demo.dto.JobResumeDto;
 import com.example.demo.enums.AccountType;
 import com.example.demo.service.JobResumeService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Slf4j
+
 @RestController
 @RequestMapping("/jobresume")
 @RequiredArgsConstructor

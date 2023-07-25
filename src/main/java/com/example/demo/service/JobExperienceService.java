@@ -5,12 +5,14 @@ import com.example.demo.dto.EducationDto;
 import com.example.demo.dto.JobExperienceDto;
 import com.example.demo.model.JobExperience;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class JobExperienceService {
     private final JobExperienceDao jobExperienceDao;
 
@@ -26,12 +28,13 @@ public class JobExperienceService {
     }
 
     public void saveJobExperience(JobExperienceDto jobExperience, int resumeId) {
-        jobExperienceDao.save(JobExperience.builder()
+        int id=jobExperienceDao.save(JobExperience.builder()
                 .endDate(jobExperience.getStartDate())
                 .startDate(jobExperience.getStartDate())
                 .position(jobExperience.getPosition())
                 .resumeId(resumeId)
                 .build());
+        log.info("JobExperience saved with id:"+id);
     }
 
 
@@ -42,5 +45,6 @@ public class JobExperienceService {
                 .position(jobExperience.getPosition())
                 .resumeId(id)
                 .build());
+        log.info("JobExperience updated with id:"+jobExperience.getId());
     }
 }
