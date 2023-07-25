@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      id: insertDataAuthority
+      author: admin
+      changes:
+        - sql:
+            comment: Insert data into authority
+            sql: |
+              insert into authorities (authority)
+              values('FULL'), ('READ_ONLY');
+
+  - changeSet:
+      id: insertDataRoles
+      author: admin
+      changes:
+        - sql:
+            comment: Insert data into roles
+            sql: |
+              insert into roles(role, authority_id)
+              values ('EMPLOYER', (select id from authorities where authority = 'FULL')),
+                ('JOB_SEEKER', (select id from authorities where authority = 'FULL'));
+  - changeSet:
+      id: insertDataUsers
+      author: admin
+      changes:
+        - sql:
+            sql: |
+              insert into users(email, account_name, password, enabled, role_id,account_type,phone_number)
+              VALUES (
+                'qwe@qwe.qwe', 
+                'qwe', 
+                '$2a$12$WB2YUbFcCN0tm44SBcKUjua9yiFBsfB3vW02IjuwzY7HGtlQIKzy2', 
+                TRUE,
+                (select id from roles where role = 'EMPLOYER'),
+                'EMPLOYER',
+                '777888999'
+                 
+              ),
+              (
+                'ewq@ewq.com',
+                'ewq',
+                '$2a$12$WB2YUbFcCN0tm44SBcKUjua9yiFBsfB3vW02IjuwzY7HGtlQIKzy2',
+                TRUE,
+                (select id from roles where role = 'JOB_SEEKER'),
+                'JOB_SEEKER',
+                '777888999'
+              )

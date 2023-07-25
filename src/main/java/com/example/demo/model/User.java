@@ -16,5 +16,7 @@ public class User {
     private AccountType accountType;
     private String password;
     private String phoneNumber;
+    private int roleId;
+    private Boolean enabled;
 
 }

@@ -39,9 +39,15 @@ public class AccountController {
     public List<UserDto> getAllAccounts() {
         return userService.getAllUsers();
     }
+
     @GetMapping("/jobseekers")
-    public List<UserDto> getAllJobSeekers(){
+    public List<UserDto> getAllJobSeekers() {
         return userService.getAllJobSeekers();
+    }
+
+    @GetMapping("/employers")
+    public List<UserDto> getAllEmployers() {
+        return userService.getAllEmployers();
     }
 
 }

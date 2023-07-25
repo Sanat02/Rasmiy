@@ -31,7 +31,7 @@ public class UserDao extends BaseDao {
 
     public List<User> getAllUsers() {
         String sql = "SELECT id, account_name as accountName, email, account_type as accountType, " +
-                "password, phone_number as phoneNumber, profile_photo as profilePhoto FROM users";
+                "password, phone_number as phoneNumber FROM users";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
     }
 
@@ -103,8 +103,8 @@ public class UserDao extends BaseDao {
     @Override
     public int save(Object obj) {
         User user = (User) obj;
-        String sql = "INSERT INTO users (account_name, email, account_type, password, phone_number) " +
-                "VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (account_name, email, account_type, password, phone_number , enabled , role_id) " +
+                "VALUES (?, ?, ?, ?, ?,?,?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(sql, new String[]{"id"});
@@ -113,6 +113,8 @@ public class UserDao extends BaseDao {
             ps.setString(3, String.valueOf(user.getAccountType()));
             ps.setString(4, user.getPassword());
             ps.setString(5, user.getPhoneNumber());
+            ps.setBoolean(6, user.getEnabled());
+            ps.setInt(7, user.getRoleId());
             return ps;
         }, keyHolder);
         return Objects.requireNonNull(keyHolder.getKey()).intValue();

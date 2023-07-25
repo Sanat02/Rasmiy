@@ -1,19 +1,19 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.EducationDao;
+
 import com.example.demo.dao.ResumeDao;
-import com.example.demo.dto.EducationDto;
-import com.example.demo.dto.JobExperienceDto;
-import com.example.demo.dto.JobListDto;
-import com.example.demo.dto.ResumeDto;
-import com.example.demo.enums.ContactType;
+import com.example.demo.dto.*;
+
 import com.example.demo.model.*;
-import lombok.Data;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.security.core.Authentication;
+
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -81,22 +81,24 @@ public class ResumeService {
     }
 
 
-    public void saveResume(ResumeDto resumeDto) {
+    public void saveResume(ResumeDto resumeDto, Authentication auth) {
+
+
         Optional<User> mayBeUser = userService.getUserById(resumeDto.getApplicant().getId());
         int userId;
         if (!mayBeUser.isPresent()) {
             userId = userService.save(resumeDto.getApplicant());
         } else {
             userId = userService.getUserByEmail(resumeDto.getApplicant().getEmail()).get().getId();
+
         }
-
-
         int resumeId = resumeDao.save(Resume.builder()
                 .expectedSalary(resumeDto.getExpectedSalary())
                 .job(resumeDto.getJob())
                 .userId(userId)
                 .build()
         );
+
         if (resumeDto.getJobExperience() != null) {
             jobExperienceService.saveJobExperience(resumeDto.getJobExperience(), resumeId);
         }
@@ -129,7 +131,7 @@ public class ResumeService {
                     educationService.saveEducation(resumeDto.getEducation(), resumeDto.getId());
                 } else {
 
-                    educationService.updateEducation(resumeDto.getEducation(),resumeDto.getEducation().getId());
+                    educationService.updateEducation(resumeDto.getEducation(), resumeDto.getEducation().getId());
                 }
             }
 
@@ -138,7 +140,7 @@ public class ResumeService {
                 if (!jobExperience.isPresent()) {
                     jobExperienceService.saveJobExperience(resumeDto.getJobExperience(), resumeDto.getId());
                 } else {
-                    jobExperienceService.updateEducation(resumeDto.getJobExperience(),resumeDto.getJobExperience().getId());
+                    jobExperienceService.updateEducation(resumeDto.getJobExperience(), resumeDto.getJobExperience().getId());
                 }
             }
         } else {

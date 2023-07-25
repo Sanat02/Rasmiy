@@ -25,37 +25,38 @@ public class JobResumeService {
     private final CategoryService categoryService;
 
 
-//    public List<JobResumeDto> gettAllJobResumes(){
-//
-//        List<JobResume> jobResumes=jobResumeDao.getAllJobResumes();
-//       return jobResumes.stream()
-//                .map(e->JobResumeDto.builder()
-//                        .id(e.getId())
-//                        .jobDescription(e.getJobDescription())
-//                        .jobTitle(e.getJobTitle())
-//                        .salary(e.getSalary())
-//                        .user(userService.getUserById(e.getUserId()))
-//                        .category(categoryService.getCategoryById(e.getCategoryId()))
-//                        .experience(e.getExperience())
-//                        .build()
-//                ).toList();
-//
-//    }
-//    public JobResumeDto getJobResumeById(int id){
+    public List<JobResumeDto> gettAllJobResumes() {
+
+        List<JobResume> jobResumes = jobResumeDao.getAllJobResumes();
+        return jobResumes.stream()
+                .map(e -> JobResumeDto.builder()
+                        .id(e.getId())
+                        .jobDescription(e.getJobDescription())
+                        .jobTitle(e.getJobTitle())
+                        .salary(e.getSalary())
+                        .user(userService.mapToUserDto(userService.getUserById(e.getUserId()).get()))
+                        .category(categoryService.mapToCategoryDto(categoryService.getCategoryById(e.getCategoryId()).get()))
+                        .experience(e.getExperience())
+                        .build()
+                ).toList();
+
+    }
+
+    //    public JobResumeDto getJobResumeById(int id){
 //        List<JobResumeDto> jobResumeDtos=gettAllJobResumes();
 //        JobResumeDto jobResumeDto=jobResumeDtos.stream().filter(e->e.getId()==id)
 //                .findFirst().orElse(null);
 //        return jobResumeDto;
 //    }
 //
-//    public List<JobResumeDto> getJobResumeByCategoryName(String categoryName){
-//        List<JobResumeDto> jobResumeDtos=gettAllJobResumes().
-//                stream().
-//                filter(e->e.getCategory().getName().equalsIgnoreCase(categoryName)).
-//                collect(toList());
-//        return jobResumeDtos;
-//
-//    }
+    public List<JobResumeDto> getJobResumeByCategoryName(String categoryName) {
+        List<JobResumeDto> jobResumeDtos = gettAllJobResumes().
+                stream().
+                filter(e -> e.getCategory().getName().equalsIgnoreCase(categoryName)).
+                collect(toList());
+        return jobResumeDtos;
+
+    }
 
     public void saveJobResume(JobResumeDto jobResumeDto) {
         Optional<User> mayBeUser = userService.getUserById(jobResumeDto.getUser().getId());
@@ -98,11 +99,11 @@ public class JobResumeService {
             Optional<User> mayBeUser = userService.getUserById(jobResumeDto.getUser().getId());
             int userId;
             if (!mayBeUser.isPresent()) {
-                userId=userService.save(jobResumeDto.getUser());
+                userId = userService.save(jobResumeDto.getUser());
 
             } else {
                 userService.update(jobResumeDto.getUser());
-                userId=jobResumeDto.getUser().getId();
+                userId = jobResumeDto.getUser().getId();
 
             }
 
@@ -112,7 +113,7 @@ public class JobResumeService {
                 categoryId = categoryService.save(jobResumeDto.getCategory());
             } else {
                 categoryService.update(jobResumeDto.getCategory());
-                categoryId =jobResumeDto.getCategory().getId();
+                categoryId = jobResumeDto.getCategory().getId();
 
             }
 

@@ -86,12 +86,16 @@ public class UserService {
 
 
     public int save(UserDto userDto) {
+        int roleId = userDto.getAccountType().equals(AccountType.JOB_SEEKER) ? 2 : 1;
+
         return userDao.save(User.builder()
                 .accountName(userDto.getAccountName())
-                .accountType(AccountType.EMPLOYER)
+                .accountType(userDto.getAccountType())
                 .email(userDto.getEmail())
                 .password(userDto.getPassword())
                 .phoneNumber(userDto.getPhoneNumber())
+                .enabled(true)
+                .roleId(roleId)
                 .build());
     }
 

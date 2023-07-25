@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.ResumeDto;
+import com.example.demo.enums.AccountType;
 import com.example.demo.model.Resume;
 import com.example.demo.service.ResumeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,8 +30,9 @@ public class ResumeController {
 
     //create resume
     @PostMapping
-    public void createJobResume(@RequestBody ResumeDto resumeDto) {
-        resumeService.saveResume(resumeDto);
+    public void createJobResume(@RequestBody ResumeDto resumeDto , Authentication auth) {
+        resumeDto.getApplicant().setAccountType(AccountType.JOB_SEEKER);
+        resumeService.saveResume(resumeDto,auth);
     }
 
     //update resume
