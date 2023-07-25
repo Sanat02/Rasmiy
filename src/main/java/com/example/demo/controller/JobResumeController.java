@@ -16,7 +16,7 @@ import java.util.List;
 public class JobResumeController {
     private final JobResumeService jobResumeService;
 
-    //adding jobresume
+
     @PostMapping
     public HttpStatus createJobResume(@RequestBody JobResumeDto jobResumeDto) {
         jobResumeDto.getUser().setAccountType(AccountType.EMPLOYER);
@@ -24,26 +24,26 @@ public class JobResumeController {
         return HttpStatus.OK;
     }
 
-    //updating jobresume
+
     @PutMapping
     public void updateJobResume(@RequestBody JobResumeDto jobResumeDto) {
         jobResumeService.updateJobResume(jobResumeDto);
     }
 
-    //delete jobresume
+
     @DeleteMapping("/id/{id}")
     public void deleteJobResume(@PathVariable int id){
         jobResumeService.deleteJobResume(id);
     }
 
-    //get all jobresumes
+
     @GetMapping
     public List<JobResumeDto> getAllJobResumes(){
         return  jobResumeService.gettAllJobResumes();
     }
 
 
-    //get job resume by category
+
     @GetMapping("/category/{categoryName}")
     public List<JobResumeDto> getJobResumesByCategoryName(@PathVariable String categoryName) {
         return jobResumeService.getJobResumeByCategoryName(categoryName);
