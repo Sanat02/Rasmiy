@@ -10,8 +10,8 @@ import java.time.LocalDate;
 @Builder
 public class JobListDto {
     private int id;
-    private User publisher;
-    private int categoryId;
+    private UserDto publisher;
+    private CategoryDto category;
 
     //System sets automatically
     @JsonIgnore
