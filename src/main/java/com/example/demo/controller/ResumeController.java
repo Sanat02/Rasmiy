@@ -6,7 +6,9 @@ import com.example.demo.model.Resume;
 import com.example.demo.service.ResumeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.http.HttpResponse;
@@ -32,10 +34,17 @@ public class ResumeController {
 
 
     @PostMapping
-    public HttpStatus createJobResume(@RequestBody ResumeDto resumeDto , Authentication auth) {
+    public ResponseEntity<String> createJobResume(@RequestBody ResumeDto resumeDto , Authentication auth, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            StringBuilder errorMessage = new StringBuilder();
+            bindingResult.getAllErrors().forEach(error -> {
+                errorMessage.append(error.getDefaultMessage()).append("; ");
+            });
+            return ResponseEntity.badRequest().body(errorMessage.toString());
+        }
         resumeDto.getApplicant().setAccountType(AccountType.JOB_SEEKER);
         resumeService.saveResume(resumeDto,auth);
-        return HttpStatus.OK;
+        return ResponseEntity.ok("Resume created successfully");
     }
 
 

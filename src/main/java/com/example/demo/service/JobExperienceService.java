@@ -17,7 +17,7 @@ public class JobExperienceService {
     private final JobExperienceDao jobExperienceDao;
 
     public Optional<JobExperienceDto> getJobExperienceById(int id) {
-        JobExperience jobExperience = jobExperienceDao.getExperienceById(id);
+        JobExperience jobExperience = jobExperienceDao.getExperienceById(id).get();
 
         Optional<JobExperienceDto> jobExperienceDto = Optional.ofNullable(JobExperienceDto.builder()
                 .position(jobExperience.getPosition())

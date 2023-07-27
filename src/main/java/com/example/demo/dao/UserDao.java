@@ -49,12 +49,10 @@ public class UserDao extends BaseDao {
     public Optional<User> getUserByEmail(String email) {
         String sql = "SELECT id, account_name as accountName, email, account_type as accountType, " +
                 "password, phone_number as phoneNumber FROM users WHERE email = ?";
-        try {
-            User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
-            return Optional.ofNullable(user);
-        } catch (EmptyResultDataAccessException e) {
-            return Optional.empty();
-        }
+
+        return Optional.ofNullable(DataAccessUtils.singleResult(
+                jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class), email)));
+
     }
 
 

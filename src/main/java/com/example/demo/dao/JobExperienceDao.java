@@ -3,6 +3,7 @@ package com.example.demo.dao;
 
 import com.example.demo.model.JobExperience;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
 import java.util.Objects;
+import java.util.Optional;
 
 @Component
 
@@ -21,15 +23,15 @@ public class JobExperienceDao extends BaseDao {
         super(jdbcTemplate, namedParameterJdbcTemplate);
     }
 
-    public JobExperience getExperienceById(int id) {
-        try {
-            String sql = "SELECT id, resume_id as resumeId, position, start_date as startDate, end_date as endDate " +
-                    "FROM job_experience " +
-                    "WHERE resume_id = ?";
-            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(JobExperience.class), id);
-        } catch (EmptyResultDataAccessException e) {
-            return null;
-        }
+    public Optional<JobExperience> getExperienceById(int id) {
+
+        String sql = "SELECT id, resume_id as resumeId, position, start_date as startDate, end_date as endDate " +
+                "FROM job_experience " +
+                "WHERE resume_id = ?";
+        return Optional.ofNullable(DataAccessUtils.singleResult(
+                jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(JobExperience.class), id)
+        ));
+
     }
 
 
