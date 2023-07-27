@@ -52,6 +52,13 @@ databaseChangeLog:
       file: db/changelog/initial/025_modify_users.yaml
   - include:
       file: db/changelog/initial/026_insert_data.yaml
+  - include:
+      file: db/changelog/initial/027_add_cascade_resume.yaml
+  - include:
+      file: db/changelog/initial/028_add_education_cascade.yaml
+  - include:
+      file: db/changelog/initial/029_add_jobexp_cascade.yaml
+
 
 
 

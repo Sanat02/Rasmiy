@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: drop  fk_jobexperience_resume
+      author: Sanat
+      changes:
+        - dropForeignKeyConstraint:
+            baseTableName: job_experience
+            constraintName: fk_jobexperience_resume
+  - changeSet:
+      id: add fk_jobexperience_resume
+      author: Sanat
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: job_experience
+            baseColumnNames: resume_id
+            constraintName: fk_jobexperience_resume
+            referencedTableName: resumes
+            referencedColumnNames: id
+            onDelete: cascade
+            onUpdate: cascade
