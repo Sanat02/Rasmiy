@@ -87,6 +87,9 @@ public class ResumeService {
         if (resumeDto.getEducation() != null) {
             educationService.saveEducation(resumeDto.getEducation(), resumeId);
         }
+        if(!resumeDto.getContacts().isEmpty()){
+            contactsService.saveContacts(resumeDto.getContacts(),resumeId);
+        }
         log.info("The resume:" +resumeId + " is saved!");
 
     }

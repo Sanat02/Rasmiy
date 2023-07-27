@@ -24,4 +24,14 @@ public class ContactsService {
 
     }
 
+    public void saveContacts(List<ContactDto> contacts, int resumeId) {
+        List<Contacts> contactsList=contacts.stream()
+                .map(e->Contacts.builder()
+                        .value(e.getValue())
+                        .type(e.getType())
+                        .resumeId(resumeId)
+                        .build()
+                ).collect(Collectors.toList());
+        contactsDao.save(contactsList);
+    }
 }
