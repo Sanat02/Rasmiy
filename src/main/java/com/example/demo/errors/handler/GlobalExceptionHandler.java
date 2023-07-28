@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
         log.error("Exception message: {}",exception.getMessage());
         return ErrorResponse.builder(exception, HttpStatus.NOT_FOUND,exception.getMessage()).build();
     }
-    @ExceptionHandler(DataAccessException.class) // или SQLException
+    @ExceptionHandler(DataAccessException.class)
     private ErrorResponse handleDatabaseException(DataAccessException exception) {
         log.error("Database Exception: ", exception);
         return ErrorResponse.builder(exception, HttpStatus.INTERNAL_SERVER_ERROR, "Database error occurred").build();
