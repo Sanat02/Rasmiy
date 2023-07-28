@@ -58,6 +58,8 @@ databaseChangeLog:
       file: db/changelog/initial/028_add_education_cascade.yaml
   - include:
       file: db/changelog/initial/029_add_jobexp_cascade.yaml
+  - include:
+      file: db/changelog/initial/030_add_jobresume_cascade.yaml
 
 
 
