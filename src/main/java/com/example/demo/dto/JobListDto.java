@@ -13,7 +13,7 @@ public class JobListDto {
     private UserDto publisher;
     private CategoryDto category;
 
-    //System sets automatically
+
     @JsonIgnore
     private LocalDate date;
 }

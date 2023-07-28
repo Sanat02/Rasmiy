@@ -17,7 +17,6 @@ public class UserDto {
     private String email;
 
     @JsonIgnore
-    //System sets the account type depending on the PATH automatically.So we ignore it!
     private AccountType accountType;
 
 
