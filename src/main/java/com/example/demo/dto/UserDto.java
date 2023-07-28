@@ -20,7 +20,7 @@ public class UserDto {
     //System sets the account type depending on the PATH automatically.So we ignore it!
     private AccountType accountType;
 
-    @Pattern(regexp = "^\\+(?:[0-9] ?){6,14}[0-9]$",message = "Invalid value phone")
+
     @Size(min = 10, max = 15)
     private String phoneNumber;
 

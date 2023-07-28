@@ -8,9 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 @RestController
@@ -58,6 +60,8 @@ public class JobResumeController {
     public List<JobResumeDto> getJobResumesByCategoryName(@PathVariable String categoryName) {
         return jobResumeService.getJobResumeByCategoryName(categoryName);
     }
+
+
 
 
 }

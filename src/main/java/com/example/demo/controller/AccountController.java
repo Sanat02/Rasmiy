@@ -9,9 +9,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 
 @RestController
@@ -23,7 +25,7 @@ public class AccountController {
     private final UserService userService;
 
     @PostMapping("/register/applicant")
-    public  ResponseEntity<String> createAccountApplicant(@RequestBody @Valid UserDto user, BindingResult bindingResult) {
+    public ResponseEntity<String> createAccountApplicant(@RequestBody @Valid UserDto user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
             bindingResult.getAllErrors().forEach(error -> {
@@ -35,6 +37,7 @@ public class AccountController {
         userService.save(user);
         return ResponseEntity.ok("Job-seeker registered successfully");
     }
+
 
 
     @PostMapping("/register/employer")
@@ -66,5 +69,10 @@ public class AccountController {
     public List<UserDto> getAllEmployers() {
         return userService.getAllEmployers();
     }
+
+//    @ExceptionHandler(NoSuchFieldError.class)
+//    private ErrorResponse noSuchFieldHandler(NoSuchFieldError exception){
+//        return ErrorResponse.builder(exception,HttpStatus.NOT_FOUND,exception.getMessage()).build();
+//    }
 
 }
