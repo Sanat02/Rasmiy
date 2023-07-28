@@ -16,11 +16,10 @@ import java.util.List;
 public class WhoInterestedController {
     private final WhoInterestedService whoInterestedService;
 
-
-   
     @GetMapping("/jobId/{jobId}")
     public List<WhoInterestedDto> getInterestedApplicants(@PathVariable int jobId) {
         return whoInterestedService.getInterestedApplicants(jobId);
     }
+
 
 }
