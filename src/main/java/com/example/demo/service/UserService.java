@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserDao userDao;
+//    private final ResumeService resumeService;
 
 
     public List<UserDto> getAllUsers() {

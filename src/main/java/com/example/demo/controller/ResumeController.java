@@ -52,10 +52,10 @@ public class ResumeController {
     }
 
 
-    @PutMapping
-    public void updateResume(@RequestBody ResumeDto resumeDto) {
-        resumeService.updateResume(resumeDto);
-    }
+//    @PutMapping
+//    public void updateResume(@RequestBody ResumeDto resumeDto) {
+//        resumeService.updateResume(resumeDto);
+//    }
 
 
     @DeleteMapping("/id/{resume_id}")

@@ -12,21 +12,21 @@ import java.util.NoSuchElementException;
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
-    @ExceptionHandler(NoSuchElementException.class)
-    private ErrorResponse noSuchElementHandler(NoSuchElementException exception){
-        log.error("Exception message: {}",exception.getMessage());
-        return ErrorResponse.builder(exception, HttpStatus.NOT_FOUND,exception.getMessage()).build();
-    }
-    @ExceptionHandler(DataAccessException.class)
-    private ErrorResponse handleDatabaseException(DataAccessException exception) {
-        log.error("Database Exception: ", exception);
-        return ErrorResponse.builder(exception, HttpStatus.INTERNAL_SERVER_ERROR, "Database error occurred").build();
-    }
-
-    @ExceptionHandler(Exception.class)
-    private ErrorResponse handleGeneralException(Exception exception) {
-        log.error("Unhandled Exception: ", exception);
-        return ErrorResponse.builder(exception, HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred").build();
-    }
+//    @ExceptionHandler(NoSuchElementException.class)
+//    private ErrorResponse noSuchElementHandler(NoSuchElementException exception){
+//        log.error("Exception message: {}",exception.getMessage());
+//        return ErrorResponse.builder(exception, HttpStatus.NOT_FOUND,exception.getMessage()).build();
+//    }
+//    @ExceptionHandler(DataAccessException.class)
+//    private ErrorResponse handleDatabaseException(DataAccessException exception) {
+//        log.error("Database Exception: ", exception);
+//        return ErrorResponse.builder(exception, HttpStatus.INTERNAL_SERVER_ERROR, "Database error occurred").build();
+//    }
+//
+//    @ExceptionHandler(Exception.class)
+//    private ErrorResponse handleGeneralException(Exception exception) {
+//        log.error("Unhandled Exception: ", exception);
+//        return ErrorResponse.builder(exception, HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred").build();
+//    }
 
 }

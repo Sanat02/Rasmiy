@@ -36,6 +36,11 @@ public class ResumeDao extends BaseDao {
         ));
     }
 
+    public List<Resume> getResumesByUserId(int userId){
+        String sql="SELECT id, job, expected_salary AS expectedSalary FROM resumes WHERE user_id = ?";
+        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(Resume.class),userId);
+    }
+
 
     public List<Resume> getResumeByJob(String job) {
         String sql = "SELECT id, user_id AS userId, job, expected_salary AS expectedSalary FROM resumes WHERE job = ?";
