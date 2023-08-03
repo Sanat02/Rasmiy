@@ -1,6 +1,6 @@
 package com.example.demo.dto;
 
-import com.example.demo.model.User;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
