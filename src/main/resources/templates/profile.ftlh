@@ -287,6 +287,24 @@
             </div>
             </#list>
 
+            <#list account.jobResumes as jresume>
+                <div >
+                    <div class="resumeinfo">
+                        <div class="resumeName">${jresume.jobTitle}</div>
+                        <div>Date of the update:</div>
+                        <div>02/02/2022</div>
+                    </div>
+                    <div class="rbtn">
+                        <a class="nav-link active" href="#">
+                            <div class="btn1">Update</div>
+                        </a>
+                        <a class="nav-link active" href="#">
+                            <div class="btn2">Edit</div>
+                        </a>
+                    </div>
+                </div>
+            </#list>
+
             
 
 

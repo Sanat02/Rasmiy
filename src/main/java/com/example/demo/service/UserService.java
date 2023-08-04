@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserDao userDao;
-//    private final ResumeService resumeService;
 
 
     public List<UserDto> getAllUsers() {
@@ -41,7 +40,7 @@ public class UserService {
 
 
     public Optional<User> getUserByEmail(String email) {
-        log.info("Gol user by email:"+email);
+        log.info("Gol user by email:" + email);
         Optional<User> mayBeUser = userDao.getUserByEmail(email);
         return mayBeUser;
     }
@@ -51,10 +50,10 @@ public class UserService {
 
             Optional<User> user = userDao.getUserByEmail(email);
             if (user != null) {
-                log.error("User:"+email+" does not exist!");
+                log.error("User:" + email + " does not exist!");
                 return "Exists";
             } else {
-                log.info("User:"+email+" exists!");
+                log.info("User:" + email + " exists!");
                 return "Not exists";
             }
         } catch (EmptyResultDataAccessException e) {
@@ -64,7 +63,7 @@ public class UserService {
     }
 
     public Optional<User> getUserById(int id) {
-        log.info("Got user by id:"+id);
+        log.info("Got user by id:" + id);
         return userDao.getUserById(id);
     }
 
@@ -95,7 +94,7 @@ public class UserService {
 
     public int save(UserDto userDto) {
         int roleId = userDto.getAccountType().equals(AccountType.JOB_SEEKER) ? 2 : 1;
-        log.info("The user:"+userDto.getEmail()+" is saved!");
+        log.info("The user:" + userDto.getEmail() + " is saved!");
         return userDao.save(User.builder()
                 .accountName(userDto.getAccountName())
                 .accountType(userDto.getAccountType())
@@ -109,7 +108,7 @@ public class UserService {
     }
 
     public void update(UserDto userDto) {
-        log.info("The user:"+userDto.getEmail()+" is updated!");
+        log.info("The user:" + userDto.getEmail() + " is updated!");
         userDao.update(User.builder()
                 .accountName(userDto.getAccountName())
                 .email(userDto.getEmail())

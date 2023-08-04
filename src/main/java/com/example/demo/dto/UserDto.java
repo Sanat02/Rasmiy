@@ -33,5 +33,7 @@ public class UserDto {
 
     private List<ResumeDto> resumes;
 
+    private List<JobResumeDto> jobResumes;
+
 
 }

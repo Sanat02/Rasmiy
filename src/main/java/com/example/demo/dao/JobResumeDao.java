@@ -34,13 +34,18 @@ public class JobResumeDao extends BaseDao {
         ));
     }
 
+    public List<JobResume> getJobResumeByUserId(int userId) {
+        String sql = "SELECT id, user_id AS userId, job_title AS jobTitle, salary, job_description AS jobDescription, " +
+                "experience, category_id AS categoryId FROM job_resumes WHERE user_id = ?";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(JobResume.class), userId);
+    }
+
 
     public List<JobResume> getAllJobResumes() {
         String sql = "SELECT id, user_id AS userId, job_title AS jobTitle, salary, job_description AS jobDescription, " +
                 "experience, category_id AS categoryId FROM job_resumes";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(JobResume.class));
     }
-
 
 
     @Override

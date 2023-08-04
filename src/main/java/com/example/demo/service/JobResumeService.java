@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.JobResumeDao;
+import com.example.demo.dto.JobExperienceDto;
 import com.example.demo.dto.JobResumeDto;
 import com.example.demo.model.Category;
 import com.example.demo.model.JobResume;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 
 import static java.util.stream.Collectors.toList;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -42,7 +44,7 @@ public class JobResumeService {
     }
 
     public List<JobResumeDto> getJobResumeByCategoryName(String categoryName) {
-        log.info("Got job with category:"+categoryName);
+        log.info("Got job with category:" + categoryName);
         List<JobResumeDto> jobResumeDtos = gettAllJobResumes().
                 stream().
                 filter(e -> e.getCategory().getName().equalsIgnoreCase(categoryName)).
@@ -68,15 +70,15 @@ public class JobResumeService {
 //            categoryId = categoryService.getCategoryById(jobResumeDto.getCategory().getId()).get().getId();
 //        }
 
-        int jobResumeId=jobResumeDao.save(JobResume.builder()
+        int jobResumeId = jobResumeDao.save(JobResume.builder()
                 .jobTitle(jobResumeDto.getJobTitle())
                 .jobDescription(jobResumeDto.getJobDescription())
                 .salary(jobResumeDto.getSalary())
                 .experience(jobResumeDto.getExperience())
                 .userId(userId)
-               .categoryId(2)
+                .categoryId(2)
                 .build());
-        log.info("Job resume saved with id:"+jobResumeId);
+        log.info("Job resume saved with id:" + jobResumeId);
         return jobResumeId;
 
     }
@@ -145,5 +147,19 @@ public class JobResumeService {
                 .category(categoryService.mapToCategoryDto(categoryService.getCategoryById(jobResume.getCategoryId()).get()))
                 .build();
 
+    }
+
+    public List<JobResumeDto> getJobResumesByUserId(int userId) {
+        List<JobResume> jobResume = jobResumeDao.getJobResumeByUserId(userId);
+        List<JobResumeDto> jobResumeDtos = jobResume.stream().
+                map(e -> JobResumeDto.builder()
+                        .jobTitle(e.getJobTitle())
+                        .user(userService.mapToUserDto(userService.getUserById(userId).get()))
+                        .jobDescription(e.getJobDescription())
+                        .experience(e.getExperience())
+                        .salary(e.getSalary())
+                        .build()
+                ).collect(toList());
+        return jobResumeDtos;
     }
 }
