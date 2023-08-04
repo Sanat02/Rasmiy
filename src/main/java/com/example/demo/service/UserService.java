@@ -49,18 +49,20 @@ public class UserService {
         try {
 
             Optional<User> user = userDao.getUserByEmail(email);
-            if (user != null) {
-                log.error("User:" + email + " does not exist!");
-                return "Exists";
+            if (user.isPresent()) {
+                log.error("User:" + email + "  exists!");
+                return "1";
             } else {
-                log.info("User:" + email + " exists!");
-                return "Not exists";
+                log.info("User:" + email + " does not exist!");
+                return "0";
             }
         } catch (EmptyResultDataAccessException e) {
             log.error("Empty Result!");
-            return "Not exists";
+            return "error";
         }
     }
+
+
 
     public Optional<User> getUserById(int id) {
         log.info("Got user by id:" + id);
