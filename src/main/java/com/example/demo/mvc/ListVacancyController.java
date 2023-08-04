@@ -19,4 +19,5 @@ public class ListVacancyController {
         model.addAttribute("vacancies",vacancies);
         return "vacancies";
     }
+
 }

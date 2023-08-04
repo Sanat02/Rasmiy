@@ -17,24 +17,27 @@ public class JobExperienceService {
     private final JobExperienceDao jobExperienceDao;
 
     public Optional<JobExperienceDto> getJobExperienceById(int id) {
-        JobExperience jobExperience = jobExperienceDao.getExperienceById(id).get();
-
-        Optional<JobExperienceDto> jobExperienceDto = Optional.ofNullable(JobExperienceDto.builder()
-                .position(jobExperience.getPosition())
-                .endDate(jobExperience.getEndDate())
-                .startDate(jobExperience.getStartDate())
-                .build());
-        return jobExperienceDto;
+        Optional<JobExperience> jobExperienceOptional = jobExperienceDao.getExperienceById(id);
+        if (jobExperienceOptional.isPresent()) {
+            JobExperience jobExperience = jobExperienceOptional.get();
+            return Optional.ofNullable(JobExperienceDto.builder()
+                    .position(jobExperience.getPosition())
+                    .startDate(jobExperience.getStartDate())
+                    .endDate(jobExperience.getEndDate())
+                    .build());
+        } else {
+            return Optional.empty();
+        }
     }
 
     public void saveJobExperience(JobExperienceDto jobExperience, int resumeId) {
-        int id=jobExperienceDao.save(JobExperience.builder()
+        int id = jobExperienceDao.save(JobExperience.builder()
                 .endDate(jobExperience.getStartDate())
                 .startDate(jobExperience.getStartDate())
                 .position(jobExperience.getPosition())
                 .resumeId(resumeId)
                 .build());
-        log.info("JobExperience saved with id:"+id);
+        log.info("JobExperience saved with id:" + id);
     }
 
 
@@ -45,6 +48,6 @@ public class JobExperienceService {
                 .position(jobExperience.getPosition())
                 .resumeId(id)
                 .build());
-        log.info("JobExperience updated with id:"+jobExperience.getId());
+        log.info("JobExperience updated with id:" + jobExperience.getId());
     }
 }
