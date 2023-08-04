@@ -177,7 +177,7 @@
                 <a class="nav-link active" href="/profile">Profile</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Vacancies</a>
+                <a class="nav-link" href="/vacancies">Vacancies</a>
               </li>
             </ul>
           </div>
