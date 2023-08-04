@@ -63,7 +63,6 @@ public class UserService {
     }
 
 
-
     public Optional<User> getUserById(int id) {
         log.info("Got user by id:" + id);
         return userDao.getUserById(id);

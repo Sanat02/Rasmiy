@@ -1,4 +1,4 @@
-package com.example.demo.mvc;
+package com.example.demo.controllersMvc;
 
 import com.example.demo.service.JobsListService;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ public class ListVacancyController {
     private final JobsListService jobsListService;
 
     @GetMapping
-    public String index(Model model){
+    public String getVacancies(Model model){
         var vacancies=jobsListService.getAllJobs();
         model.addAttribute("vacancies",vacancies);
         return "vacancies";

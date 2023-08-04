@@ -1,8 +1,7 @@
-package com.example.demo.mvc;
+package com.example.demo.controllersMvc;
 
 import com.example.demo.dto.EducationDto;
 import com.example.demo.dto.JobExperienceDto;
-import com.example.demo.dto.JobResumeDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.service.EducationService;
 import com.example.demo.service.JobExperienceService;
@@ -16,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -29,7 +27,7 @@ public class EditResumeController {
 
 
     @GetMapping("/add/{userId}")
-    public String addMovie(Model model, @PathVariable int userId) {
+    public String editResume(Model model, @PathVariable int userId) {
         model.addAttribute("id", userId);
         return "editResume";
     }

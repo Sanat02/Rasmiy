@@ -34,7 +34,7 @@ public class EducationService {
 
 
     public void saveEducation(EducationDto education, int resumeId) {
-        int id=educationDao.save(Education.builder()
+        int id = educationDao.save(Education.builder()
                 .degree(education.getDegree())
                 .endDate(education.getEndDate())
                 .startDate(education.getStartDate())
@@ -42,7 +42,7 @@ public class EducationService {
                 .institutionName(education.getInstitutionName())
                 .build()
         );
-        log.info("Education saved with id:"+id);
+        log.info("Education saved with id:" + id);
     }
 
     public void updateEducation(EducationDto education, int resumId) {
@@ -53,6 +53,6 @@ public class EducationService {
                 .resumeId(resumId)
                 .institutionName(education.getInstitutionName())
                 .build());
-        log.info("Education updated with id:"+education.getId());
+        log.info("Education updated with id:" + education.getId());
     }
 }

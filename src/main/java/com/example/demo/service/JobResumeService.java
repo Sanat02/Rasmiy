@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.JobResumeDao;
-import com.example.demo.dto.JobExperienceDto;
 import com.example.demo.dto.JobResumeDto;
 import com.example.demo.model.Category;
 import com.example.demo.model.JobResume;
@@ -62,14 +61,6 @@ public class JobResumeService {
             userId = userService.getUserByEmail(jobResumeDto.getUser().getEmail()).get().getId();
         }
 
-//        Optional<Category> mayBeCategory = categoryService.getCategoryById(jobResumeDto.getCategory().getId());
-//        int categoryId;
-//        if (!mayBeCategory.isPresent()) {
-//            categoryId = categoryService.save(jobResumeDto.getCategory());
-//        } else {
-//            categoryId = categoryService.getCategoryById(jobResumeDto.getCategory().getId()).get().getId();
-//        }
-
         int jobResumeId = jobResumeDao.save(JobResume.builder()
                 .jobTitle(jobResumeDto.getJobTitle())
                 .jobDescription(jobResumeDto.getJobDescription())
@@ -88,10 +79,8 @@ public class JobResumeService {
     }
 
     public void updateJobResume(JobResumeDto jobResumeDto) {
-        //проверяем сущестсвует ли id jobresume
         Optional<JobResume> mayBeJobResume = getJobResumeById(jobResumeDto.getId());
 
-        //если да
         if (mayBeJobResume.isPresent()) {
             Optional<User> mayBeUser = userService.getUserById(jobResumeDto.getUser().getId());
             int userId;
@@ -124,8 +113,6 @@ public class JobResumeService {
                     .id(jobResumeDto.getId())
                     .build();
             jobResumeDao.update(jobResume);
-
-            //если нет
         } else {
             throw new IllegalArgumentException("Job Resume with ID " + jobResumeDto.getId() + " not found.");
         }

@@ -31,10 +31,10 @@ public class CategoryService {
 
 
     public int save(CategoryDto category) {
-        int categoryId=categoryDao.save(Category.builder()
+        int categoryId = categoryDao.save(Category.builder()
                 .name(category.getName())
                 .description(category.getDescription()).build());
-        log.info("Category saved with id:"+categoryId);
+        log.info("Category saved with id:" + categoryId);
         return categoryId;
     }
 
@@ -44,6 +44,6 @@ public class CategoryService {
                 .description(category.getDescription())
                 .build()
         );
-        log.info("Category updated with id:"+category.getId());
+        log.info("Category updated with id:" + category.getId());
     }
 }

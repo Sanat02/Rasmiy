@@ -1,4 +1,4 @@
-package com.example.demo.mvc;
+package com.example.demo.controllersMvc;
 
 import com.example.demo.dto.UserDto;
 import com.example.demo.service.JobResumeService;

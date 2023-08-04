@@ -18,11 +18,12 @@ public class WhoInterestedService {
     private final WhoIsInterestedDao whoIsInterestedDao;
     private final UserService userService;
     private final JobResumeService jobResumeService;
-    public List<WhoInterestedDto> getInterestedApplicants(int job_id){
+
+    public List<WhoInterestedDto> getInterestedApplicants(int job_id) {
         log.info("Got all interested applicants!");
-        List<WhoInterested> whoInteresteds=whoIsInterestedDao.getInterestedApplicants(job_id);
-        List<WhoInterestedDto> whoInterestedDtos=whoInteresteds.stream()
-                .map(e->WhoInterestedDto.builder()
+        List<WhoInterested> whoInteresteds = whoIsInterestedDao.getInterestedApplicants(job_id);
+        List<WhoInterestedDto> whoInterestedDtos = whoInteresteds.stream()
+                .map(e -> WhoInterestedDto.builder()
                         .id(e.getApplicantId())
                         .applicant(userService.mapToUserDto(userService.getUserById(e.getApplicantId()).get()))
                         .date(e.getDate())

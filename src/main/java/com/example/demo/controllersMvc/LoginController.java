@@ -1,7 +1,6 @@
-package com.example.demo.mvc;
+package com.example.demo.controllersMvc;
 
 import com.example.demo.dto.UserDto;
-import com.example.demo.enums.AccountType;
 import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

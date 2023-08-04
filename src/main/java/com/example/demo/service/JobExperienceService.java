@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.JobExperienceDao;
-import com.example.demo.dto.EducationDto;
 import com.example.demo.dto.JobExperienceDto;
 import com.example.demo.model.JobExperience;
 import lombok.RequiredArgsConstructor;
