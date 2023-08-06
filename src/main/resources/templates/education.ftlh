@@ -31,17 +31,6 @@
             padding: 10px 0;
         }
 
-        .publisher {
-            font-weight: bold;
-        }
-
-        .category {
-            color: #00a86b;
-        }
-
-        .date {
-            color: #777;
-        }
 
         .navbar {
             background-color: #f8f9fa;
@@ -80,12 +69,6 @@
         .navbar-nav .nav-link.active {
             background-color: greenyellow;
             color: white;
-        }
-
-        .search-form {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
         }
 
         .search-form input[type="text"] {
@@ -160,81 +143,62 @@
         .form-section form button:hover {
             background-color: #008754;
         }
-        #addEducationBtn{
-            margin-bottom: 10px;
-            display: inline-block;
-            margin-right: 10px;
-            background-color: #00a86b;
-            border:none;
-        }
     </style>
     <title>Resume</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Your Logo</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Your Logo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Profile</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/vacancies">Vacancies</a>
-              </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/vacancies">Vacancies</a>
+                </li>
             </ul>
-          </div>
         </div>
-    </nav>
-
-    <div class="container">
-        <h1 class="vtxt">Resume</h1>
-
-
-        <ul>
-            <li><span class="publisher">Category:</span> ${resume.category}</li>
-            <li><span class="publisher">Resume Name:</span> ${resume.job}</li>
-            <li><span class="publisher">Expected Salary:</span> ${resume.expectedSalary}</li>
-
-        </ul>
-
-        <#if resume.education??>
-        <h1 class="vtxt">Education</h1>
-        <ul>
-            <li><span class="publisher">University:</span> ${resume.education.institutionName}</li>
-            <li><span class="publisher">Degree: </span>${resume.education.degree} </li>
-            <li><span class="publisher">Start date: </span> ${resume.education.startDate}</li>
-            <li><span class="publisher">End date: </span>${resume.education.endDate}</li>
-        </ul>
-        <#else>
-            <a href="/resumes/${resume.id}/education">
-            <div>
-                <button class="btn btn-primary" id="addEducationBtn">Add Education</button>
-            </div>
-            </a>
-        </#if>
-
-
-        <#if resume.jobExperience??>
-            <h1 class="vtxt">Experience</h1>
-                    <ul>
-                        <li><span class="publisher">Position:</span> ${resume.jobExperience.position}</li>
-                        <li><span class="publisher">Start date:</span>${resume.jobExperience.startDate}</li>
-                        <li><span class="publisher">End date:</span>${resume.education.endDate}</li>
-                    </ul>
-        <#else>
-            <div>
-                <a href="/resumes/${resume.id}/experience">
-                <button class="btn btn-primary" id="addEducationBtn">Add Experience</button>
-                    </a>
-            </div>
-        </#if>
     </div>
+</nav>
+
+<div class="container">
+    <h1 class="vtxt">Education</h1>
+
+    <div class="form-section" id="educationForm">
+        <h2>Education</h2>
+        <form  action="/resumes/${resume.id}/education" method="post">
+            <div>
+                <label for="university">University:</label>
+                <input type="text" id="university" name="university" required>
+            </div>
+            <div>
+                <label for="degree">Degree:</label>
+                <input type="text" id="degree" name="degree" required>
+            </div>
+            <div>
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" required>
+            </div>
+            <div>
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" name="endDate" required>
+            </div>
+            <button type="submit">Save Education</button>
+        </form>
+    </div>
+
+
+
+</div>
+
+
 </body>
 </html>

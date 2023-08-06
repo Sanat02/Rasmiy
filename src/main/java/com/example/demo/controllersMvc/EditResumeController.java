@@ -45,6 +45,7 @@ public class EditResumeController {
                 .job(resumeName)
                 .expectedSalary(expectedSalary)
                 .applicant(userService.mapToUserDto(userService.getUserById(userId).get()))
+                .category(category)
                 .build();
         int resumeId = resumeService.saveResume(resumeDto, auth);
         return "redirect:/resumes/" + resumeId;
@@ -58,16 +59,27 @@ public class EditResumeController {
         return "additionalResume";
     }
 
-    @PostMapping("/{resumeId}")
+    @GetMapping("/{resumeId}/education")
+    public String addEducation(Model model, @PathVariable int resumeId) {
+        ResumeDto resumeDto = resumeService.getResumeById(resumeId);
+        model.addAttribute("resume", resumeDto);
+        return "education";
+    }
+    @GetMapping("/{resumeId}/experience")
+    public String addExperience(Model model, @PathVariable int resumeId) {
+        ResumeDto resumeDto = resumeService.getResumeById(resumeId);
+        model.addAttribute("resume", resumeDto);
+        return "experience";
+    }
+
+
+    @PostMapping("/{resumeId}/education")
     @ResponseStatus(HttpStatus.SEE_OTHER)
     public String addAdditionalInfo(
             @RequestParam(name = "university") String university,
             @RequestParam(name = "degree") String degree,
             @RequestParam(name = "startDate") LocalDate startDate,
             @RequestParam(name = "endDate") LocalDate endDate,
-            @RequestParam(name = "position") String position,
-            @RequestParam(name = "startDateJob") LocalDate startDateJob,
-            @RequestParam(name = "endDateJob") LocalDate endDateJob,
             Authentication auth,
             @PathVariable int resumeId
     ) {
@@ -77,12 +89,24 @@ public class EditResumeController {
                 .startDate(startDate)
                 .endDate(endDate)
                 .build();
+        educationService.saveEducation(educationDto, resumeId);
+        return "redirect:/resumes/" + resumeId;
+    }
+
+    @PostMapping("/{resumeId}/experience")
+    @ResponseStatus(HttpStatus.SEE_OTHER)
+    public String addEducationInfo(
+            @RequestParam(name = "position") String position,
+            @RequestParam(name = "startDateJob") LocalDate startDateJob,
+            @RequestParam(name = "endDateJob") LocalDate endDateJob,
+            Authentication auth,
+            @PathVariable int resumeId
+    ) {
         JobExperienceDto jobExperienceDto = JobExperienceDto.builder()
                 .position(position)
-                .startDate(startDate)
-                .endDate(endDate)
+                .startDate(startDateJob)
+                .endDate(endDateJob)
                 .build();
-        educationService.saveEducation(educationDto, resumeId);
         jobExperienceService.saveJobExperience(jobExperienceDto, resumeId);
         return "redirect:/resumes/" + resumeId;
     }

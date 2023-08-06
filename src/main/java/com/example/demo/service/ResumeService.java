@@ -28,6 +28,7 @@ public class ResumeService {
     private final ContactsService contactsService;
     private final EducationService educationService;
     private final JobExperienceService jobExperienceService;
+    private final CategoryService categoryService;
 
     public List<ResumeDto> getAllResumes() {
         log.info("Got all users");
@@ -39,8 +40,8 @@ public class ResumeService {
                         .job(e.getJob())
                         .applicant(userService.mapToUserDto(userService.getUserById(e.getUserId()).get()))
                         //.education(educationService.getEducationByResumeId(e.getId()).get())
-                       // .jobExperience(jobExperienceService.getJobExperienceById(e.getId()).get())
-                       // .contacts(contactsService.getContactsDtoByResumeId(e.getId()))
+                        // .jobExperience(jobExperienceService.getJobExperienceById(e.getId()).get())
+                        // .contacts(contactsService.getContactsDtoByResumeId(e.getId()))
                         .build())
                 .collect(Collectors.toList());
         return resumeDtos;
@@ -56,7 +57,7 @@ public class ResumeService {
                         .job(e.getJob())
                         .expectedSalary(e.getExpectedSalary())
                         .applicant(userService.mapToUserDto(userService.getUserById(e.getUserId()).get()))
-                       // .contacts(contactsService.getContactsDtoByResumeId(e.getId()))
+                        // .contacts(contactsService.getContactsDtoByResumeId(e.getId()))
                         .build()
                 ).toList();
         return resumeDtos;
@@ -76,9 +77,10 @@ public class ResumeService {
                 .expectedSalary(resumeDto.getExpectedSalary())
                 .job(resumeDto.getJob())
                 .userId(userId)
+                .categoryId(Integer.parseInt(resumeDto.getCategory()))
                 .build()
         );
-        log.info("The resume:" +resumeId + " is saved!");
+        log.info("The resume:" + resumeId + " is saved!");
         return resumeId;
 
     }
@@ -112,11 +114,11 @@ public class ResumeService {
         resumeDao.delete(resumeId);
     }
 
-    public List<ResumeDto> getResumesByUserId(int userId){
-        List<Resume> resumes =resumeDao.getResumesByUserId(userId);
-        System.out.println("Got resumes:"+resumes.size());
+    public List<ResumeDto> getResumesByUserId(int userId) {
+        List<Resume> resumes = resumeDao.getResumesByUserId(userId);
+        System.out.println("Got resumes:" + resumes.size());
         return resumes.stream()
-                .map(e->ResumeDto.builder()
+                .map(e -> ResumeDto.builder()
                         .id(e.getId())
                         .expectedSalary(e.getExpectedSalary())
                         .job(e.getJob())
@@ -124,11 +126,13 @@ public class ResumeService {
                 .collect(Collectors.toList());
 
     }
-    public ResumeDto getResumeById(int resumeId){
-        Resume resume=resumeDao.getResumeById(resumeId).orElse(null);
+
+    public ResumeDto getResumeById(int resumeId) {
+        Resume resume = resumeDao.getResumeById(resumeId).orElse(null);
         return ResumeDto.builder()
                 .id(resumeId)
                 .job(resume.getJob())
+                .category(categoryService.mapToCategoryDto(categoryService.getCategoryById(resume.getCategoryId()).get()).getName())
                 .expectedSalary(resume.getExpectedSalary())
                 .education(educationService.getEducationByResumeId(resumeId).orElse(null))
                 .jobExperience(jobExperienceService.getJobExperienceById(resumeId).orElse(null))

@@ -30,7 +30,8 @@ public class ResumeDao extends BaseDao {
     }
 
     public Optional<Resume> getResumeById(int id) {
-        String sql = "SELECT id, user_id AS userId, job, expected_salary AS expectedSalary FROM resumes WHERE id = ?";
+        String sql = "SELECT id, user_id AS userId, job, expected_salary AS expectedSalary , category_id as categoryId " +
+                "FROM resumes WHERE id = ?";
         return Optional.ofNullable(DataAccessUtils.singleResult(
                 jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Resume.class), id)
         ));
@@ -50,12 +51,13 @@ public class ResumeDao extends BaseDao {
     @Override
     public int save(Object obj) {
         Resume resume = (Resume) obj;
-        String sql = "INSERT INTO resumes (user_id, expected_salary, job) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO resumes (user_id, expected_salary, job,category_id) VALUES (?, ?, ?, ?)";
         jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(sql, new String[]{"id"});
             ps.setInt(1, resume.getUserId());
             ps.setInt(2, resume.getExpectedSalary());
             ps.setString(3, resume.getJob());
+            ps.setInt(4,resume.getCategoryId());
             return ps;
         }, keyHolder);
         return Objects.requireNonNull(keyHolder.getKey()).intValue();

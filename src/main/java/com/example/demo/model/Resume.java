@@ -15,4 +15,5 @@ public class Resume {
     private int userId;
     private String job;
     private Integer expectedSalary;
+    private Integer categoryId;
 }
