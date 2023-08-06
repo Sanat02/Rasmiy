@@ -1,13 +1,18 @@
 databaseChangeLog:
   - include:
+      file: db/changelog/initial/023_create_authorities.yaml
+  - include:
+      file: db/changelog/initial/024_create_roles.yaml
+  - include:
       file: db/changelog/initial/019_create_categories_table.yaml
   - include:
       file: db/changelog/initial/020_insert_categories.yaml
-
   - include:
       file: db/changelog/initial/001_create_users_table.yaml
   - include:
       file: db/changelog/initial/014_add_column_users.yaml
+  - include:
+      file: db/changelog/initial/026_insert_data.yaml
   - include:
       file: db/changelog/initial/002_create_resume_table.yaml
   - include:
@@ -21,37 +26,25 @@ databaseChangeLog:
   - include:
       file: db/changelog/initial/007_add_column.yaml
   - include:
-      file: db/changelog/initial/008_insert_users.yaml
-  - include:
       file: db/changelog/initial/009_insert_resumes.yaml
+  - include:
+      file: db/changelog/initial/012_insert_jobr.yaml
   - include:
       file: db/changelog/initial/010_insert_contacts.yaml
   - include:
       file: db/changelog/initial/011_insert_vacancies.yaml
   - include:
-      file: db/changelog/initial/012_insert_jobr.yaml
-  - include:
-      file: db/changelog/initial/013_insert_who.yaml
-  - include:
       file: db/changelog/initial/015_create_education_table.yaml
   - include:
-      file: db/changelog/initial/016_insert_education.yaml
-  - include:
       file: db/changelog/initial/017_create_jobexp_table.yaml
+  - include:
+      file: db/changelog/initial/016_insert_education.yaml
   - include:
       file: db/changelog/initial/018_insert_jobexp.yaml
   - include:
       file: db/changelog/initial/021_create_profile_images.yaml
   - include:
       file: db/changelog/initial/022_add_who_cascadefk.yaml
-  - include:
-      file: db/changelog/initial/023_create_authorities.yaml
-  - include:
-      file: db/changelog/initial/024_create_roles.yaml
-  - include:
-      file: db/changelog/initial/025_modify_users.yaml
-  - include:
-      file: db/changelog/initial/026_insert_data.yaml
   - include:
       file: db/changelog/initial/027_add_cascade_resume.yaml
   - include:
@@ -60,12 +53,4 @@ databaseChangeLog:
       file: db/changelog/initial/029_add_jobexp_cascade.yaml
   - include:
       file: db/changelog/initial/030_add_jobresume_cascade.yaml
-
-
-
-
-
-
-
-
 

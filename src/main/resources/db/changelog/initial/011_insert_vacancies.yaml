@@ -8,7 +8,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: publisher_id
-                  value: 2
+                  value: 1
               - column:
                   name: category_id
                   value: 1
@@ -20,10 +20,193 @@ databaseChangeLog:
             columns:
               - column:
                   name: publisher_id
-                  value: 2
+                  value: 3
               - column:
                   name: category_id
                   value: 2
               - column:
                   name: date
                   value: '2023-07-15'
+
+  - changeSet:
+      id: 26-insert-vacancies-data
+      author: Sanat
+      changes:
+        - insert:
+            tableName: vacancies
+            columns:
+              - column:
+                  name: publisher_id
+                  value: 4
+              - column:
+                  name: category_id
+                  value: 3
+              - column:
+                  name: date
+                  value: '2023-07-16'
+
+  - changeSet:
+      id: 27-insert-vacancies-data
+      author: Sanat
+      changes:
+        - insert:
+            tableName: vacancies
+            columns:
+              - column:
+                  name: publisher_id
+                  value: 5
+              - column:
+                  name: category_id
+                  value: 4
+              - column:
+                  name: date
+                  value: '2023-07-17'
+
+  - changeSet:
+      id: 28-insert-vacancies-data
+      author: Sanat
+      changes:
+        - insert:
+            tableName: vacancies
+            columns:
+              - column:
+                  name: publisher_id
+                  value: 6
+              - column:
+                  name: category_id
+                  value: 1
+              - column:
+                  name: date
+                  value: '2023-07-18'
+
+  - changeSet:
+      id: 29-insert-vacancies-data
+      author: Sanat
+      changes:
+        - insert:
+            tableName: vacancies
+            columns:
+              - column:
+                  name: publisher_id
+                  value: 7
+              - column:
+                  name: category_id
+                  value: 2
+              - column:
+                  name: date
+                  value: '2023-07-19'
+
+  - changeSet:
+      id: 30-insert-vacancies-data
+      author: Sanat
+      changes:
+        - insert:
+            tableName: vacancies
+            columns:
+              - column:
+                  name: publisher_id
+                  value: 8
+              - column:
+                  name: category_id
+                  value: 3
+              - column:
+                  name: date
+                  value: '2023-07-20'
+
+  - changeSet:
+      id: 31-insert-vacancies-data
+      author: Sanat
+      changes:
+        - insert:
+            tableName: vacancies
+            columns:
+              - column:
+                  name: publisher_id
+                  value: 9
+              - column:
+                  name: category_id
+                  value: 5
+              - column:
+                  name: date
+                  value: '2023-07-21'
+  - changeSet:
+      id: 31-inswert-vacancies-data
+      author: Sanat
+      changes:
+        - insert:
+            tableName: vacancies
+            columns:
+              - column:
+                  name: publisher_id
+                  value: 10
+              - column:
+                  name: category_id
+                  value: 5
+              - column:
+                  name: date
+                  value: '2023-07-21'
+  - changeSet:
+      id: 33-insert-vacancies-data
+      author: Sanat
+      changes:
+        - insert:
+            tableName: vacancies
+            columns:
+              - column:
+                  name: publisher_id
+                  value: 11
+              - column:
+                  name: category_id
+                  value: 2
+              - column:
+                  name: date
+                  value: '2023-07-21'
+  - changeSet:
+      id: 35-insert-vacancies-data
+      author: Sanat
+      changes:
+        - insert:
+            tableName: vacancies
+            columns:
+              - column:
+                  name: publisher_id
+                  value: 12
+              - column:
+                  name: category_id
+                  value: 1
+              - column:
+                  name: date
+                  value: '2023-07-21'
+  - changeSet:
+      id: 37-insert-vacancies-data
+      author: Sanat
+      changes:
+        - insert:
+            tableName: vacancies
+            columns:
+              - column:
+                  name: publisher_id
+                  value: 13
+              - column:
+                  name: category_id
+                  value: 4
+              - column:
+                  name: date
+                  value: '2023-07-21'
+  - changeSet:
+      id: 38-insert-vacancies-data
+      author: Sanat
+      changes:
+        - insert:
+            tableName: vacancies
+            columns:
+              - column:
+                  name: publisher_id
+                  value: 14
+              - column:
+                  name: category_id
+                  value: 5
+              - column:
+                  name: date
+                  value: '2023-07-21'
+

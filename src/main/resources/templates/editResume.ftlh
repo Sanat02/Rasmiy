@@ -195,6 +195,7 @@
         <option value="IT">IT</option>
         <option value="Marketing">Marketing</option>
         <option value="Finance">Finance</option>
+        <option value="Finance">Education</option>
         <option value="Human Resources">Human Resources</option>
         <option value="Others">Others</option>
     </select><br><br>

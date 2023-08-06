@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 03-create-job_resume-table
+      id: 07-insert-job_resume-4
       author: Sanat
       changes:
         - insert:
@@ -8,40 +8,384 @@ databaseChangeLog:
             columns:
               - column:
                   name: user_id
-                  value: 2
+                  value: 1
               - column:
                   name: job_title
-                  value: 'IT'
+                  value: 'Graphic Designer'
               - column:
                   name: salary
-                  value: 50000
+                  value: 55000
               - column:
                   name: job_description
-                  value: 'Job Description 1'
+                  value: 'Creating visual concepts and graphics'
               - column:
                   name: experience
-                  value: 3
+                  value: 2
               - column:
                   name: category_id
                   value: 1
+
+  - changeSet:
+      id: 08-insert-job_resume-5
+      author: Sanat
+      changes:
         - insert:
             tableName: job_resumes
             columns:
               - column:
                   name: user_id
-                  value: 2
+                  value: 3
               - column:
                   name: job_title
-                  value: 'Managment'
+                  value: 'Marketing Specialist'
               - column:
                   name: salary
-                  value: 60000
+                  value: 70000
               - column:
                   name: job_description
-                  value: 'Job Description 2'
+                  value: 'Planning and executing marketing campaigns'
               - column:
                   name: experience
                   value: 4
               - column:
                   name: category_id
                   value: 2
+
+  - changeSet:
+      id: 09-insert-job_resume-6
+      author: Sanat
+      changes:
+        - insert:
+            tableName: job_resumes
+            columns:
+              - column:
+                  name: user_id
+                  value: 4
+              - column:
+                  name: job_title
+                  value: 'Software Engineer'
+              - column:
+                  name: salary
+                  value: 80000
+              - column:
+                  name: job_description
+                  value: 'Developing and maintaining software applications'
+              - column:
+                  name: experience
+                  value: 5
+              - column:
+                  name: category_id
+                  value: 1
+
+  - changeSet:
+      id: 10-insert-job_resume-7
+      author: Sanat
+      changes:
+        - insert:
+            tableName: job_resumes
+            columns:
+              - column:
+                  name: user_id
+                  value: 5
+              - column:
+                  name: job_title
+                  value: 'Data Analyst'
+              - column:
+                  name: salary
+                  value: 60000
+              - column:
+                  name: job_description
+                  value: 'Analyzing and interpreting data for insights'
+              - column:
+                  name: experience
+                  value: 3
+              - column:
+                  name: category_id
+                  value: 1
+
+  - changeSet:
+      id: 11-insert-job_resume-8
+      author: Sanat
+      changes:
+        - insert:
+            tableName: job_resumes
+            columns:
+              - column:
+                  name: user_id
+                  value: 6
+              - column:
+                  name: job_title
+                  value: 'Sales Representative'
+              - column:
+                  name: salary
+                  value: 45000
+              - column:
+                  name: job_description
+                  value: 'Selling products and services to customers'
+              - column:
+                  name: experience
+                  value: 2
+              - column:
+                  name: category_id
+                  value: 2
+
+  - changeSet:
+      id: 12-insert-job_resume-9
+      author: Sanat
+      changes:
+        - insert:
+            tableName: job_resumes
+            columns:
+              - column:
+                  name: user_id
+                  value: 7
+              - column:
+                  name: job_title
+                  value: 'Content Writer'
+              - column:
+                  name: salary
+                  value: 50000
+              - column:
+                  name: job_description
+                  value: 'Creating engaging and compelling content'
+              - column:
+                  name: experience
+                  value: 3
+              - column:
+                  name: category_id
+                  value: 5
+
+  - changeSet:
+      id: 13-insert-job_resume-10
+      author: Sanat
+      changes:
+        - insert:
+            tableName: job_resumes
+            columns:
+              - column:
+                  name: user_id
+                  value: 8
+              - column:
+                  name: job_title
+                  value: 'Human Resources Manager'
+              - column:
+                  name: salary
+                  value: 90000
+              - column:
+                  name: job_description
+                  value: 'Managing HR functions and employee relations'
+              - column:
+                  name: experience
+                  value: 6
+              - column:
+                  name: category_id
+                  value: 5
+
+  - changeSet:
+      id: 14-insert-job_resume-11
+      author: Sanat
+      changes:
+        - insert:
+            tableName: job_resumes
+            columns:
+              - column:
+                  name: user_id
+                  value: 9
+              - column:
+                  name: job_title
+                  value: 'Financial Analyst'
+              - column:
+                  name: salary
+                  value: 75000
+              - column:
+                  name: job_description
+                  value: 'Analyzing financial data and preparing reports'
+              - column:
+                  name: experience
+                  value: 4
+              - column:
+                  name: category_id
+                  value: 2
+
+  - changeSet:
+      id: 15-insert-job_resume-12
+      author: Sanat
+      changes:
+        - insert:
+            tableName: job_resumes
+            columns:
+              - column:
+                  name: user_id
+                  value: 10
+              - column:
+                  name: job_title
+                  value: 'Product Manager'
+              - column:
+                  name: salary
+                  value: 100000
+              - column:
+                  name: job_description
+                  value: 'Managing the product development lifecycle'
+              - column:
+                  name: experience
+                  value: 7
+              - column:
+                  name: category_id
+                  value: 2
+  - changeSet:
+      id: 16-insert-job_resume-12
+      author: Sanat
+      changes:
+        - insert:
+            tableName: job_resumes
+            columns:
+              - column:
+                  name: user_id
+                  value: 11
+              - column:
+                  name: job_title
+                  value: 'Product Manager'
+              - column:
+                  name: salary
+                  value: 100000
+              - column:
+                  name: job_description
+                  value: 'Managing the product development lifecycle'
+              - column:
+                  name: experience
+                  value: 7
+              - column:
+                  name: category_id
+                  value: 2
+  - changeSet:
+      id: 17-insert-job_resume-12
+      author: Sanat
+      changes:
+        - insert:
+            tableName: job_resumes
+            columns:
+              - column:
+                  name: user_id
+                  value: 12
+              - column:
+                  name: job_title
+                  value: 'Product Manager'
+              - column:
+                  name: salary
+                  value: 100000
+              - column:
+                  name: job_description
+                  value: 'Managing the product development lifecycle'
+              - column:
+                  name: experience
+                  value: 2
+              - column:
+                  name: category_id
+                  value: 2
+  - changeSet:
+      id: 18-insert-job_resume-12
+      author: Sanat
+      changes:
+        - insert:
+            tableName: job_resumes
+            columns:
+              - column:
+                  name: user_id
+                  value: 13
+              - column:
+                  name: job_title
+                  value: 'Product Manager'
+              - column:
+                  name: salary
+                  value: 100000
+              - column:
+                  name: job_description
+                  value: 'Managing the product development lifecycle'
+              - column:
+                  name: experience
+                  value: 7
+              - column:
+                  name: category_id
+                  value: 2
+  - changeSet:
+      id: 16-inswert-job_resume-13
+      author: Sanat
+      changes:
+        - insert:
+            tableName: job_resumes
+            columns:
+              - column:
+                  name: user_id
+                  value: 14
+              - column:
+                  name: job_title
+                  value: 'Data Scientist'
+              - column:
+                  name: salary
+                  value: 85000
+              - column:
+                  name: job_description
+                  value: 'Applying statistical analysis to interpret data'
+              - column:
+                  name: experience
+                  value: 5
+              - column:
+                  name: category_id
+                  value: 1
+
+  - changeSet:
+      id: 17-insewrt-job_resume-14
+      author: Sanat
+      changes:
+        - insert:
+            tableName: job_resumes
+            columns:
+              - column:
+                  name: user_id
+                  value: 15
+              - column:
+                  name: job_title
+                  value: 'Customer Service Representative'
+              - column:
+                  name: salary
+                  value: 40000
+              - column:
+                  name: job_description
+                  value: 'Assisting customers with their inquiries'
+              - column:
+                  name: experience
+                  value: 2
+              - column:
+                  name: category_id
+                  value: 2
+
+  - changeSet:
+      id: 18-inwsert-job_resume-15
+      author: Sanat
+      changes:
+        - insert:
+            tableName: job_resumes
+            columns:
+              - column:
+                  name: user_id
+                  value: 37
+              - column:
+                  name: job_title
+                  value: 'Mechanical Engineer'
+              - column:
+                  name: salary
+                  value: 75000
+              - column:
+                  name: job_description
+                  value: 'Designing and testing mechanical systems'
+              - column:
+                  name: experience
+                  value: 4
+              - column:
+                  name: category_id
+                  value: 1
+
+  # Add more change sets with different job titles, salaries, and category IDs as needed.
+
+
+

@@ -25,6 +25,15 @@ databaseChangeLog:
               - column:
                   name: expected_salary
                   type: int
+              - column:
+                  name: category_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_resumes_category
+                    references: categories(id)
+                    onDelete: CASCADE
+                    onUpdate: CASCADE
 
 
 

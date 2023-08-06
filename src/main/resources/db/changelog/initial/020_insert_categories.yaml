@@ -30,6 +30,26 @@ databaseChangeLog:
               - column:
                   name: description
                   value: 'finance description'
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: Education
+              - column:
+                  name: description
+                  value: 'education description'
+        - insert:
+            tableName: categories
+            columns:
+              - column:
+                  name: name
+                  value: HumanResource
+              - column:
+                  name: description
+                  value: 'human resource description'
+
+
 
 
 

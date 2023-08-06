@@ -54,3 +54,258 @@ databaseChangeLog:
               - column:
                   name: value
                   value: 'bunny'
+  - changeSet:
+      id: 11-insert-contacts-dwwrata-3
+      author: Sanat
+      changes:
+        - insert:
+            tableName: contacts
+            columns:
+              - column:
+                  name: resume_id
+                  value: 3
+              - column:
+                  name: type
+                  value: 'EMAIL'
+              - column:
+                  name: value
+                  value: 'john.doe@example.com'
+
+  - changeSet:
+      id: 12-insert-contacts-dawwtaa-3
+      author: Sanat
+      changes:
+        - insert:
+            tableName: contacts
+            columns:
+              - column:
+                  name: resume_id
+                  value: 3
+              - column:
+                  name: type
+                  value: 'PHONE'
+              - column:
+                  name: value
+                  value: '987654321'
+
+  - changeSet:
+      id: 13-insert-contacts-data-4w
+      author: Sanat
+      changes:
+        - insert:
+            tableName: contacts
+            columns:
+              - column:
+                  name: resume_id
+                  value: 4
+              - column:
+                  name: type
+                  value: 'TELEGRAM'
+              - column:
+                  name: value
+                  value: 'user_telegram'
+
+  - changeSet:
+      id: 14-iwnsert-contacts-data-4
+      author: Sanat
+      changes:
+        - insert:
+            tableName: contacts
+            columns:
+              - column:
+                  name: resume_id
+                  value: 4
+              - column:
+                  name: type
+                  value: 'FACEBOOK'
+              - column:
+                  name: value
+                  value: 'facebook.com/user123'
+
+  - changeSet:
+      id: 15-insert-contacts-datwa-5
+      author: Sanat
+      changes:
+        - insert:
+            tableName: contacts
+            columns:
+              - column:
+                  name: resume_id
+                  value: 5
+              - column:
+                  name: type
+                  value: 'LINKEDIN'
+              - column:
+                  name: value
+                  value: 'linkedin.com/in/user456'
+
+  - changeSet:
+      id: 11-insewwrt-contacts-data-3
+      author: Sanat
+      changes:
+        - insert:
+            tableName: contacts
+            columns:
+              - column:
+                  name: resume_id
+                  value: 6
+              - column:
+                  name: type
+                  value: 'EMAIL'
+              - column:
+                  name: value
+                  value: 'john.doe@example.com'
+
+  - changeSet:
+      id: 12-insert-contacts-dawwta-3
+      author: Sanat
+      changes:
+        - insert:
+            tableName: contacts
+            columns:
+              - column:
+                  name: resume_id
+                  value: 6
+              - column:
+                  name: type
+                  value: 'PHONE'
+              - column:
+                  name: value
+                  value: '987654321'
+
+  - changeSet:
+      id: 13-insert-contacts-dawta-4
+      author: Sanat
+      changes:
+        - insert:
+            tableName: contacts
+            columns:
+              - column:
+                  name: resume_id
+                  value: 7
+              - column:
+                  name: type
+                  value: 'TELEGRAM'
+              - column:
+                  name: value
+                  value: 'user_telegram'
+
+  - changeSet:
+      id: 14-insert-contasswcts-data-4
+      author: Sanat
+      changes:
+        - insert:
+            tableName: contacts
+            columns:
+              - column:
+                  name: resume_id
+                  value: 7
+              - column:
+                  name: type
+                  value: 'FACEBOOK'
+              - column:
+                  name: value
+                  value: 'facebook.com/user123'
+
+  - changeSet:
+      id: 15-insersst-contacts-data-5
+      author: Sanat
+      changes:
+        - insert:
+            tableName: contacts
+            columns:
+              - column:
+                  name: resume_id
+                  value: 8
+              - column:
+                  name: type
+                  value: 'LINKEDIN'
+              - column:
+                  name: value
+                  value: 'linkedin.com/in/user456'
+
+  - changeSet:
+      id: 11-inserat-contacts-data-3
+      author: Sanat
+      changes:
+        - insert:
+            tableName: contacts
+            columns:
+              - column:
+                  name: resume_id
+                  value: 9
+              - column:
+                  name: type
+                  value: 'EMAIL'
+              - column:
+                  name: value
+                  value: 'john.doe@example.com'
+
+  - changeSet:
+      id: 12-inserta-contacts-data-3
+      author: Sanat
+      changes:
+        - insert:
+            tableName: contacts
+            columns:
+              - column:
+                  name: resume_id
+                  value: 9
+              - column:
+                  name: type
+                  value: 'PHONE'
+              - column:
+                  name: value
+                  value: '987654321'
+
+  - changeSet:
+      id: 13-insert-contsacts-data-4
+      author: Sanat
+      changes:
+        - insert:
+            tableName: contacts
+            columns:
+              - column:
+                  name: resume_id
+                  value: 10
+              - column:
+                  name: type
+                  value: 'TELEGRAM'
+              - column:
+                  name: value
+                  value: 'user_telegram'
+
+  - changeSet:
+      id: 14-inserst-contacts-data-4
+      author: Sanat
+      changes:
+        - insert:
+            tableName: contacts
+            columns:
+              - column:
+                  name: resume_id
+                  value: 10
+              - column:
+                  name: type
+                  value: 'FACEBOOK'
+              - column:
+                  name: value
+                  value: 'facebook.com/user123'
+
+  - changeSet:
+      id: 15-inssert-contacts-data-5
+      author: Sanat
+      changes:
+        - insert:
+            tableName: contacts
+            columns:
+              - column:
+                  name: resume_id
+                  value: 11
+              - column:
+                  name: type
+                  value: 'LINKEDIN'
+              - column:
+                  name: value
+                  value: 'linkedin.com/in/user456'
+
