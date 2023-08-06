@@ -30,14 +30,14 @@ public class UserDao extends BaseDao {
     }
 
     public List<User> getAllUsers() {
-        String sql = "SELECT id, account_name as accountName, email, account_type as accountType, " +
+        String sql = "SELECT id, account_name as accountName, email, role_id as roleId, " +
                 "password, phone_number as phoneNumber FROM users";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
     }
 
 
     public User getUserByName(String accountName) {
-        String sql = "SELECT id, account_name as accountName, email, account_type as accountType, " +
+        String sql = "SELECT id, account_name as accountName, email, role_id as roleId, " +
                 "password, phone_number as phoneNumber FROM users WHERE account_name = ?";
 
         User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), accountName);
@@ -47,7 +47,7 @@ public class UserDao extends BaseDao {
 
 
     public Optional<User> getUserByEmail(String email) {
-        String sql = "SELECT id, account_name as accountName, email, account_type as accountType, " +
+        String sql = "SELECT id, account_name as accountName, email, role_id as roleId, " +
                 "password, phone_number as phoneNumber FROM users WHERE email = ?";
 
         return Optional.ofNullable(DataAccessUtils.singleResult(
@@ -64,7 +64,7 @@ public class UserDao extends BaseDao {
 
     @SneakyThrows
     public Optional<User> getUserById(int id) {
-        String sql = "SELECT id, account_name as accountName, email, account_type as accountType, " +
+        String sql = "SELECT id, account_name as accountName, email, role_id as roleId, " +
                 "password, phone_number as phoneNumber FROM users WHERE id = ?";
 
         return Optional.ofNullable(DataAccessUtils.singleResult(
@@ -85,14 +85,14 @@ public class UserDao extends BaseDao {
 
 
     public User getUserByPhoneNumber(String phoneNumber) {
-        String sql = "SELECT id, account_name as accountName, email, account_type as accountType, " +
+        String sql = "SELECT id, account_name as accountName, email, role_id as roleId, " +
                 "password, phone_number as phoneNumber FROM users WHERE phone_number = ?";
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), phoneNumber);
     }
 
 
     public List<User> getAllJobSeekers() {
-        String sql = "SELECT id, account_name as accountName, email, account_type as accountType, " +
+        String sql = "SELECT id, account_name as accountName, email, role_id as roleId, " +
                 "password, phone_number as phoneNumber FROM users WHERE account_type = ?";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class), String.valueOf(AccountType.JOB_SEEKER));
     }
@@ -101,14 +101,14 @@ public class UserDao extends BaseDao {
     @Override
     public int save(Object obj) {
         User user = (User) obj;
-        String sql = "INSERT INTO users (account_name, email, account_type, password, phone_number , enabled , role_id) " +
+        String sql = "INSERT INTO users (account_name, email, role_id, password, phone_number , enabled , role_id) " +
                 "VALUES (?, ?, ?, ?, ?,?,?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(sql, new String[]{"id"});
             ps.setString(1, user.getAccountName());
             ps.setString(2, user.getEmail());
-            ps.setString(3, String.valueOf(user.getAccountType()));
+            ps.setInt(3, user.getRoleId());
             ps.setString(4, user.getPassword());
             ps.setString(5, user.getPhoneNumber());
             ps.setBoolean(6, user.getEnabled());

@@ -28,7 +28,7 @@ public class UserService {
                 .map(e -> UserDto.builder()
                         .id(e.getId())
                         .phoneNumber(e.getPhoneNumber())
-                        .accountType(e.getAccountType())
+                        .accountType(getAccountType(e.getRoleId()))
                         .password(e.getPassword())
                         .email(e.getEmail())
                         .accountName(e.getAccountName())
@@ -98,7 +98,7 @@ public class UserService {
         log.info("The user:" + userDto.getEmail() + " is saved!");
         return userDao.save(User.builder()
                 .accountName(userDto.getAccountName())
-                .accountType(userDto.getAccountType())
+//                .accountType(userDto.getAccountType())
                 .email(userDto.getEmail())
                 .password(userDto.getPassword())
                 .phoneNumber(userDto.getPhoneNumber())
@@ -124,9 +124,15 @@ public class UserService {
                 .id(user.getId())
                 .accountName(user.getAccountName())
                 .email(user.getEmail())
-                .accountType(user.getAccountType())
+                .accountType(getAccountType(user.getRoleId()))
                 .password(user.getPassword())
                 .phoneNumber(user.getPhoneNumber())
                 .build();
+    }
+    public AccountType getAccountType(int num){
+        if(num==1){
+            return AccountType.EMPLOYER;
+        }
+        return AccountType.JOB_SEEKER;
     }
 }

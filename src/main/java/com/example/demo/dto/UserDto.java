@@ -19,7 +19,7 @@ public class UserDto {
     @NotEmpty
     private String email;
 
-    @JsonIgnore
+
     private AccountType accountType;
 
 
