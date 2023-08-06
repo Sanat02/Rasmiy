@@ -195,11 +195,11 @@
     <label for="category">Category:</label>
     <select id="category" name="category" required>
         <option value="">Select category</option>
-        <option value="IT">IT</option>
-        <option value="Marketing">Marketing</option>
-        <option value="Finance">Finance</option>
-        <option value="Human Resources">Human Resources</option>
-        <option value="Others">Others</option>
+        <option value="1">IT</option>
+        <option value="2">Marketing</option>
+        <option value="3">Finance</option>
+        <option value="4">Education</option>
+        <option value="5">Human Resources</option>
     </select><br><br>
 
     <label for="expected_salary">Salary (USD):</label>

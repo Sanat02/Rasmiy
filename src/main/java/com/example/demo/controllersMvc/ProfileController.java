@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -20,11 +21,15 @@ public class ProfileController {
     private final JobResumeService jobResumeService;
 
     @GetMapping("/{userId}")
-    public String getMovie(@PathVariable int userId, Model model) {
+    public String getProfile(@PathVariable int userId, Model model) {
         UserDto userDto = userService.mapToUserDto(userService.getUserById(userId).get());
         userDto.setResumes(resumeService.getResumesByUserId(userId));
         userDto.setJobResumes(jobResumeService.getJobResumesByUserId(userId));
         model.addAttribute("account", userDto);
+        return "profile";
+    }
+    @PostMapping("/{userId}/setimage")
+    public String setProfileImage(@PathVariable int userId, Model model) {
         return "profile";
     }
 }

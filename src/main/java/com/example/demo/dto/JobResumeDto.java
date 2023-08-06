@@ -26,5 +26,5 @@ public class JobResumeDto {
     private Integer experience;
 
 
-    private CategoryDto category;
+    private String category;
 }

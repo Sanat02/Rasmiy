@@ -158,7 +158,7 @@
                 <li>Participate in team meetings and contribute to the overall development process</li>
             </ul>
         </div>
-        <div class="category">Category: ${jobresume.category.name}</div>
+        <div class="category">Category: ${jobresume.category}</div>
         <button class="apply-btn">Apply</button>
         <div class="contact-info">
             <span>Contact Email: <a href="mailto:contact@example.com">${jobresume.user.email}</a></span>
