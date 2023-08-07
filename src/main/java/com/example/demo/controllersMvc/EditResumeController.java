@@ -8,6 +8,7 @@ import com.example.demo.service.JobExperienceService;
 import com.example.demo.service.ResumeService;
 import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,15 @@ public class EditResumeController {
     private final UserService userService;
     private final EducationService educationService;
     private final JobExperienceService jobExperienceService;
+    private static final int PAGE_SIZE = 5;
+
+    @GetMapping("/all")
+    public String getAllResumes(@RequestParam(name = "page", defaultValue = "0") int page, Model model){
+        Page<ResumeDto> resumes=resumeService.getAllResumes(page,PAGE_SIZE);
+        model.addAttribute("resumes",resumes);
+        return "resumes";
+    }
+
 
 
     @GetMapping("/add/{userId}")

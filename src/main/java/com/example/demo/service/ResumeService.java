@@ -9,6 +9,10 @@ import com.example.demo.model.*;
 import lombok.RequiredArgsConstructor;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 
 import org.springframework.stereotype.Service;
@@ -30,7 +34,7 @@ public class ResumeService {
     private final JobExperienceService jobExperienceService;
     private final CategoryService categoryService;
 
-    public List<ResumeDto> getAllResumes() {
+    public Page<ResumeDto> getAllResumes(int start,int end) {
         log.info("Got all users");
         List<Resume> resumes = resumeDao.getAllResumes();
         List<ResumeDto> resumeDtos = resumes.stream()
@@ -38,13 +42,14 @@ public class ResumeService {
                         .id(e.getId())
                         .expectedSalary(e.getExpectedSalary())
                         .job(e.getJob())
-                        .applicant(userService.mapToUserDto(userService.getUserById(e.getUserId()).get()))
-                        //.education(educationService.getEducationByResumeId(e.getId()).get())
-                        // .jobExperience(jobExperienceService.getJobExperienceById(e.getId()).get())
-                        // .contacts(contactsService.getContactsDtoByResumeId(e.getId()))
+                        .applicant(userService.mapToUserDto(userService.getUserById(e.getUserId()).orElse(null)))
+                        .education(educationService.getEducationByResumeId(e.getId()).orElse(null))
+                         .jobExperience(jobExperienceService.getJobExperienceById(e.getId()).orElse(null))
+                         .contacts(contactsService.getContactsDtoByResumeId(e.getId()))
                         .build())
                 .collect(Collectors.toList());
-        return resumeDtos;
+        var page=toPage(resumeDtos, PageRequest.of(start,end));
+        return page;
     }
 
 
@@ -137,5 +142,16 @@ public class ResumeService {
                 .education(educationService.getEducationByResumeId(resumeId).orElse(null))
                 .jobExperience(jobExperienceService.getJobExperienceById(resumeId).orElse(null))
                 .build();
+    }
+    private Page<ResumeDto> toPage(List<ResumeDto> list, Pageable pageable) {
+        if (pageable.getOffset() >= list.size()) {
+            return Page.empty();
+        }
+        int startIndex = (int) pageable.getOffset();
+        int endIndex = (int) ((pageable.getOffset() + pageable.getPageSize()) > list.size() ?
+                list.size() :
+                pageable.getOffset() + pageable.getPageSize());
+        List<ResumeDto> subList = list.subList(startIndex, endIndex);
+        return new PageImpl<>(subList, pageable, list.size());
     }
 }

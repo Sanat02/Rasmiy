@@ -26,5 +26,6 @@ public class ResumeDto {
     private EducationDto education;
     private List<ContactDto> contacts;
     private String category;
+//
 
 }

@@ -49,7 +49,7 @@
             margin-bottom: 10px;
             float: left;
             display: block;
-            color: #212529; /* Change the text color */
+            color: #212529;
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
@@ -57,21 +57,21 @@
         }
 
         .navbar a:hover {
-            background-color: #ddd; /* Add a background color on hover */
+            background-color: #ddd;
 
         }
 
-        /* Add styles for active link */
+
         .navbar a.active {
             background-color:greenyellow;
             color: white;
             border-radius: 4px;
         }
 
-        /* Add styles for disabled link */
+
         .navbar a.disabled {
             color: #6c757d;
-            pointer-events: none; /* Disable link interaction */
+            pointer-events: none;
         }
 
         .search-form {
@@ -155,37 +155,26 @@
         </div>
 
 
-<#--        <ul>-->
-<#--            <#list vacancies.content as vacancy>-->
-<#--            <li>-->
-<#--                <div class="publ"><span class="publisher">${vacancy.publisher.accountName}</span></div>-->
-<#--                <div class="cat"><span class="category">${vacancy.category.name}</span></div>-->
-<#--                <span class="date">${vacancy.date}</span>-->
-<#--            </li>-->
-<#--           </#list>-->
-<#--        </ul>-->
-<#--    </div>-->
-<#--    <a href="/vacancies/2">Next Page</a>-->
-        <#if vacancies.content?size == 0>
+
+        <#if resumes.content?size == 0>
             <p>No vacancies found.</p>
         <#else>
             <ul>
-                <#list vacancies.content as vacancy>
+                <#list resumes.content as resume>
                     <li>
-                        <div class="publ"><span class="publisher">${vacancy.publisher.accountName}</span></div>
-                        <div class="cat"><span class="category">${vacancy.category.name}</span></div>
-                        <span class="date">${vacancy.date}</span>
+                        <div class="publ"><span class="publisher">${resume.applicant.accountName}</span></div>
+                        <span class="job">${resume.job}</span>
                     </li>
                 </#list>
             </ul>
         </#if>
 
         <#-- Pagination Links -->
-        <#if vacancies.hasPrevious()>
-            <a class="pag" href="/vacancies?page=${vacancies.number - 1}">Previous Page</a>
+        <#if resumes.hasPrevious()>
+            <a class="pag" href="/vacancies?page=${resumes.number - 1}">Previous Page</a>
         </#if>
-        <#if vacancies.hasNext()>
-            <a class="pag" href="/vacancies?page=${vacancies.number + 1}">Next Page</a>
+        <#if resumes.hasNext()>
+            <a class="pag" href="/vacancies?page=${resumes.number + 1}">Next Page</a>
         </#if>
 
 
