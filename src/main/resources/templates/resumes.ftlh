@@ -169,7 +169,7 @@
             </ul>
         </#if>
 
-        <#-- Pagination Links -->
+
         <#if resumes.hasPrevious()>
             <a class="pag" href="/vacancies?page=${resumes.number - 1}">Previous Page</a>
         </#if>

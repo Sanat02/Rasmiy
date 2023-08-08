@@ -8,8 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -25,7 +26,7 @@ public class JobsListService {
         return jobsListDao.getJobByCategory(category);
     }
 
-    public Page<JobListDto> getAllJobs(int start,int end) {
+    public Page<JobListDto> getAllJobs(int start, int end) {
         List<JobList> jobLists = jobsListDao.getAllJobs();
         List<JobListDto> jobListDtos = jobLists.stream()
                 .map(e -> JobListDto.builder()
@@ -33,8 +34,9 @@ public class JobsListService {
                         .date(e.getDate())
                         .category(categoryService.mapToCategoryDto(categoryService.getCategoryById(e.getCategoryId()).get()))
                         .publisher(userService.mapToUserDto(userService.getUserById(e.getId()).get())).build()
-                ).toList();
-        var page=toPage(jobListDtos, PageRequest.of(start,end));
+                ).collect(Collectors.toList());
+        jobListDtos = sortByCategory(jobListDtos);
+        var page = toPage(jobListDtos, PageRequest.of(start, end));
         return page;
     }
 
@@ -49,4 +51,10 @@ public class JobsListService {
         List<JobListDto> subList = list.subList(startIndex, endIndex);
         return new PageImpl<>(subList, pageable, list.size());
     }
+
+    private List<JobListDto> sortByCategory(List<JobListDto> jobs) {
+        jobs.sort(Comparator.comparing(e -> e.getCategory().getName()));
+        return jobs;
+    }
+
 }
