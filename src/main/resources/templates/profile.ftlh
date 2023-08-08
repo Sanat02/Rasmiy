@@ -220,6 +220,10 @@
               <li class="nav-item">
                 <a class="nav-link" href="/vacancies">Vacancies</a>
               </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/resumes">Resumes</a>
+                </li>
             </ul>
           </div>
         </div>

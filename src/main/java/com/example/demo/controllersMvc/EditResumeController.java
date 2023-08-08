@@ -27,7 +27,7 @@ public class EditResumeController {
     private final JobExperienceService jobExperienceService;
     private static final int PAGE_SIZE = 5;
 
-    @GetMapping("/all")
+    @GetMapping()
     public String getAllResumes(@RequestParam(name = "page", defaultValue = "0") int page, Model model){
         Page<ResumeDto> resumes=resumeService.getAllResumes(page,PAGE_SIZE);
         model.addAttribute("resumes",resumes);

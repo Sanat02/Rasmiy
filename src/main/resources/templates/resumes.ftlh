@@ -122,7 +122,7 @@
             padding: 5px;
         }
     </style>
-    <title>Vacancies</title>
+    <title>Resumes</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary" >
@@ -140,8 +140,12 @@
                 <a class="nav-link " href="/profile">Profile</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="#">Vacancies</a>
+                <a class="nav-link " href="/vacancies">Vacancies</a>
               </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="/resumes">Resumes</a>
+                </li>
             </ul>
           </div>
         </div>

@@ -137,11 +137,15 @@
                 <a class="nav-link " aria-current="page" href="#">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="/profile">Profile</a>
+                <a class="nav-link " href="/#">Profile</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="#">Vacancies</a>
+                <a class="nav-link active" href="/vacancies">Vacancies</a>
               </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " href="/resumes">Resumes</a>
+                </li>
             </ul>
           </div>
         </div>
