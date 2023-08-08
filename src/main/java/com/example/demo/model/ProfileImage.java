@@ -8,7 +8,7 @@ import lombok.*;
 @Builder
 public class ProfileImage {
     private int id;
-    private long userId;
+    private int userId;
     private String fileName;
 
 }

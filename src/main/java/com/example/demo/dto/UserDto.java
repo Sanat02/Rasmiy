@@ -35,5 +35,7 @@ public class UserDto {
 
     private List<JobResumeDto> jobResumes;
 
+    private String profileImage;
+
 
 }

@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserDao userDao;
+    private final ProfileImageService profileImageService;
 
 
     public List<UserDto> getAllUsers() {
@@ -32,6 +33,7 @@ public class UserService {
                         .password(e.getPassword())
                         .email(e.getEmail())
                         .accountName(e.getAccountName())
+                        .profileImage(profileImageService.getImageByUserId(e.getId()))
                         .build()
                 ).collect(Collectors.toList());
 
@@ -98,7 +100,6 @@ public class UserService {
         log.info("The user:" + userDto.getEmail() + " is saved!");
         return userDao.save(User.builder()
                 .accountName(userDto.getAccountName())
-//                .accountType(userDto.getAccountType())
                 .email(userDto.getEmail())
                 .password(userDto.getPassword())
                 .phoneNumber(userDto.getPhoneNumber())
@@ -127,6 +128,7 @@ public class UserService {
                 .accountType(getAccountType(user.getRoleId()))
                 .password(user.getPassword())
                 .phoneNumber(user.getPhoneNumber())
+                .profileImage(profileImageService.getImageByUserId(user.getId()))
                 .build();
     }
     public AccountType getAccountType(int num){

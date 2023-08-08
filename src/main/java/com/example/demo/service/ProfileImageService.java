@@ -10,12 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class ProfileImageService {
-    private static final String SUB_DIR = "images";
+    private static final String SUB_DIR = "static";
     private final FileService fileService;
     private final ProfileImageDao profileImageDao;
 
@@ -40,5 +41,17 @@ public class ProfileImageService {
             throw new NoSuchElementException("Image not found!");
         }
         return fileService.getOutputFile(filename, "/images", MediaType.IMAGE_PNG);
+    }
+
+    public String getImageByUserId(int userId) {
+        ProfileImage profileImage = profileImageDao.getImageByUserId(userId);
+        if (profileImage == null) {
+            return null;
+        }
+        var value=ProfileImageDto.builder()
+                .userId(profileImage.getUserId())
+                .fileName("/"+profileImage.getFileName())
+                .build();
+        return value.getFileName();
     }
 }

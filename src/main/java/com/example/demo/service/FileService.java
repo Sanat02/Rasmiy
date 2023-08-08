@@ -23,7 +23,7 @@ import java.util.UUID;
 @Slf4j
 @Service
 public class FileService {
-    private static final String UPLOAD_DIR = "data/";
+    private static final String UPLOAD_DIR = "src/main/resources/";
 
     @SneakyThrows
     public String saveUploadedFile(MultipartFile file, String subDir) {
