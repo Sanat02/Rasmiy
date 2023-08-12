@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class RegistrationController {
     private final UserService userService;
 
+
     @GetMapping
     public String register() {
         return "registration";
@@ -53,7 +54,7 @@ public class RegistrationController {
                     .build();
 
             int userId = userService.save(userDto);
-            return "redirect:/profile/" + userId;
+            return "redirect:/login";
         }
     }
 

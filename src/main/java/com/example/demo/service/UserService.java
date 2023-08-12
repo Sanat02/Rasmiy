@@ -7,6 +7,7 @@ import com.example.demo.model.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class UserService {
 
     private final UserDao userDao;
     private final ProfileImageService profileImageService;
+    private final PasswordEncoder encoder;
 
 
     public List<UserDto> getAllUsers() {
@@ -101,7 +103,7 @@ public class UserService {
         return userDao.save(User.builder()
                 .accountName(userDto.getAccountName())
                 .email(userDto.getEmail())
-                .password(userDto.getPassword())
+                .password(encoder.encode(userDto.getPassword()))
                 .phoneNumber(userDto.getPhoneNumber())
                 .enabled(true)
                 .roleId(roleId)
@@ -121,18 +123,23 @@ public class UserService {
     }
 
     public UserDto mapToUserDto(User user) {
-        return UserDto.builder()
-                .id(user.getId())
-                .accountName(user.getAccountName())
-                .email(user.getEmail())
-                .accountType(getAccountType(user.getRoleId()))
-                .password(user.getPassword())
-                .phoneNumber(user.getPhoneNumber())
-                .profileImage(profileImageService.getImageByUserId(user.getId()))
-                .build();
+        if (user != null) {
+            return UserDto.builder()
+                    .id(user.getId())
+                    .accountName(user.getAccountName())
+                    .email(user.getEmail())
+                    .accountType(getAccountType(user.getRoleId()))
+                    .password(user.getPassword())
+                    .phoneNumber(user.getPhoneNumber())
+                    .profileImage(profileImageService.getImageByUserId(user.getId()))
+                    .build();
+        } else {
+            return null;
+        }
     }
-    public AccountType getAccountType(int num){
-        if(num==1){
+
+    public AccountType getAccountType(int num) {
+        if (num == 1) {
             return AccountType.EMPLOYER;
         }
         return AccountType.JOB_SEEKER;

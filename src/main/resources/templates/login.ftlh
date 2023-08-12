@@ -137,7 +137,7 @@
         <h2>Login</h2>
         <form action="/login" method="post">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+            <input type="email" id="email" name="username" placeholder="Enter your email address" required>
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" placeholder="Enter your password" required>

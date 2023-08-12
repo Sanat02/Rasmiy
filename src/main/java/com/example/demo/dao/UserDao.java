@@ -101,8 +101,8 @@ public class UserDao extends BaseDao {
     @Override
     public int save(Object obj) {
         User user = (User) obj;
-        String sql = "INSERT INTO users (account_name, email, role_id, password, phone_number , enabled , role_id) " +
-                "VALUES (?, ?, ?, ?, ?,?,?)";
+        String sql = "INSERT INTO users (account_name, email, role_id, password, phone_number , enabled) " +
+                "VALUES (?, ?, ?, ?, ?,?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(sql, new String[]{"id"});
@@ -112,7 +112,6 @@ public class UserDao extends BaseDao {
             ps.setString(4, user.getPassword());
             ps.setString(5, user.getPhoneNumber());
             ps.setBoolean(6, user.getEnabled());
-            ps.setInt(7, user.getRoleId());
             return ps;
         }, keyHolder);
         return Objects.requireNonNull(keyHolder.getKey()).intValue();

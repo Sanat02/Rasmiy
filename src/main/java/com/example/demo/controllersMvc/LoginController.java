@@ -23,21 +23,5 @@ public class LoginController {
         return "loginError";
     }
 
-    @PostMapping()
-    @ResponseStatus(HttpStatus.SEE_OTHER)
-    public String login(
-            @RequestParam(name = "email") String email,
-            @RequestParam(name = "password") String password
-
-    ) {
-
-
-        if (userService.isUserExist(email).equalsIgnoreCase("0")) {
-            return "redirect:/login/error";
-        } else {
-            UserDto userDto =userService.mapToUserDto(userService.getUserByEmail(email).get());
-            return "redirect:/profile/" + userDto.getId();
-        }
-    }
 
 }

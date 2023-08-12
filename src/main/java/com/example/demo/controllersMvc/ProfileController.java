@@ -5,6 +5,8 @@ import com.example.demo.service.JobResumeService;
 import com.example.demo.service.ResumeService;
 import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,14 +22,18 @@ public class ProfileController {
     private final ResumeService resumeService;
     private final JobResumeService jobResumeService;
 
-    @GetMapping("/{userId}")
-    public String getProfile(@PathVariable int userId, Model model) {
-        UserDto userDto = userService.mapToUserDto(userService.getUserById(userId).get());
-        userDto.setResumes(resumeService.getResumesByUserId(userId));
-        userDto.setJobResumes(jobResumeService.getJobResumesByUserId(userId));
+    @GetMapping()
+    public String getProfile(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
+        if (userDto != null) {
+            userDto.setResumes(resumeService.getResumesByUserId(userDto.getId()));
+            userDto.setJobResumes(jobResumeService.getJobResumesByUserId(userDto.getId()));
+        }
         model.addAttribute("account", userDto);
         return "profile";
     }
+
     @PostMapping("/{userId}/setimage")
     public String setProfileImage(@PathVariable int userId, Model model) {
         return "profile";

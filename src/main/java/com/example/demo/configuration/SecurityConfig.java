@@ -15,6 +15,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -44,33 +45,38 @@ public class SecurityConfig {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .usersByUsernameQuery(fetchUserQuery)
-                .authoritiesByUsernameQuery(fetchRolesQuery);
+                .authoritiesByUsernameQuery(fetchRolesQuery)
+                .passwordEncoder(new BCryptPasswordEncoder());
+        ;
+
+
     }
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy
-                        .STATELESS))
-
-                .httpBasic(Customizer.withDefaults())
-
-                .formLogin(AbstractHttpConfigurer::disable)
-                .logout(AbstractHttpConfigurer::disable)
-
+//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(AbstractHttpConfigurer::disable)
-
-                .authorizeHttpRequests(authorize -> {
-                    authorize
-                            .requestMatchers(HttpMethod.POST, "/resumes").hasAuthority("JOB_SEEKER")
-                            .requestMatchers(HttpMethod.DELETE,"/resumes").hasAuthority("JOB_SEEKER")
-                            .requestMatchers(HttpMethod.PUT,"/resumes").hasAuthority("JOB_SEEKER")
-                            .requestMatchers(HttpMethod.POST, "/jobresume").hasAuthority("EMPLOYER")
-                            .requestMatchers(HttpMethod.DELETE, "/jobresume").hasAuthority("EMPLOYER")
-                            .requestMatchers(HttpMethod.PUT, "/jobresume").hasAuthority("EMPLOYER")
-                            .anyRequest().permitAll();
-                });
+                .httpBasic(Customizer.withDefaults())
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/")
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .permitAll())
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/register")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/vacancies")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/resumes")).hasAuthority("EMPLOYER")
+                        .anyRequest().authenticated()
+                );
         return http.build();
     }
+
+
 
 }
