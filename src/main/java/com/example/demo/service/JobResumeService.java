@@ -60,8 +60,8 @@ public class JobResumeService {
         } else {
             userId = userService.getUserByEmail(jobResumeDto.getUser().getEmail()).get().getId();
         }
-        String category=jobResumeDto.getCategory();
-        int categoryId=Integer.parseInt(category);
+        String category = jobResumeDto.getCategory();
+        int categoryId = Integer.parseInt(category);
 
         int jobResumeId = jobResumeDao.save(JobResume.builder()
                 .jobTitle(jobResumeDto.getJobTitle())
@@ -83,43 +83,19 @@ public class JobResumeService {
     }
 
     public void updateJobResume(JobResumeDto jobResumeDto) {
-        Optional<JobResume> mayBeJobResume = getJobResumeById(jobResumeDto.getId());
+        String category = jobResumeDto.getCategory();
+        int categoryId = Integer.parseInt(category);
 
-        if (mayBeJobResume.isPresent()) {
-            Optional<User> mayBeUser = userService.getUserById(jobResumeDto.getUser().getId());
-            int userId;
-            if (!mayBeUser.isPresent()) {
-                userId = userService.save(jobResumeDto.getUser());
+        jobResumeDao.update(JobResume.builder()
+                .jobTitle(jobResumeDto.getJobTitle())
+                .jobDescription(jobResumeDto.getJobDescription())
+                .experience(jobResumeDto.getExperience())
+                .salary(jobResumeDto.getSalary())
+                .id(jobResumeDto.getId())
+                .categoryId(categoryId)
+                .build()
+        );
 
-            } else {
-                userService.update(jobResumeDto.getUser());
-                userId = jobResumeDto.getUser().getId();
-
-            }
-
-//            Optional<Category> mayBeCategory = categoryService.getCategoryById(jobResumeDto.getCategory().getId());
-//            int categoryId;
-//            if (!mayBeCategory.isPresent()) {
-//                categoryId = categoryService.save(jobResumeDto.getCategory());
-//            } else {
-//                categoryService.update(jobResumeDto.getCategory());
-//                categoryId = jobResumeDto.getCategory().getId();
-//
-//            }
-
-            JobResume jobResume = JobResume.builder()
-                    .jobTitle(jobResumeDto.getJobTitle())
-                    .jobDescription(jobResumeDto.getJobDescription())
-                    .salary(jobResumeDto.getSalary())
-                    .experience(jobResumeDto.getSalary())
-                    .userId(userId)
-                   // .categoryId(categoryId)
-                    .id(jobResumeDto.getId())
-                    .build();
-            jobResumeDao.update(jobResume);
-        } else {
-            throw new IllegalArgumentException("Job Resume with ID " + jobResumeDto.getId() + " not found.");
-        }
     }
 
 
@@ -144,6 +120,7 @@ public class JobResumeService {
         List<JobResume> jobResume = jobResumeDao.getJobResumeByUserId(userId);
         List<JobResumeDto> jobResumeDtos = jobResume.stream().
                 map(e -> JobResumeDto.builder()
+                        .id(e.getId())
                         .jobTitle(e.getJobTitle())
                         .user(userService.mapToUserDto(userService.getUserById(userId).get()))
                         .jobDescription(e.getJobDescription())

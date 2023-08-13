@@ -228,14 +228,9 @@
         .svg{
             color: greenyellow;
         }
-        
 
-        
-       
-        
-        
     </style>
-    <title>Profile Job Seeker</title>
+    <title>Profile</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -289,7 +284,7 @@
                 <div class="clicks">Clicks</div>
                </a>
                     <#else>
-                        <a class="nav-link active" href="/jobresumes/add/${account.id}">
+                        <a class="nav-link active" href="/jobresumes/add">
                             <div class="resumebtn">
                                 <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
@@ -315,7 +310,7 @@
                  </div>
               <div class="rbtn">
                 <a class="nav-link active" href="#">
-                <div class="btn1">Update</div>
+                <div class="btn1">See</div>
                 </a>
                 <a class="nav-link active" href="#">
                 <div class="btn2">Edit</div>
@@ -332,18 +327,16 @@
                         <div>02/02/2022</div>
                     </div>
                     <div class="rbtn">
-                        <a class="nav-link active" href="#">
-                            <div class="btn1">Update</div>
+                        <a class="nav-link active" href="/jobresumes/${jresume.id}">
+                            <div class="btn1">See</div>
                         </a>
-                        <a class="nav-link active" href="#">
+                        <a class="nav-link active" href="/jobresumes/edit/${jresume.id}">
                             <div class="btn2">Edit</div>
                         </a>
                     </div>
                 </div>
             </#list>
         </div>
-
-       
        </div>
     </div>
 </body>

@@ -8,8 +8,8 @@
             font-family: 'Poppins', sans-serif;
         }
         .container {
+            margin-top: 100px;
             max-width: 800px;
-            margin: 20px auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 8px;
@@ -82,65 +82,74 @@
             text-decoration: underline;
         }
 
-        .navbar a {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            float: left;
-            display: block;
-            color: #212529; /* Change the text color */
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .navbar-brand {
             margin-left: 10px;
         }
 
-        .navbar a:hover {
-            background-color: #ddd; /* Add a background color on hover */
-            
+        .navbar-links {
+            display: flex;
+            align-items: center;
         }
 
-        /* Add styles for active link */
-        .navbar a.active {
-            background-color:greenyellow;
+        .navbar-links a {
+            margin-left: 10px;
+            color: #212529;
+            text-decoration: none;
+            padding: 14px 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-links a:hover {
+            background-color: #ddd;
+        }
+
+        .navbar-links a.active {
+            background-color: greenyellow;
             color: white;
             border-radius: 4px;
         }
 
-        /* Add styles for disabled link */
-        .navbar a.disabled {
+        .navbar-links a.disabled {
             color: #6c757d;
-            pointer-events: none; /* Disable link interaction */
+            pointer-events: none;
         }
+        .right-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .right-buttons .btn {
+            margin-left: 10px;
+        }
+
+
 
     </style>
     <title>Specific Vacancy</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" >
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link " aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link " href="#">Profile</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="/vacancies">Vacancies</a>
-              </li>
 
-                <li class="nav-item">
-                    <a class="nav-link " href="/resumes">Resumes</a>
-                </li>
-            </ul>
-          </div>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <div class="navbar-links">
+            <a class="nav-link" aria-current="page" href="/">Home</a>
+            <a class="nav-link active" href="/profile">Profile</a>
+            <a class="nav-link" href="/vacancies">Vacancies</a>
+            <a class="nav-link " href="/resumes">Resumes</a>
         </div>
-    </nav>
+        <div class="right-buttons">
+            <a class="btn btn-primary btn-sign-in" href="/logout">Log Out</a>
+        </div>
+    </div>
+</nav>
 
     <div class="container">
         <h1 class="job-title">Job:${jobresume.jobTitle}</h1>

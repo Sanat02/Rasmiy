@@ -121,7 +121,6 @@ public class ResumeService {
 
     public List<ResumeDto> getResumesByUserId(int userId) {
         List<Resume> resumes = resumeDao.getResumesByUserId(userId);
-        System.out.println("Got resumes:" + resumes.size());
         return resumes.stream()
                 .map(e -> ResumeDto.builder()
                         .id(e.getId())
