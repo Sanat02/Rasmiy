@@ -1,6 +1,7 @@
 package com.example.demo.controllersMvc;
 
 import com.example.demo.dto.JobResumeDto;
+import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.service.JobResumeService;
 import com.example.demo.service.UserService;
@@ -60,6 +61,21 @@ public class EditJobResumeController {
         } else {
             return "prohibited";
         }
+    }
+
+    @GetMapping("/{jobResumeId}/delete")
+    @ResponseStatus(HttpStatus.SEE_OTHER)
+    public String deleteJobResume(@PathVariable int jobResumeId) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
+        JobResumeDto jobResumeDto = jobResumeService.mapToJobResumeDto(jobResumeService.getJobResumeById(jobResumeId).get());
+        if (jobResumeDto.getUser().getId() == userDto.getId()) {
+            jobResumeService.deleteJobResume(jobResumeId);
+            return "redirect:/profile";
+        } else {
+            return "prohibited";
+        }
+
     }
 
     @GetMapping("/edit/{jobResumeId}")

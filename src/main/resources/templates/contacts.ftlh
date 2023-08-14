@@ -30,46 +30,6 @@
             border-bottom: 1px solid #ccc;
             padding: 10px 0;
         }
-
-
-        /*.navbar {*/
-        /*    background-color: #f8f9fa;*/
-        /*    padding: 10px 0;*/
-        /*}*/
-
-        /*.navbar-brand {*/
-        /*    margin-left: 20px;*/
-        /*    font-size: 24px;*/
-        /*    font-weight: bold;*/
-        /*    color: #212529;*/
-        /*    text-decoration: none;*/
-        /*}*/
-
-        /*.navbar-nav {*/
-        /*    margin-right: 20px;*/
-        /*}*/
-
-        /*.navbar-nav .nav-item {*/
-        /*    margin: 0 10px;*/
-        /*}*/
-
-        /*.navbar-nav .nav-link {*/
-        /*    color: #212529;*/
-        /*    text-decoration: none;*/
-        /*    font-size: 18px;*/
-        /*    padding: 10px;*/
-        /*    border-radius: 4px;*/
-        /*    transition: background-color 0.3s ease;*/
-        /*}*/
-
-        /*.navbar-nav .nav-link:hover {*/
-        /*    background-color: #ddd;*/
-        /*}*/
-
-        /*.navbar-nav .nav-link.active {*/
-        /*    background-color: greenyellow;*/
-        /*    color: white;*/
-        /*}*/
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -109,7 +69,6 @@
             pointer-events: none;
         }
 
-        /* Style for the "Sign In" and "Sign Up" buttons */
         .right-buttons {
             display: flex;
             align-items: center;
@@ -184,7 +143,10 @@
         }
 
         .form-section form input[type="text"],
-        .form-section form input[type="date"] {
+        .form-section form input[type="date"],
+        .form-section form input[type="tel"],
+        .form-section form input[type="email"]
+        {
             width: 100%;
             padding: 8px;
             margin-bottom: 10px;
@@ -192,7 +154,6 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
-
 
         .form-section form button {
             background-color: greenyellow;
@@ -212,7 +173,6 @@
     <title>Resume</title>
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
@@ -227,35 +187,23 @@
     </div>
 </nav>
 <div class="container">
-    <h1 class="vtxt">Education</h1>
-
-    <div class="form-section" id="educationForm">
-        <h2>Education</h2>
-        <form  action="/resumes/${resume.id}/education" method="post">
-            <div>
-                <label for="university">University:</label>
-                <input type="text" id="university" name="university" required>
-            </div>
-            <div>
-                <label for="degree">Degree:</label>
-                <input type="text" id="degree" name="degree" required>
-            </div>
-            <div>
-                <label for="startDate">Start Date:</label>
-                <input type="date" id="startDate" name="startDate" required>
-            </div>
-            <div>
-                <label for="endDate">End Date:</label>
-                <input type="date" id="endDate" name="endDate" required>
-            </div>
-            <button type="submit">Save Education</button>
+    <h1 class="vtxt">Contacts</h1>
+    <div class="form-section" id="experienceForm">
+        <form  action="/resumes/${resume.id}/contacts" method="post">
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" >
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" >
+            <label for="telegram">Telegram:</label>
+            <input type="text" id="telegram" name="telegram" >
+            <label for="linkedin">LinkedIn:</label>
+            <input type="text" id="linkedin" name="linkedin" >
+            <label for="facebook">Facebook:</label>
+            <input type="text" id="facebook" name="facebook" >
+            <button type="submit">Save Contacts</button>
         </form>
     </div>
 
-
-
 </div>
-
-
 </body>
 </html>

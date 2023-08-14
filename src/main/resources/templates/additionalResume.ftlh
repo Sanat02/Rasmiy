@@ -244,6 +244,17 @@
                     </a>
             </div>
         </#if>
+        <#if resume.contacts?size == 0>
+            <a href="/resumes/${resume.id}/contacts">
+                <button class="btn btn-primary" id="addEducationBtn">Add Contact</button>
+            </a>
+         <#else>
+             <h1 class="vtxt">Contacts</h1>
+             <#list resume.contacts as contact>
+                 <li><span class="publisher">${contact.type}</span> ${contact.value}</li>
+             </#list>
+        </#if>
+
     </div>
 </body>
 </html>

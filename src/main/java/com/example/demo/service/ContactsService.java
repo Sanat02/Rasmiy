@@ -32,6 +32,8 @@ public class ContactsService {
                         .resumeId(resumeId)
                         .build()
                 ).collect(Collectors.toList());
-        contactsDao.save(contactsList);
+        for (int i = 0; i < contactsList.size(); i++) {
+            contactsDao.save(contactsList.get(i));
+        }
     }
 }

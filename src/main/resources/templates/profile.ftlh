@@ -319,27 +319,7 @@
         </div>
         <div class="resumetxt">Resume</div>
         <div class="resumecontent">
-
-<#--            <#list account.resumes as resume>-->
-<#--            <div class="gr" >-->
-<#--                 <div class="resumeinfo">-->
-<#--                    <div class="resumeName">${resume.job}</div>-->
-<#--                    <div>Date of the update:</div>-->
-<#--                    <div>02/02/2022</div>-->
-<#--                 </div>-->
-<#--              <div class="rbtn">-->
-<#--                <a class="nav-link active" href="/resumes/${resume.id}">-->
-<#--                <div class="btn1">See</div>-->
-<#--                </a>-->
-<#--                <a class="nav-link active" href="#">-->
-<#--                <div class="btn2">Edit</div>-->
-<#--                </a>-->
-<#--                  <a class="nav-link active" href="#">-->
-<#--                      <div class="btn2">Delete</div>-->
-<#--                  </a>-->
-<#--              </div>-->
-<#--            </div>-->
-<#--            </#list>-->
+            <#if account.resumes?size != 0>
             <div class="slider-container">
                 <#list account.resumes as resume>
                     <div class="resume-item">
@@ -362,10 +342,12 @@
                     </div>
                 </#list>
             </div>
+            </#if>
 
-
+            <#if account.jobResumes?size != 0>
+            <div class="slider-container">
             <#list account.jobResumes as jresume>
-                <div >
+                <div class="resume-item">
                     <div class="resumeinfo">
                         <div class="resumeName">${jresume.jobTitle}</div>
                         <div>Date of the update:</div>
@@ -378,9 +360,15 @@
                         <a class="nav-link active" href="/jobresumes/edit/${jresume.id}">
                             <div class="btn2">Edit</div>
                         </a>
+                        <a class="nav-link active" href="/jobresumes/${jresume.id}/delete">
+                            <div class="btn2">Delete</div>
+                        </a>
                     </div>
                 </div>
             </#list>
+            </div>
+            </#if>
+
         </div>
        </div>
     </div>

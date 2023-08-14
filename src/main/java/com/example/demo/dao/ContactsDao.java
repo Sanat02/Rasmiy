@@ -4,36 +4,50 @@ import com.example.demo.model.Contacts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Component
-@RequiredArgsConstructor
-public class ContactsDao {
-    private final JdbcTemplate jdbcTemplate;
+
+public class ContactsDao extends BaseDao {
+
+
+    ContactsDao(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+        super(jdbcTemplate, namedParameterJdbcTemplate);
+    }
 
     public List<Contacts> getContactsByResumeId(int id) {
         String sql = "select * from contacts where resume_id = ?";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Contacts.class), id);
     }
 
-    public void save(List<Contacts> contactsList) {
-        String sql = "INSERT INTO contacts (resume_id, contact_type, contact_value) " +
+    @Override
+    public int save(Object obj) {
+        Contacts contacts=(Contacts) obj;
+        String sql = "INSERT INTO contacts (resume_id, type, \"value\") " +
                 "VALUES (?, ?, ?)";
-
-        List<Object[]> batchArgs = new ArrayList<>();
-        for (Contacts contacts : contactsList) {
-            Object[] args = new Object[]{
-                    contacts.getResumeId(),
-                    contacts.getType().name(),
-                    contacts.getValue()
-            };
-            batchArgs.add(args);
-        }
-
-        jdbcTemplate.batchUpdate(sql, batchArgs);
+        jdbcTemplate.update(con->{
+            PreparedStatement ps = con.prepareStatement(sql, new String[]{"id"});
+            ps.setInt(1,contacts.getResumeId());
+            ps.setString(2,contacts.getType().toString());
+            ps.setString(3, contacts.getValue());
+            return ps;
+        },keyHolder);
+        return  Objects.requireNonNull(keyHolder.getKey()).intValue();
     }
 
+    @Override
+    public void delete(int id) {
+
+    }
+
+    @Override
+    public void update(Object obj) {
+
+    }
 }

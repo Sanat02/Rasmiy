@@ -30,45 +30,68 @@
             border-bottom: 1px solid #ccc;
             padding: 10px 0;
         }
-
-
         .navbar {
-            background-color: #f8f9fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 10px 0;
         }
 
         .navbar-brand {
-            margin-left: 20px;
-            font-size: 24px;
-            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-links a {
+            margin-left: 10px;
             color: #212529;
             text-decoration: none;
-        }
-
-        .navbar-nav {
-            margin-right: 20px;
-        }
-
-        .navbar-nav .nav-item {
-            margin: 0 10px;
-        }
-
-        .navbar-nav .nav-link {
-            color: #212529;
-            text-decoration: none;
-            font-size: 18px;
-            padding: 10px;
-            border-radius: 4px;
+            padding: 14px 16px;
             transition: background-color 0.3s ease;
         }
 
-        .navbar-nav .nav-link:hover {
+        .navbar-links a:hover {
             background-color: #ddd;
         }
 
-        .navbar-nav .nav-link.active {
+        .navbar-links a.active {
             background-color: greenyellow;
             color: white;
+            border-radius: 4px;
+        }
+
+        .navbar-links a.disabled {
+            color: #6c757d;
+            pointer-events: none;
+        }
+
+        .right-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .right-buttons .btn {
+            margin-left: 10px;
+        }
+
+        .right-buttons .btn-sign-in,
+        .right-buttons .btn-sign-up {
+            background-color: greenyellow;
+            width: 85px;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .right-buttons .btn-sign-in:hover,
+        .right-buttons .btn-sign-up:hover {
+            background-color: #0056b3;
         }
 
         .search-form input[type="text"] {
@@ -147,37 +170,24 @@
     <title>Resume</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Your Logo</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/vacancies">Vacancies</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/resumes">Resumes</a>
-                </li>
-            </ul>
+        <a class="navbar-brand" href="#">Navbar</a>
+        <div class="navbar-links">
+            <a class="nav-link " aria-current="page" href="#">Home</a>
+            <a class="nav-link active" href="/profile">Profile</a>
+            <a class="nav-link" href="/vacancies">Vacancies</a>
+        </div>
+        <div class="right-buttons">
+            <a class="btn btn-primary btn-sign-in" href="/logout">Log Out</a>
         </div>
     </div>
 </nav>
-
 <div class="container">
-    <h1 class="vtxt">Education</h1>
+    <h1 class="vtxt">Experience</h1>
 
     <div class="form-section" id="experienceForm">
-        <h2>Experience</h2>
+
         <form  action="/resumes/${resume.id}/experience" method="post">
             <div>
                 <label for="position">Position:</label>
@@ -194,10 +204,6 @@
             <button type="submit">Save Experience</button>
         </form>
     </div>
-
-
 </div>
-
-
 </body>
 </html>

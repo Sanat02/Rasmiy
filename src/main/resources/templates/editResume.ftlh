@@ -203,8 +203,11 @@
             display: none;
         }
         .sbm{
+            margin-top: 20px;
             border: none;
             background-color: greenyellow;
+            width: 730px;
+            height: 50px;
         }
     </style>
     <title>Edit Resume</title>
@@ -282,9 +285,9 @@
 
 
 
-        <div class="publishbtn">
+<#--        <div class="publishbtn">-->
             <button class="sbm" type="submit" onclick="validateAndSubmit()">Submit</button>
-        </div>
+<#--        </div>-->
     </form>
 </div>
 
