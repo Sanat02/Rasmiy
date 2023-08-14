@@ -140,6 +140,7 @@ public class ResumeService {
                 .expectedSalary(resume.getExpectedSalary())
                 .education(educationService.getEducationByResumeId(resumeId).orElse(null))
                 .jobExperience(jobExperienceService.getJobExperienceById(resumeId).orElse(null))
+                .applicant(userService.mapToUserDto(userService.getUserById(resume.getUserId()).get()))
                 .build();
     }
     private Page<ResumeDto> toPage(List<ResumeDto> list, Pageable pageable) {

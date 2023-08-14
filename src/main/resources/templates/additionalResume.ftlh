@@ -42,50 +42,68 @@
         .date {
             color: #777;
         }
-
         .navbar {
-            background-color: #f8f9fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 10px 0;
         }
 
         .navbar-brand {
-            margin-left: 20px;
-            font-size: 24px;
-            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-links a {
+            margin-left: 10px;
             color: #212529;
             text-decoration: none;
-        }
-
-        .navbar-nav {
-            margin-right: 20px;
-        }
-
-        .navbar-nav .nav-item {
-            margin: 0 10px;
-        }
-
-        .navbar-nav .nav-link {
-            color: #212529;
-            text-decoration: none;
-            font-size: 18px;
-            padding: 10px;
-            border-radius: 4px;
+            padding: 14px 16px;
             transition: background-color 0.3s ease;
         }
 
-        .navbar-nav .nav-link:hover {
+        .navbar-links a:hover {
             background-color: #ddd;
         }
 
-        .navbar-nav .nav-link.active {
+        .navbar-links a.active {
             background-color: greenyellow;
             color: white;
+            border-radius: 4px;
         }
 
-        .search-form {
+        .navbar-links a.disabled {
+            color: #6c757d;
+            pointer-events: none;
+        }
+
+        /* Style for the "Sign In" and "Sign Up" buttons */
+        .right-buttons {
             display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .right-buttons .btn {
+            margin-left: 10px;
+        }
+
+        .right-buttons .btn-sign-in,
+        .right-buttons .btn-sign-up {
+            background-color: greenyellow;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .right-buttons .btn-sign-in:hover,
+        .right-buttons .btn-sign-up:hover {
+            background-color: #0056b3;
         }
 
         .search-form input[type="text"] {
@@ -116,9 +134,6 @@
             margin-bottom: 40px;
         }
 
-        .form-section {
-            margin-top: 20px;
-        }
 
         .form-section h2 {
             color: #333;
@@ -171,31 +186,21 @@
     <title>Resume</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Your Logo</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Profile</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/vacancies">Vacancies</a>
-              </li>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <div class="navbar-links">
+            <!-- Navigation links -->
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link" href="/profile">Profile</a>
+            <a class="nav-link" href="/vacancies">Vacancies</a>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/resumes">Resumes</a>
-                </li>
-            </ul>
-          </div>
         </div>
-    </nav>
+        <div class="right-buttons">
+            <a class="btn btn-primary btn-sign-in" href="/logout">Log Out</a>
+        </div>
+    </div>
+</nav>
 
     <div class="container">
         <h1 class="vtxt">Resume</h1>
@@ -230,7 +235,7 @@
                     <ul>
                         <li><span class="publisher">Position:</span> ${resume.jobExperience.position}</li>
                         <li><span class="publisher">Start date:</span>${resume.jobExperience.startDate}</li>
-                        <li><span class="publisher">End date:</span>${resume.education.endDate}</li>
+                        <li><span class="publisher">End date:</span>${resume.jobExperience.endDate}</li>
                     </ul>
         <#else>
             <div>

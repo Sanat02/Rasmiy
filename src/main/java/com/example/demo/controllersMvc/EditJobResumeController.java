@@ -38,7 +38,7 @@ public class EditJobResumeController {
         UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
         JobResumeDto jobResumeDto = JobResumeDto.builder()
                 .jobTitle(vacancyName)
-                .user(userService.mapToUserDto(userService.getUserById(userDto.getId()).get()))
+                .user(userDto)
                 .jobDescription(description)
                 .salary(expectedSalary)
                 .experience(startDate)

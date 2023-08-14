@@ -35,13 +35,6 @@
             font-weight: bold;
         }
 
-        .category {
-            color: #00a86b;
-        }
-
-        .date {
-            color: #777;
-        }
         .navbar {
             display: flex;
             justify-content: space-between;

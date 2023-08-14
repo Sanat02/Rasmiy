@@ -68,6 +68,7 @@
         .right-buttons .btn-sign-in,
         .right-buttons .btn-sign-up {
             background-color: greenyellow;
+            width: 85px;
             color: white;
             border: none;
             border-radius: 4px;
@@ -117,24 +118,7 @@
     input[type="submit"]:hover {
         background-color: #0056b3;
     }
-    
-    .abbox {
-        display: flex;
-        flex-direction: column;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-        align-items: flex-start;
-        justify-content: flex-start;
-        align-self: center;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-bottom: 17px;
-        padding-top: 17px;
-        gap: 10px;
-        width: 800px;
-    }
-    
 
-    
     .btn {
         width: 200px;
         background-color: greenyellow;

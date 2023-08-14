@@ -31,7 +31,7 @@ public class JobExperienceService {
 
     public void saveJobExperience(JobExperienceDto jobExperience, int resumeId) {
         int id = jobExperienceDao.save(JobExperience.builder()
-                .endDate(jobExperience.getStartDate())
+                .endDate(jobExperience.getEndDate())
                 .startDate(jobExperience.getStartDate())
                 .position(jobExperience.getPosition())
                 .resumeId(resumeId)

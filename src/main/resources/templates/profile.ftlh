@@ -228,6 +228,25 @@
         .svg{
             color: greenyellow;
         }
+        .slider-container {
+            display: flex;
+            overflow-x: scroll; /* Enable horizontal scrolling */
+            width: 100%; /* Full width */
+            max-width: 100%; /* Ensure the container fits the viewport */
+            white-space: nowrap; /* Prevent items from wrapping to the next line */
+        }
+
+        /* Styles for each resume item (slide) */
+        .resume-item {
+            padding: 10px;
+            margin-right: 10px; /* Space between items */
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: inline-block; /* Display items in a row */
+            vertical-align: top; /* Align items at the top */
+        }
+
 
     </style>
     <title>Profile</title>
@@ -272,7 +291,7 @@
                 </div>
 
                 <#if account.accountType == "JOB_SEEKER">
-                <a class="nav-link active" href="/resumes/add/${account.id}">
+                <a class="nav-link active" href="/resumes/add">
                 <div class="resumebtn">
                     <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
@@ -301,23 +320,49 @@
         <div class="resumetxt">Resume</div>
         <div class="resumecontent">
 
-            <#list account.resumes as resume>
-            <div >
-                 <div class="resumeinfo">
-                    <div class="resumeName">${resume.job}</div>
-                    <div>Date of the update:</div>
-                    <div>02/02/2022</div>
-                 </div>
-              <div class="rbtn">
-                <a class="nav-link active" href="#">
-                <div class="btn1">See</div>
-                </a>
-                <a class="nav-link active" href="#">
-                <div class="btn2">Edit</div>
-                </a>
-              </div>
+<#--            <#list account.resumes as resume>-->
+<#--            <div class="gr" >-->
+<#--                 <div class="resumeinfo">-->
+<#--                    <div class="resumeName">${resume.job}</div>-->
+<#--                    <div>Date of the update:</div>-->
+<#--                    <div>02/02/2022</div>-->
+<#--                 </div>-->
+<#--              <div class="rbtn">-->
+<#--                <a class="nav-link active" href="/resumes/${resume.id}">-->
+<#--                <div class="btn1">See</div>-->
+<#--                </a>-->
+<#--                <a class="nav-link active" href="#">-->
+<#--                <div class="btn2">Edit</div>-->
+<#--                </a>-->
+<#--                  <a class="nav-link active" href="#">-->
+<#--                      <div class="btn2">Delete</div>-->
+<#--                  </a>-->
+<#--              </div>-->
+<#--            </div>-->
+<#--            </#list>-->
+            <div class="slider-container">
+                <#list account.resumes as resume>
+                    <div class="resume-item">
+                        <div class="resumeinfo">
+                            <div class="resumeName">${resume.job}</div>
+                            <div>Date of the update:</div>
+                            <div>02/02/2022</div>
+                        </div>
+                        <div class="rbtn">
+                            <a class="nav-link active" href="/resumes/${resume.id}">
+                                <div class="btn1">See</div>
+                            </a>
+                            <a class="nav-link active" href="#">
+                                <div class="btn2">Edit</div>
+                            </a>
+                            <a class="nav-link active" href="/resumes/${resume.id}/delete">
+                                <div class="btn2">Delete</div>
+                            </a>
+                        </div>
+                    </div>
+                </#list>
             </div>
-            </#list>
+
 
             <#list account.jobResumes as jresume>
                 <div >
@@ -339,5 +384,12 @@
         </div>
        </div>
     </div>
+<script>
+    const sliderContainer = document.querySelector('.slider-container');
+    sliderContainer.addEventListener('mousewheel', (e) => {
+        e.preventDefault();
+        sliderContainer.scrollLeft += e.deltaY;
+    });
+</script>
 </body>
 </html>
