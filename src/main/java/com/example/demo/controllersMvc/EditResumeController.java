@@ -2,7 +2,6 @@ package com.example.demo.controllersMvc;
 
 import com.example.demo.dto.*;
 import com.example.demo.enums.ContactType;
-import com.example.demo.model.Contacts;
 import com.example.demo.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -281,5 +280,22 @@ public class EditResumeController {
         }
 
     }
+
+    @GetMapping("/edit/{resumeId}")
+    @ResponseStatus(HttpStatus.SEE_OTHER)
+    public String updateResume(@PathVariable int resumeId) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
+        ResumeDto resumeDto = resumeService.getResumeById(resumeId);
+
+        if (resumeDto.getApplicant().getId() == userDto.getId()) {
+            resumeService.deleteResume(resumeId);
+            return "updateResume";
+        } else {
+            return "prohibited";
+        }
+
+    }
+
 
 }

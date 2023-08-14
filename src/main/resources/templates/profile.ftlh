@@ -332,7 +332,7 @@
                             <a class="nav-link active" href="/resumes/${resume.id}">
                                 <div class="btn1">See</div>
                             </a>
-                            <a class="nav-link active" href="#">
+                            <a class="nav-link active" href="/resumes/edit/${resume.id}">
                                 <div class="btn2">Edit</div>
                             </a>
                             <a class="nav-link active" href="/resumes/${resume.id}/delete">
