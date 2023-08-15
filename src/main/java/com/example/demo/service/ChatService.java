@@ -31,7 +31,6 @@ public class ChatService {
 
     public List<ChatDto> getMessagesByEmployerId(int userId, int employerId) {
         List<Chat> chats = chatDao.getMessagesByEmployerId(userId, employerId);
-        System.out.println("chatDao"+chats.size());
         return chats.stream().map(e -> ChatDto.builder()
                 .message(e.getMessage())
                 .employerId(e.getEmployerId())

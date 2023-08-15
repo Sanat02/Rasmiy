@@ -29,8 +29,6 @@ public class ChatController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
         System.out.println(chatService.getMessagesByEmployerId(userId,userDto.getId()).size());
-        System.out.println("empId:"+userId);
-        System.out.println("userId:"+userDto.getId());
         return chatService.getMessagesByEmployerId(userDto.getId(),userId);
     }
 
