@@ -176,19 +176,18 @@
         <p class="employer_id">${employer.id}</p>
     </div>
     <div class="chat-container">
-        <div class="chat">
-            <div class="message">
-                <p class="sender">John Doe</p>
-                <p>Hello, how can I help you?</p>
-                <p class="date">2023-08-10 10:15 AM</p>
-            </div>
-            <div class="message-separator"></div>
-            <div class="message">
-                <p class="sender">You</p>
-                <p>I have a question about your products.</p>
-                <p class="date">2023-08-10 10:18 AM</p>
-            </div>
-
+        <div  id="chat" class="chat">
+<#--            <div class="message">-->
+<#--                <p class="sender">John Doe</p>-->
+<#--                <p>Hello, how can I help you?</p>-->
+<#--                <p class="date">2023-08-10 10:15 AM</p>-->
+<#--            </div>-->
+<#--            <div class="message-separator"></div>-->
+<#--            <div class="message">-->
+<#--                <p class="sender">You</p>-->
+<#--                <p>I have a question about your products.</p>-->
+<#--                <p class="date">2023-08-10 10:18 AM</p>-->
+<#--            </div>-->
         </div>
         <div class="input-group">
             <form id="chat_form">
@@ -208,12 +207,10 @@
     function reviewHandler(e) {
         e.preventDefault();
 
-        // Get the message input element
         const messageInput = document.getElementById('message');
-        const message = messageInput.value.trim(); // Trim whitespace from the message
+        const message = messageInput.value.trim();
 
         if (message === '') {
-            // If message is empty, do not submit the form
             return;
         }
 
@@ -222,7 +219,6 @@
         formData.append('userId', userId);
         formData.append('message', message);
 
-        // Clear the input field
         messageInput.value = '';
 
         const formDataObject = {};
@@ -232,7 +228,6 @@
 
         const json = JSON.stringify(formDataObject);
 
-        // Send the JSON data to the server
         fetch(
             baseUrl,
             {
@@ -247,7 +242,54 @@
 
     messageForm.addEventListener('submit', reviewHandler);
 
+    window.addEventListener('load', async () => {
+        setInterval(async () => {
+            const chatContainer = document.querySelector('.chat');
+            const response = await getMessages();
+            const messages = JSON.parse(JSON.stringify(response));
 
+
+            chatContainer.innerHTML = '';
+
+            for (let messageElement of messages) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message';
+
+                const senderP = document.createElement('p');
+                senderP.className = 'sender';
+                senderP.textContent = 'you';
+                messageDiv.appendChild(senderP);
+
+                const textP = document.createElement('p');
+                textP.textContent = messageElement.message;
+                messageDiv.appendChild(textP);
+
+                const dateP = document.createElement('p');
+                dateP.className = 'date';
+                dateP.textContent = messageElement.timestamp; // Assuming timestamp is correct in the response
+                messageDiv.appendChild(dateP);
+
+                chatContainer.appendChild(messageDiv);
+
+                const separatorDiv = document.createElement('div');
+                separatorDiv.className = 'message-separator';
+                chatContainer.appendChild(separatorDiv);
+            }
+        }, 5000);
+    });
+
+    async function getMessages() {
+        let response = await fetch(
+            baseUrl,
+            {
+                method: 'GET',
+                headers: new Headers({
+                    'Accept': 'application/json'
+                })
+            }
+        )
+        return await response.json()
+    }
 </script>
 </body>
 </html>

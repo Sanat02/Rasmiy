@@ -1,17 +1,24 @@
 package com.example.demo.dao;
 
 import com.example.demo.model.Chat;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
+import java.util.List;
 import java.util.Objects;
 
 @Component
 public class ChatDao extends BaseDao {
     ChatDao(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         super(jdbcTemplate, namedParameterJdbcTemplate);
+    }
+
+    public List<Chat> getMessagesByEmployerId(int userId, int employerId) {
+        String sql = "SELECT * FROM chats where userId = ? AND employerId=? ";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Chat.class), userId, employerId);
     }
 
     @Override
