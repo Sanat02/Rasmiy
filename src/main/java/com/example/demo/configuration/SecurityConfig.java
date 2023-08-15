@@ -72,6 +72,7 @@ public class SecurityConfig {
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/vacancies")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/resumes")).hasAuthority("EMPLOYER")
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/{userId}/chat")).hasAuthority("JOB_SEEKER")
                         .anyRequest().authenticated()
                 );
         return http.build();

@@ -55,4 +55,10 @@ databaseChangeLog:
       file: db/changelog/initial/030_add_jobresume_cascade.yaml
   - include:
       file: db/changelog/initial/031_add_cascaded_contacts.yaml
+  - include:
+      file: db/changelog/initial/032_create_chat_table.yaml
+  - include:
+      file: db/changelog/initial/033_add_constraintsfk_chat.yaml
+  - include:
+      file: db/changelog/initial/034_add_constraintfk_vacancy.yaml
 

@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: drop  fk_vacancies_publisher
+      author: Sanat
+      changes:
+        - dropForeignKeyConstraint:
+            baseTableName: vacancies
+            constraintName: fk_vacancies_publisher
+  - changeSet:
+      id: add fk_vacancies_publisher
+      author: Sanat
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: vacancies
+            baseColumnNames: publisher_id
+            constraintName: fk_vacancies_publisher
+            referencedTableName: users
+            referencedColumnNames: id
+            onDelete: cascade
+            onUpdate: cascade

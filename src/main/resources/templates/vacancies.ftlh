@@ -164,7 +164,6 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
         <div class="navbar-links">
-            <!-- Navigation links -->
             <a class="nav-link " aria-current="page" href="/">Home</a>
             <#if username??>
                 <a class="nav-link" href="/profile">Profile</a>
@@ -194,18 +193,6 @@
             <button type="submit">Search</button>
         </div>
 
-
-<#--        <ul>-->
-<#--            <#list vacancies.content as vacancy>-->
-<#--            <li>-->
-<#--                <div class="publ"><span class="publisher">${vacancy.publisher.accountName}</span></div>-->
-<#--                <div class="cat"><span class="category">${vacancy.category.name}</span></div>-->
-<#--                <span class="date">${vacancy.date}</span>-->
-<#--            </li>-->
-<#--           </#list>-->
-<#--        </ul>-->
-<#--    </div>-->
-<#--    <a href="/vacancies/2">Next Page</a>-->
         <#if vacancies.content?size == 0>
             <p>No vacancies found.</p>
         <#else>
@@ -216,11 +203,14 @@
                         <div class="cat"><span class="category">${vacancy.category.name}</span></div>
                         <span class="date">${vacancy.date}</span>
                     </li>
+                    <#if type=="JOB_SEEKER">
+                    <a href="/vacancies/${vacancy.publisher.id}/chat"> <button>Chat</button></a>
+                    </#if>
                 </#list>
             </ul>
         </#if>
 
-        <#-- Pagination Links -->
+
         <#if vacancies.hasPrevious()>
             <a class="pag" href="/vacancies?page=${vacancies.number - 1}">Previous Page</a>
         </#if>
