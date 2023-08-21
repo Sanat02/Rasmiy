@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login and Registration Page</title>
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet' />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <!-- Add Font Awesome CSS -->
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 
     <style>
         body {
@@ -133,36 +134,51 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Login</h2>
-        <form action="/login" method="post">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="username" placeholder="Enter your email address" required>
+<div class="container">
+    <h2>Login</h2>
+    <form action="/login" method="post" id="login-form">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="username" placeholder="Enter your email address" required>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
 
-            <input type="submit" value="Login">
-        </form>
+        <input type="submit" value="Login">
+    </form>
 
-        <div class="register-option">
-            Don't have an account? <a href="/register">Register</a>
-        </div>
-
-        <div class="divider">
-            <hr>
-            <span class="or-text">OR</span>
-        </div>
-
-        <div class="social-login">
-            <div class="social-login-btn">
-                <i class="fab fa-google"></i> Sign in with Google
-            </div>
-            <!-- Add more social login options as needed -->
-        </div>
+    <div class="register-option">
+        Don't have an account? <a href="/register">Register</a>
     </div>
 
-    <!-- Add Font Awesome script -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <div class="divider">
+        <hr>
+        <span class="or-text">OR</span>
+    </div>
+
+    <div class="social-login">
+        <div class="social-login-btn">
+            <i class="fab fa-google"></i> Sign in with Google
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("login-form").addEventListener('submit', onLoginHandler);
+
+    let user = {};
+
+    function onLoginHandler(event) {
+
+        let form = event.target;
+        let userFormData = new FormData(form);
+        user = Object.fromEntries(userFormData);
+        saveUser(user)
+    }
+
+    function saveUser(user) {
+        let userAsJson = JSON.stringify(user)
+        localStorage.setItem('user', userAsJson)
+    }
+</script>
 </body>
 </html>

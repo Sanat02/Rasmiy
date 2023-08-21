@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet' />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
         }
+
         .container {
             margin-top: 100px;
             max-width: 800px;
@@ -136,18 +138,22 @@
         .search-form button:hover {
             background-color: #008754;
         }
-        .vtxt{
+
+        .vtxt {
             margin-bottom: 40px;
         }
-        .publ{
+
+        .publ {
             width: 150px;
             display: inline-block;
         }
-        .cat{
+
+        .cat {
             width: 150px;
             display: inline-block;
         }
-        .pag{
+
+        .pag {
             margin-left: 15px;
             margin-top: 10px;
             text-decoration: none;
@@ -170,12 +176,12 @@
             </#if>
             <a class="nav-link active" href="/vacancies">Vacancies</a>
             <#if username?? && type=="EMPLOYER">
-            <a class="nav-link" href="/resumes">Resumes</a>
+                <a class="nav-link" href="/resumes">Resumes</a>
             </#if>
         </div>
         <div class="right-buttons">
             <#if username??>
-                <a class="btn btn-primary btn-sign-in" href="/logout">Log Out</a>
+                <a class="btn btn-primary btn-sign-in" href="/logout" id="logout"> Log Out</a>
             <#else>
                 <!-- "Sign In" and "Sign Up" buttons -->
                 <a class="btn btn-primary btn-sign-in" href="/login">Sign In</a>
@@ -186,40 +192,46 @@
     </div>
 </nav>
 
-    <div class="container">
-        <h1 class="vtxt">Vacancies</h1>
-        <div class="search-form">
-            <input type="text" name="category" placeholder="Search by category">
-            <button type="submit">Search</button>
-        </div>
+<div class="container">
+    <h1 class="vtxt">Vacancies</h1>
+    <div class="search-form">
+        <input type="text" name="category" placeholder="Search by category">
+        <button type="submit">Search</button>
+    </div>
 
-        <#if vacancies.content?size == 0>
-            <p>No vacancies found.</p>
-        <#else>
-            <ul>
-                <#list vacancies.content as vacancy>
-                    <li>
-                        <div class="publ"><span class="publisher">${vacancy.publisher.accountName}</span></div>
-                        <div class="cat"><span class="category">${vacancy.category.name}</span></div>
-                        <span class="date">${vacancy.date}</span>
-                    </li>
-                    <#if type??>
+    <#if vacancies.content?size == 0>
+        <p>No vacancies found.</p>
+    <#else>
+        <ul>
+            <#list vacancies.content as vacancy>
+                <li>
+                    <div class="publ"><span class="publisher">${vacancy.publisher.accountName}</span></div>
+                    <div class="cat"><span class="category">${vacancy.category.name}</span></div>
+                    <span class="date">${vacancy.date}</span>
+                </li>
+                <#if type??>
                     <#if type=="JOB_SEEKER">
-                    <a href="/vacancies/${vacancy.publisher.id}/chat"> <button>Chat</button></a>
+                        <a href="/vacancies/${vacancy.publisher.id}/chat">
+                            <button>Chat</button>
+                        </a>
                     </#if>
-                    </#if>
-                </#list>
-            </ul>
-        </#if>
+                </#if>
+            </#list>
+        </ul>
+    </#if>
 
 
-        <#if vacancies.hasPrevious()>
-            <a class="pag" href="/vacancies?page=${vacancies.number - 1}">Previous Page</a>
-        </#if>
-        <#if vacancies.hasNext()>
-            <a class="pag" href="/vacancies?page=${vacancies.number + 1}">Next Page</a>
-        </#if>
-
-
+    <#if vacancies.hasPrevious()>
+        <a class="pag" href="/vacancies?page=${vacancies.number - 1}">Previous Page</a>
+    </#if>
+    <#if vacancies.hasNext()>
+        <a class="pag" href="/vacancies?page=${vacancies.number + 1}">Next Page</a>
+    </#if>
+</div>
+<script>
+    document.getElementById('logout').addEventListener('click', () => {
+        localStorage.removeItem('user')
+    })
+</script>
 </body>
 </html>

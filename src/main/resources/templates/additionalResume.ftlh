@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet' />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
         }
+
         .container {
             max-width: 800px;
             margin: 60px auto;
@@ -42,6 +44,7 @@
         .date {
             color: #777;
         }
+
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -81,7 +84,7 @@
             pointer-events: none;
         }
 
-        /* Style for the "Sign In" and "Sign Up" buttons */
+
         .right-buttons {
             display: flex;
             align-items: center;
@@ -130,7 +133,7 @@
             background-color: #008754;
         }
 
-        .vtxt{
+        .vtxt {
             margin-bottom: 40px;
         }
 
@@ -175,12 +178,13 @@
         .form-section form button:hover {
             background-color: #008754;
         }
-        #addEducationBtn{
+
+        #addEducationBtn {
             margin-bottom: 10px;
             display: inline-block;
             margin-right: 10px;
             background-color: #00a86b;
-            border:none;
+            border: none;
         }
     </style>
     <title>Resume</title>
@@ -190,30 +194,29 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
         <div class="navbar-links">
-            <!-- Navigation links -->
             <a class="nav-link " aria-current="page" href="#">Home</a>
             <a class="nav-link active" href="/profile">Profile</a>
             <a class="nav-link" href="/vacancies">Vacancies</a>
 
         </div>
         <div class="right-buttons">
-            <a class="btn btn-primary btn-sign-in" href="/logout">Log Out</a>
+            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>
         </div>
     </div>
 </nav>
 
-    <div class="container">
-        <h1 class="vtxt">Resume</h1>
+<div class="container">
+    <h1 class="vtxt">Resume</h1>
 
 
-        <ul>
-            <li><span class="publisher">Category:</span> ${resume.category}</li>
-            <li><span class="publisher">Resume Name:</span> ${resume.job}</li>
-            <li><span class="publisher">Expected Salary:</span> ${resume.expectedSalary}</li>
+    <ul>
+        <li><span class="publisher">Category:</span> ${resume.category}</li>
+        <li><span class="publisher">Resume Name:</span> ${resume.job}</li>
+        <li><span class="publisher">Expected Salary:</span> ${resume.expectedSalary}</li>
 
-        </ul>
+    </ul>
 
-        <#if resume.education??>
+    <#if resume.education??>
         <h1 class="vtxt">Education</h1>
         <ul>
             <li><span class="publisher">University:</span> ${resume.education.institutionName}</li>
@@ -221,40 +224,46 @@
             <li><span class="publisher">Start date: </span> ${resume.education.startDate}</li>
             <li><span class="publisher">End date: </span>${resume.education.endDate}</li>
         </ul>
-        <#else>
-            <a href="/resumes/${resume.id}/education">
+    <#else>
+        <a href="/resumes/${resume.id}/education">
             <div>
                 <button class="btn btn-primary" id="addEducationBtn">Add Education</button>
             </div>
-            </a>
-        </#if>
+        </a>
+    </#if>
 
 
-        <#if resume.jobExperience??>
-            <h1 class="vtxt">Experience</h1>
-                    <ul>
-                        <li><span class="publisher">Position:</span> ${resume.jobExperience.position}</li>
-                        <li><span class="publisher">Start date:</span>${resume.jobExperience.startDate}</li>
-                        <li><span class="publisher">End date:</span>${resume.jobExperience.endDate}</li>
-                    </ul>
-        <#else>
-            <div>
-                <a href="/resumes/${resume.id}/experience">
+    <#if resume.jobExperience??>
+        <h1 class="vtxt">Experience</h1>
+        <ul>
+            <li><span class="publisher">Position:</span> ${resume.jobExperience.position}</li>
+            <li><span class="publisher">Start date:</span>${resume.jobExperience.startDate}</li>
+            <li><span class="publisher">End date:</span>${resume.jobExperience.endDate}</li>
+        </ul>
+    <#else>
+        <div>
+            <a href="/resumes/${resume.id}/experience">
                 <button class="btn btn-primary" id="addEducationBtn">Add Experience</button>
-                    </a>
-            </div>
-        </#if>
-        <#if resume.contacts?size == 0>
-            <a href="/resumes/${resume.id}/contacts">
-                <button class="btn btn-primary" id="addEducationBtn">Add Contact</button>
             </a>
-         <#else>
-             <h1 class="vtxt">Contacts</h1>
-             <#list resume.contacts as contact>
-                 <li><span class="publisher">${contact.type}</span> ${contact.value}</li>
-             </#list>
-        </#if>
+        </div>
+    </#if>
+    <#if resume.contacts?size == 0>
+        <a href="/resumes/${resume.id}/contacts">
+            <button class="btn btn-primary" id="addEducationBtn">Add Contact</button>
+        </a>
+    <#else>
+        <h1 class="vtxt">Contacts</h1>
+        <#list resume.contacts as contact>
+            <li><span class="publisher">${contact.type}</span> ${contact.value}</li>
+        </#list>
+    </#if>
 
-    </div>
+</div>
+<script>
+    document.getElementById('logout').addEventListener('click',()=>{
+        localStorage.removeItem('user')
+    })
+</script>
+
 </body>
 </html>

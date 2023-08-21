@@ -163,7 +163,7 @@
             <a class="nav-link active" href="/vacancies">Vacancies</a>
         </div>
         <div class="right-buttons">
-            <a class="btn btn-primary btn-sign-in" href="/logout">Log Out</a>
+            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>
         </div>
     </div>
 </nav>
@@ -176,18 +176,8 @@
         <p class="employer_id">${employer.id}</p>
     </div>
     <div class="chat-container">
-        <div  id="chat" class="chat">
-<#--            <div class="message">-->
-<#--                <p class="sender">John Doe</p>-->
-<#--                <p>Hello, how can I help you?</p>-->
-<#--                <p class="date">2023-08-10 10:15 AM</p>-->
-<#--            </div>-->
-<#--            <div class="message-separator"></div>-->
-<#--            <div class="message">-->
-<#--                <p class="sender">You</p>-->
-<#--                <p>I have a question about your products.</p>-->
-<#--                <p class="date">2023-08-10 10:18 AM</p>-->
-<#--            </div>-->
+        <div id="chat" class="chat">
+
         </div>
         <div class="input-group">
             <form id="chat_form">
@@ -204,6 +194,7 @@
     const baseUrl = 'http://localhost:8770/chat/${employer.id}';
     const employerId = ${employer.id};
     const userId = ${user.id};
+
     function reviewHandler(e) {
         e.preventDefault();
 
@@ -290,6 +281,9 @@
         )
         return await response.json()
     }
+    document.getElementById('logout').addEventListener('click',()=>{
+        localStorage.removeItem('user')
+    })
 </script>
 </body>
 </html>

@@ -6,7 +6,11 @@
 </head>
 <body>
 <div><h1>The user does not exist!</h1></div>
-<a href="/login"><div><h1>Login again!</h1></div></a>
-<a href="/register"> <div><h1>Register</h1></div></a>
+<a href="/login">
+    <div><h1>Login again!</h1></div>
+</a>
+<a href="/register">
+    <div><h1>Register</h1></div>
+</a>
 </body>
 </html>

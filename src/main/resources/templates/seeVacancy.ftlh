@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet' />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
         }
+
         .container {
             margin-top: 100px;
             max-width: 800px;
@@ -120,6 +122,7 @@
             color: #6c757d;
             pointer-events: none;
         }
+
         .right-buttons {
             display: flex;
             align-items: center;
@@ -128,7 +131,6 @@
         .right-buttons .btn {
             margin-left: 10px;
         }
-
 
 
     </style>
@@ -146,37 +148,42 @@
             <a class="nav-link " href="/resumes">Resumes</a>
         </div>
         <div class="right-buttons">
-            <a class="btn btn-primary btn-sign-in" href="/logout">Log Out</a>
+            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>
         </div>
     </div>
 </nav>
 
-    <div class="container">
-        <h1 class="job-title">Job:${jobresume.jobTitle}</h1>
-        <div class="salary">Salary: ${jobresume.salary}</div>
-        <div class="experience">Experience:${jobresume.experience}</div>
-        <div class="job-description">
-            <h2>Job Description:</h2>
-            <p>
-               ${jobresume.jobDescription}
-            </p>
-            <p>
-                Key Responsibilities:
-            </p>
-            <ul>
-                <li>Design, code, test, and debug software applications</li>
-                <li>Collaborate with product managers and software architects to define technical requirements</li>
-                <li>Contribute to the development of new features and improvements</li>
-                <li>Perform code reviews and provide constructive feedback to team members</li>
-                <li>Participate in team meetings and contribute to the overall development process</li>
-            </ul>
-        </div>
-        <div class="category">Category: ${jobresume.category}</div>
-        <button class="apply-btn">Apply</button>
-        <div class="contact-info">
-            <span>Contact Email: <a href="mailto:contact@example.com">${jobresume.user.email}</a></span>
-            <span>Contact Phone: <a href="tel:+123456789">${jobresume.user.phoneNumber}</a></span>
-        </div>
+<div class="container">
+    <h1 class="job-title">Job:${jobresume.jobTitle}</h1>
+    <div class="salary">Salary: ${jobresume.salary}</div>
+    <div class="experience">Experience:${jobresume.experience}</div>
+    <div class="job-description">
+        <h2>Job Description:</h2>
+        <p>
+            ${jobresume.jobDescription}
+        </p>
+        <p>
+            Key Responsibilities:
+        </p>
+        <ul>
+            <li>Design, code, test, and debug software applications</li>
+            <li>Collaborate with product managers and software architects to define technical requirements</li>
+            <li>Contribute to the development of new features and improvements</li>
+            <li>Perform code reviews and provide constructive feedback to team members</li>
+            <li>Participate in team meetings and contribute to the overall development process</li>
+        </ul>
     </div>
+    <div class="category">Category: ${jobresume.category}</div>
+    <button class="apply-btn">Apply</button>
+    <div class="contact-info">
+        <span>Contact Email: <a href="mailto:contact@example.com">${jobresume.user.email}</a></span>
+        <span>Contact Phone: <a href="tel:+123456789">${jobresume.user.phoneNumber}</a></span>
+    </div>
+</div>
+<script>
+    document.getElementById('logout').addEventListener('click', () => {
+        localStorage.removeItem('user')
+    })
+</script>
 </body>
 </html>

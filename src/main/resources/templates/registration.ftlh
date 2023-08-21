@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration and Login Page</title>
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet' />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <!-- Add Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -136,49 +137,49 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Registration</h2>
-        <form action="/register" method="post">
-            <label for="account_name">Account Name:</label>
-            <input type="text" id="account_name" name="account_name" placeholder="Enter your account name" required>
+<div class="container">
+    <h2>Registration</h2>
+    <form action="/register" method="post">
+        <label for="account_name">Account Name:</label>
+        <input type="text" id="account_name" name="account_name" placeholder="Enter your account name" required>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email address" required>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
 
-            <label for="account_type">Account Type:</label>
-            <select id="account_type" name="account_type" required>
-                <option value="">Select account type</option>
-                <option value="jobseeker">Job Seeker</option>
-                <option value="employer">Employer</option>
-            </select>
+        <label for="account_type">Account Type:</label>
+        <select id="account_type" name="account_type" required>
+            <option value="">Select account type</option>
+            <option value="jobseeker">Job Seeker</option>
+            <option value="employer">Employer</option>
+        </select>
 
-            <label for="phone_number">Phone Number:</label>
-            <input type="tel" id="phone_number" name="phone_number" placeholder="Enter your phone number" required>
+        <label for="phone_number">Phone Number:</label>
+        <input type="tel" id="phone_number" name="phone_number" placeholder="Enter your phone number" required>
 
-            <input type="submit" value="Register">
-        </form>
+        <input type="submit" value="Register">
+    </form>
 
-        <div class="login-option">
-            Already have an account? <a href="/login">Login</a>
-        </div>
-
-        <div class="login-divider">
-            <hr>
-            <span class="or-text">OR</span>
-        </div>
-
-        <div class="social-login">
-            <div class="social-login-btn">
-                <i class="fab fa-google"></i> Sign in with Google
-            </div>
-            <!-- Add more social login options as needed -->
-        </div>
+    <div class="login-option">
+        Already have an account? <a href="/login">Login</a>
     </div>
 
-    <!-- Add Font Awesome script -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <div class="login-divider">
+        <hr>
+        <span class="or-text">OR</span>
+    </div>
+
+    <div class="social-login">
+        <div class="social-login-btn">
+            <i class="fab fa-google"></i> Sign in with Google
+        </div>
+        <!-- Add more social login options as needed -->
+    </div>
+</div>
+
+<!-- Add Font Awesome script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 </body>
 </html>

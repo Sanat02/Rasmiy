@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet' />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
         }
+
         .container {
             max-width: 800px;
             margin: 60px auto;
@@ -159,7 +161,7 @@
             background-color: #008754;
         }
 
-        .vtxt{
+        .vtxt {
             margin-bottom: 40px;
         }
 
@@ -222,7 +224,7 @@
             <a class="nav-link" href="/vacancies">Vacancies</a>
         </div>
         <div class="right-buttons">
-            <a class="btn btn-primary btn-sign-in" href="/logout">Log Out</a>
+            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>
         </div>
     </div>
 </nav>
@@ -231,7 +233,7 @@
 
     <div class="form-section" id="educationForm">
         <h2>Education</h2>
-        <form  action="/resumes/${resume.id}/education" method="post">
+        <form action="/resumes/${resume.id}/education" method="post">
             <div>
                 <label for="university">University:</label>
                 <input type="text" id="university" name="university" required>
@@ -253,9 +255,12 @@
     </div>
 
 
-
 </div>
-
+<script>
+    document.getElementById('logout').addEventListener('click',()=>{
+        localStorage.removeItem('user')
+    })
+</script>
 
 </body>
 </html>

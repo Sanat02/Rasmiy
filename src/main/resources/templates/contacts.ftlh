@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet' />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
         }
+
         .container {
             max-width: 800px;
             margin: 60px auto;
@@ -30,6 +32,7 @@
             border-bottom: 1px solid #ccc;
             padding: 10px 0;
         }
+
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -118,7 +121,7 @@
             background-color: #008754;
         }
 
-        .vtxt{
+        .vtxt {
             margin-bottom: 40px;
         }
 
@@ -145,8 +148,7 @@
         .form-section form input[type="text"],
         .form-section form input[type="date"],
         .form-section form input[type="tel"],
-        .form-section form input[type="email"]
-        {
+        .form-section form input[type="email"] {
             width: 100%;
             padding: 8px;
             margin-bottom: 10px;
@@ -182,28 +184,33 @@
             <a class="nav-link" href="/vacancies">Vacancies</a>
         </div>
         <div class="right-buttons">
-            <a class="btn btn-primary btn-sign-in" href="/logout">Log Out</a>
+            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>
         </div>
     </div>
 </nav>
 <div class="container">
     <h1 class="vtxt">Contacts</h1>
     <div class="form-section" id="experienceForm">
-        <form  action="/resumes/${resume.id}/contacts" method="post">
+        <form action="/resumes/${resume.id}/contacts" method="post">
             <label for="phone">Phone:</label>
-            <input type="tel" id="phone" name="phone" >
+            <input type="tel" id="phone" name="phone">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" >
+            <input type="email" id="email" name="email">
             <label for="telegram">Telegram:</label>
-            <input type="text" id="telegram" name="telegram" >
+            <input type="text" id="telegram" name="telegram">
             <label for="linkedin">LinkedIn:</label>
-            <input type="text" id="linkedin" name="linkedin" >
+            <input type="text" id="linkedin" name="linkedin">
             <label for="facebook">Facebook:</label>
-            <input type="text" id="facebook" name="facebook" >
+            <input type="text" id="facebook" name="facebook">
             <button type="submit">Save Contacts</button>
         </form>
     </div>
 
 </div>
+<script>
+    document.getElementById('logout').addEventListener('click', () => {
+        localStorage.removeItem('user')
+    })
+</script>
 </body>
 </html>
