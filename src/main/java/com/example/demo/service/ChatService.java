@@ -5,6 +5,7 @@ import com.example.demo.dto.ChatDto;
 import com.example.demo.model.Chat;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -16,13 +17,14 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ChatService {
     private final ChatDao chatDao;
+    private final UserService userService;
 
 
-    public int saveMessage(ChatDto chatDto) {
+    public int saveMessage(ChatDto chatDto, Authentication auth) {
         Chat chat = Chat.builder()
                 .message(chatDto.getMessage())
                 .employerId(chatDto.getEmployerId())
-                .userId(chatDto.getUserId())
+                .userId(userService.getUserByEmail(auth.getName()).get().getId())
                 .messageDate(LocalDate.now())
                 .build();
         int chatId = chatDao.save(chat);

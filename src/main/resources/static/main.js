@@ -20,3 +20,8 @@ function makeHeaders(){
     return headers
 }
 
+const requestSettings={
+    method:'GET',
+    headers:makeHeaders()
+}
+

@@ -18,18 +18,17 @@ import java.util.List;
 public class ChatController {
     private final ChatService chatService;
     private final UserService userService;
-    @PostMapping("/{userId}")
-    public HttpStatus addMessage(@RequestBody ChatDto chatDto) {
-        chatService.saveMessage(chatDto);
+
+    @PostMapping("/{employerId}")
+    public HttpStatus addMessage(@RequestBody ChatDto chatDto, Authentication auth) {
+        chatService.saveMessage(chatDto, auth);
         return HttpStatus.OK;
     }
 
-    @GetMapping("/{userId}")
-    public List<ChatDto> getMessagesByEmployerId(@PathVariable int userId) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    @GetMapping("/{employerId}")
+    public List<ChatDto> getMessagesByEmployerId(@PathVariable int employerId, Authentication auth) {
         UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
-        System.out.println(chatService.getMessagesByEmployerId(userId,userDto.getId()).size());
-        return chatService.getMessagesByEmployerId(userDto.getId(),userId);
+        return chatService.getMessagesByEmployerId(userDto.getId(), employerId);
     }
 
 }

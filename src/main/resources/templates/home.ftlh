@@ -87,7 +87,6 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
         <div class="navbar-links">
-            <!-- Navigation links -->
             <a class="nav-link active" aria-current="page" href="#">Home</a>
             <#if username??>
                 <a class="nav-link" href="/profile">Profile</a>
@@ -101,7 +100,6 @@
             <#if username??>
                 <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>
             <#else>
-                <!-- "Sign In" and "Sign Up" buttons -->
                 <a class="btn btn-primary btn-sign-in" href="/login">Sign In</a>
                 <a class="btn btn-success btn-sign-up" href="/register">Sign Up</a>
 

@@ -193,7 +193,12 @@
     const messageForm = document.querySelector('#chat_form');
     const baseUrl = 'http://localhost:8770/chat/${employer.id}';
     const employerId = ${employer.id};
-    const userId = ${user.id};
+    const storedUser = readUser();
+
+    const headers = new Headers({
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + btoa(storedUser.username + ':' + storedUser.password)
+    });
 
     function reviewHandler(e) {
         e.preventDefault();
@@ -207,7 +212,6 @@
 
         const formData = new FormData(messageForm);
         formData.append('employerId', employerId);
-        formData.append('userId', userId);
         formData.append('message', message);
 
         messageInput.value = '';
@@ -224,9 +228,7 @@
             {
                 method: 'POST',
                 body: json,
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                headers: headers
             }
         );
     }
@@ -257,7 +259,7 @@
 
                 const dateP = document.createElement('p');
                 dateP.className = 'date';
-                dateP.textContent = messageElement.timestamp; // Assuming timestamp is correct in the response
+                dateP.textContent = messageElement.timestamp;
                 messageDiv.appendChild(dateP);
 
                 chatContainer.appendChild(messageDiv);
@@ -274,16 +276,23 @@
             baseUrl,
             {
                 method: 'GET',
-                headers: new Headers({
-                    'Accept': 'application/json'
-                })
+                headers: headers
             }
         )
         return await response.json()
     }
-    document.getElementById('logout').addEventListener('click',()=>{
+
+    document.getElementById('logout').addEventListener('click', () => {
         localStorage.removeItem('user')
     })
+
+    function readUser() {
+        let userAsJson = localStorage.getItem('user')
+        let user = JSON.parse(userAsJson)
+        return user
+    }
+
+
 </script>
 </body>
 </html>
