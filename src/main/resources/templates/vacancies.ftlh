@@ -203,8 +203,10 @@
                         <div class="cat"><span class="category">${vacancy.category.name}</span></div>
                         <span class="date">${vacancy.date}</span>
                     </li>
+                    <#if type??>
                     <#if type=="JOB_SEEKER">
                     <a href="/vacancies/${vacancy.publisher.id}/chat"> <button>Chat</button></a>
+                    </#if>
                     </#if>
                 </#list>
             </ul>
