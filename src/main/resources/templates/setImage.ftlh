@@ -105,7 +105,7 @@
     </div>
 </nav>
 
-<form action="/image/${userId}" method="post" enctype="multipart/form-data">
+<form action="/images" method="post" enctype="multipart/form-data">
     <input type="file" name="files" multiple>
     <br><br>
     <input type="submit" value="Upload">

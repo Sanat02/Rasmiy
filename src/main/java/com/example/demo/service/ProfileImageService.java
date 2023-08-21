@@ -16,7 +16,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class ProfileImageService {
-    private static final String SUB_DIR = "static";
+    private static final String SUB_DIR = "/images";
     private final FileService fileService;
     private final ProfileImageDao profileImageDao;
 
@@ -53,5 +53,9 @@ public class ProfileImageService {
                 .fileName("/"+profileImage.getFileName())
                 .build();
         return value.getFileName();
+    }
+    public ResponseEntity<?> getImageByUsId(int userId) {
+        ProfileImage profileImage = profileImageDao.getImageByUserId(userId);
+        return fileService.getOutputFile(profileImage.getFileName(), SUB_DIR, MediaType.IMAGE_JPEG);
     }
 }
