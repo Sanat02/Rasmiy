@@ -7,7 +7,6 @@
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <!-- Add Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
@@ -175,11 +174,10 @@
         <div class="social-login-btn">
             <i class="fab fa-google"></i> Sign in with Google
         </div>
-        <!-- Add more social login options as needed -->
     </div>
 </div>
 
-<!-- Add Font Awesome script -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 </body>
 </html>

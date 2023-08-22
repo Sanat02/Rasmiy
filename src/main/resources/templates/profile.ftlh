@@ -248,21 +248,21 @@
 
         .slider-container {
             display: flex;
-            overflow-x: scroll; /* Enable horizontal scrolling */
-            width: 100%; /* Full width */
-            max-width: 100%; /* Ensure the container fits the viewport */
-            white-space: nowrap; /* Prevent items from wrapping to the next line */
+            overflow-x: scroll;
+            width: 100%;
+            max-width: 100%;
+            white-space: nowrap;
         }
 
-        /* Styles for each resume item (slide) */
+
         .resume-item {
             padding: 10px;
-            margin-right: 10px; /* Space between items */
+            margin-right: 10px;
             background-color: #f0f0f0;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            display: inline-block; /* Display items in a row */
-            vertical-align: top; /* Align items at the top */
+            display: inline-block;
+            vertical-align: top;
         }
 
 
