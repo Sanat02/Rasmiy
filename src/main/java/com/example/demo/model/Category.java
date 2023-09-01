@@ -21,4 +21,7 @@ public class Category {
 
     @OneToMany(fetch=FetchType.LAZY,mappedBy = "category")
     List<Resume> resumes;
+
+    @OneToMany(fetch=FetchType.LAZY,mappedBy = "category")
+    List<JobResume> jobResumes;
 }

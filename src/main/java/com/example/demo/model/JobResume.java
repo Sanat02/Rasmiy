@@ -1,18 +1,28 @@
 package com.example.demo.model;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
+@Entity
+@Table(name = "job_resumes")
 
 public class JobResume {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int userId;
+
     private String jobTitle;
     private Integer salary;
     private String jobDescription;
     private Integer experience;
-    private int categoryId;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id")
+    private Category category;
 }

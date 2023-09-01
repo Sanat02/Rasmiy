@@ -1,10 +1,10 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.JobResumeDao;
 import com.example.demo.dto.JobResumeDto;
 import com.example.demo.model.Category;
 import com.example.demo.model.JobResume;
 import com.example.demo.model.User;
+import com.example.demo.repository.JobResumeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,15 +19,13 @@ import static java.util.stream.Collectors.toList;
 @Service
 @RequiredArgsConstructor
 public class JobResumeService {
-
-    private final JobResumeDao jobResumeDao;
     private final UserService userService;
     private final CategoryService categoryService;
+    private final JobResumeRepository jobResumeRepository;
 
 
     public List<JobResumeDto> gettAllJobResumes() {
-
-        List<JobResume> jobResumes = jobResumeDao.getAllJobResumes();
+        List<JobResume> jobResumes = jobResumeRepository.findAll();
         return jobResumes.stream()
                 .map(e -> JobResumeDto.builder()
                         .id(e.getId())
@@ -35,7 +33,7 @@ public class JobResumeService {
                         .jobTitle(e.getJobTitle())
                         .salary(e.getSalary())
                         .user(userService.mapToUserDto(userService.getUserById(e.getUserId()).get()))
-                        .category(categoryService.mapToCategoryDto(categoryService.getCategoryById(e.getCategoryId()).get()).getName())
+                        .category(categoryService.mapToCategoryDto(categoryService.getCategoryById(e.getCategory().getId()).get()).getName())
                         .experience(e.getExperience())
                         .build()
                 ).toList();
@@ -63,44 +61,48 @@ public class JobResumeService {
         String category = jobResumeDto.getCategory();
         int categoryId = Integer.parseInt(category);
 
-        int jobResumeId = jobResumeDao.save(JobResume.builder()
+        JobResume savedJobResume = jobResumeRepository.save(JobResume.builder()
                 .jobTitle(jobResumeDto.getJobTitle())
                 .jobDescription(jobResumeDto.getJobDescription())
                 .salary(jobResumeDto.getSalary())
                 .experience(jobResumeDto.getExperience())
                 .userId(userId)
-                .categoryId(categoryId)
+                .category(categoryService.getCategoryById(categoryId).get())
                 .build());
 
 
-        log.info("Job resume saved with id:" + jobResumeId);
-        return jobResumeId;
+        log.info("Job resume saved with id:" + savedJobResume.getId());
+        return savedJobResume.getId();
 
     }
 
     public Optional<JobResume> getJobResumeById(int id) {
-        return jobResumeDao.getJobResumeById(id);
+        return jobResumeRepository.findById(id);
     }
 
     public void updateJobResume(JobResumeDto jobResumeDto) {
         String category = jobResumeDto.getCategory();
         int categoryId = Integer.parseInt(category);
 
-        jobResumeDao.update(JobResume.builder()
-                .jobTitle(jobResumeDto.getJobTitle())
-                .jobDescription(jobResumeDto.getJobDescription())
-                .experience(jobResumeDto.getExperience())
-                .salary(jobResumeDto.getSalary())
-                .id(jobResumeDto.getId())
-                .categoryId(categoryId)
-                .build()
-        );
+        Category categoryEntity = categoryService.getCategoryById(categoryId).orElse(null);
 
+        if (categoryEntity != null) {
+            jobResumeRepository.updateJobResume(
+                    jobResumeDto.getId(),
+                    jobResumeDto.getJobTitle(),
+                    jobResumeDto.getJobDescription(),
+                    jobResumeDto.getExperience(),
+                    Double.valueOf(jobResumeDto.getSalary()),
+                    categoryEntity
+            );
+        } else {
+            System.out.println("Category entity is null");
+        }
     }
 
 
     public void deleteJobResume(int id) {
-        jobResumeDao.delete(id);
+        jobResumeRepository.deleteById(id);
     }
 
     public JobResumeDto mapToJobResumeDto(JobResume jobResume) {
@@ -111,13 +113,13 @@ public class JobResumeService {
                 .experience(jobResume.getExperience())
                 .user(userService.mapToUserDto(userService.getUserById(jobResume.getUserId()).get()))
                 .salary(jobResume.getSalary())
-                .category(categoryService.mapToCategoryDto(categoryService.getCategoryById(jobResume.getCategoryId()).get()).getName())
+                .category(categoryService.mapToCategoryDto(categoryService.getCategoryById(jobResume.getCategory().getId()).get()).getName())
                 .build();
 
     }
 
     public List<JobResumeDto> getJobResumesByUserId(int userId) {
-        List<JobResume> jobResume = jobResumeDao.getJobResumeByUserId(userId);
+        List<JobResume> jobResume = jobResumeRepository.findJobResumesByUserId(userId);
         List<JobResumeDto> jobResumeDtos = jobResume.stream().
                 map(e -> JobResumeDto.builder()
                         .id(e.getId())

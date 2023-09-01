@@ -61,7 +61,7 @@ public class JobResumeDao extends BaseDao {
             ps.setInt(3, jobResume.getSalary());
             ps.setString(4, jobResume.getJobDescription());
             ps.setInt(5, jobResume.getExperience());
-            ps.setInt(6, jobResume.getCategoryId());
+            ps.setInt(6, jobResume.getCategory().getId());
             return ps;
         }, keyHolder);
         return Objects.requireNonNull(keyHolder.getKey()).intValue();
@@ -85,6 +85,6 @@ public class JobResumeDao extends BaseDao {
         String sql = "UPDATE job_resumes SET job_title = ?, salary = ?," +
                 " job_description = ? , experience = ? ,category_id = ? WHERE id = ?";
         jdbcTemplate.update(sql, jobResume.getJobTitle(), jobResume.getSalary(),
-                jobResume.getJobDescription(), jobResume.getExperience(), jobResume.getCategoryId(), jobResume.getId());
+                jobResume.getJobDescription(), jobResume.getExperience(), jobResume.getCategory().getId(), jobResume.getId());
     }
 }
