@@ -1,8 +1,10 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.JobExperienceDao;
+
 import com.example.demo.dto.JobExperienceDto;
 import com.example.demo.model.JobExperience;
+import com.example.demo.repository.JobExperienceRepository;
+import com.example.demo.repository.ResumeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,10 +15,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class JobExperienceService {
-    private final JobExperienceDao jobExperienceDao;
+    private final ResumeRepository resumeRepository;
+    private final JobExperienceRepository jobExperienceRepository;
 
     public Optional<JobExperienceDto> getJobExperienceById(int id) {
-        Optional<JobExperience> jobExperienceOptional = jobExperienceDao.getExperienceById(id);
+        Optional<JobExperience> jobExperienceOptional=jobExperienceRepository.findJobExperienceByResumeId(id);
         if (jobExperienceOptional.isPresent()) {
             JobExperience jobExperience = jobExperienceOptional.get();
             return Optional.ofNullable(JobExperienceDto.builder()
@@ -30,23 +33,15 @@ public class JobExperienceService {
     }
 
     public void saveJobExperience(JobExperienceDto jobExperience, int resumeId) {
-        int id = jobExperienceDao.save(JobExperience.builder()
+        JobExperience savedJobExperience=jobExperienceRepository.save(JobExperience.builder()
                 .endDate(jobExperience.getEndDate())
                 .startDate(jobExperience.getStartDate())
                 .position(jobExperience.getPosition())
-                .resumeId(resumeId)
+                .resume(resumeRepository.findById(resumeId).get())
                 .build());
-        log.info("JobExperience saved with id:" + id);
+        log.info("JobExperience saved with id:" + savedJobExperience.getId());
     }
 
 
-    public void updateEducation(JobExperienceDto jobExperience, int id) {
-        jobExperienceDao.update(JobExperience.builder()
-                .endDate(jobExperience.getStartDate())
-                .startDate(jobExperience.getStartDate())
-                .position(jobExperience.getPosition())
-                .resumeId(id)
-                .build());
-        log.info("JobExperience updated with id:" + jobExperience.getId());
-    }
+
 }

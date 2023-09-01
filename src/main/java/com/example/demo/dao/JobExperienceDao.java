@@ -2,7 +2,7 @@ package com.example.demo.dao;
 
 
 import com.example.demo.model.JobExperience;
-import org.springframework.dao.EmptyResultDataAccessException;
+
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -42,7 +42,7 @@ public class JobExperienceDao extends BaseDao {
                 "VALUES(? , ? , ? , ?)";
         jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(sql, new String[]{"id"});
-            ps.setInt(1, jobExperience.getResumeId());
+            ps.setInt(1, jobExperience.getResume().getId());
             ps.setString(2, jobExperience.getPosition());
             ps.setDate(3, java.sql.Date.valueOf(jobExperience.getStartDate()));
             ps.setDate(4, java.sql.Date.valueOf(jobExperience.getEndDate()));
@@ -63,7 +63,7 @@ public class JobExperienceDao extends BaseDao {
         JobExperience jobExperience = (JobExperience) obj;
         String sql = "UPDATE job_experience SET resume_id = ?, position = ?, start_date = ? ," +
                 " end_date = ?  WHERE id = ?";
-        jdbcTemplate.update(sql, jobExperience.getResumeId(), jobExperience.getPosition(),
+        jdbcTemplate.update(sql, jobExperience.getResume().getId(), jobExperience.getPosition(),
                 jobExperience.getStartDate(), jobExperience.getEndDate(), jobExperience.getId());
     }
 }
