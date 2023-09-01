@@ -5,6 +5,7 @@ import com.example.demo.dto.JobResumeDto;
 import com.example.demo.dto.WhoInterestedDto;
 import com.example.demo.model.JobResume;
 import com.example.demo.model.WhoInterested;
+import com.example.demo.repository.WhoInterestedRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,13 +16,13 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class WhoInterestedService {
-    private final WhoIsInterestedDao whoIsInterestedDao;
+    private final WhoInterestedRepository whoInterestedRepository;
     private final UserService userService;
     private final JobResumeService jobResumeService;
 
-    public List<WhoInterestedDto> getInterestedApplicants(int job_id) {
+    public List<WhoInterestedDto> getInterestedApplicants() {
         log.info("Got all interested applicants!");
-        List<WhoInterested> whoInteresteds = whoIsInterestedDao.getInterestedApplicants(job_id);
+        List<WhoInterested> whoInteresteds = whoInterestedRepository.findAll();
         List<WhoInterestedDto> whoInterestedDtos = whoInteresteds.stream()
                 .map(e -> WhoInterestedDto.builder()
                         .id(e.getApplicantId())
