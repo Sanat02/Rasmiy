@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dao.ChatDao;
 import com.example.demo.dto.ChatDto;
 import com.example.demo.model.Chat;
+import com.example.demo.repository.ChatRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -16,10 +17,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Slf4j
 public class ChatService {
-    private final ChatDao chatDao;
+
+    private final ChatRepository chatRepository;
     private final UserService userService;
-
-
+    
     public int saveMessage(ChatDto chatDto, Authentication auth) {
         Chat chat = Chat.builder()
                 .message(chatDto.getMessage())
@@ -27,12 +28,12 @@ public class ChatService {
                 .userId(userService.getUserByEmail(auth.getName()).get().getId())
                 .messageDate(LocalDate.now())
                 .build();
-        int chatId = chatDao.save(chat);
-        return chatId;
+        Chat savedChat = chatRepository.save(chat);
+        return savedChat.getId();
     }
 
     public List<ChatDto> getMessagesByEmployerId(int userId, int employerId) {
-        List<Chat> chats = chatDao.getMessagesByEmployerId(userId, employerId);
+        List<Chat> chats = chatRepository.findChatByEmployerIdAndUserId(employerId, userId);
         return chats.stream().map(e -> ChatDto.builder()
                 .message(e.getMessage())
                 .employerId(e.getEmployerId())
