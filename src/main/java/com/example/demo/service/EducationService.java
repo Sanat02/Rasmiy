@@ -3,6 +3,8 @@ package com.example.demo.service;
 import com.example.demo.dao.EducationDao;
 import com.example.demo.dto.EducationDto;
 import com.example.demo.model.Education;
+import com.example.demo.repository.EducationRepository;
+import com.example.demo.repository.ResumeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,9 +17,11 @@ import java.util.Optional;
 
 public class EducationService {
     private final EducationDao educationDao;
+    private final EducationRepository educationRepository;
+    private final ResumeRepository resumeRepository;
 
     public Optional<EducationDto> getEducationByResumeId(int id) {
-        Optional<Education> educationOptional = educationDao.getEducationByResumeId(id);
+        Optional<Education> educationOptional=educationRepository.findByResumeId(id);
 
         if (educationOptional.isPresent()) {
             Education education = educationOptional.get();
@@ -34,25 +38,15 @@ public class EducationService {
 
 
     public void saveEducation(EducationDto education, int resumeId) {
-        int id = educationDao.save(Education.builder()
+        Education savedEducation=educationRepository.save(Education.builder()
                 .degree(education.getDegree())
                 .endDate(education.getEndDate())
                 .startDate(education.getStartDate())
-                .resumeId(resumeId)
-                .institutionName(education.getInstitutionName())
-                .build()
-        );
-        log.info("Education saved with id:" + id);
-    }
-
-    public void updateEducation(EducationDto education, int resumId) {
-        educationDao.update(Education.builder()
-                .degree(education.getDegree())
-                .endDate(education.getEndDate())
-                .startDate(education.getStartDate())
-                .resumeId(resumId)
+                .resume(resumeRepository.findById(resumeId).get())
                 .institutionName(education.getInstitutionName())
                 .build());
-        log.info("Education updated with id:" + education.getId());
+        log.info("Education saved with id:" + savedEducation.getId());
     }
+
+
 }

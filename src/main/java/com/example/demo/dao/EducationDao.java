@@ -36,7 +36,7 @@ public class EducationDao extends BaseDao {
                 "VALUES(? , ? , ? , ? , ?)";
         jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(sql, new String[]{"id"});
-            ps.setInt(1, education.getResumeId());
+            ps.setInt(1, education.getResume().getId());
             ps.setString(2, education.getInstitutionName());
             ps.setDate(3, java.sql.Date.valueOf(education.getStartDate()));
             ps.setDate(4, java.sql.Date.valueOf(education.getEndDate()));
@@ -58,7 +58,7 @@ public class EducationDao extends BaseDao {
         Education education = (Education) obj;
         String sql = "UPDATE education SET resume_id = ?, institution_name = ?, start_date = ? ," +
                 " end_date = ? ,degree=? WHERE id = ?";
-        jdbcTemplate.update(sql, education.getResumeId(), education.getInstitutionName(), education.getStartDate(),
+        jdbcTemplate.update(sql, education.getResume().getId(), education.getInstitutionName(), education.getStartDate(),
                 education.getEndDate(), education.getDegree(), education.getId());
 
     }
