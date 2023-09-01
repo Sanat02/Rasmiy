@@ -131,7 +131,6 @@ public class ResumeService {
     }
 
     public List<ResumeDto> getResumesByUserId(int userId) {
-//        List<Resume> resumes = resumeDao.getResumesByUserId(userId);
         List<Resume> resumes = resumeRepository.findByUserId(userId);
         return resumes.stream()
                 .map(e -> ResumeDto.builder()

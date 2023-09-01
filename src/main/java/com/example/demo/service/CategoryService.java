@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.CategoryDao;
 import com.example.demo.dto.CategoryDto;
 import com.example.demo.model.Category;
+import com.example.demo.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,10 +14,11 @@ import java.util.Optional;
 @Slf4j
 public class CategoryService {
 
-    private final CategoryDao categoryDao;
+
+    private final CategoryRepository categoryRepository;
 
     public Optional<Category> getCategoryById(int categoryId) {
-        return categoryDao.getCategoryById(categoryId);
+        return categoryRepository.findById(categoryId);
     }
 
     public CategoryDto mapToCategoryDto(Category category) {
@@ -30,19 +31,23 @@ public class CategoryService {
 
 
     public int save(CategoryDto category) {
-        int categoryId = categoryDao.save(Category.builder()
+        Category savedCategory = categoryRepository.save(Category.builder()
                 .name(category.getName())
                 .description(category.getDescription()).build());
-        log.info("Category saved with id:" + categoryId);
-        return categoryId;
+        log.info("Category saved with id:" + savedCategory.getId());
+        return savedCategory.getId();
     }
 
     public void update(CategoryDto category) {
-        categoryDao.update(Category.builder()
-                .name(category.getName())
-                .description(category.getDescription())
-                .build()
-        );
-        log.info("Category updated with id:" + category.getId());
+        Category existingCategory = categoryRepository.findById(category.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Category not found"));
+
+
+        existingCategory.setName(category.getName());
+        existingCategory.setDescription(category.getDescription());
+
+
+        categoryRepository.save(existingCategory);
+        log.info("Category updated with id: " + category.getId());
     }
 }
