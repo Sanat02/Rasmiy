@@ -278,7 +278,6 @@ public class EditResumeController {
         } else {
             return "prohibited";
         }
-
     }
 
     @GetMapping("/edit/{resumeId}")

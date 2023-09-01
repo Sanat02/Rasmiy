@@ -2,9 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dao.CategoryDao;
 import com.example.demo.dto.CategoryDto;
-import com.example.demo.dto.UserDto;
 import com.example.demo.model.Category;
-import com.example.demo.model.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,6 +13,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class CategoryService {
+
     private final CategoryDao categoryDao;
 
     public Optional<Category> getCategoryById(int categoryId) {

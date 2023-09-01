@@ -271,6 +271,7 @@
         }, 5000);
     });
 
+
     async function getMessages() {
         let response = await fetch(
             baseUrl,
@@ -281,6 +282,8 @@
         )
         return await response.json()
     }
+
+
 
     document.getElementById('logout').addEventListener('click', () => {
         localStorage.removeItem('user')

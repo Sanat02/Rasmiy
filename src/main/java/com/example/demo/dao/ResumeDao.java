@@ -57,7 +57,7 @@ public class ResumeDao extends BaseDao {
             ps.setInt(1, resume.getUserId());
             ps.setInt(2, resume.getExpectedSalary());
             ps.setString(3, resume.getJob());
-            ps.setInt(4,resume.getCategoryId());
+            ps.setInt(4,resume.getCategory().getId());
             return ps;
         }, keyHolder);
         return Objects.requireNonNull(keyHolder.getKey()).intValue();
