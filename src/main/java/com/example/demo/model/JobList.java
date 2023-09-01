@@ -1,21 +1,24 @@
 package com.example.demo.model;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
-@Data
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-
+@Getter
+@Setter
+@NoArgsConstructor(access=AccessLevel.PROTECTED)
+@AllArgsConstructor(access=AccessLevel.PRIVATE)
+@Builder
+@Entity
+@Table(name="vacancies")
 public class JobList {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int publisherId;
+    private int publisherId; //пока что не трогаем user
     private int categoryId;
     private LocalDate date;
 }

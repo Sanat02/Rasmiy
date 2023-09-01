@@ -1,8 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.JobsListDao;
+
 import com.example.demo.dto.JobListDto;
 import com.example.demo.model.JobList;
+import com.example.demo.repository.JobListRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.*;
@@ -16,18 +17,13 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class JobsListService {
-
-    private final JobsListDao jobsListDao;
+    private final JobListRepository jobListRepository;
     private final UserService userService;
     private final CategoryService categoryService;
 
-    public List<JobList> getByCategory(String category) {
-        log.info("Got job by category:" + category);
-        return jobsListDao.getJobByCategory(category);
-    }
 
     public Page<JobListDto> getAllJobs(int start, int end) {
-        List<JobList> jobLists = jobsListDao.getAllJobs();
+        List<JobList> jobLists = jobListRepository.findAll();
         List<JobListDto> jobListDtos = jobLists.stream()
                 .map(e -> JobListDto.builder()
                         .id(e.getId())
