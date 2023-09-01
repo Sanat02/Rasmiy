@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dao.ProfileImageDao;
 import com.example.demo.dto.ProfileImageDto;
 import com.example.demo.model.ProfileImage;
+import com.example.demo.repository.ProfileImageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -18,7 +19,8 @@ import java.util.Optional;
 public class ProfileImageService {
     private static final String SUB_DIR = "/images";
     private final FileService fileService;
-    private final ProfileImageDao profileImageDao;
+    private final ProfileImageRepository profileImageRepository;
+
 
     public void uploadImage(ProfileImageDto profileImageDto) {
         String fileName = fileService.saveUploadedFile(profileImageDto.getFile(), SUB_DIR);
@@ -27,7 +29,7 @@ public class ProfileImageService {
                 .fileName(fileName)
                 .id(profileImageDto.getId())
                 .build();
-        profileImageDao.save(pi);
+       ProfileImage savedPhoto=profileImageRepository.save(pi);
         log.info("Image saved:" + pi.getFileName());
 
     }
@@ -35,7 +37,7 @@ public class ProfileImageService {
     public ResponseEntity<?> downloadImage(int imageId) {
         String filename;
         try {
-            ProfileImage profileImage = profileImageDao.getImageById(imageId);
+            ProfileImage profileImage=profileImageRepository.findById(imageId).get();
             filename = profileImage.getFileName();
         } catch (NullPointerException e) {
             throw new NoSuchElementException("Image not found!");
@@ -44,7 +46,7 @@ public class ProfileImageService {
     }
 
     public String getImageByUserId(int userId) {
-        ProfileImage profileImage = profileImageDao.getImageByUserId(userId);
+        ProfileImage profileImage=profileImageRepository.findByUserId(userId);
         if (profileImage == null) {
             return null;
         }
@@ -55,7 +57,7 @@ public class ProfileImageService {
         return value.getFileName();
     }
     public ResponseEntity<?> getImageByUsId(int userId) {
-        ProfileImage profileImage = profileImageDao.getImageByUserId(userId);
+        ProfileImage profileImage =profileImageRepository.findByUserId(userId);
         return fileService.getOutputFile(profileImage.getFileName(), SUB_DIR, MediaType.IMAGE_JPEG);
     }
 }
