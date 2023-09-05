@@ -26,7 +26,7 @@ databaseChangeLog:
                   name: type
                   type: varchar(255)
               - column:
-                  name: value
+                  name: value_c
                   type: varchar(255)
 
 

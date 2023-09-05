@@ -100,7 +100,6 @@ public class ResumeService {
     }
 
     public void updateResume(ResumeDto resumeDto) {
-
         Optional<Resume> resume = resumeRepository.findById(resumeDto.getId());
         if (resume.isPresent()) {
             Optional<User> mayBeUser = userService.getUserById(resumeDto.getId());
@@ -115,7 +114,6 @@ public class ResumeService {
             existingResume.setExpectedSalary(resumeDto.getExpectedSalary());
             existingResume.setJob(resumeDto.getJob());
             existingResume.setUser(userService.getUserById(userId).get());
-
             resumeRepository.save(existingResume);
 
         } else {

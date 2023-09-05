@@ -91,31 +91,31 @@ public class EditResumeController {
         List<ContactDto> contacts = new ArrayList<>();
         if (phone != null && !phone.isEmpty()) {
             contacts.add(ContactDto.builder()
-                    .type(ContactType.PHONE)
+                    .type("PHONE")
                     .value(phone)
                     .build());
         }
         if (email != null && !email.isEmpty()) {
             contacts.add(ContactDto.builder()
-                    .type(ContactType.EMAIL)
+                    .type("EMAIL")
                     .value(email)
                     .build());
         }
         if (telegram != null && !telegram.isEmpty()) {
             contacts.add(ContactDto.builder()
-                    .type(ContactType.TELEGRAM)
+                    .type("TELEGRAM")
                     .value(telegram)
                     .build());
         }
         if (linkedin != null && !linkedin.isEmpty()) {
             contacts.add(ContactDto.builder()
-                    .type(ContactType.LINKEDIN)
+                    .type("LINKEDIN")
                     .value(linkedin)
                     .build());
         }
         if (facebook != null && !facebook.isEmpty()) {
             contacts.add(ContactDto.builder()
-                    .type(ContactType.FACEBOOK)
+                    .type("FACEBOOK")
                     .value(facebook)
                     .build());
 
@@ -213,31 +213,31 @@ public class EditResumeController {
         List<ContactDto> contacts = new ArrayList<>();
         if (phone != null && !phone.isEmpty()) {
             contacts.add(ContactDto.builder()
-                    .type(ContactType.PHONE)
+                    .type("PHONE")
                     .value(phone)
                     .build());
         }
         if (email != null && !email.isEmpty()) {
             contacts.add(ContactDto.builder()
-                    .type(ContactType.EMAIL)
+                    .type("EMAIL")
                     .value(email)
                     .build());
         }
         if (telegram != null && !telegram.isEmpty()) {
             contacts.add(ContactDto.builder()
-                    .type(ContactType.TELEGRAM)
+                    .type("TELEGRAM")
                     .value(telegram)
                     .build());
         }
         if (linkedin != null && !linkedin.isEmpty()) {
             contacts.add(ContactDto.builder()
-                    .type(ContactType.LINKEDIN)
+                    .type("LINKEDIN")
                     .value(linkedin)
                     .build());
         }
         if (facebook != null && !facebook.isEmpty()) {
             contacts.add(ContactDto.builder()
-                    .type(ContactType.FACEBOOK)
+                    .type("FACEBOOK")
                     .value(facebook)
                     .build());
 

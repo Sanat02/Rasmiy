@@ -35,4 +35,7 @@ public class Resume {
 
     @OneToMany(mappedBy = "resume")
     private List<JobExperience> jobExperiences;
+
+    @OneToMany(mappedBy = "resume")
+    private List<Contacts> contacts;
 }

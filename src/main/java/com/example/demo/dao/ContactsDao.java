@@ -29,13 +29,13 @@ public class ContactsDao extends BaseDao {
     @Override
     public int save(Object obj) {
         Contacts contacts=(Contacts) obj;
-        String sql = "INSERT INTO contacts (resume_id, type, \"value\") " +
+        String sql = "INSERT INTO contacts (resume_id, type, \"value_c\") " +
                 "VALUES (?, ?, ?)";
         jdbcTemplate.update(con->{
             PreparedStatement ps = con.prepareStatement(sql, new String[]{"id"});
-            ps.setInt(1,contacts.getResumeId());
+            ps.setInt(1,contacts.getResume().getId());
             ps.setString(2,contacts.getType().toString());
-            ps.setString(3, contacts.getValue());
+            ps.setString(3, contacts.getValuec());
             return ps;
         },keyHolder);
         return  Objects.requireNonNull(keyHolder.getKey()).intValue();
