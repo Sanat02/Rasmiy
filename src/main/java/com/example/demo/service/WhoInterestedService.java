@@ -1,9 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.WhoIsInterestedDao;
-import com.example.demo.dto.JobResumeDto;
+
 import com.example.demo.dto.WhoInterestedDto;
-import com.example.demo.model.JobResume;
 import com.example.demo.model.WhoInterested;
 import com.example.demo.repository.WhoInterestedRepository;
 import lombok.RequiredArgsConstructor;

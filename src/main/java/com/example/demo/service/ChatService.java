@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.ChatDao;
 import com.example.demo.dto.ChatDto;
 import com.example.demo.model.Chat;
 import com.example.demo.repository.ChatRepository;

@@ -1,8 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.ContactsDao;
+
 import com.example.demo.dto.ContactDto;
-import com.example.demo.enums.ContactType;
 import com.example.demo.model.Contacts;
 import com.example.demo.repository.ContactRepository;
 import com.example.demo.repository.ResumeRepository;
@@ -15,7 +14,6 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ContactsService {
-    private final ContactsDao contactsDao;
     private final ContactRepository contactRepository;
     private final ResumeRepository resumeRepository;
 

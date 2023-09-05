@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.EducationDao;
+
 import com.example.demo.dto.EducationDto;
 import com.example.demo.model.Education;
 import com.example.demo.repository.EducationRepository;
@@ -16,7 +16,7 @@ import java.util.Optional;
 @Slf4j
 
 public class EducationService {
-    private final EducationDao educationDao;
+
     private final EducationRepository educationRepository;
     private final ResumeRepository resumeRepository;
 
