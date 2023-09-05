@@ -43,5 +43,8 @@ databaseChangeLog:
                     references: categories(id)
                     onDelete: CASCADE
                     onUpdate: CASCADE
+              - column:
+                  name: job_resume_date
+                  type: TIMESTAMP
 
 

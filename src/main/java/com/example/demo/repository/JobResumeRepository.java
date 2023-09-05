@@ -26,5 +26,5 @@ public interface JobResumeRepository extends JpaRepository<JobResume,Integer> {
 
     List<JobResume> findJobResumesByUserId(int userId);
 
-    Page<JobResume> findAll(Pageable pageable);
+    Page<JobResume> findAllByOrderByJobResumeDateDesc(Pageable pageable);
 }

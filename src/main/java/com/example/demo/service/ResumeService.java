@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 
-
 import com.example.demo.dto.*;
 
 import com.example.demo.model.*;
@@ -14,12 +13,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 
 import org.springframework.stereotype.Service;
 import com.example.demo.repository.ResumeRepository;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -37,20 +38,47 @@ public class ResumeService {
     private final JobExperienceService jobExperienceService;
     private final CategoryService categoryService;
 
-    public Page<ResumeDto> getAllResumes(int start, int end) {
+    //    public Page<ResumeDto> getAllResumes(int start, int end) {
+//        log.info("Got all users");
+//        Pageable pageable = PageRequest.of(start, end);
+//        Page<Resume> resumes = resumeRepository.findAll(pageable);
+//        Page<ResumeDto> resumeDtos = resumes.map(e -> {
+//            return ResumeDto.builder()
+//                    .id(e.getId())
+//                    .expectedSalary(e.getExpectedSalary())
+//                    .job(e.getJob())
+//                    .applicant(userService.mapToUserDto(userService.getUserById(e.getUser().getId()).orElse(null)))
+//                    .education(educationService.getEducationByResumeId(e.getId()).orElse(null))
+//                    .jobExperience(jobExperienceService.getJobExperienceById(e.getId()).orElse(null))
+//                    .contacts(contactsService.getContactsDtoByResumeId(e.getId()))
+//                    .build();
+//        });
+//
+//        return resumeDtos;
+//    }
+    public Page<ResumeDto> getAllResumes(int start, int end, String sortField) {
         log.info("Got all users");
-        Pageable pageable = PageRequest.of(start,end);
-        Page<Resume> resumes=resumeRepository.findAll(pageable);
+        Pageable pageable;
+        if (sortField.equalsIgnoreCase("clicks")) {
+            pageable = PageRequest.of(start, end);
+        } else {
+            Sort sort = Sort.by(Sort.Order.desc("resumeDate"));
+            pageable = PageRequest.of(start, end, sort);
+        }
+
+        Page<Resume> resumes = resumeRepository.findAll(pageable);
+
         Page<ResumeDto> resumeDtos = resumes.map(e -> {
-                return ResumeDto.builder()
-                        .id(e.getId())
-                        .expectedSalary(e.getExpectedSalary())
-                        .job(e.getJob())
-                        .applicant(userService.mapToUserDto(userService.getUserById(e.getUser().getId()).orElse(null)))
-                        .education(educationService.getEducationByResumeId(e.getId()).orElse(null))
-                        .jobExperience(jobExperienceService.getJobExperienceById(e.getId()).orElse(null))
-                        .contacts(contactsService.getContactsDtoByResumeId(e.getId()))
-                        .build();
+            return ResumeDto.builder()
+                    .id(e.getId())
+                    .expectedSalary(e.getExpectedSalary())
+                    .job(e.getJob())
+                    .applicant(userService.mapToUserDto(userService.getUserById(e.getUser().getId()).orElse(null)))
+                    .education(educationService.getEducationByResumeId(e.getId()).orElse(null))
+                    .jobExperience(jobExperienceService.getJobExperienceById(e.getId()).orElse(null))
+                    .contacts(contactsService.getContactsDtoByResumeId(e.getId()))
+                    .date(e.getResumeDate())
+                    .build();
         });
 
         return resumeDtos;
@@ -66,6 +94,7 @@ public class ResumeService {
                         .job(e.getJob())
                         .expectedSalary(e.getExpectedSalary())
                         .applicant(userService.mapToUserDto(userService.getUserById(e.getUser().getId()).get()))
+                        .date(e.getResumeDate())
                         // .contacts(contactsService.getContactsDtoByResumeId(e.getId()))
                         .build()
                 ).toList();
@@ -89,6 +118,7 @@ public class ResumeService {
                 .job(resumeDto.getJob())
                 .user(userService.getUserById(userId).get())
                 .category(categoryService.getCategoryById(Integer.parseInt(resumeDto.getCategory())).get())
+                .resumeDate(new Date())
                 .build());
 
 
@@ -135,6 +165,7 @@ public class ResumeService {
                         .id(e.getId())
                         .expectedSalary(e.getExpectedSalary())
                         .job(e.getJob())
+                        .date(e.getResumeDate())
                         .build())
                 .collect(Collectors.toList());
 
@@ -157,6 +188,7 @@ public class ResumeService {
                         .jobExperience(jobExperienceService.getJobExperienceById(resumeId).orElse(null))
                         .applicant(userService.mapToUserDto(userService.getUserById(resume.getUser().getId()).orElse(null)))
                         .contacts(contactsService.getContactsDtoByResumeId(resumeId))
+                        .date(resume.getResumeDate())
                         .build();
             } else {
                 log.error("Category is null for Resume ID: " + resumeId);

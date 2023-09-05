@@ -152,6 +152,45 @@
             background-color: #00a86b;
             padding: 5px;
         }
+        form {
+            max-width: 660px;
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            background-color: #fff;
+            font-size: 16px;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .job{
+            margin-right: 5px;
+        }
     </style>
     <title>Resumes</title>
 </head>
@@ -176,10 +215,14 @@
 
 <div class="container">
     <h1 class="vtxt">Resumes</h1>
-    <div class="search-form">
-        <input type="text" name="category" placeholder="Search by category">
-        <button type="submit">Search</button>
-    </div>
+    <form action="/resumes" method="GET">
+        <label for="sort">Sort By:</label>
+        <select id="sort" name="sort">
+            <option value="date">Date</option>
+            <option value="clicks">Clicks</option>
+        </select>
+        <button type="submit">Sort</button>
+    </form>
 
 
     <#if resumes.content?size == 0>
@@ -190,6 +233,7 @@
                 <li>
                     <div class="publ"><span class="publisher">${resume.applicant.accountName}</span></div>
                     <span class="job">${resume.job}</span>
+                    <span class="job">${resume.date}</span>
                 </li>
             </#list>
         </ul>
@@ -197,10 +241,10 @@
 
 
     <#if resumes.hasPrevious()>
-        <a class="pag" href="/vacancies?page=${resumes.number - 1}">Previous Page</a>
+        <a class="pag" href="/resumes?page=${resumes.number - 1}">Previous Page</a>
     </#if>
     <#if resumes.hasNext()>
-        <a class="pag" href="/vacancies?page=${resumes.number + 1}">Next Page</a>
+        <a class="pag" href="/resumes?page=${resumes.number + 1}">Next Page</a>
     </#if>
     <script>
         document.getElementById('logout').addEventListener('click',()=>{

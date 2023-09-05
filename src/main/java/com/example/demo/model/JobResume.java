@@ -3,6 +3,8 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -25,4 +27,7 @@ public class JobResume {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @Column(name = "job_resume_date")
+    private Date jobResumeDate;
 }

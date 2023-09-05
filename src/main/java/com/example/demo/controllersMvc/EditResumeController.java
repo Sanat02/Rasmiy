@@ -28,10 +28,22 @@ public class EditResumeController {
     private static final int PAGE_SIZE = 5;
 
     @GetMapping()
-    public String getAllResumes(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
-        Page<ResumeDto> resumes = resumeService.getAllResumes(page, PAGE_SIZE);
+    public String getAllResumes(
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "sort", defaultValue = "resumeDate") String sortField,
+            Model model
+    ) {
+        Page<ResumeDto> resumes = resumeService.getAllResumes(page,PAGE_SIZE,sortField);
         model.addAttribute("resumes", resumes);
         return "resumes";
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.SEE_OTHER)
+    public String sort(
+            @RequestParam(name = "sort") String sort
+    ) {
+        return "redirect:/resumes?page=0&sort=" + sort;
     }
 
 

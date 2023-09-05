@@ -6,6 +6,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.data.domain.Sort;
+
+import java.util.Date;
 
 @Data
 @Builder
@@ -27,4 +30,7 @@ public class JobResumeDto {
 
 
     private String category;
+
+    private Date date;
+
 }

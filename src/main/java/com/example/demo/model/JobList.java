@@ -18,7 +18,7 @@ public class JobList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int publisherId; //пока что не трогаем user
+    private int publisherId;
     private int categoryId;
     private LocalDate date;
 }

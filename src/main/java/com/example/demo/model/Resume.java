@@ -3,6 +3,7 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -38,4 +39,7 @@ public class Resume {
 
     @OneToMany(mappedBy = "resume")
     private List<Contacts> contacts;
+
+    @Column(name = "resume_date")
+    private Date resumeDate;
 }

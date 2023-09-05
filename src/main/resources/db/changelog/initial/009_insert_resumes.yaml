@@ -18,6 +18,9 @@ databaseChangeLog:
               - column:
                   name: category_id
                   value: 1
+              - column:
+                  name: resume_date
+                  value: "2019-05-20"
 
         - insert:
             tableName: resumes
@@ -34,6 +37,9 @@ databaseChangeLog:
               - column:
                   name: category_id
                   value: 1
+              - column:
+                  name: resume_date
+                  value: "2019-06-20"
 
         - insert:
             tableName: resumes
@@ -50,7 +56,11 @@ databaseChangeLog:
               - column:
                   name: category_id
                   value: 1
+              - column:
+                  name: resume_date
+                  value: "2019-07-20"
 
+        # Add more resumes for users with role_id 2
         - insert:
             tableName: resumes
             columns:
@@ -66,8 +76,10 @@ databaseChangeLog:
               - column:
                   name: category_id
                   value: 1
+              - column:
+                  name: resume_date
+                  value: "2019-08-20"
 
-        # Add more resumes for users with role_id 2
         - insert:
             tableName: resumes
             columns:
@@ -83,6 +95,9 @@ databaseChangeLog:
               - column:
                   name: category_id
                   value: 1
+              - column:
+                  name: resume_date
+                  value: "2019-05-20"
 
         - insert:
             tableName: resumes
@@ -99,6 +114,9 @@ databaseChangeLog:
               - column:
                   name: category_id
                   value: 1
+              - column:
+                  name: resume_date
+                  value: "2019-05-20"
 
         - insert:
             tableName: resumes
@@ -115,6 +133,9 @@ databaseChangeLog:
               - column:
                   name: category_id
                   value: 1
+              - column:
+                  name: resume_date
+                  value: "2019-05-23"
 
         - insert:
             tableName: resumes
@@ -131,6 +152,9 @@ databaseChangeLog:
               - column:
                   name: category_id
                   value: 1
+              - column:
+                  name: resume_date
+                  value: "2019-05-23"
 
         - insert:
             tableName: resumes
@@ -147,6 +171,9 @@ databaseChangeLog:
               - column:
                   name: category_id
                   value: 1
+              - column:
+                  name: resume_date
+                  value: "2020-05-23"
 
         - insert:
             tableName: resumes
@@ -163,6 +190,9 @@ databaseChangeLog:
               - column:
                   name: category_id
                   value: 2
+              - column:
+                  name: resume_date
+                  value: "2020-05-23"
 
         - insert:
             tableName: resumes
@@ -179,6 +209,9 @@ databaseChangeLog:
               - column:
                   name: category_id
                   value: 1
+              - column:
+                  name: resume_date
+                  value: "2020-05-23"
 
         - insert:
             tableName: resumes
@@ -195,6 +228,10 @@ databaseChangeLog:
               - column:
                   name: category_id
                   value: 1
+              - column:
+                  name: resume_date
+                  value: "2020-05-23"
+
         - insert:
             tableName: resumes
             columns:
@@ -210,6 +247,10 @@ databaseChangeLog:
               - column:
                   name: category_id
                   value: 2
+              - column:
+                  name: resume_date
+                  value: "2020-05-23"
+
         - insert:
             tableName: resumes
             columns:
@@ -225,6 +266,10 @@ databaseChangeLog:
               - column:
                   name: category_id
                   value: 4
+              - column:
+                  name: resume_date
+                  value: "2021-05-23"
+
         - insert:
             tableName: resumes
             columns:
@@ -240,6 +285,10 @@ databaseChangeLog:
               - column:
                   name: category_id
                   value: 4
+              - column:
+                  name: resume_date
+                  value: "2020-05-23"
+
         - insert:
             tableName: resumes
             columns:
@@ -255,6 +304,10 @@ databaseChangeLog:
               - column:
                   name: category_id
                   value: 4
+              - column:
+                  name: resume_date
+                  value: "2020-05-23"
+
         - insert:
             tableName: resumes
             columns:
@@ -270,3 +323,6 @@ databaseChangeLog:
               - column:
                   name: category_id
                   value: 4
+              - column:
+                  name: resume_date
+                  value: "2020-05-23"

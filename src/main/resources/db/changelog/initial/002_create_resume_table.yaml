@@ -34,6 +34,9 @@ databaseChangeLog:
                     references: categories(id)
                     onDelete: CASCADE
                     onUpdate: CASCADE
+              - column:
+                  name: resume_date
+                  type: TIMESTAMP
 
 
 

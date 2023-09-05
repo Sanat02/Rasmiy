@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Positive;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -26,6 +27,7 @@ public class ResumeDto {
     private EducationDto education;
     private List<ContactDto> contacts;
     private String category;
+    private Date date;
 
 
 }

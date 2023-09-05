@@ -21,11 +21,24 @@ public class EditJobResumeController {
     private final UserService userService;
     private final JobResumeService jobResumeService;
     private static final int PAGE_SIZE = 5;
+
     @GetMapping()
-    public String getAllResumes(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
-        Page<JobResumeDto> jobResumes =jobResumeService.gettAllJobResumes(page, PAGE_SIZE);
+    public String getAllJobResumes(
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "sort", defaultValue = "jobResumeDate") String sortField,
+            Model model
+    ) {
+        Page<JobResumeDto> jobResumes = jobResumeService.getAllJobResumes(page, PAGE_SIZE, sortField);
         model.addAttribute("jobs", jobResumes);
         return "jobs";
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.SEE_OTHER)
+    public String sort(
+            @RequestParam(name = "sort") String sort
+    ) {
+        return "redirect:/jobresumes?page=0&sort=" + sort;
     }
 
     @GetMapping("/add")

@@ -11,8 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,9 +31,16 @@ public class JobResumeService {
     private final JobResumeRepository jobResumeRepository;
 
 
-    public Page<JobResumeDto> gettAllJobResumes(int start, int end) {
-        Pageable pageable = PageRequest.of(start,end);
-        Page<JobResume> jobResumes=jobResumeRepository.findAll(pageable);
+    public Page<JobResumeDto> getAllJobResumes(int start, int end, String sortField) {
+        Pageable pageable;
+        if (sortField.equalsIgnoreCase("clicks")) {
+            pageable = PageRequest.of(start, end);
+        } else {
+            Sort sort = Sort.by(Sort.Order.desc("jobResumeDate"));
+            pageable = PageRequest.of(start, end, sort);
+        }
+
+        Page<JobResume> jobResumes = jobResumeRepository.findAll(pageable);
 
         Page<JobResumeDto> jobResumeDtos = jobResumes.map(e -> {
             return JobResumeDto.builder()
@@ -41,21 +51,13 @@ public class JobResumeService {
                     .user(userService.mapToUserDto(userService.getUserById(e.getUserId()).get()))
                     .category(categoryService.mapToCategoryDto(categoryService.getCategoryById(e.getCategory().getId()).get()).getName())
                     .experience(e.getExperience())
+                    .date(e.getJobResumeDate())
                     .build();
         });
-       return jobResumeDtos;
 
+        return jobResumeDtos;
     }
 
-//    public List<JobResumeDto> getJobResumeByCategoryName(String categoryName) {
-//        log.info("Got job with category:" + categoryName);
-//        List<JobResumeDto> jobResumeDtos = gettAllJobResumes().
-//                stream().
-//                filter(e -> e.getCategory().equalsIgnoreCase(categoryName)).
-//                collect(toList());
-//        return jobResumeDtos;
-//
-//    }
 
     public int saveJobResume(JobResumeDto jobResumeDto) {
         Optional<User> mayBeUser = userService.getUserById(jobResumeDto.getUser().getId());
@@ -75,6 +77,7 @@ public class JobResumeService {
                 .experience(jobResumeDto.getExperience())
                 .userId(userId)
                 .category(categoryService.getCategoryById(categoryId).get())
+                .jobResumeDate(new Date())
                 .build());
 
 
@@ -99,6 +102,7 @@ public class JobResumeService {
                     jobResumeDto.getJobTitle(),
                     jobResumeDto.getJobDescription(),
                     jobResumeDto.getExperience(),
+
                     Double.valueOf(jobResumeDto.getSalary()),
                     categoryEntity
             );
@@ -121,6 +125,7 @@ public class JobResumeService {
                 .user(userService.mapToUserDto(userService.getUserById(jobResume.getUserId()).get()))
                 .salary(jobResume.getSalary())
                 .category(categoryService.mapToCategoryDto(categoryService.getCategoryById(jobResume.getCategory().getId()).get()).getName())
+                .date(jobResume.getJobResumeDate())
                 .build();
 
     }
@@ -135,8 +140,17 @@ public class JobResumeService {
                         .jobDescription(e.getJobDescription())
                         .experience(e.getExperience())
                         .salary(e.getSalary())
+                        .date(e.getJobResumeDate())
                         .build()
                 ).collect(toList());
         return jobResumeDtos;
+    }
+
+    public void sortJobResumeByDate() {
+
+    }
+
+    public void sortJobResumeByClicks() {
+
     }
 }
