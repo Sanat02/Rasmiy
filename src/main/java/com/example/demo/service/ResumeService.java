@@ -46,7 +46,7 @@ public class ResumeService {
                         .id(e.getId())
                         .expectedSalary(e.getExpectedSalary())
                         .job(e.getJob())
-                        .applicant(userService.mapToUserDto(userService.getUserById(e.getUserId()).orElse(null)))
+                        .applicant(userService.mapToUserDto(userService.getUserById(e.getUser().getId()).orElse(null)))
                         .education(educationService.getEducationByResumeId(e.getId()).orElse(null))
                         .jobExperience(jobExperienceService.getJobExperienceById(e.getId()).orElse(null))
                         .contacts(contactsService.getContactsDtoByResumeId(e.getId()))
@@ -65,7 +65,7 @@ public class ResumeService {
                         .id(e.getId())
                         .job(e.getJob())
                         .expectedSalary(e.getExpectedSalary())
-                        .applicant(userService.mapToUserDto(userService.getUserById(e.getUserId()).get()))
+                        .applicant(userService.mapToUserDto(userService.getUserById(e.getUser().getId()).get()))
                         // .contacts(contactsService.getContactsDtoByResumeId(e.getId()))
                         .build()
                 ).toList();
@@ -87,7 +87,7 @@ public class ResumeService {
         Resume savedResume = resumeRepository.save(Resume.builder()
                 .expectedSalary(resumeDto.getExpectedSalary())
                 .job(resumeDto.getJob())
-                .userId(userId)
+                .user(userService.getUserById(userId).get())
                 .category(categoryService.getCategoryById(Integer.parseInt(resumeDto.getCategory())).get())
                 .build());
 
@@ -114,7 +114,7 @@ public class ResumeService {
             Resume existingResume = resume.get();
             existingResume.setExpectedSalary(resumeDto.getExpectedSalary());
             existingResume.setJob(resumeDto.getJob());
-            existingResume.setUserId(userId);
+            existingResume.setUser(userService.getUserById(userId).get());
 
             resumeRepository.save(existingResume);
 
@@ -157,7 +157,7 @@ public class ResumeService {
                         .expectedSalary(resume.getExpectedSalary())
                         .education(educationService.getEducationByResumeId(resumeId).orElse(null))
                         .jobExperience(jobExperienceService.getJobExperienceById(resumeId).orElse(null))
-                        .applicant(userService.mapToUserDto(userService.getUserById(resume.getUserId()).orElse(null)))
+                        .applicant(userService.mapToUserDto(userService.getUserById(resume.getUser().getId()).orElse(null)))
                         .contacts(contactsService.getContactsDtoByResumeId(resumeId))
                         .build();
             } else {

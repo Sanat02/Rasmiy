@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.ProfileImageDao;
+
 import com.example.demo.dto.ProfileImageDto;
 import com.example.demo.model.ProfileImage;
 import com.example.demo.repository.ProfileImageRepository;
@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
-import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor

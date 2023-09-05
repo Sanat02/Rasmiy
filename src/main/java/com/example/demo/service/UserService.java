@@ -1,9 +1,10 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.UserDao;
+
 import com.example.demo.dto.UserDto;
 import com.example.demo.enums.AccountType;
 import com.example.demo.model.User;
+import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -19,14 +20,15 @@ import java.util.stream.Collectors;
 @Slf4j
 public class UserService {
 
-    private final UserDao userDao;
+
+    private final UserRepository userRepository;
     private final ProfileImageService profileImageService;
     private final PasswordEncoder encoder;
 
 
     public List<UserDto> getAllUsers() {
         log.info("Gol all users");
-        List<User> users = userDao.getAllUsers();
+        List<User> users = userRepository.findAll();
         List<UserDto> userDtos = users.stream()
                 .map(e -> UserDto.builder()
                         .id(e.getId())
@@ -45,14 +47,13 @@ public class UserService {
 
     public Optional<User> getUserByEmail(String email) {
         log.info("Gol user by email:" + email);
-        Optional<User> mayBeUser = userDao.getUserByEmail(email);
+        Optional<User> mayBeUser = userRepository.findUserByEmail(email);
         return mayBeUser;
     }
 
     public String isUserExist(String email) {
         try {
-
-            Optional<User> user = userDao.getUserByEmail(email);
+            Optional<User> user = userRepository.findUserByEmail(email);
             if (user.isPresent()) {
                 log.error("User:" + email + "  exists!");
                 return "1";
@@ -69,57 +70,28 @@ public class UserService {
 
     public Optional<User> getUserById(int id) {
         log.info("Got user by id:" + id);
-        return userDao.getUserById(id);
-    }
-
-
-    public List<UserDto> getAllJobSeekers() {
-        log.info("Got all job seekers");
-        List<User> users = userDao.getAllJobSeekers();
-        List<UserDto> userDtos = users.stream()
-                .map(e -> UserDto.builder()
-                        .id(e.getId())
-                        .accountName(e.getAccountName())
-                        .accountType(AccountType.JOB_SEEKER)
-                        .password(e.getPassword())
-                        .phoneNumber(e.getPassword())
-                        .email(e.getEmail())
-                        .build()
-                ).toList();
-        return userDtos;
-    }
-
-    public List<UserDto> getAllEmployers() {
-        log.info("Got all job employers");
-        List<UserDto> employers = getAllUsers().stream()
-                .filter(e -> e.getAccountType().equals(AccountType.EMPLOYER)).collect(Collectors.toList());
-        return employers;
+        return userRepository.findById(id);
     }
 
 
     public int save(UserDto userDto) {
         int roleId = userDto.getAccountType().equals(AccountType.JOB_SEEKER) ? 2 : 1;
         log.info("The user:" + userDto.getEmail() + " is saved!");
-        return userDao.save(User.builder()
+        return userRepository.save(User.builder()
                 .accountName(userDto.getAccountName())
                 .email(userDto.getEmail())
                 .password(encoder.encode(userDto.getPassword()))
                 .phoneNumber(userDto.getPhoneNumber())
                 .enabled(true)
                 .roleId(roleId)
-                .build());
+                .build()).getId();
 
     }
 
     public void update(UserDto userDto) {
         log.info("The user:" + userDto.getEmail() + " is updated!");
-        userDao.update(User.builder()
-                .accountName(userDto.getAccountName())
-                .email(userDto.getEmail())
-                .password(userDto.getPassword())
-                .phoneNumber(userDto.getPhoneNumber())
-                .id(userDto.getId())
-                .build());
+        userRepository.updateUser(userDto.getId(), userDto.getAccountName(),
+                userDto.getEmail(), userDto.getPassword(), userDto.getPhoneNumber());
     }
 
     public UserDto mapToUserDto(User user) {

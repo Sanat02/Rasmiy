@@ -54,7 +54,7 @@ public class ResumeDao extends BaseDao {
         String sql = "INSERT INTO resumes (user_id, expected_salary, job,category_id) VALUES (?, ?, ?, ?)";
         jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(sql, new String[]{"id"});
-            ps.setInt(1, resume.getUserId());
+            ps.setInt(1, resume.getUser().getId());
             ps.setInt(2, resume.getExpectedSalary());
             ps.setString(3, resume.getJob());
             ps.setInt(4,resume.getCategory().getId());
@@ -73,6 +73,6 @@ public class ResumeDao extends BaseDao {
     public void update(Object obj) {
         Resume resume = (Resume) obj;
         String sql = "UPDATE resumes SET user_id = ?, job = ?, expected_salary = ? WHERE id = ?";
-        jdbcTemplate.update(sql, resume.getUserId(), resume.getJob(), resume.getExpectedSalary(), resume.getId());
+        jdbcTemplate.update(sql, resume.getUser().getId(), resume.getJob(), resume.getExpectedSalary(), resume.getId());
     }
 }

@@ -18,7 +18,9 @@ public class Resume {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int userId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private  User user;
 
     @Column(length = 128)
     private String job;

@@ -1,15 +1,23 @@
 package com.example.demo.model;
 
-import com.example.demo.enums.AccountType;
+
+import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 
-@Data
+
+@Getter
+@Setter
 @Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@Entity
+@Table(name = "users")
 
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  int id;
     private String accountName;
     private String email;
@@ -17,5 +25,7 @@ public class User {
     private String phoneNumber;
     private int roleId;
     private Boolean enabled;
+    @OneToMany(fetch= FetchType.LAZY,mappedBy = "user")
+    List<Resume> resumes;
 
 }
