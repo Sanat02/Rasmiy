@@ -3,6 +3,8 @@ package com.example.demo.repository;
 import com.example.demo.model.Category;
 import com.example.demo.model.JobResume;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -23,4 +25,6 @@ public interface JobResumeRepository extends JpaRepository<JobResume,Integer> {
     );
 
     List<JobResume> findJobResumesByUserId(int userId);
+
+    Page<JobResume> findAll(Pageable pageable);
 }

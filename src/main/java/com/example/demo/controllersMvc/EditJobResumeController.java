@@ -6,6 +6,7 @@ import com.example.demo.dto.UserDto;
 import com.example.demo.service.JobResumeService;
 import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +20,13 @@ import org.springframework.web.bind.annotation.*;
 public class EditJobResumeController {
     private final UserService userService;
     private final JobResumeService jobResumeService;
+    private static final int PAGE_SIZE = 5;
+    @GetMapping()
+    public String getAllResumes(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
+        Page<JobResumeDto> jobResumes =jobResumeService.gettAllJobResumes(page, PAGE_SIZE);
+        model.addAttribute("jobs", jobResumes);
+        return "jobs";
+    }
 
     @GetMapping("/add")
     public String editJobResume(Model model) {

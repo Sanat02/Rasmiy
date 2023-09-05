@@ -3,10 +3,14 @@ package com.example.demo.service;
 import com.example.demo.dto.JobResumeDto;
 import com.example.demo.model.Category;
 import com.example.demo.model.JobResume;
+import com.example.demo.model.Resume;
 import com.example.demo.model.User;
 import com.example.demo.repository.JobResumeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,31 +28,34 @@ public class JobResumeService {
     private final JobResumeRepository jobResumeRepository;
 
 
-    public List<JobResumeDto> gettAllJobResumes() {
-        List<JobResume> jobResumes = jobResumeRepository.findAll();
-        return jobResumes.stream()
-                .map(e -> JobResumeDto.builder()
-                        .id(e.getId())
-                        .jobDescription(e.getJobDescription())
-                        .jobTitle(e.getJobTitle())
-                        .salary(e.getSalary())
-                        .user(userService.mapToUserDto(userService.getUserById(e.getUserId()).get()))
-                        .category(categoryService.mapToCategoryDto(categoryService.getCategoryById(e.getCategory().getId()).get()).getName())
-                        .experience(e.getExperience())
-                        .build()
-                ).toList();
+    public Page<JobResumeDto> gettAllJobResumes(int start, int end) {
+        Pageable pageable = PageRequest.of(start,end);
+        Page<JobResume> jobResumes=jobResumeRepository.findAll(pageable);
+
+        Page<JobResumeDto> jobResumeDtos = jobResumes.map(e -> {
+            return JobResumeDto.builder()
+                    .id(e.getId())
+                    .jobDescription(e.getJobDescription())
+                    .jobTitle(e.getJobTitle())
+                    .salary(e.getSalary())
+                    .user(userService.mapToUserDto(userService.getUserById(e.getUserId()).get()))
+                    .category(categoryService.mapToCategoryDto(categoryService.getCategoryById(e.getCategory().getId()).get()).getName())
+                    .experience(e.getExperience())
+                    .build();
+        });
+       return jobResumeDtos;
 
     }
 
-    public List<JobResumeDto> getJobResumeByCategoryName(String categoryName) {
-        log.info("Got job with category:" + categoryName);
-        List<JobResumeDto> jobResumeDtos = gettAllJobResumes().
-                stream().
-                filter(e -> e.getCategory().equalsIgnoreCase(categoryName)).
-                collect(toList());
-        return jobResumeDtos;
-
-    }
+//    public List<JobResumeDto> getJobResumeByCategoryName(String categoryName) {
+//        log.info("Got job with category:" + categoryName);
+//        List<JobResumeDto> jobResumeDtos = gettAllJobResumes().
+//                stream().
+//                filter(e -> e.getCategory().equalsIgnoreCase(categoryName)).
+//                collect(toList());
+//        return jobResumeDtos;
+//
+//    }
 
     public int saveJobResume(JobResumeDto jobResumeDto) {
         Optional<User> mayBeUser = userService.getUserById(jobResumeDto.getUser().getId());

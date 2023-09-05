@@ -10,8 +10,8 @@
         }
 
         .container {
+            margin-top: 100px;
             max-width: 800px;
-            margin: 60px auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 8px;
@@ -33,45 +33,10 @@
             padding: 10px 0;
         }
 
+        .publisher {
+            font-weight: bold;
+        }
 
-        /*.navbar {*/
-        /*    background-color: #f8f9fa;*/
-        /*    padding: 10px 0;*/
-        /*}*/
-
-        /*.navbar-brand {*/
-        /*    margin-left: 20px;*/
-        /*    font-size: 24px;*/
-        /*    font-weight: bold;*/
-        /*    color: #212529;*/
-        /*    text-decoration: none;*/
-        /*}*/
-
-        /*.navbar-nav {*/
-        /*    margin-right: 20px;*/
-        /*}*/
-
-        /*.navbar-nav .nav-item {*/
-        /*    margin: 0 10px;*/
-        /*}*/
-
-        /*.navbar-nav .nav-link {*/
-        /*    color: #212529;*/
-        /*    text-decoration: none;*/
-        /*    font-size: 18px;*/
-        /*    padding: 10px;*/
-        /*    border-radius: 4px;*/
-        /*    transition: background-color 0.3s ease;*/
-        /*}*/
-
-        /*.navbar-nav .nav-link:hover {*/
-        /*    background-color: #ddd;*/
-        /*}*/
-
-        /*.navbar-nav .nav-link.active {*/
-        /*    background-color: greenyellow;*/
-        /*    color: white;*/
-        /*}*/
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -124,7 +89,6 @@
         .right-buttons .btn-sign-in,
         .right-buttons .btn-sign-up {
             background-color: greenyellow;
-            width: 85px;
             color: white;
             border: none;
             border-radius: 4px;
@@ -135,6 +99,12 @@
         .right-buttons .btn-sign-in:hover,
         .right-buttons .btn-sign-up:hover {
             background-color: #0056b3;
+        }
+
+        .search-form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
         }
 
         .search-form input[type="text"] {
@@ -149,12 +119,11 @@
             background-color: greenyellow;
             color: #fff;
             border: none;
-            border-radius: 4px;
+            border-radius: 0 4px 4px 0;
             padding: 8px 20px;
             cursor: pointer;
             font-weight: bold;
             transition: background-color 0.3s ease;
-            margin-left: -4px;
         }
 
         .search-form button:hover {
@@ -165,103 +134,79 @@
             margin-bottom: 40px;
         }
 
-        .form-section {
-            margin-top: 20px;
+        .publ {
+            width: 150px;
+            display: inline-block;
         }
 
-        .form-section h2 {
-            color: #333;
-            margin-bottom: 10px;
+        .cat {
+            width: 150px;
+            display: inline-block;
         }
 
-        .form-section form {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-section form label {
-            font-weight: bold;
-        }
-
-        .form-section form input[type="text"],
-        .form-section form input[type="date"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-
-        .form-section form button {
-            background-color: greenyellow;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-
-        .form-section form button:hover {
-            background-color: #008754;
+        .pag {
+            margin-left: 15px;
+            margin-top: 10px;
+            text-decoration: none;
+            color: white;
+            background-color: #00a86b;
+            padding: 5px;
         }
     </style>
-    <title>Resume</title>
+    <title>Resumes</title>
 </head>
 <body>
+
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
         <div class="navbar-links">
-            <a class="nav-link " aria-current="page" href="#">Home</a>
-            <a class="nav-link active" href="/profile">Profile</a>
+            <!-- Navigation links -->
+            <a class="nav-link" aria-current="page" href="/">Home</a>
+            <a class="nav-link" href="/profile">Profile</a>
             <a class="nav-link" href="/vacancies">Vacancies</a>
-            <a class="nav-link" href="/jobresumes">Jobs</a>
+            <a class="nav-link active" href="#">Jobs</a>
         </div>
         <div class="right-buttons">
             <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>
         </div>
     </div>
 </nav>
-<div class="container">
-    <h1 class="vtxt">Education</h1>
 
-    <div class="form-section" id="educationForm">
-        <h2>Education</h2>
-        <form action="/resumes/${resume.id}/education" method="post">
-            <div>
-                <label for="university">University:</label>
-                <input type="text" id="university" name="university" required>
-            </div>
-            <div>
-                <label for="degree">Degree:</label>
-                <input type="text" id="degree" name="degree" required>
-            </div>
-            <div>
-                <label for="startDate">Start Date:</label>
-                <input type="date" id="startDate" name="startDate" required>
-            </div>
-            <div>
-                <label for="endDate">End Date:</label>
-                <input type="date" id="endDate" name="endDate" required>
-            </div>
-            <button type="submit">Save Education</button>
-        </form>
+<div class="container">
+    <h1 class="vtxt">Resumes</h1>
+    <div class="search-form">
+        <input type="text" name="category" placeholder="Search by category">
+        <button type="submit">Search</button>
     </div>
 
 
-</div>
-<script>
-    document.getElementById('logout').addEventListener('click',()=>{
-        localStorage.removeItem('user')
-    })
-</script>
+    <#if jobs.content?size == 0>
+        <p>No vacancies found.</p>
+    <#else>
+        <ul>
+            <#list jobs.content as resume>
+                <li>
+                    <div class="publ"><span class="publisher">${resume.user.accountName}</span></div>
+                    <span class="job">${resume.jobTitle}</span>
+                </li>
+            </#list>
+        </ul>
+    </#if>
+
+
+    <#if jobs.hasPrevious()>
+        <a class="pag" href="/jobresumes?page=${jobs.number - 1}">Previous Page</a>
+    </#if>
+    <#if jobs.hasNext()>
+        <a class="pag" href="/jobresumes?page=${jobs.number + 1}">Next Page</a>
+    </#if>
+    <script>
+        document.getElementById('logout').addEventListener('click',()=>{
+            localStorage.removeItem('user')
+        })
+    </script>
 
 </body>
 </html>

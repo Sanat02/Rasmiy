@@ -281,6 +281,9 @@
             <#if account.accountType=="EMPLOYER">
                 <a class="nav-link " href="/resumes">Resumes</a>
             </#if>
+            <#if account.accountType=="JOB_SEEKER">
+                <a class="nav-link " href="/jobresumes">Jobs</a>
+            </#if>
         </div>
         <div class="right-buttons">
             <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>

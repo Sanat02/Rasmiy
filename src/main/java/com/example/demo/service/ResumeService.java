@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
@@ -40,9 +39,10 @@ public class ResumeService {
 
     public Page<ResumeDto> getAllResumes(int start, int end) {
         log.info("Got all users");
-        List<Resume> resumes = resumeRepository.findAll();
-        List<ResumeDto> resumeDtos = resumes.stream()
-                .map(e -> ResumeDto.builder()
+        Pageable pageable = PageRequest.of(start,end);
+        Page<Resume> resumes=resumeRepository.findAll(pageable);
+        Page<ResumeDto> resumeDtos = resumes.map(e -> {
+                return ResumeDto.builder()
                         .id(e.getId())
                         .expectedSalary(e.getExpectedSalary())
                         .job(e.getJob())
@@ -50,10 +50,10 @@ public class ResumeService {
                         .education(educationService.getEducationByResumeId(e.getId()).orElse(null))
                         .jobExperience(jobExperienceService.getJobExperienceById(e.getId()).orElse(null))
                         .contacts(contactsService.getContactsDtoByResumeId(e.getId()))
-                        .build())
-                .collect(Collectors.toList());
-        var page = toPage(resumeDtos, PageRequest.of(start, end));
-        return page;
+                        .build();
+        });
+
+        return resumeDtos;
     }
 
 
@@ -166,17 +166,5 @@ public class ResumeService {
             log.error("Resume not found for ID: " + resumeId);
             return null;
         }
-    }
-
-    private Page<ResumeDto> toPage(List<ResumeDto> list, Pageable pageable) {
-        if (pageable.getOffset() >= list.size()) {
-            return Page.empty();
-        }
-        int startIndex = (int) pageable.getOffset();
-        int endIndex = (int) ((pageable.getOffset() + pageable.getPageSize()) > list.size() ?
-                list.size() :
-                pageable.getOffset() + pageable.getPageSize());
-        List<ResumeDto> subList = list.subList(startIndex, endIndex);
-        return new PageImpl<>(subList, pageable, list.size());
     }
 }

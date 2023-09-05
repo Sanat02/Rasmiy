@@ -182,6 +182,7 @@
             <a class="nav-link " aria-current="page" href="#">Home</a>
             <a class="nav-link active" href="/profile">Profile</a>
             <a class="nav-link" href="/vacancies">Vacancies</a>
+            <a class="nav-link" href="/jobresumes">Jobs</a>
         </div>
         <div class="right-buttons">
             <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>

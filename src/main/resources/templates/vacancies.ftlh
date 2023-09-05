@@ -178,6 +178,9 @@
             <#if username?? && type=="EMPLOYER">
                 <a class="nav-link" href="/resumes">Resumes</a>
             </#if>
+            <#if username?? && type=="JOB_SEEKER">
+                <a class="nav-link" href="/jobresumes">Jobs</a>
+            </#if>
         </div>
         <div class="right-buttons">
             <#if username??>
