@@ -28,35 +28,35 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    private final DataSource dataSource;
+//    private final DataSource dataSource;
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        String fetchUserQuery = "select email, password ,enabled \n " +
-                "from users \n" +
-                "where email = ?;";
-
-        String fetchRolesQuery = "select email, role  \n " +
-                "from users u, \n" +
-                "roles r \n" +
-                "where u.email = ? \n" +
-                "and u.role_id=r.id;";
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .usersByUsernameQuery(fetchUserQuery)
-                .authoritiesByUsernameQuery(fetchRolesQuery)
-                .passwordEncoder(new BCryptPasswordEncoder());
-        ;
-
-
-    }
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//        String fetchUserQuery = "select email, password ,enabled \n " +
+//                "from users \n" +
+//                "where email = ?;";
+//
+//        String fetchRolesQuery = "select email, role  \n " +
+//                "from users u, \n" +
+//                "roles r \n" +
+//                "where u.email = ? \n" +
+//                "and u.role_id=r.id;";
+//        auth.jdbcAuthentication()
+//                .dataSource(dataSource)
+//                .usersByUsernameQuery(fetchUserQuery)
+//                .authoritiesByUsernameQuery(fetchRolesQuery)
+//                .passwordEncoder(new BCryptPasswordEncoder());
+//        ;
+//
+//
+//    }
 
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
 //                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .csrf(AbstractHttpConfigurer::disable)
+//                .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(form -> form
                         .loginPage("/login")
@@ -74,6 +74,7 @@ public class SecurityConfig {
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/jobresumes")).hasAuthority("JOB_SEEKER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/{userId}/chat")).hasAuthority("JOB_SEEKER")
                         .anyRequest().authenticated()
+
                 );
         return http.build();
     }

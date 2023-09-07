@@ -34,44 +34,7 @@
         }
 
 
-        /*.navbar {*/
-        /*    background-color: #f8f9fa;*/
-        /*    padding: 10px 0;*/
-        /*}*/
 
-        /*.navbar-brand {*/
-        /*    margin-left: 20px;*/
-        /*    font-size: 24px;*/
-        /*    font-weight: bold;*/
-        /*    color: #212529;*/
-        /*    text-decoration: none;*/
-        /*}*/
-
-        /*.navbar-nav {*/
-        /*    margin-right: 20px;*/
-        /*}*/
-
-        /*.navbar-nav .nav-item {*/
-        /*    margin: 0 10px;*/
-        /*}*/
-
-        /*.navbar-nav .nav-link {*/
-        /*    color: #212529;*/
-        /*    text-decoration: none;*/
-        /*    font-size: 18px;*/
-        /*    padding: 10px;*/
-        /*    border-radius: 4px;*/
-        /*    transition: background-color 0.3s ease;*/
-        /*}*/
-
-        /*.navbar-nav .nav-link:hover {*/
-        /*    background-color: #ddd;*/
-        /*}*/
-
-        /*.navbar-nav .nav-link.active {*/
-        /*    background-color: greenyellow;*/
-        /*    color: white;*/
-        /*}*/
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -235,6 +198,13 @@
     <div class="form-section" id="educationForm">
         <h2>Education</h2>
         <form action="/resumes/${resume.id}/education" method="post">
+
+            <#if _csrf??>
+                <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}"
+                       value="${(_csrf.token)!'csrf-token'}"/>
+
+            </#if>
+
             <div>
                 <label for="university">University:</label>
                 <input type="text" id="university" name="university" required>

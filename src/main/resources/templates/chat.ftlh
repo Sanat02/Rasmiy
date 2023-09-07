@@ -4,6 +4,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -182,6 +183,13 @@
         </div>
         <div class="input-group">
             <form id="chat_form">
+                <#if _csrf??>
+                    <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}"
+                           value="${(_csrf.token)!'csrf-token'}"/>
+
+                </#if>
+                <meta name="_csrf_header" content="${_csrf.headerName}"/>
+                <meta name="_csrf_token" content="${_csrf.token}"/>
                 <input id="message" type="text" placeholder="Type a message" required>
                 <input type="submit" value="Submit">
             </form>
@@ -196,9 +204,13 @@
     const employerId = ${employer.id};
     const storedUser = readUser();
 
+    const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+    const csrfToken = document.querySelector('meta[name="_csrf_token"]').getAttribute('content');
+
     const headers = new Headers({
         'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + btoa(storedUser.username + ':' + storedUser.password)
+        'Authorization': 'Basic ' + btoa(storedUser.username + ':' + storedUser.password),
+        [csrfHeader]: csrfToken
     });
 
     function reviewHandler(e) {

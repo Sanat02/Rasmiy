@@ -38,24 +38,7 @@ public class ResumeService {
     private final JobExperienceService jobExperienceService;
     private final CategoryService categoryService;
 
-    //    public Page<ResumeDto> getAllResumes(int start, int end) {
-//        log.info("Got all users");
-//        Pageable pageable = PageRequest.of(start, end);
-//        Page<Resume> resumes = resumeRepository.findAll(pageable);
-//        Page<ResumeDto> resumeDtos = resumes.map(e -> {
-//            return ResumeDto.builder()
-//                    .id(e.getId())
-//                    .expectedSalary(e.getExpectedSalary())
-//                    .job(e.getJob())
-//                    .applicant(userService.mapToUserDto(userService.getUserById(e.getUser().getId()).orElse(null)))
-//                    .education(educationService.getEducationByResumeId(e.getId()).orElse(null))
-//                    .jobExperience(jobExperienceService.getJobExperienceById(e.getId()).orElse(null))
-//                    .contacts(contactsService.getContactsDtoByResumeId(e.getId()))
-//                    .build();
-//        });
-//
-//        return resumeDtos;
-//    }
+
     public Page<ResumeDto> getAllResumes(int start, int end, String sortField) {
         log.info("Got all users");
         Pageable pageable;

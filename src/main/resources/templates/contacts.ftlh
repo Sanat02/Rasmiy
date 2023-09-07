@@ -193,6 +193,11 @@
     <h1 class="vtxt">Contacts</h1>
     <div class="form-section" id="experienceForm">
         <form action="/resumes/${resume.id}/contacts" method="post">
+            <#if _csrf??>
+                <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}"
+                       value="${(_csrf.token)!'csrf-token'}"/>
+
+            </#if>
             <label for="phone">Phone:</label>
             <input type="tel" id="phone" name="phone">
             <label for="email">Email:</label>

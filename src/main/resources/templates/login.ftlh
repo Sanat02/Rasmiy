@@ -137,6 +137,11 @@
 <div class="container">
     <h2>Login</h2>
     <form action="/login" method="post" id="login-form">
+        <#if _csrf??>
+            <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}"
+                   value="${(_csrf.token)!'csrf-token'}"/>
+
+        </#if>
         <label for="email">Email:</label>
         <input type="email" id="email" name="username" placeholder="Enter your email address" required>
 

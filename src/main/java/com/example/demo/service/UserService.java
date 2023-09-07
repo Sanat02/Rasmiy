@@ -24,6 +24,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final ProfileImageService profileImageService;
     private final PasswordEncoder encoder;
+    private final RoleService roleService;
 
 
     public List<UserDto> getAllUsers() {
@@ -33,7 +34,7 @@ public class UserService {
                 .map(e -> UserDto.builder()
                         .id(e.getId())
                         .phoneNumber(e.getPhoneNumber())
-                        .accountType(getAccountType(e.getRoleId()))
+                        .accountType(getAccountType(e.getRole().getId().intValue()))
                         .password(e.getPassword())
                         .email(e.getEmail())
                         .accountName(e.getAccountName())
@@ -70,6 +71,7 @@ public class UserService {
 
     public Optional<User> getUserById(int id) {
         log.info("Got user by id:" + id);
+        log.info("ROLE:"+userRepository.findById(id).get().getRole().getRole());
         return userRepository.findById(id);
     }
 
@@ -83,7 +85,7 @@ public class UserService {
                 .password(encoder.encode(userDto.getPassword()))
                 .phoneNumber(userDto.getPhoneNumber())
                 .enabled(true)
-                .roleId(roleId)
+                .role(roleService.getRoleById(roleId))
                 .build()).getId();
 
     }
@@ -100,7 +102,7 @@ public class UserService {
                     .id(user.getId())
                     .accountName(user.getAccountName())
                     .email(user.getEmail())
-                    .accountType(getAccountType(user.getRoleId()))
+                    .accountType(getAccountType(user.getRole().getId().intValue()))
                     .password(user.getPassword())
                     .phoneNumber(user.getPhoneNumber())
                     .profileImage(profileImageService.getImageByUserId(user.getId()))

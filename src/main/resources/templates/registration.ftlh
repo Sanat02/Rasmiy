@@ -139,6 +139,12 @@
 <div class="container">
     <h2>Registration</h2>
     <form action="/register" method="post">
+        <#if _csrf??>
+            <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}"
+                   value="${(_csrf.token)!'csrf-token'}"/>
+
+        </#if>
+
         <label for="account_name">Account Name:</label>
         <input type="text" id="account_name" name="account_name" placeholder="Enter your account name" required>
 

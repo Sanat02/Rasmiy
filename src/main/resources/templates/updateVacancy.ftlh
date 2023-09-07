@@ -194,6 +194,12 @@
 <div class="container">
     <h2>Vacancy Update Form ID:${jobresume.id}</h2>
     <form action="/jobresumes/edit/${jobresume.id}" method="post">
+        <#if _csrf??>
+            <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}"
+                   value="${(_csrf.token)!'csrf-token'}"/>
+
+        </#if>
+
         <label for="resume_name">Name of the vacancy:</label>
         <input type="text" id="resume_name" name="resume_name" required><br><br>
 

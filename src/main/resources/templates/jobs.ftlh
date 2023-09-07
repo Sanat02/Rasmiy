@@ -216,6 +216,11 @@
 <div class="container">
     <h1 class="vtxt">Resumes</h1>
     <form action="/jobresumes" method="GET">
+        <#if _csrf??>
+            <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}"
+                   value="${(_csrf.token)!'csrf-token'}"/>
+
+        </#if>
         <label for="sort">Sort By:</label>
         <select id="sort" name="sort">
             <option name="date" value="date">Date</option>

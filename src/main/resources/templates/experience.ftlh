@@ -193,6 +193,12 @@
     <div class="form-section" id="experienceForm">
 
         <form action="/resumes/${resume.id}/experience" method="post">
+            <#if _csrf??>
+                <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}"
+                       value="${(_csrf.token)!'csrf-token'}"/>
+
+            </#if>
+
             <div>
                 <label for="position">Position:</label>
                 <input type="text" id="position" name="position" required>
