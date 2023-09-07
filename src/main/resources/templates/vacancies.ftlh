@@ -161,6 +161,7 @@
             background-color: #00a86b;
             padding: 5px;
         }
+
         form {
             max-width: 660px;
             margin-bottom: 20px;
@@ -196,6 +197,9 @@
 
         button[type="submit"]:hover {
             background-color: #0056b3;
+        }
+        a{
+            text-decoration: none;
         }
     </style>
     <title>Vacancies</title>
@@ -246,20 +250,24 @@
         <p>No vacancies found.</p>
     <#else>
         <ul>
+
             <#list vacancies.content as vacancy>
-                <li>
-                    <div class="publ"><span class="publisher">${vacancy.publisher.accountName}</span></div>
-                    <div class="cat"><span class="category">${vacancy.category.name}</span></div>
-                    <span class="date">${vacancy.date}</span>
-                </li>
-                <#if type??>
-                    <#if type=="JOB_SEEKER">
-                        <a href="/vacancies/${vacancy.publisher.id}/chat">
-                            <button>Chat</button>
-                        </a>
+                <a href="/vacancies/${vacancy.publisher.id}">
+                    <li>
+                        <div class="publ"><span class="publisher">${vacancy.publisher.accountName}</span></div>
+                        <div class="cat"><span class="category">${vacancy.category.name}</span></div>
+                        <span class="date">${vacancy.date}</span>
+                    </li>
+                    <#if type??>
+                        <#if type=="JOB_SEEKER">
+                            <a href="/vacancies/${vacancy.publisher.id}/chat">
+                                <button>Chat</button>
+                            </a>
+                        </#if>
                     </#if>
-                </#if>
+                </a>
             </#list>
+
         </ul>
     </#if>
 

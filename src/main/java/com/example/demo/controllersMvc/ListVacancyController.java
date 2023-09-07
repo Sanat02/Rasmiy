@@ -7,6 +7,7 @@ import com.example.demo.dto.UserDto;
 import com.example.demo.enums.AccountType;
 import com.example.demo.model.Chat;
 import com.example.demo.service.ChatService;
+import com.example.demo.service.JobResumeService;
 import com.example.demo.service.JobsListService;
 import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/vacancies")
 public class ListVacancyController {
+    private final JobResumeService jobResumeService;
     private final JobsListService jobsListService;
     private final UserService userService;
     private final ChatService chatService;
@@ -49,6 +51,8 @@ public class ListVacancyController {
         return "vacancies";
     }
 
+
+
     @PostMapping
     @ResponseStatus(HttpStatus.SEE_OTHER)
     public String sort(
@@ -65,6 +69,14 @@ public class ListVacancyController {
         model.addAttribute("user", userDto);
         model.addAttribute("employer", employerDto);
         return "chat";
+    }
+
+    @GetMapping("{userId}")
+    public String getInfo(@PathVariable int userId,Model model){
+        UserDto employerDto = userService.mapToUserDto(userService.getUserById(userId).orElse(null));
+        employerDto.setJobResumes(jobResumeService.getJobResumesByUserId(employerDto.getId()));
+        model.addAttribute("employer", employerDto);
+        return "vacancy";
     }
 
 
