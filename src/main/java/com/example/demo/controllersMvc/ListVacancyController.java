@@ -32,8 +32,10 @@ public class ListVacancyController {
     private static final int PAGE_SIZE = 5;
 
     @GetMapping
-    public String getVacancies(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
-        Page<JobListDto> vacancies = jobsListService.getAllJobs(page, PAGE_SIZE);
+    public String getVacancies(@RequestParam(name = "page", defaultValue = "0") int page,
+                               @RequestParam(name = "sort", defaultValue = "resumeDate") String sortField,
+                               Model model) {
+        Page<JobListDto> vacancies = jobsListService.getAllJobs(page, PAGE_SIZE,sortField);
         model.addAttribute("vacancies", vacancies);
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -47,6 +49,14 @@ public class ListVacancyController {
         return "vacancies";
     }
 
+    @PostMapping
+    @ResponseStatus(HttpStatus.SEE_OTHER)
+    public String sort(
+            @RequestParam(name = "sort") String sort
+    ) {
+        return "redirect:/vacancies?page=0&sort=" + sort;
+    }
+
     @GetMapping("/{userId}/chat")
     public String chat(@PathVariable int userId, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -56,8 +66,6 @@ public class ListVacancyController {
         model.addAttribute("employer", employerDto);
         return "chat";
     }
-
-
 
 
 }

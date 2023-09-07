@@ -162,8 +162,8 @@
             padding: 5px;
         }
         form {
-            max-width: 300px;
-            margin: 0 auto;
+            max-width: 660px;
+            margin-bottom: 20px;
             padding: 20px;
             border: 1px solid #ccc;
             background-color: #f9f9f9;
@@ -233,10 +233,14 @@
 
 <div class="container">
     <h1 class="vtxt">Vacancies</h1>
-    <div class="search-form">
-        <input type="text" name="category" placeholder="Search by category">
-        <button type="submit">Search</button>
-    </div>
+    <form action="/vacancies" method="GET">
+        <label for="sort">Sort By:</label>
+        <select id="sort" name="sort">
+            <option value="date">Date</option>
+            <option value="clicks">Clicks</option>
+        </select>
+        <button type="submit">Sort</button>
+    </form>
 
     <#if vacancies.content?size == 0>
         <p>No vacancies found.</p>

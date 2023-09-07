@@ -15,6 +15,7 @@ databaseChangeLog:
               - column:
                   name: date
                   value: '2023-07-14'
+
         - insert:
             tableName: vacancies
             columns:

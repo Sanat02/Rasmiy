@@ -20,8 +20,14 @@ public class JobsListService {
     private final CategoryService categoryService;
 
 
-    public Page<JobListDto> getAllJobs(int start, int end) {
-        Pageable pageable = PageRequest.of(start, end);
+    public Page<JobListDto> getAllJobs(int start, int end, String sortField) {
+        Pageable pageable;
+        if (sortField.equalsIgnoreCase("clicks")) {
+            pageable = PageRequest.of(start, end);
+        } else {
+            Sort sort = Sort.by(Sort.Order.desc("date"));
+            pageable = PageRequest.of(start, end, sort);
+        }
         Page<JobList> jobs = jobListRepository.findAll(pageable);
 
         Page<JobListDto> jobListDtos = jobs.map(jobList -> {
