@@ -152,6 +152,7 @@
             background-color: #00a86b;
             padding: 5px;
         }
+
         form {
             max-width: 660px;
             margin-bottom: 20px;
@@ -188,7 +189,8 @@
         button[type="submit"]:hover {
             background-color: #0056b3;
         }
-        .job{
+
+        .job {
             margin-right: 5px;
         }
     </style>
@@ -214,7 +216,7 @@
 </nav>
 
 <div class="container">
-    <h1 class="vtxt">Resumes</h1>
+    <h1 class="vtxt">Job Resumes</h1>
     <form action="/jobresumes" method="GET">
         <#if _csrf??>
             <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}"
@@ -235,11 +237,13 @@
     <#else>
         <ul>
             <#list jobs.content as resume>
-                <li>
-                    <div class="publ"><span class="publisher">${resume.user.accountName}</span></div>
-                    <span class="job">${resume.jobTitle}</span>
-                    <span class="job">${resume.date}</span>
-                </li>
+                <a href="/jobresumes/${resume.id}">
+                    <li>
+                        <div class="publ"><span class="publisher">${resume.user.accountName}</span></div>
+                        <span class="job">${resume.jobTitle}</span>
+                        <span class="job">${resume.date}</span>
+                    </li>
+                </a>
             </#list>
         </ul>
     </#if>
@@ -252,7 +256,7 @@
         <a class="pag" href="/jobresumes?page=${jobs.number + 1}">Next Page</a>
     </#if>
     <script>
-        document.getElementById('logout').addEventListener('click',()=>{
+        document.getElementById('logout').addEventListener('click', () => {
             localStorage.removeItem('user')
         })
     </script>

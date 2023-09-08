@@ -143,9 +143,12 @@
         <a class="navbar-brand" href="#">Navbar</a>
         <div class="navbar-links">
             <a class="nav-link" aria-current="page" href="/">Home</a>
-            <a class="nav-link active" href="/profile">Profile</a>
-            <a class="nav-link" href="/vacancies">Vacancies</a>
-            <a class="nav-link " href="/resumes">Resumes</a>
+            <#if username??><a class="nav-link" href="/profile">Profile</a></#if>
+            <a class="nav-link active" href="/vacancies">Vacancies</a>
+            <#if username?? && type == "EMPLOYER"><a class="nav-link " href="/resumes">Resumes</a></#if>
+            <#if username?? && type == "JOB_SEEKER">
+                <a class="nav-link" href="/jobresumes">Jobs</a>
+            </#if>
         </div>
         <div class="right-buttons">
             <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>
@@ -174,7 +177,10 @@
         </ul>
     </div>
     <div class="category">Category: ${jobresume.category}</div>
-    <button class="apply-btn">Apply</button>
+    <#if type=="JOB_SEEKER">
+        <button class="apply-btn">Click</button>
+        <a href="/vacancies/${jobresume.user.id}/chat"> <button class="apply-btn">Chat</button></a>
+    </#if>
     <div class="contact-info">
         <span>Contact Email: <a href="mailto:contact@example.com">${jobresume.user.email}</a></span>
         <span>Contact Phone: <a href="tel:+123456789">${jobresume.user.phoneNumber}</a></span>

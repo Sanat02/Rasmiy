@@ -3,6 +3,7 @@ package com.example.demo.controllersMvc;
 import com.example.demo.dto.JobResumeDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.UserDto;
+import com.example.demo.enums.AccountType;
 import com.example.demo.service.JobResumeService;
 import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -73,15 +74,18 @@ public class EditJobResumeController {
 
     @GetMapping("/{jobResumeId}")
     public String getJobResume(Model model, @PathVariable int jobResumeId) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
         JobResumeDto jobResumeDto = jobResumeService.mapToJobResumeDto(jobResumeService.getJobResumeById(jobResumeId).get());
-        if (jobResumeDto.getUser().getId() == userDto.getId()) {
-            model.addAttribute("jobresume", jobResumeDto);
-            return "seeVacancy";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth.getName().equals("anonymousUser")) {
+            model.addAttribute("username", null);
         } else {
-            return "prohibited";
+            model.addAttribute("username", auth.getName());
+            AccountType accountType = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).
+                    orElse(null)).getAccountType();
+            model.addAttribute("type", accountType);
         }
+        model.addAttribute("jobresume", jobResumeDto);
+        return "seeVacancy";
     }
 
     @GetMapping("/{jobResumeId}/delete")

@@ -37,7 +37,7 @@ public class ListVacancyController {
     public String getVacancies(@RequestParam(name = "page", defaultValue = "0") int page,
                                @RequestParam(name = "sort", defaultValue = "resumeDate") String sortField,
                                Model model) {
-        Page<JobListDto> vacancies = jobsListService.getAllJobs(page, PAGE_SIZE,sortField);
+        Page<JobListDto> vacancies = jobsListService.getAllJobs(page, PAGE_SIZE, sortField);
         model.addAttribute("vacancies", vacancies);
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -50,7 +50,6 @@ public class ListVacancyController {
 
         return "vacancies";
     }
-
 
 
     @PostMapping
@@ -72,10 +71,19 @@ public class ListVacancyController {
     }
 
     @GetMapping("{userId}")
-    public String getInfo(@PathVariable int userId,Model model){
+    public String getInfo(@PathVariable int userId, Model model) {
         UserDto employerDto = userService.mapToUserDto(userService.getUserById(userId).orElse(null));
         employerDto.setJobResumes(jobResumeService.getJobResumesByUserId(employerDto.getId()));
         model.addAttribute("employer", employerDto);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth.getName().equals("anonymousUser")) {
+            model.addAttribute("username", null);
+        } else {
+            model.addAttribute("username", auth.getName());
+            AccountType accountType = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).
+                    orElse(null)).getAccountType();
+            model.addAttribute("type", accountType);
+        }
         return "vacancy";
     }
 

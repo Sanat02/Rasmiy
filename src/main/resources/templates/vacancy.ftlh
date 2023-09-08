@@ -131,6 +131,7 @@
         .right-buttons .btn {
             margin-left: 10px;
         }
+
         .slider-container {
             display: flex;
             overflow-x: scroll;
@@ -152,11 +153,15 @@
             vertical-align: top;
             margin-bottom: 6px;
         }
-        h2{
+
+        h2 {
             margin-top: 15px;
             font-size: 18px;
         }
 
+        .btn1 {
+            color: #0056b3;
+        }
 
 
     </style>
@@ -187,26 +192,30 @@
 
         <h2>Available Job Resumes</h2>
         <#if employer.jobResumes?size == 0>
-        <p>No job resumes found!</p>
+            <p>No job resumes found!</p>
         <#else>
-        <div class="slider-container">
-            <#list employer.jobResumes as jresume>
-                <div class="resume-item">
-                    <div class="resumeinfo">
-                        <div class="resumeName">${jresume.jobTitle}</div>
-                        <div>Date of the update:</div>
-                        <div>02/02/2022</div>
+            <div class="slider-container">
+                <#list employer.jobResumes as jresume>
+                    <div class="resume-item">
+                        <div class="resumeinfo">
+                            <div class="resumeName">${jresume.jobTitle}</div>
+                            <div>Date of the update:</div>
+                            <div>02/02/2022</div>
+                        </div>
+                        <div class="rbtn">
+                            <a class="nav-link active" href="/jobresumes/${jresume.id}">
+                                <div class="btn1">See</div>
+                            </a>
+                        </div>
                     </div>
-                    <div class="rbtn">
-                        <a class="nav-link active" href="/jobresumes/${jresume.id}">
-                            <div class="btn1">See</div>
-                        </a>
-                    </div>
-                </div>
-              </#list>
-        </div>
+                </#list>
+            </div>
         </#if>
-        <button class="apply-btn">Apply</button>
+        <#if username?? && type == "JOB_SEEKER">
+            <a href="/vacancies/${employer.id}/chat">
+                <button class="apply-btn">Chat</button>
+            </a>
+        </#if>
     </div>
     <script>
         document.getElementById('logout').addEventListener('click', () => {
