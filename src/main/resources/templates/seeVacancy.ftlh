@@ -65,6 +65,22 @@
         .apply-btn:hover {
             background-color: #008754;
         }
+        .apply-btn2 {
+            background-color: #fff;
+
+            color: #00a86b;
+            border: solid #00a86b;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .apply-btn2:hover {
+            background-color: #fff;
+            color: #00a86b;
+        }
 
         .contact-info {
             margin-top: 20px;
@@ -177,9 +193,22 @@
         </ul>
     </div>
     <div class="category">Category: ${jobresume.category}</div>
+
     <#if type=="JOB_SEEKER">
-        <button class="apply-btn">Click</button>
-        <a href="/vacancies/${jobresume.user.id}/chat"> <button class="apply-btn">Chat</button></a>
+        <#if isInterested>
+            <a href="/click/delete/${jobresume.id}">
+                <button class="apply-btn2">Unclick</button>
+            </a>
+
+        <#else>
+            <a href="/click/${jobresume.id}">
+                <button class="apply-btn">Click</button>
+            </a>
+        </#if>
+
+        <a href="/vacancies/${jobresume.user.id}/chat">
+            <button class="apply-btn">Chat</button>
+        </a>
     </#if>
     <div class="contact-info">
         <span>Contact Email: <a href="mailto:contact@example.com">${jobresume.user.email}</a></span>

@@ -3,9 +3,11 @@ package com.example.demo.controllersMvc;
 import com.example.demo.dto.JobResumeDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.UserDto;
+import com.example.demo.dto.WhoInterestedDto;
 import com.example.demo.enums.AccountType;
 import com.example.demo.service.JobResumeService;
 import com.example.demo.service.UserService;
+import com.example.demo.service.WhoInterestedService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 public class EditJobResumeController {
     private final UserService userService;
     private final JobResumeService jobResumeService;
+    private final WhoInterestedService whoInterestedService;
     private static final int PAGE_SIZE = 5;
 
     @GetMapping()
@@ -79,12 +82,20 @@ public class EditJobResumeController {
         if (auth.getName().equals("anonymousUser")) {
             model.addAttribute("username", null);
         } else {
+            UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
             model.addAttribute("username", auth.getName());
             AccountType accountType = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).
                     orElse(null)).getAccountType();
             model.addAttribute("type", accountType);
+            model.addAttribute("isInterested", whoInterestedService.isClicked(
+                    WhoInterestedDto.builder()
+                            .applicant(userDto)
+                            .job_resume(jobResumeDto)
+                            .build()
+            ));
         }
         model.addAttribute("jobresume", jobResumeDto);
+
         return "seeVacancy";
     }
 

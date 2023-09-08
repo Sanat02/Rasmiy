@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -18,18 +19,32 @@ public class WhoInterestedService {
     private final UserService userService;
     private final JobResumeService jobResumeService;
 
-    public List<WhoInterestedDto> getInterestedApplicants() {
-        log.info("Got all interested applicants!");
-        List<WhoInterested> whoInteresteds = whoInterestedRepository.findAll();
-        List<WhoInterestedDto> whoInterestedDtos = whoInteresteds.stream()
-                .map(e -> WhoInterestedDto.builder()
-                        .id(e.getApplicantId())
-                        .applicant(userService.mapToUserDto(userService.getUserById(e.getApplicantId()).get()))
-                        .date(e.getDate())
-                        .job_resume(jobResumeService.mapToJobResumeDto(jobResumeService.getJobResumeById(e.getJobResumeId()).get()))
-                        .build()
-                ).toList();
-        return whoInterestedDtos;
+    public void saveClick(WhoInterestedDto whoInterestedDto) {
+        WhoInterested whoInterested = WhoInterested.builder()
+                .applicantId(whoInterestedDto.getApplicant().getId())
+                .date(LocalDate.now())
+                .jobResumeId(whoInterestedDto.getJob_resume().getId())
+                .build();
+        whoInterestedRepository.save(whoInterested);
+
+    }
+
+    public boolean isClicked(WhoInterestedDto whoInterestedDto) {
+        WhoInterested whoInterested = whoInterestedRepository.findWhoInterestedByApplicantIdAndAndJobResumeId(
+                whoInterestedDto.getApplicant().getId(), whoInterestedDto.getJob_resume().getId()).orElse(null);
+        if (whoInterested == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public void deleteClick(WhoInterestedDto whoInterestedDto) {
+        WhoInterested whoInterested = whoInterestedRepository.findWhoInterestedByApplicantIdAndAndJobResumeId(
+                whoInterestedDto.getApplicant().getId(), whoInterestedDto.getJob_resume().getId()).orElse(null);
+        if(whoInterested!=null){
+            whoInterestedRepository.deleteById(whoInterested.getId());
+        }
     }
 
 
