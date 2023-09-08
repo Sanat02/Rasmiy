@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 
+import com.example.demo.dto.UserDto;
 import com.example.demo.dto.WhoInterestedDto;
 import com.example.demo.model.WhoInterested;
 import com.example.demo.repository.WhoInterestedRepository;
@@ -46,6 +47,8 @@ public class WhoInterestedService {
             whoInterestedRepository.deleteById(whoInterested.getId());
         }
     }
+
+
 
 
 }
