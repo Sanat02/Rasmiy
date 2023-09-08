@@ -43,12 +43,10 @@ public class WhoInterestedService {
     public void deleteClick(WhoInterestedDto whoInterestedDto) {
         WhoInterested whoInterested = whoInterestedRepository.findWhoInterestedByApplicantIdAndAndJobResumeId(
                 whoInterestedDto.getApplicant().getId(), whoInterestedDto.getJob_resume().getId()).orElse(null);
-        if(whoInterested!=null){
+        if (whoInterested != null) {
             whoInterestedRepository.deleteById(whoInterested.getId());
         }
     }
-
-
 
 
 }
