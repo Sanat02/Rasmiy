@@ -154,17 +154,10 @@
     <div class="register-option">
         Don't have an account? <a href="/register">Register</a>
     </div>
-
-    <div class="divider">
-        <hr>
-        <span class="or-text">OR</span>
+    <div class="register-option">
+        <a href="/register">Forgot password?</a>
     </div>
 
-    <div class="social-login">
-        <div class="social-login-btn">
-            <i class="fab fa-google"></i> Sign in with Google
-        </div>
-    </div>
 </div>
 
 <script>

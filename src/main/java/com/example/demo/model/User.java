@@ -27,6 +27,7 @@ public class User implements UserDetails {
     private String password;
     private String phoneNumber;
     private Boolean enabled;
+    private String resetPasswordToken;
     @OneToMany(fetch= FetchType.LAZY,mappedBy = "user")
     List<Resume> resumes;
 
