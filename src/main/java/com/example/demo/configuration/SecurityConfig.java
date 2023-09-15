@@ -80,12 +80,12 @@ public class SecurityConfig {
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/jobresumes/{jobResumeId}/delete")).hasAuthority("EMPLOYER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/jobresumes/edit/{jobResumeId}")).hasAuthority("EMPLOYER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/resumes/add")).hasAuthority("JOB_SEEKER")
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/resumes/{resumeId}")).hasAuthority("JOB_SEEKER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/resumes/{resumeId}/education")).hasAuthority("JOB_SEEKER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/resumes/{resumeId}/experience")).hasAuthority("JOB_SEEKER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/resumes/{resumeId}/contacts")).hasAuthority("JOB_SEEKER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/resumes/{resumeId}/delete")).hasAuthority("JOB_SEEKER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/resumes/edit/{resumeId}")).hasAuthority("JOB_SEEKER")
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/resumes/info/{resumeId}")).hasAuthority("EMPLOYER")
                         .anyRequest().authenticated()
 
                 );

@@ -326,5 +326,15 @@ public class EditResumeController {
 
     }
 
+    @GetMapping("/info/{resumeId}")
+    public String getResumeInfo(@PathVariable int resumeId, Model model) {
+        ResumeDto resumeDto = resumeService.getResumeById(resumeId);
+        if (resumeDto == null) {
+            return "notExists";
+        }
+        model.addAttribute("resume", resumeDto);
+        return "seeResume";
+    }
+
 
 }

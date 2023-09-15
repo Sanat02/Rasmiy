@@ -6,6 +6,7 @@ import com.example.demo.dto.UserDto;
 import com.example.demo.dto.WhoInterestedDto;
 import com.example.demo.enums.AccountType;
 import com.example.demo.model.JobResume;
+import com.example.demo.model.User;
 import com.example.demo.service.JobResumeService;
 import com.example.demo.service.UserService;
 import com.example.demo.service.WhoInterestedService;
@@ -88,8 +89,9 @@ public class EditJobResumeController {
         if (auth.getName().equals("anonymousUser")) {
             model.addAttribute("username", null);
         } else {
-            UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
-            if (jobResumeDto.getUser().getId() != userDto.getId()) {
+            User user = userService.getUserByEmail(auth.getName()).orElse(null);
+            UserDto userDto = userService.mapToUserDto(user);
+            if (user.getRole().getRole().equals("EMPLOYER") && jobResumeDto.getUser().getId() != userDto.getId()) {
                 return "prohibited";
             }
             model.addAttribute("username", auth.getName());

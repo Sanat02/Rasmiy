@@ -10,8 +10,8 @@
         }
 
         .container {
-            margin-top: 100px;
             max-width: 800px;
+            margin: 60px auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 8px;
@@ -35,6 +35,14 @@
 
         .publisher {
             font-weight: bold;
+        }
+
+        .category {
+            color: #00a86b;
+        }
+
+        .date {
+            color: #777;
         }
 
         .navbar {
@@ -76,7 +84,7 @@
             pointer-events: none;
         }
 
-        /* Style for the "Sign In" and "Sign Up" buttons */
+
         .right-buttons {
             display: flex;
             align-items: center;
@@ -101,12 +109,6 @@
             background-color: #0056b3;
         }
 
-        .search-form {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
         .search-form input[type="text"] {
             width: 250px;
             padding: 8px;
@@ -119,11 +121,12 @@
             background-color: greenyellow;
             color: #fff;
             border: none;
-            border-radius: 0 4px 4px 0;
+            border-radius: 4px;
             padding: 8px 20px;
             cursor: pointer;
             font-weight: bold;
             transition: background-color 0.3s ease;
+            margin-left: -4px;
         }
 
         .search-form button:hover {
@@ -134,80 +137,68 @@
             margin-bottom: 40px;
         }
 
-        .publ {
-            width: 150px;
-            display: inline-block;
+
+        .form-section h2 {
+            color: #333;
+            margin-bottom: 10px;
         }
 
-        .cat {
-            width: 150px;
-            display: inline-block;
-        }
-
-        .pag {
-            margin-left: 15px;
-            margin-top: 10px;
-            text-decoration: none;
-            color: white;
-            background-color: #00a86b;
-            padding: 5px;
-        }
-
-        form {
-            max-width: 660px;
-            margin-bottom: 20px;
+        .form-section form {
+            background-color: #f8f9fa;
             padding: 20px;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-            border-radius: 5px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        label {
+        .form-section form label {
             font-weight: bold;
         }
 
-        select {
+        .form-section form input[type="text"],
+        .form-section form input[type="date"] {
             width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 15px;
+            padding: 8px;
+            margin-bottom: 10px;
             border: 1px solid #ccc;
-            border-radius: 3px;
-            background-color: #fff;
-            font-size: 16px;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
 
-        button[type="submit"] {
-            background-color: #007bff;
+        .form-section form button {
+            background-color: greenyellow;
             color: #fff;
             border: none;
+            border-radius: 4px;
             padding: 10px 20px;
-            border-radius: 3px;
             cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
         }
 
-        button[type="submit"]:hover {
-            background-color: #0056b3;
+        .form-section form button:hover {
+            background-color: #008754;
         }
 
-        .job {
-            margin-right: 5px;
+        #addEducationBtn {
+            margin-bottom: 10px;
+            display: inline-block;
+            margin-right: 10px;
+            background-color: #00a86b;
+            border: none;
         }
     </style>
-    <title>Resumes</title>
+    <title>Resume</title>
 </head>
 <body>
-
-
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
         <div class="navbar-links">
-            <!-- Navigation links -->
-            <a class="nav-link" aria-current="page" href="/">Home</a>
-            <a class="nav-link" href="/profile">Profile</a>
+            <a class="nav-link " aria-current="page" href="#">Home</a>
+            <a class="nav-link active" href="/profile">Profile</a>
             <a class="nav-link" href="/vacancies">Vacancies</a>
-            <a class="nav-link active" href="/resumes">Resumes</a>
+            <a class="nav-link" href="/jobresumes">Jobs</a>
+
         </div>
         <div class="right-buttons">
             <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>
@@ -216,45 +207,48 @@
 </nav>
 
 <div class="container">
-    <h1 class="vtxt">Resumes</h1>
-    <form action="/resumes" method="GET">
-        <label for="sort">Sort By:</label>
-        <select id="sort" name="sort">
-            <option value="date">Date</option>
-            <option value="clicks">Clicks</option>
-        </select>
-        <button type="submit">Sort</button>
-    </form>
+    <h1 class="vtxt">Resume</h1>
 
 
-    <#if resumes.content?size == 0>
-        <p>No vacancies found.</p>
-    <#else>
+    <ul>
+        <li><span class="publisher">Category:</span> ${resume.category}</li>
+        <li><span class="publisher">Resume Name:</span> ${resume.job}</li>
+        <li><span class="publisher">Expected Salary:</span> ${resume.expectedSalary}</li>
+
+    </ul>
+
+    <#if resume.education??>
+        <h1 class="vtxt">Education</h1>
         <ul>
-            <#list resumes.content as resume>
-                <a href="/resumes/info/${resume.id}">
-                    <li>
-                        <div class="publ"><span class="publisher">${resume.applicant.accountName}</span></div>
-                        <span class="job">${resume.job}</span>
-                        <span class="job">${resume.date}</span>
-                    </li>
-                </a>
-            </#list>
+            <li><span class="publisher">University:</span> ${resume.education.institutionName}</li>
+            <li><span class="publisher">Degree: </span>${resume.education.degree} </li>
+            <li><span class="publisher">Start date: </span> ${resume.education.startDate}</li>
+            <li><span class="publisher">End date: </span>${resume.education.endDate}</li>
         </ul>
     </#if>
 
 
-    <#if resumes.hasPrevious()>
-        <a class="pag" href="/resumes?page=${resumes.number - 1}">Previous Page</a>
+    <#if resume.jobExperience??>
+        <h1 class="vtxt">Experience</h1>
+        <ul>
+            <li><span class="publisher">Position:</span> ${resume.jobExperience.position}</li>
+            <li><span class="publisher">Start date:</span>${resume.jobExperience.startDate}</li>
+            <li><span class="publisher">End date:</span>${resume.jobExperience.endDate}</li>
+        </ul>
     </#if>
-    <#if resumes.hasNext()>
-        <a class="pag" href="/resumes?page=${resumes.number + 1}">Next Page</a>
+    <#if resume.contacts?size != 0>
+        <h1 class="vtxt">Contacts</h1>
+        <#list resume.contacts as contact>
+            <li><span class="publisher">${contact.type}</span> ${contact.value}</li>
+        </#list>
     </#if>
-    <script>
-        document.getElementById('logout').addEventListener('click', () => {
-            localStorage.removeItem('user')
-        })
-    </script>
+
+</div>
+<script>
+    document.getElementById('logout').addEventListener('click',()=>{
+        localStorage.removeItem('user')
+    })
+</script>
 
 </body>
 </html>
