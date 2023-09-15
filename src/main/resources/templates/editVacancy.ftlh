@@ -55,8 +55,6 @@
             color: #6c757d;
             pointer-events: none;
         }
-
-        /* Style for the "Sign In" and "Sign Up" buttons */
         .right-buttons {
             display: flex;
             align-items: center;
@@ -210,7 +208,7 @@
         </select><br><br>
 
         <label for="expected_salary">Salary (USD):</label>
-        <input type="number" id="expected_salary" name="expected_salary" required><br><br>
+        <input type="number" id="expected_salary" name="expected_salary" required min="0"><br><br>
 
         <label for="vacancy-description">Vacancy description:</label>
         <input type="text" id="vacancy-description" name="vacancy-description" required><br><br>
@@ -218,10 +216,10 @@
 
         <h1>Required experience</h1>
         <label for="from_year">From:</label>
-        <input type="number" id="from_year" name="from_year" placeholder="Enter the start" required>
+        <input type="number" id="from_year" name="from_year" placeholder="Enter the start" required min="0">
 
         <label for="till_year">Till:</label>
-        <input type="number" id="till_year" name="till_year" placeholder="Enter the end" required>
+        <input type="number" id="till_year" name="till_year" placeholder="Enter the end" required min="0">
 
 
         <a class="nav-link active" href="#"><input type="submit" value="Submit"></a>

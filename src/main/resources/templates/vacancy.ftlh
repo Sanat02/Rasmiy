@@ -168,21 +168,6 @@
     <title>Specific Vacancy</title>
 </head>
 <body>
-
-<#--<nav class="navbar navbar-expand-lg bg-body-tertiary">-->
-<#--    <div class="container-fluid">-->
-<#--        <a class="navbar-brand" href="#">Navbar</a>-->
-<#--        <div class="navbar-links">-->
-<#--            <a class="nav-link" aria-current="page" href="/">Home</a>-->
-<#--            <a class="nav-link " href="/profile">Profile</a>-->
-<#--            <a class="nav-link active" href="/vacancies">Vacancies</a>-->
-<#--        </div>-->
-<#--&lt;#&ndash;        <div class="right-buttons">&ndash;&gt;-->
-<#--&lt;#&ndash;            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>&ndash;&gt;-->
-<#--&lt;#&ndash;        </div>&ndash;&gt;-->
-<#--    </div>-->
-<#--</nav>-->
-
 <div class="container">
     <h1 class="job-title">Company:${employer.accountName}</h1>
     <div class="salary">Phone: ${employer.phoneNumber}</div>

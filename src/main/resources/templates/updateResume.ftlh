@@ -252,7 +252,7 @@
         </select><br><br>
 
         <label for="expected_salary">Expected Salary (USD):</label>
-        <input type="number" id="expected_salary" name="expected_salary" required><br><br>
+        <input type="number" id="expected_salary" name="expected_salary" required min="0"><br><br>
 
         <button type="button" class="educationbtn" id="edubtn">Education</button>
         <div class="secondForm" id="secondForm" style="display: none;">

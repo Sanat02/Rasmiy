@@ -75,8 +75,6 @@
             color: #6c757d;
             pointer-events: none;
         }
-
-        /* Style for the "Sign In" and "Sign Up" buttons */
         .right-buttons {
             display: flex;
             align-items: center;
@@ -203,7 +201,6 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
         <div class="navbar-links">
-            <!-- Navigation links -->
             <a class="nav-link" aria-current="page" href="/">Home</a>
             <a class="nav-link" href="/profile">Profile</a>
             <a class="nav-link" href="/vacancies">Vacancies</a>
