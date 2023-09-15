@@ -61,4 +61,6 @@ databaseChangeLog:
       file: db/changelog/initial/033_add_constraintsfk_chat.yaml
   - include:
       file: db/changelog/initial/034_add_constraintfk_vacancy.yaml
+  - include:
+      file: db/changelog/initial/036_add_token_reset_password.yaml
 
