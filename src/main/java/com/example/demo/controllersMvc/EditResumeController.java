@@ -33,7 +33,7 @@ public class EditResumeController {
             @RequestParam(name = "sort", defaultValue = "resumeDate") String sortField,
             Model model
     ) {
-        Page<ResumeDto> resumes = resumeService.getAllResumes(page,PAGE_SIZE,sortField);
+        Page<ResumeDto> resumes = resumeService.getAllResumes(page, PAGE_SIZE, sortField);
         model.addAttribute("resumes", resumes);
         return "resumes";
     }
@@ -145,6 +145,9 @@ public class EditResumeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
         ResumeDto resumeDto = resumeService.getResumeById(resumeId);
+        if (resumeDto == null) {
+            return "notExists";
+        }
         if (resumeDto.getApplicant().getId() == userDto.getId()) {
             model.addAttribute("resume", resumeDto);
             return "additionalResume";
@@ -158,6 +161,9 @@ public class EditResumeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
         ResumeDto resumeDto = resumeService.getResumeById(resumeId);
+        if (resumeDto == null) {
+            return "notExists";
+        }
         if (resumeDto.getApplicant().getId() == userDto.getId()) {
             model.addAttribute("resume", resumeDto);
             return "education";
@@ -171,6 +177,9 @@ public class EditResumeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
         ResumeDto resumeDto = resumeService.getResumeById(resumeId);
+        if (resumeDto == null) {
+            return "notExists";
+        }
         if (resumeDto.getApplicant().getId() == userDto.getId()) {
             model.addAttribute("resume", resumeDto);
             return "experience";
@@ -184,6 +193,9 @@ public class EditResumeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
         ResumeDto resumeDto = resumeService.getResumeById(resumeId);
+        if (resumeDto == null) {
+            return "notExists";
+        }
         if (resumeDto.getApplicant().getId() == userDto.getId()) {
             model.addAttribute("resume", resumeDto);
             return "contacts";
@@ -283,6 +295,9 @@ public class EditResumeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
         ResumeDto resumeDto = resumeService.getResumeById(resumeId);
+        if (resumeDto == null) {
+            return "notExists";
+        }
 
         if (resumeDto.getApplicant().getId() == userDto.getId()) {
             resumeService.deleteResume(resumeId);
@@ -298,6 +313,9 @@ public class EditResumeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
         ResumeDto resumeDto = resumeService.getResumeById(resumeId);
+        if (resumeDto == null) {
+            return "notExists";
+        }
 
         if (resumeDto.getApplicant().getId() == userDto.getId()) {
             resumeService.deleteResume(resumeId);

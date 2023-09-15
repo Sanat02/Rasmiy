@@ -5,6 +5,7 @@ import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.dto.WhoInterestedDto;
 import com.example.demo.enums.AccountType;
+import com.example.demo.model.JobResume;
 import com.example.demo.service.JobResumeService;
 import com.example.demo.service.UserService;
 import com.example.demo.service.WhoInterestedService;
@@ -77,12 +78,20 @@ public class EditJobResumeController {
 
     @GetMapping("/{jobResumeId}")
     public String getJobResume(Model model, @PathVariable int jobResumeId) {
-        JobResumeDto jobResumeDto = jobResumeService.mapToJobResumeDto(jobResumeService.getJobResumeById(jobResumeId).get());
+        JobResume jr = jobResumeService.getJobResumeById(jobResumeId).orElse(null);
+        if (jr == null) {
+            return "notExists";
+        }
+        JobResumeDto jobResumeDto = jobResumeService.mapToJobResumeDto(jr);
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth.getName().equals("anonymousUser")) {
             model.addAttribute("username", null);
         } else {
             UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
+            if (jobResumeDto.getUser().getId() != userDto.getId()) {
+                return "prohibited";
+            }
             model.addAttribute("username", auth.getName());
             AccountType accountType = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).
                     orElse(null)).getAccountType();
@@ -104,7 +113,11 @@ public class EditJobResumeController {
     public String deleteJobResume(@PathVariable int jobResumeId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
-        JobResumeDto jobResumeDto = jobResumeService.mapToJobResumeDto(jobResumeService.getJobResumeById(jobResumeId).get());
+        JobResume jr = jobResumeService.getJobResumeById(jobResumeId).orElse(null);
+        if (jr == null) {
+            return "notExists";
+        }
+        JobResumeDto jobResumeDto = jobResumeService.mapToJobResumeDto(jr);
         if (jobResumeDto.getUser().getId() == userDto.getId()) {
             jobResumeService.deleteJobResume(jobResumeId);
             return "redirect:/profile";
@@ -118,7 +131,11 @@ public class EditJobResumeController {
     public String editJobResume(Model model, @PathVariable int jobResumeId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
-        JobResumeDto jobResumeDto = jobResumeService.mapToJobResumeDto(jobResumeService.getJobResumeById(jobResumeId).get());
+        JobResume jr = jobResumeService.getJobResumeById(jobResumeId).orElse(null);
+        if (jr == null) {
+            return "notExists";
+        }
+        JobResumeDto jobResumeDto = jobResumeService.mapToJobResumeDto(jr);
         if (jobResumeDto.getUser().getId() == userDto.getId()) {
             model.addAttribute("jobresume", jobResumeDto);
             return "updateVacancy";

@@ -71,7 +71,6 @@ public class UserService {
 
     public Optional<User> getUserById(int id) {
         log.info("Got user by id:" + id);
-        log.info("ROLE:"+userRepository.findById(id).get().getRole().getRole());
         return userRepository.findById(id);
     }
 

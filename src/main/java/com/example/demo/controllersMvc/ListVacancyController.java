@@ -6,6 +6,7 @@ import com.example.demo.dto.JobListDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.enums.AccountType;
 import com.example.demo.model.Chat;
+import com.example.demo.model.User;
 import com.example.demo.service.ChatService;
 import com.example.demo.service.JobResumeService;
 import com.example.demo.service.JobsListService;
@@ -72,7 +73,11 @@ public class ListVacancyController {
 
     @GetMapping("{userId}")
     public String getInfo(@PathVariable int userId, Model model) {
-        UserDto employerDto = userService.mapToUserDto(userService.getUserById(userId).orElse(null));
+        User user = userService.getUserById(userId).orElse(null);
+        if (user == null) {
+            return "notExists";
+        }
+        UserDto employerDto = userService.mapToUserDto(user);
         employerDto.setJobResumes(jobResumeService.getJobResumesByUserId(employerDto.getId()));
         model.addAttribute("employer", employerDto);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
