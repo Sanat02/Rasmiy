@@ -70,6 +70,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/register")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/reset")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/vacancies")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/vacancies/{userId}")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/resumes")).hasAuthority("EMPLOYER")
@@ -86,6 +87,7 @@ public class SecurityConfig {
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/resumes/{resumeId}/delete")).hasAuthority("JOB_SEEKER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/resumes/edit/{resumeId}")).hasAuthority("JOB_SEEKER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/resumes/info/{resumeId}")).hasAuthority("EMPLOYER")
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/forgot")).permitAll()
                         .anyRequest().authenticated()
 
                 );

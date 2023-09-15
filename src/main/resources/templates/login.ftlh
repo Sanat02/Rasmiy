@@ -155,7 +155,7 @@
         Don't have an account? <a href="/register">Register</a>
     </div>
     <div class="register-option">
-        <a href="/register">Forgot password?</a>
+        Forgot password? <a href="/forgot">Reset</a>
     </div>
 
 </div>

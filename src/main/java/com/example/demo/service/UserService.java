@@ -5,14 +5,22 @@ import com.example.demo.dto.UserDto;
 import com.example.demo.enums.AccountType;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.util.Utility;
+import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,6 +33,7 @@ public class UserService {
     private final ProfileImageService profileImageService;
     private final PasswordEncoder encoder;
     private final RoleService roleService;
+    private final EmailService emailService;
 
 
     public List<UserDto> getAllUsers() {
@@ -105,6 +114,7 @@ public class UserService {
                     .password(user.getPassword())
                     .phoneNumber(user.getPhoneNumber())
                     .profileImage(profileImageService.getImageByUserId(user.getId()))
+                    .resetPasswordToken(user.getResetPasswordToken())
                     .build();
         } else {
             return null;
@@ -117,4 +127,31 @@ public class UserService {
         }
         return AccountType.JOB_SEEKER;
     }
+
+    private void updateResetPasswordToken(String token, String email) {
+        User user = userRepository.findUserByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+        user.setResetPasswordToken(token);
+        userRepository.saveAndFlush(user);
+    }
+
+    public UserDto getByResetPasswdToken(String token) {
+        User user = userRepository.findByResetPasswordToken(token).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+        return mapToUserDto(user);
+    }
+
+    public void updatePassword(UserDto userDto, String newPasswd) {
+        User u = userRepository.findUserByEmail(userDto.getEmail()).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+        u.setResetPasswordToken(null);
+        u.setPassword(encoder.encode(newPasswd));
+        userRepository.saveAndFlush(u);
+    }
+
+    public void makeResetPasswdLink(HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
+        String email = request.getParameter("email");
+        String token = UUID.randomUUID().toString();
+        updateResetPasswordToken(token, email);
+        String resetPasswordLink = Utility.getSiteUrl(request) + "/forgot?token=" + token;
+        emailService.sendEmail(email, resetPasswordLink);
+    }
+
 }
