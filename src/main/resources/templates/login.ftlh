@@ -1,3 +1,4 @@
+<#import "spring.ftl" as spring>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -135,27 +136,27 @@
 </head>
 <body>
 <div class="container">
-    <h2>Login</h2>
+    <h2><@spring.message 'login'/></h2>
     <form action="/login" method="post" id="login-form">
         <#if _csrf??>
             <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}"
                    value="${(_csrf.token)!'csrf-token'}"/>
 
         </#if>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="username" placeholder="Enter your email address" required>
+        <label for="email"><@spring.message 'email'/>:</label>
+        <input type="email" id="email" name="username" placeholder="<@spring.message 'text.email'/>" required>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        <label for="password"><@spring.message 'password'/>:</label>
+        <input type="password" id="password" name="password" placeholder="<@spring.message 'text.password'/>" required>
 
-        <input type="submit" value="Login">
+        <input type="submit" value="<@spring.message 'login'/>">
     </form>
 
     <div class="register-option">
-        Don't have an account? <a href="/register">Register</a>
+        <@spring.message 'no.account'/> <a href="/register"><@spring.message 'navbar.user.signup'/></a>
     </div>
     <div class="register-option">
-        Forgot password? <a href="/forgot">Reset</a>
+        <@spring.message 'forgot'/> <a href="/forgot"><@spring.message 'reset'/></a>
     </div>
 
 </div>

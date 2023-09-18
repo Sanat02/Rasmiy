@@ -269,7 +269,7 @@
         <a class="pag" href="/vacancies?page=${vacancies.number - 1}"><@spring.message 'button.previous'/></a>
     </#if>
     <#if vacancies.hasNext()>
-        <a class="pag" href="/vacancies?page=${vacancies.number + 1}">><@spring.message 'button.next'/></a>
+        <a class="pag" href="/vacancies?page=${vacancies.number + 1}"><@spring.message 'button.next'/></a>
     </#if>
 </div>
 <script>
