@@ -1,4 +1,3 @@
-
 <#import "spring.ftl" as spring>
 <!DOCTYPE html>
 <html>
@@ -82,7 +81,6 @@
             background-color: #0056b3;
         }
     </style>
-    <title>Home</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">

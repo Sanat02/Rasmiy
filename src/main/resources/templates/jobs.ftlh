@@ -1,3 +1,5 @@
+
+<#import "spring.ftl" as spring>
 <!DOCTYPE html>
 <html>
 <head>
@@ -137,10 +139,6 @@
             display: inline-block;
         }
 
-        .cat {
-            width: 150px;
-            display: inline-block;
-        }
 
         .pag {
             margin-left: 15px;
@@ -199,33 +197,32 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#"><@spring.message 'navbar.logo'/></a>
         <div class="navbar-links">
-            <a class="nav-link" aria-current="page" href="/">Home</a>
-            <a class="nav-link" href="/profile">Profile</a>
-            <a class="nav-link" href="/vacancies">Vacancies</a>
-            <a class="nav-link active" href="#">Jobs</a>
+            <a class="nav-link" aria-current="page" href="/"><@spring.message 'navbar.navi.home'/></a>
+            <a class="nav-link" href="/profile"><@spring.message 'navbar.navi.profile'/></a>
+            <a class="nav-link" href="/vacancies"><@spring.message 'navbar.navi.vacancies'/></a>
+            <a class="nav-link active" href="#"><@spring.message 'navbar.navi.jobs'/></a>
         </div>
         <div class="right-buttons">
-            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>
+            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout"><@spring.message 'logout'/></a>
         </div>
     </div>
 </nav>
 
 <div class="container">
-    <h1 class="vtxt">Job Resumes</h1>
     <form action="/jobresumes" method="GET">
         <#if _csrf??>
             <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}"
                    value="${(_csrf.token)!'csrf-token'}"/>
 
         </#if>
-        <label for="sort">Sort By:</label>
+        <label for="sort"><@spring.message 'text.sort'/>:</label>
         <select id="sort" name="sort">
-            <option name="date" value="date">Date</option>
-            <option name="clicks" value="clicks">Clicks</option>
+            <option name="date" value="date"><@spring.message 'text.date'/></option>
+            <option name="clicks" value="clicks"><@spring.message 'text.clicks'/></option>
         </select>
-        <button type="submit">Sort</button>
+        <button type="submit"><@spring.message 'button.sort'/></button>
     </form>
 
 
@@ -247,10 +244,10 @@
 
 
     <#if jobs.hasPrevious()>
-        <a class="pag" href="/jobresumes?page=${jobs.number - 1}">Previous Page</a>
+        <a class="pag" href="/jobresumes?page=${jobs.number - 1}"><@spring.message 'button.previous'/>/a>
     </#if>
     <#if jobs.hasNext()>
-        <a class="pag" href="/jobresumes?page=${jobs.number + 1}">Next Page</a>
+        <a class="pag" href="/jobresumes?page=${jobs.number + 1}"><@spring.message 'button.next'/></a>
     </#if>
     <script>
         document.getElementById('logout').addEventListener('click', () => {

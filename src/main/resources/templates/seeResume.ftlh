@@ -1,3 +1,4 @@
+<#import "spring.ftl" as spring>
 <!DOCTYPE html>
 <html>
 <head>
@@ -192,52 +193,52 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#"><@spring.message 'navbar.logo'/></a>
         <div class="navbar-links">
-            <a class="nav-link " aria-current="page" href="#">Home</a>
-            <a class="nav-link active" href="/profile">Profile</a>
-            <a class="nav-link" href="/vacancies">Vacancies</a>
-            <a class="nav-link" href="/jobresumes">Jobs</a>
+            <a class="nav-link " aria-current="page" href="#"><@spring.message 'navbar.navi.home'/></a>
+            <a class="nav-link active" href="/profile"><@spring.message 'navbar.navi.profile'/></a>
+            <a class="nav-link" href="/vacancies"><@spring.message 'navbar.navi.vacancies'/></a>
+            <a class="nav-link" href="/jobresumes"><@spring.message 'navbar.navi.jobs'/></a>
 
         </div>
         <div class="right-buttons">
-            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>
+            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout"><@spring.message 'logout'/></a>
         </div>
     </div>
 </nav>
 
 <div class="container">
-    <h1 class="vtxt">Resume</h1>
+    <h1 class="vtxt"><@spring.message 'resume'/></h1>
 
 
     <ul>
-        <li><span class="publisher">Category:</span> ${resume.category}</li>
-        <li><span class="publisher">Resume Name:</span> ${resume.job}</li>
-        <li><span class="publisher">Expected Salary:</span> ${resume.expectedSalary}</li>
+        <li><span class="publisher"><@spring.message 'category'/></span> ${resume.category}</li>
+        <li><span class="publisher"><@spring.message 'resume.name'/>:</span> ${resume.job}</li>
+        <li><span class="publisher"><@spring.message 'salary'/></span> ${resume.expectedSalary}</li>
 
     </ul>
 
     <#if resume.education??>
-        <h1 class="vtxt">Education</h1>
+        <h1 class="vtxt"><@spring.message 'education'/></h1>
         <ul>
-            <li><span class="publisher">University:</span> ${resume.education.institutionName}</li>
-            <li><span class="publisher">Degree: </span>${resume.education.degree} </li>
-            <li><span class="publisher">Start date: </span> ${resume.education.startDate}</li>
-            <li><span class="publisher">End date: </span>${resume.education.endDate}</li>
+            <li><span class="publisher"><@spring.message 'university'/></span> ${resume.education.institutionName}</li>
+            <li><span class="publisher"><@spring.message 'degree'/> </span>${resume.education.degree} </li>
+            <li><span class="publisher"><@spring.message 'start.date'/>: </span> ${resume.education.startDate}</li>
+            <li><span class="publisher"><@spring.message 'end.date'/> </span>${resume.education.endDate}</li>
         </ul>
     </#if>
 
 
     <#if resume.jobExperience??>
-        <h1 class="vtxt">Experience</h1>
+        <h1 class="vtxt"><@spring.message 'experience'/></h1>
         <ul>
-            <li><span class="publisher">Position:</span> ${resume.jobExperience.position}</li>
-            <li><span class="publisher">Start date:</span>${resume.jobExperience.startDate}</li>
-            <li><span class="publisher">End date:</span>${resume.jobExperience.endDate}</li>
+            <li><span class="publisher"><@spring.message 'position'/></span> ${resume.jobExperience.position}</li>
+            <li><span class="publisher"><@spring.message 'start.date'/></span>${resume.jobExperience.startDate}</li>
+            <li><span class="publisher"><@spring.message 'end.date'/></span>${resume.jobExperience.endDate}</li>
         </ul>
     </#if>
     <#if resume.contacts?size != 0>
-        <h1 class="vtxt">Contacts</h1>
+        <h1 class="vtxt"><@spring.message 'contacts'/></h1>
         <#list resume.contacts as contact>
             <li><span class="publisher">${contact.type}</span> ${contact.value}</li>
         </#list>

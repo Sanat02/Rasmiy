@@ -1,3 +1,4 @@
+<#import "spring.ftl" as spring>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,7 @@
 </head>
 <body>
 <div class="text-center">
-    <h2>Reset Your Password</h2>
+    <h2><@spring.message 'reset'/></h2>
     <#if error??>
         <b class="text-danger">${error}</b>
     </#if>
@@ -21,10 +22,10 @@
                            value="${(_csrf.token)!'csrf-token'}"/>
                 </#if>
                 <input type="hidden" name="token" value="${token!}">
-                <input type="password" name="password" class="form-control"
-                       placeholder="Enter your new password" required autofocus/>
+                <input type="password" name="<@spring.message 'password'/>" class="form-control"
+                       placeholder="<@spring.message 'text.password'/>" required autofocus/>
                 <p class="text-center">
-                    <button type="submit" class="btn btn-primary mt-3">Change Password</button>
+                    <button type="submit" class="btn btn-primary mt-3"><@spring.message 'submit'/></button>
                 </p>
             </form>
         </div>
