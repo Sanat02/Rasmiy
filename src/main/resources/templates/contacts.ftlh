@@ -1,3 +1,4 @@
+<#import "spring.ftl" as spring>
 <!DOCTYPE html>
 <html>
 <head>
@@ -177,20 +178,20 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#"><@spring.message 'navbar.logo'/></a>
         <div class="navbar-links">
-            <a class="nav-link " aria-current="page" href="#">Home</a>
-            <a class="nav-link active" href="/profile">Profile</a>
-            <a class="nav-link" href="/vacancies">Vacancies</a>
-            <a class="nav-link" href="/jobresumes">Jobs</a>
+            <a class="nav-link " aria-current="page" href="#"><@spring.message 'navbar.navi.home'/></a>
+            <a class="nav-link active" href="/profile"><@spring.message 'navbar.navi.profile'/></a>
+            <a class="nav-link" href="/vacancies"><@spring.message 'navbar.navi.vacancies'/></a>
+            <a class="nav-link" href="/jobresumes"><@spring.message 'navbar.navi.jobs'/></a>
         </div>
         <div class="right-buttons">
-            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>
+            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout"><@spring.message 'logout'/></a>
         </div>
     </div>
 </nav>
 <div class="container">
-    <h1 class="vtxt">Contacts</h1>
+    <h1 class="vtxt"><@spring.message 'contacts'/></h1>
     <div class="form-section" id="experienceForm">
         <form action="/resumes/${resume.id}/contacts" method="post">
             <#if _csrf??>
@@ -198,9 +199,9 @@
                        value="${(_csrf.token)!'csrf-token'}"/>
 
             </#if>
-            <label for="phone">Phone:</label>
+            <label for="phone"><@spring.message 'phone.number'/></label>
             <input type="tel" id="phone" name="phone">
-            <label for="email">Email:</label>
+            <label for="email"><@spring.message 'email'/>:</label>
             <input type="email" id="email" name="email">
             <label for="telegram">Telegram:</label>
             <input type="text" id="telegram" name="telegram">
@@ -208,7 +209,7 @@
             <input type="text" id="linkedin" name="linkedin">
             <label for="facebook">Facebook:</label>
             <input type="text" id="facebook" name="facebook">
-            <button type="submit">Save Contacts</button>
+            <button type="submit"><@spring.message 'save'/></button>
         </form>
     </div>
 

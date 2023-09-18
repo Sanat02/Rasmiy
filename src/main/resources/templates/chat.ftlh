@@ -1,3 +1,4 @@
+<#import "spring.ftl" as spring>
 <!DOCTYPE html>
 <html>
 <head>
@@ -157,15 +158,15 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#"><@spring.message 'navbar.logo'/></a>
         <div class="navbar-links">
-            <a class="nav-link" aria-current="page" href="#">Home</a>
-            <a class="nav-link" href="/profile">Profile</a>
-            <a class="nav-link active" href="/vacancies">Vacancies</a>
-            <a class="nav-link" href="/jobresumes">Jobs</a>
+            <a class="nav-link" aria-current="page" href="#"><@spring.message 'navbar.navi.home'/></a>
+            <a class="nav-link" href="/profile"><@spring.message 'navbar.navi.profile'/></a>
+            <a class="nav-link active" href="/vacancies"><@spring.message 'navbar.navi.vacancies'/></a>
+            <a class="nav-link" href="/jobresumes"><@spring.message 'navbar.navi.jobs'/></a>
         </div>
         <div class="right-buttons">
-            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>
+            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout"><@spring.message 'logout'/></a>
         </div>
     </div>
 </nav>
@@ -191,7 +192,7 @@
                 <meta name="_csrf_header" content="${_csrf.headerName}"/>
                 <meta name="_csrf_token" content="${_csrf.token}"/>
                 <input id="message" type="text" placeholder="Type a message" required>
-                <input type="submit" value="Submit">
+                <input type="submit" value="<@spring.message 'submit'/>">
             </form>
         </div>
     </div>
