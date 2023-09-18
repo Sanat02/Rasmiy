@@ -1,10 +1,9 @@
 package com.example.demo.controllersMvc;
 
+
 import com.example.demo.enums.AccountType;
-import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import jakarta.mail.MessagingException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
