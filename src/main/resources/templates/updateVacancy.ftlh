@@ -1,3 +1,4 @@
+<#import "spring.ftl" as spring>
 <!DOCTYPE html>
 <html>
 <head>
@@ -178,21 +179,20 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#"><@spring.message 'navbar.logo'/></a>
         <div class="navbar-links">
             <!-- Navigation links -->
-            <a class="nav-link " aria-current="page" href="/">Home</a>
-            <a class="nav-link active" href="/profile">Profile</a>
-            <a class="nav-link" href="/vacancies">Vacancies</a>
-            <a class="nav-link" href="/resumes">Resumes</a>
+            <a class="nav-link " aria-current="page" href="/"><@spring.message 'navbar.navi.home'/></a>
+            <a class="nav-link active" href="/profile"><@spring.message 'navbar.navi.profile'/></a>
+            <a class="nav-link" href="/vacancies"><@spring.message 'navbar.navi.vacancies'/></a>
+            <a class="nav-link" href="/resumes"><@spring.message 'navbar.navi.resumes'/></a>
         </div>
         <div class="right-buttons">
-            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>
+            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout"><@spring.message 'logout'/></a>
         </div>
     </div>
 </nav>
 <div class="container">
-    <h2>Vacancy Update Form ID:${jobresume.id}</h2>
     <form action="/jobresumes/edit/${jobresume.id}" method="post">
         <#if _csrf??>
             <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}"
@@ -200,35 +200,35 @@
 
         </#if>
 
-        <label for="resume_name">Name of the vacancy:</label>
+        <label for="resume_name"><@spring.message 'name.vacancy'/></label>
         <input type="text" id="resume_name" name="resume_name" required><br><br>
 
-        <label for="category">Category:</label>
+        <label for="category"><@spring.message 'category'/></label>
         <select id="category" name="category" required>
-            <option value="">Select category</option>
+            <option value=""><@spring.message 'select.category'/></option>
             <option value="1">IT</option>
-            <option value="2">Marketing</option>
-            <option value="3">Finance</option>
-            <option value="4">Education</option>
-            <option value="5">Human Resources</option>
+            <option value="2"><@spring.message 'marketing'/></option>
+            <option value="3"><@spring.message 'finance'/></option>
+            <option value="4"><@spring.message 'education'/></option>
+            <option value="5"><@spring.message 'human.resources'/></option>
         </select><br><br>
 
-        <label for="expected_salary">Salary (USD):</label>
+        <label for="expected_salary"><@spring.message 'salary'/></label>
         <input type="number" id="expected_salary" name="expected_salary" required><br><br>
 
-        <label for="vacancy-description">Vacancy description:</label>
+        <label for="vacancy-description"><@spring.message 'vacancy.description'/></label>
         <input type="text" id="vacancy-description" name="vacancy-description" required><br><br>
 
 
-        <h1>Required experience</h1>
-        <label for="from_year">From:</label>
+        <h1><@spring.message 'required.experience'/></h1>
+        <label for="from_year"><@spring.message 'from'/></label>
         <input type="number" id="from_year" name="from_year" placeholder="Enter the start" required>
 
-        <label for="till_year">Till:</label>
+        <label for="till_year"><@spring.message 'till'/></label>
         <input type="number" id="till_year" name="till_year" placeholder="Enter the end" required>
 
 
-        <a class="nav-link active" href="#"><input type="submit" value="Submit"></a>
+        <a class="nav-link active" href="#"><input type="submit" value="<@spring.message 'submit'/>"></a>
     </form>
 
 

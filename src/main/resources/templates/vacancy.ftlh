@@ -1,3 +1,4 @@
+<#import "spring.ftl" as spring>
 <!DOCTYPE html>
 <html>
 <head>
@@ -165,31 +166,30 @@
 
 
     </style>
-    <title>Specific Vacancy</title>
 </head>
 <body>
 <div class="container">
-    <h1 class="job-title">Company:${employer.accountName}</h1>
-    <div class="salary">Phone: ${employer.phoneNumber}</div>
+    <h1 class="job-title"><@spring.message 'company.name'/>:${employer.accountName}</h1>
+    <div class="salary"><@spring.message 'phone.number'/> ${employer.phoneNumber}</div>
     <div class="experience">Email:${employer.email}</div>
     <div class="job-description">
 
 
-        <h2>Available Job Resumes</h2>
+
         <#if employer.jobResumes?size == 0>
-            <p>No job resumes found!</p>
+            <p><@spring.message 'no.vacancies'/></p>
         <#else>
             <div class="slider-container">
                 <#list employer.jobResumes as jresume>
                     <div class="resume-item">
                         <div class="resumeinfo">
                             <div class="resumeName">${jresume.jobTitle}</div>
-                            <div>Date of the update:</div>
+                            <div><@spring.message 'date.update'/></div>
                             <div>02/02/2022</div>
                         </div>
                         <div class="rbtn">
                             <a class="nav-link active" href="/jobresumes/${jresume.id}">
-                                <div class="btn1">See</div>
+                                <div class="btn1"><@spring.message 'see'/></div>
                             </a>
                         </div>
                     </div>
@@ -198,7 +198,7 @@
         </#if>
         <#if username?? && type == "JOB_SEEKER">
             <a href="/vacancies/${employer.id}/chat">
-                <button class="apply-btn">Chat</button>
+                <button class="apply-btn"><@spring.message 'chat'/></button>
             </a>
         </#if>
     </div>

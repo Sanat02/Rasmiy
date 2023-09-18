@@ -85,8 +85,7 @@
             color: #6c757d;
             pointer-events: none;
         }
-
-        /* Style for the "Sign In" and "Sign Up" buttons */
+        
         .right-buttons {
             display: flex;
             align-items: center;

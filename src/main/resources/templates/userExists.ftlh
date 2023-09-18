@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Error</title>
 </head>
 <body>
 <div><h1>The user already Exists</h1></div>
