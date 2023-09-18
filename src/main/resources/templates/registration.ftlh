@@ -1,9 +1,9 @@
+<#import "spring.ftl" as spring>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration and Login Page</title>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -137,7 +137,7 @@
 </head>
 <body>
 <div class="container">
-    <h2>Registration</h2>
+    <h2><@spring.message 'navbar.user.signup'/></h2>
     <form action="/register" method="post">
         <#if _csrf??>
             <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}"
@@ -145,41 +145,30 @@
 
         </#if>
 
-        <label for="account_name">Account Name:</label>
-        <input type="text" id="account_name" name="account_name" placeholder="Enter your account name" required>
+        <label for="account_name"><@spring.message 'account.name'/></label>
+        <input type="text" id="account_name" name="account_name" placeholder="<@spring.message 'enter.account.name'/>" required>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+        <label for="email"><@spring.message 'email'/>:</label>
+        <input type="email" id="email" name="email" placeholder="<@spring.message 'text.email'/>" required>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        <label for="password"><@spring.message 'password'/>:</label>
+        <input type="password" id="password" name="password" placeholder="<@spring.message 'text.password'/>" required>
 
-        <label for="account_type">Account Type:</label>
+        <label for="account_type"><@spring.message 'account.type'/></label>
         <select id="account_type" name="account_type" required>
-            <option value="">Select account type</option>
-            <option value="jobseeker">Job Seeker</option>
-            <option value="employer">Employer</option>
+            <option value=""><@spring.message 'select.account.type'/></option>
+            <option value="jobseeker"><@spring.message 'job.seeker'/></option>
+            <option value="employer"><@spring.message 'employer'/></option>
         </select>
 
-        <label for="phone_number">Phone Number:</label>
-        <input type="tel" id="phone_number" name="phone_number" placeholder="Enter your phone number" required>
+        <label for="phone_number"><@spring.message 'phone.number'/></label>
+        <input type="tel" id="phone_number" name="phone_number" placeholder="<@spring.message 'enter.phone.number'/>" required>
 
-        <input type="submit" value="Register">
+        <input type="submit" value="<@spring.message 'register'/>">
     </form>
 
     <div class="login-option">
-        Already have an account? <a href="/login">Login</a>
-    </div>
-
-    <div class="login-divider">
-        <hr>
-        <span class="or-text">OR</span>
-    </div>
-
-    <div class="social-login">
-        <div class="social-login-btn">
-            <i class="fab fa-google"></i> Sign in with Google
-        </div>
+        <@spring.message 'have.account'/> <a href="/login"><@spring.message 'login'/></a>
     </div>
 </div>
 
