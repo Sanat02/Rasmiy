@@ -1,3 +1,4 @@
+<#import "spring.ftl" as spring>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,7 +57,6 @@
             pointer-events: none;
         }
 
-        /* Style for the "Sign In" and "Sign Up" buttons */
         .right-buttons {
             display: flex;
             align-items: center;
@@ -216,21 +216,20 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#"><@spring.message 'navbar.logo'/></a>
         <div class="navbar-links">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-            <a class="nav-link" href="/profile">Profile</a>
-            <a class="nav-link" href="/vacancies">Vacancies</a>
-            <a class="nav-link" href="/jobresumes">Jobs</a>
+            <a class="nav-link active" aria-current="page" href="#"><@spring.message 'navbar.navi.home'/></a>
+            <a class="nav-link" href="/profile"><@spring.message 'navbar.navi.profile'/></a>
+            <a class="nav-link" href="/vacancies"><@spring.message 'navbar.navi.vacancies'/></a>
+            <a class="nav-link" href="/jobresumes"><@spring.message 'navbar.navi.jobs'/></a>
         </div>
         <div class="right-buttons">
-            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>
+            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout"><@spring.message 'logout'/></a>
         </div>
     </div>
 </nav>
 
 <div class="container">
-    <h2>Resume UPDATE Form</h2>
     <form action="/resumes/add" method="post" id="resumeForm">
         <#if _csrf??>
             <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}"
@@ -238,48 +237,48 @@
 
         </#if>
 
-        <label for="resume_name">Name of the resume:</label>
+        <label for="resume_name"><@spring.message 'resume.name'/></label>
         <input type="text" id="resume_name" name="resume_name" required><br><br>
 
-        <label for="category">Category:</label>
+        <label for="category"><@spring.message 'category'/></label>
         <select id="category" name="category" required>
-            <option value="">Select category</option>
+            <option value=""><@spring.message 'select.category'/></option>
             <option value="1">IT</option>
-            <option value="2">Marketing</option>
-            <option value="3">Finance</option>
-            <option value="4">Education</option>
-            <option value="5">Human Resources</option>
+            <option value="2"><@spring.message 'marketing'/></option>
+            <option value="3"><@spring.message 'finance'/></option>
+            <option value="4"><@spring.message 'education'/></option>
+            <option value="5"><@spring.message 'human.resources'/></option>
         </select><br><br>
 
-        <label for="expected_salary">Expected Salary (USD):</label>
+        <label for="expected_salary"><@spring.message 'salary'/></label>
         <input type="number" id="expected_salary" name="expected_salary" required min="0"><br><br>
 
-        <button type="button" class="educationbtn" id="edubtn">Education</button>
+        <button type="button" class="educationbtn" id="edubtn"><@spring.message 'education'/></button>
         <div class="secondForm" id="secondForm" style="display: none;">
-            <label for="university">University:</label>
+            <label for="university"><@spring.message 'university'/></label>
             <input id="edinput" type="text" id="university" name="university">
-            <label for="degree">Degree:</label>
+            <label for="degree"><@spring.message 'degree'/></label>
             <input id="edinput2" type="text" id="degree" name="degree">
-            <label for="startDate">Start Date:</label>
+            <label for="startDate"><@spring.message 'start.date'/></label>
             <input id="edinput3" type="date" id="startDate" name="startDate">
-            <label for="endDate">End Date:</label>
+            <label for="endDate"><@spring.message 'end.date'/></label>
             <input id="edinput4" type="date" id="endDate" name="endDate">
         </div>
 
-        <button type="button" class="educationbtn" id="expbtn">Experience</button>
+        <button type="button" class="educationbtn" id="expbtn"><@spring.message 'experience'/></button>
         <div class="secondForm" id="thirdForm" style="display: none;">
-            <label for="position">Position:</label>
+            <label for="position"><@spring.message 'position'/></label>
             <input id="exinput" type="text" id="position" name="position">
-            <label for="startDateJob">Start Date of job:</label>
+            <label for="startDateJob"><@spring.message 'start.date'/></label>
             <input id="exinput2" type="date" id="startDateJob" name="startDateJob">
-            <label for="endDateJob">End Date of job:</label>
+            <label for="endDateJob"><@spring.message 'end.date'/></label>
             <input id="exinput3" type="date" id="endDateJob" name="endDateJob">
         </div>
 
 
-        <button type="button" class="educationbtn" id="contactbtn">Contacts</button>
+        <button type="button" class="educationbtn" id="contactbtn"><@spring.message 'contacts'/></button>
         <div class="secondForm" id="fourthForm" style="display: none;">
-            <label for="phone">Phone:</label>
+            <label for="phone"><@spring.message 'phone.number'/></label>
             <input type="tel" id="phone" name="phone">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email">
@@ -291,7 +290,7 @@
             <input type="text" id="facebook" name="facebook">
         </div>
 
-        <button class="sbm" type="submit" onclick="validateAndSubmit()">UPDATE</button>
+        <button class="sbm" type="submit" onclick="validateAndSubmit()"><@spring.message 'update'/></button>
 
     </form>
 </div>

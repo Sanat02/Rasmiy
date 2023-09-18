@@ -1,3 +1,4 @@
+<#import "spring.ftl" as spring>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,6 @@
 
 
     </style>
-    <title>Profile Job Seeker</title>
 </head>
 <body>
 <form action="/images" method="post" enctype="multipart/form-data">
@@ -22,7 +22,7 @@
     </#if>
     <input type="file" name="files" multiple>
     <br><br>
-    <input type="submit" value="Upload">
+    <input type="submit" value="<@spring.message 'upload'/>">
 </form>
 </body>
 </html>

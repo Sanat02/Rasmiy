@@ -1,3 +1,4 @@
+<#import "spring.ftl" as spring>
 <!DOCTYPE html>
 <html>
 <head>
@@ -156,63 +157,53 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#"><@spring.message 'navbar.logo'/></a>
         <div class="navbar-links">
-            <a class="nav-link" aria-current="page" href="/">Home</a>
-            <#if username??><a class="nav-link" href="/profile">Profile</a></#if>
-            <a class="nav-link active" href="/vacancies">Vacancies</a>
-            <#if username?? && type == "EMPLOYER"><a class="nav-link " href="/resumes">Resumes</a></#if>
+            <a class="nav-link" aria-current="page" href="/"><@spring.message 'navbar.navi.home'/></a>
+            <#if username??><a class="nav-link" href="/profile"><@spring.message 'navbar.navi.profile'/></a></#if>
+            <a class="nav-link active" href="/vacancies"><@spring.message 'navbar.navi.vacancies'/></a>
+            <#if username?? && type == "EMPLOYER"><a class="nav-link " href="/resumes"><@spring.message 'navbar.navi.resumes'/></a></#if>
             <#if username?? && type == "JOB_SEEKER">
-                <a class="nav-link" href="/jobresumes">Jobs</a>
+                <a class="nav-link" href="/jobresumes"><@spring.message 'navbar.navi.jobs'/></a>
             </#if>
         </div>
         <div class="right-buttons">
-            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>
+            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout"><@spring.message 'logout'/></a>
         </div>
     </div>
 </nav>
 
 <div class="container">
-    <h1 class="job-title">Job:${jobresume.jobTitle}</h1>
-    <div class="salary">Salary: ${jobresume.salary}</div>
-    <div class="experience">Experience:${jobresume.experience}</div>
+    <h1 class="job-title"><@spring.message 'job'/>:${jobresume.jobTitle}</h1>
+    <div class="salary"><@spring.message 'salary'/>: ${jobresume.salary}</div>
+    <div class="experience"><@spring.message 'experience'/>:${jobresume.experience}</div>
     <div class="job-description">
-        <h2>Job Description:</h2>
+        <h2><@spring.message 'vacancy.description'/></h2>
         <p>
             ${jobresume.jobDescription}
         </p>
-        <p>
-            Key Responsibilities:
-        </p>
-        <ul>
-            <li>Design, code, test, and debug software applications</li>
-            <li>Collaborate with product managers and software architects to define technical requirements</li>
-            <li>Contribute to the development of new features and improvements</li>
-            <li>Perform code reviews and provide constructive feedback to team members</li>
-            <li>Participate in team meetings and contribute to the overall development process</li>
-        </ul>
     </div>
-    <div class="category">Category: ${jobresume.category}</div>
+    <div class="category"><@spring.message 'category'/> ${jobresume.category}</div>
 
     <#if type=="JOB_SEEKER">
         <#if isInterested>
             <a href="/click/delete/${jobresume.id}">
-                <button class="apply-btn2">Unclick</button>
+                <button class="apply-btn2"><@spring.message 'click'/></button>
             </a>
 
         <#else>
             <a href="/click/${jobresume.id}">
-                <button class="apply-btn">Click</button>
+                <button class="apply-btn"><@spring.message 'unclick'/></button>
             </a>
         </#if>
 
         <a href="/vacancies/${jobresume.user.id}/chat">
-            <button class="apply-btn">Chat</button>
+            <button class="apply-btn"><@spring.message 'chat'/></button>
         </a>
     </#if>
     <div class="contact-info">
-        <span>Contact Email: <a href="mailto:contact@example.com">${jobresume.user.email}</a></span>
-        <span>Contact Phone: <a href="tel:+123456789">${jobresume.user.phoneNumber}</a></span>
+        <span> Email: <a href="mailto:contact@example.com">${jobresume.user.email}</a></span>
+        <span><@spring.message 'phone.number'/> <a href="tel:+123456789">${jobresume.user.phoneNumber}</a></span>
     </div>
 </div>
 <script>
