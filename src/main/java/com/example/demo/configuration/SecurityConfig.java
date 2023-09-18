@@ -70,6 +70,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/register")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher( "/public-resource/**")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/reset")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/vacancies")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/vacancies/{userId}")).permitAll()

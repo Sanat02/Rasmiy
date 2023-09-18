@@ -1,3 +1,5 @@
+
+<#import "spring.ftl" as spring>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +57,7 @@
             pointer-events: none;
         }
 
-        /* Style for the "Sign In" and "Sign Up" buttons */
+
         .right-buttons {
             display: flex;
             align-items: center;
@@ -85,26 +87,26 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#"><@spring.message 'navbar.logo'/></a>
         <div class="navbar-links">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="#"><@spring.message 'navbar.navi.home'/></a>
             <#if username??>
-                <a class="nav-link" href="/profile">Profile</a>
+                <a class="nav-link" href="/profile"><@spring.message 'navbar.navi.profile'/></a>
             </#if>
-            <a class="nav-link" href="/vacancies">Vacancies</a>
+            <a class="nav-link" href="/vacancies"><@spring.message 'navbar.navi.vacancies'/></a>
             <#if username?? && type == "EMPLOYER">
-                <a class="nav-link" href="/resumes">Resumes</a>
+                <a class="nav-link" href="/resumes"><@spring.message 'navbar.navi.resumes'/></a>
             </#if>
             <#if username?? && type == "JOB_SEEKER">
-                <a class="nav-link" href="/jobresumes">Jobs</a>
+                <a class="nav-link" href="/jobresumes"><@spring.message 'navbar.navi.jobs'/></a>
             </#if>
         </div>
         <div class="right-buttons">
             <#if username??>
-                <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>
+                <a class="btn btn-primary btn-sign-in" href="/logout" id="logout"><@spring.message 'navbar.user.logout'/></a>
             <#else>
-                <a class="btn btn-primary btn-sign-in" href="/login">Sign In</a>
-                <a class="btn btn-success btn-sign-up" href="/register">Sign Up</a>
+                <a class="btn btn-primary btn-sign-in" href="/login"><@spring.message 'navbar.user.signin'/></a>
+                <a class="btn btn-success btn-sign-up" href="/register"><@spring.message 'navbar.user.signup'/></a>
 
             </#if>
         </div>
@@ -113,15 +115,15 @@
 <div class="container">
 
     <#if username??>
-        <h1>Hi ${username}</h1>
+        <h1><@spring.message 'navbar.user.hi'/>  ${username}</h1>
     <#else>
-        <h1>WELCOME TO HOMEPAGE</h1>
+        <h1><@spring.message 'navbar.user.welcome'/></h1>
     </#if>
-<script>
-    document.getElementById('logout').addEventListener('click',()=>{
-        localStorage.removeItem('user')
-    })
-</script>
+    <script>
+        document.getElementById('logout').addEventListener('click', () => {
+            localStorage.removeItem('user')
+        })
+    </script>
 
 </div>
 </body>

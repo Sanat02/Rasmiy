@@ -1,3 +1,4 @@
+<#import "spring.ftl" as spring>
 <!DOCTYPE html>
 <html>
 <head>
@@ -208,27 +209,26 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#"><@spring.message 'navbar.logo'/></a>
         <div class="navbar-links">
-            <a class="nav-link " aria-current="page" href="/">Home</a>
+            <a class="nav-link " aria-current="page" href="/"><@spring.message 'navbar.navi.home'/></a>
             <#if username??>
-                <a class="nav-link" href="/profile">Profile</a>
+                <a class="nav-link" href="/profile"><@spring.message 'navbar.navi.profile'/></a>
             </#if>
-            <a class="nav-link active" href="/vacancies">Vacancies</a>
+            <a class="nav-link active" href="/vacancies"><@spring.message 'navbar.navi.vacancies'/></a>
             <#if username?? && type=="EMPLOYER">
-                <a class="nav-link" href="/resumes">Resumes</a>
+                <a class="nav-link" href="/resumes"><@spring.message 'navbar.navi.resumes'/></a>
             </#if>
             <#if username?? && type=="JOB_SEEKER">
-                <a class="nav-link" href="/jobresumes">Jobs</a>
+                <a class="nav-link" href="/jobresumes"><@spring.message 'navbar.navi.jobs'/></a>
             </#if>
         </div>
         <div class="right-buttons">
             <#if username??>
-                <a class="btn btn-primary btn-sign-in" href="/logout" id="logout"> Log Out</a>
+                <a class="btn btn-primary btn-sign-in" href="/logout" id="logout"> <@spring.message 'navbar.user.logout'/></a>
             <#else>
-                <!-- "Sign In" and "Sign Up" buttons -->
-                <a class="btn btn-primary btn-sign-in" href="/login">Sign In</a>
-                <a class="btn btn-success btn-sign-up" href="/register">Sign Up</a>
+                <a class="btn btn-primary btn-sign-in" href="/login"><@spring.message 'navbar.user.signin'/></a>
+                <a class="btn btn-success btn-sign-up" href="/register"><@spring.message 'navbar.user.signup'/></a>
 
             </#if>
         </div>
@@ -236,18 +236,18 @@
 </nav>
 
 <div class="container">
-    <h1 class="vtxt">Vacancies</h1>
+    <h1 class="vtxt"><@spring.message 'navbar.navi.vacancies'/></h1>
     <form action="/vacancies" method="GET">
-        <label for="sort">Sort By:</label>
+        <label for="sort"><@spring.message 'text.sort'/>:</label>
         <select id="sort" name="sort">
-            <option value="date">Date</option>
-            <option value="clicks">Clicks</option>
+            <option value="date"><@spring.message 'text.date'/></option>
+            <option value="clicks"><@spring.message 'text.clicks'/></option>
         </select>
-        <button type="submit">Sort</button>
+        <button type="submit"><@spring.message 'button.sort'/></button>
     </form>
 
     <#if vacancies.content?size == 0>
-        <p>No vacancies found.</p>
+        <p>><@spring.message 'no.vacancies'/></p>
     <#else>
         <ul>
 
@@ -258,13 +258,6 @@
                         <div class="cat"><span class="category">${vacancy.category.name}</span></div>
                         <span class="date">${vacancy.date}</span>
                     </li>
-<#--                    <#if type??>-->
-<#--                        <#if type=="JOB_SEEKER">-->
-<#--                            <a href="/vacancies/${vacancy.publisher.id}/chat">-->
-<#--                                <button>Chat</button>-->
-<#--                            </a>-->
-<#--                        </#if>-->
-<#--                    </#if>-->
                 </a>
             </#list>
 
@@ -273,10 +266,10 @@
 
 
     <#if vacancies.hasPrevious()>
-        <a class="pag" href="/vacancies?page=${vacancies.number - 1}">Previous Page</a>
+        <a class="pag" href="/vacancies?page=${vacancies.number - 1}"><@spring.message 'button.previous'/></a>
     </#if>
     <#if vacancies.hasNext()>
-        <a class="pag" href="/vacancies?page=${vacancies.number + 1}">Next Page</a>
+        <a class="pag" href="/vacancies?page=${vacancies.number + 1}">><@spring.message 'button.next'/></a>
     </#if>
 </div>
 <script>
