@@ -1,3 +1,4 @@
+<#import "spring.ftl" as spring>
 <!DOCTYPE html>
 <html>
 <head>
@@ -177,20 +178,20 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#"><@spring.message 'navbar.logo'/></a>
         <div class="navbar-links">
-            <a class="nav-link " aria-current="page" href="#">Home</a>
-            <a class="nav-link active" href="/profile">Profile</a>
-            <a class="nav-link" href="/vacancies">Vacancies</a>
-            <a class="nav-link" href="/jobresumes">Jobs</a>
+            <a class="nav-link " aria-current="page" href="#"><@spring.message 'navbar.navi.home'/></a>
+            <a class="nav-link active" href="/profile"><@spring.message 'navbar.navi.profile'/></a>
+            <a class="nav-link" href="/vacancies"><@spring.message 'navbar.navi.vacancies'/></a>
+            <a class="nav-link" href="/jobresumes"><@spring.message 'navbar.navi.jobs'/></a>
         </div>
         <div class="right-buttons">
-            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>
+            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout"><@spring.message 'logout'/></a>
         </div>
     </div>
 </nav>
 <div class="container">
-    <h1 class="vtxt">Experience</h1>
+    <h1 class="vtxt"><@spring.message 'experience'/></h1>
 
     <div class="form-section" id="experienceForm">
 
@@ -202,18 +203,18 @@
             </#if>
 
             <div>
-                <label for="position">Position:</label>
+                <label for="position"><@spring.message 'position'/></label>
                 <input type="text" id="position" name="position" required>
             </div>
             <div>
-                <label for="startDateJob">Start Date of job:</label>
+                <label for="startDateJob"><@spring.message 'start.date'/></label>
                 <input type="date" id="startDateJob" name="startDateJob" required>
             </div>
             <div>
-                <label for="endDateJob">End Date of job:</label>
+                <label for="endDateJob"><@spring.message 'end.date'/></label>
                 <input type="date" id="endDateJob" name="endDateJob" required>
             </div>
-            <button type="submit">Save Experience</button>
+            <button type="submit"><@spring.message 'save'/></button>
         </form>
     </div>
 </div>

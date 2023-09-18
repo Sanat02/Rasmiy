@@ -1,3 +1,4 @@
+<#import "spring.ftl" as spring>
 <!DOCTYPE html>
 <html>
 <head>
@@ -180,23 +181,23 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#"><@spring.message 'navbar.logo'/></a>
         <div class="navbar-links">
-            <a class="nav-link " aria-current="page" href="#">Home</a>
-            <a class="nav-link active" href="/profile">Profile</a>
-            <a class="nav-link" href="/vacancies">Vacancies</a>
-            <a class="nav-link" href="/jobresumes">Jobs</a>
+            <a class="nav-link " aria-current="page" href="#"><@spring.message 'navbar.navi.home'/></a>
+            <a class="nav-link active" href="/profile"><@spring.message 'navbar.navi.profile'/></a>
+            <a class="nav-link" href="/vacancies"><@spring.message 'navbar.navi.vacancies'/></a>
+            <a class="nav-link" href="/jobresumes"><@spring.message 'navbar.navi.jobs'/></a>
         </div>
         <div class="right-buttons">
-            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>
+            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout"><@spring.message 'logout'/></a>
         </div>
     </div>
 </nav>
 <div class="container">
-    <h1 class="vtxt">Education</h1>
+    <h1 class="vtxt"><@spring.message 'education'/></h1>
 
     <div class="form-section" id="educationForm">
-        <h2>Education</h2>
+        <h2><@spring.message 'education'/></h2>
         <form action="/resumes/${resume.id}/education" method="post">
 
             <#if _csrf??>
@@ -206,22 +207,22 @@
             </#if>
 
             <div>
-                <label for="university">University:</label>
+                <label for="university"><@spring.message 'university'/></label>
                 <input type="text" id="university" name="university" required>
             </div>
             <div>
-                <label for="degree">Degree:</label>
+                <label for="degree"><@spring.message 'degree'/></label>
                 <input type="text" id="degree" name="degree" required>
             </div>
             <div>
-                <label for="startDate">Start Date:</label>
+                <label for="startDate"><@spring.message 'start.date'/></label>
                 <input type="date" id="startDate" name="startDate" required>
             </div>
             <div>
-                <label for="endDate">End Date:</label>
+                <label for="endDate"><@spring.message 'end.date'/></label>
                 <input type="date" id="endDate" name="endDate" required>
             </div>
-            <button type="submit">Save Education</button>
+            <button type="submit"><@spring.message 'save'/></button>
         </form>
     </div>
 
