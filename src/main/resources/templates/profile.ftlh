@@ -1,3 +1,4 @@
+<#import "spring.ftl" as spring>
 <!DOCTYPE html>
 <html>
 <head>
@@ -267,31 +268,30 @@
 
 
     </style>
-    <title>Profile</title>
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#"><@spring.message 'navbar.logo'/></a>
         <div class="navbar-links">
-            <!-- Navigation links -->
-            <a class="nav-link" aria-current="page" href="/">Home</a>
-            <a class="nav-link active" href="/profile">Profile</a>
-            <a class="nav-link" href="/vacancies">Vacancies</a>
+            <a class="nav-link" aria-current="page" href="/"><@spring.message 'navbar.navi.home'/></a>
+            <a class="nav-link active" href="/profile"><@spring.message 'navbar.navi.profile'/></a>
+            <a class="nav-link" href="/vacancies"><@spring.message 'navbar.navi.vacancies'/></a>
             <#if account.accountType=="EMPLOYER">
-                <a class="nav-link " href="/resumes">Resumes</a>
+                <a class="nav-link " href="/resumes"><@spring.message 'navbar.navi.resumes'/></a>
             </#if>
             <#if account.accountType=="JOB_SEEKER">
-                <a class="nav-link " href="/jobresumes">Jobs</a>
+                <a class="nav-link " href="/jobresumes"><@spring.message 'navbar.navi.jobs'/></a>
             </#if>
         </div>
         <div class="right-buttons">
-            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout">Log Out</a>
+            <a class="btn btn-primary btn-sign-in" href="/logout" id="logout"><@spring.message 'logout'/></a>
         </div>
     </div>
 </nav>
 <div class="container">
-    <div class="header">${account.accountType.value} profile</div>
+    <div class="header">${account.accountType.value} <@spring.message 'navbar.navi.profile'/></div>
     <div class="content">
         <div class="column">
 
@@ -304,17 +304,17 @@
 
             </#if>
             <div class="name">
-                <div>Username:${account.accountName}</div>
-                <div>Email:${account.email}</div>
+                <div><@spring.message 'username'/>${account.accountName}</div>
+                <div><@spring.message 'email'/>:${account.email}</div>
                 <#if account.profileImage??>
                     <div class="edit">
-                        <div>You have profile image!</div>
+                        <div><@spring.message 'have.profile.image'/></div>
                     </div>
 
                     <#else >
                 <a class="nav-link active" href="/images">
                     <div class="edit">
-                        <div>Set Image</div>
+                        <div><@spring.message 'set.image'/></div>
                     </div>
                 </a>
                 </#if>
@@ -329,11 +329,11 @@
                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                             </svg>
                         </div>
-                        <div>Create <br>resume</div>
+                        <div><@spring.message 'create'/><br><@spring.message 'resume'/></div>
                     </div>
                 </a>
                 <a class="nav-link active" href="#">
-                    <div class="clicks">Clicks</div>
+                    <div class="clicks"><@spring.message 'text.clicks'/></div>
                 </a>
             <#else>
                 <a class="nav-link active" href="/jobresumes/add">
@@ -344,16 +344,16 @@
                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                             </svg>
                         </div>
-                        <div>Create <br>job resume</div>
+                        <div><@spring.message 'create'/><br><@spring.message 'resume'/></div>
                     </div>
                 </a>
                 <a class="nav-link active" href="#">
-                    <div class="clicks">Clicks</div>
+                    <div class="clicks"><@spring.message 'text.clicks'/></div>
                 </a>
             </#if>
         </div>
     </div>
-    <div class="resumetxt">Resume</div>
+    <div class="resumetxt"><@spring.message 'resume'/></div>
     <div class="resumecontent">
         <#if account.resumes?size != 0>
             <div class="slider-container">
@@ -361,18 +361,18 @@
                     <div class="resume-item">
                         <div class="resumeinfo">
                             <div class="resumeName">${resume.job}</div>
-                            <div>Date of the update:</div>
+                            <div><@spring.message 'date.update'/></div>
                             <div>02/02/2022</div>
                         </div>
                         <div class="rbtn">
                             <a class="nav-link active" href="/resumes/${resume.id}">
-                                <div class="btn1">See</div>
+                                <div class="btn1"><@spring.message 'see'/></div>
                             </a>
                             <a class="nav-link active" href="/resumes/edit/${resume.id}">
-                                <div class="btn2">Edit</div>
+                                <div class="btn2"><@spring.message 'edit'/></div>
                             </a>
                             <a class="nav-link active" href="/resumes/${resume.id}/delete">
-                                <div class="btn2">Delete</div>
+                                <div class="btn2"><@spring.message 'delete'/></div>
                             </a>
                         </div>
                     </div>
@@ -386,18 +386,18 @@
                     <div class="resume-item">
                         <div class="resumeinfo">
                             <div class="resumeName">${jresume.jobTitle}</div>
-                            <div>Date of the update:</div>
+                            <div><@spring.message 'date.update'/></div>
                             <div>02/02/2022</div>
                         </div>
                         <div class="rbtn">
                             <a class="nav-link active" href="/jobresumes/${jresume.id}">
-                                <div class="btn1">See</div>
+                                <div class="btn1"><@spring.message 'see'/></div>
                             </a>
                             <a class="nav-link active" href="/jobresumes/edit/${jresume.id}">
-                                <div class="btn2">Edit</div>
+                                <div class="btn2"><@spring.message 'edit'/></div>
                             </a>
                             <a class="nav-link active" href="/jobresumes/${jresume.id}/delete">
-                                <div class="btn2">Delete</div>
+                                <div class="btn2"><@spring.message 'delete'/></div>
                             </a>
                         </div>
                     </div>
