@@ -4,7 +4,10 @@
 <head>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -80,6 +83,10 @@
         .right-buttons .btn-sign-up:hover {
             background-color: #0056b3;
         }
+        #lk{
+            background-color: greenyellow;
+            border-color:greenyellow; ;
+        }
     </style>
 </head>
 <body>
@@ -100,6 +107,17 @@
             </#if>
         </div>
         <div class="right-buttons">
+            <div class="dropdown" >
+                <button class="btn btn-secondary dropdown-toggle" id="lk" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    <i class="flag-united-kingdom flag m-0"></i>
+                    <@spring.message 'navbar.navi.lang'/>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="?lang=en">English</a></li>
+                    <li><a class="dropdown-item" href="?lang=ru">Русский</a></li>
+                </ul>
+            </div>
             <#if username??>
                 <a class="btn btn-primary btn-sign-in" href="/logout" id="logout"><@spring.message 'navbar.user.logout'/></a>
             <#else>
