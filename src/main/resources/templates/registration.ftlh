@@ -144,16 +144,6 @@
                    value="${(_csrf.token)!'csrf-token'}"/>
 
         </#if>
-
-        <label for="account_name"><@spring.message 'account.name'/></label>
-        <input type="text" id="account_name" name="account_name" placeholder="<@spring.message 'enter.account.name'/>" required>
-
-        <label for="email"><@spring.message 'email'/>:</label>
-        <input type="email" id="email" name="email" placeholder="<@spring.message 'text.email'/>" required>
-
-        <label for="password"><@spring.message 'password'/>:</label>
-        <input type="password" id="password" name="password" placeholder="<@spring.message 'text.password'/>" required>
-
         <label for="account_type"><@spring.message 'account.type'/></label>
         <select id="account_type" name="account_type" required>
             <option value=""><@spring.message 'select.account.type'/></option>
@@ -161,8 +151,20 @@
             <option value="employer"><@spring.message 'employer'/></option>
         </select>
 
+        <label for="account_name"><@spring.message 'account.name'/></label>
+        <input type="text" id="account_name" name="account_name" placeholder="<@spring.message 'enter.account.name'/>"
+               required>
+
+        <label for="email"><@spring.message 'email'/>:</label>
+        <input type="email" id="email" name="email" placeholder="<@spring.message 'text.email'/>" required>
+
+        <label for="password"><@spring.message 'password'/>:</label>
+        <input type="password" id="password" name="password" placeholder="<@spring.message 'text.password'/>" required>
+
+
         <label for="phone_number"><@spring.message 'phone.number'/></label>
-        <input type="tel" id="phone_number" name="phone_number" placeholder="<@spring.message 'enter.phone.number'/>" required>
+        <input type="tel" id="phone_number" name="phone_number" placeholder="<@spring.message 'enter.phone.number'/>"
+               required>
 
         <input type="submit" value="<@spring.message 'register'/>">
     </form>
@@ -174,5 +176,17 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+<script>
+    document.getElementById('account_type').addEventListener('change', function () {
+        const accountType = this.value;
+        const accountNameLabel = document.querySelector('label[for="account_name"]');
+
+        if (accountType === 'employer') {
+            accountNameLabel.textContent = 'Company name';
+        } else {
+            accountNameLabel.textContent = '<@spring.message "account.name"/>';
+        }
+    });
+</script>
 </body>
 </html>

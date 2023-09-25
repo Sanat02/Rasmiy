@@ -25,7 +25,8 @@
         h2 {
             text-align: center;
         }
-        #warn{
+
+        #warn {
             background-color: white;
             border-color: white;
         }
@@ -37,13 +38,7 @@
         <div class="col-md-7 col-lg-5 col-xl-5">
             <div class="form-container">
                 <h2>Forgot Password</h2>
-
-                    <div id="warn" class="alert alert-danger text-center"></div>
-
-
-<#--                <#if message??>-->
-<#--                    <div class="alert alert-warning text-center">${message}</div>-->
-<#--                </#if>-->
+                <div id="warn" class="alert alert-danger text-center"></div>
                 <form action="/forgot" method="post">
                     <#if _csrf??>
                         <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}"
@@ -62,27 +57,12 @@
         </div>
     </div>
 </div>
-<#--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
-<#--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>-->
-<#--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
-<#--<script>-->
-<#--    function getQueryParam(name) {-->
-<#--        const urlParams = new URLSearchParams(window.location.search);-->
-<#--        return urlParams.get(name);-->
-<#--    }-->
-
-<#--    const accountValue = getQueryParam("error");-->
-
-<#--    if (accountValue === "error") {-->
-<#--        const warningDiv = document.getElementById("alert alert-warning text-center");-->
-<#--        warningDiv.textContent = "Invalid email address!";-->
-<#--    }-->
-<#--</script>-->
 <script>
     function getQueryParam(name) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(name);
     }
+
     const error = getQueryParam();
     if (error) {
         document.getElementById("warn").style.backgroundColor = 'pink';
