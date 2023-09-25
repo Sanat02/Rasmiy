@@ -54,15 +54,15 @@ public class HomeController {
 
     @PostMapping("/forgot")
     public String processForgotPassword(HttpServletRequest request, Model model) {
-        try {
-            userService.makeResetPasswdLink(request);
+        String email = request.getParameter("email");
+        if (userService.isUserExist(request.getParameter("email")).equals("1")) {
             model.addAttribute("message", "We have sent a reset password link to your email. Please check.");
-        } catch (UsernameNotFoundException | UnsupportedEncodingException e) {
-            model.addAttribute("error", e.getMessage());
-        } catch (MessagingException e) {
-            model.addAttribute("error", "Error while sending email!");
+            return "redirect:/token?email=" + email;
+        } else {
+            model.addAttribute("error", "This email does not exist!");
+            return "redirect:/forgot?error=error";
         }
-        return "forgot";
+
     }
 
     @GetMapping("/reset")
@@ -77,9 +77,9 @@ public class HomeController {
     }
 
     @PostMapping("/reset")
-    public String processResetPassword(HttpServletRequest request, Model model) {
-        String token = request.getParameter("token");
-        String password = request.getParameter("password");
+    public String processResetPassword(@RequestParam String token,
+                                       @RequestParam(name = "password") String password,
+                                       Model model) {
         try {
             var user = userService.getByResetPasswdToken(token);
             userService.updatePassword(user, password);
@@ -88,5 +88,25 @@ public class HomeController {
             model.addAttribute("message", "Invalid Token");
         }
         return "message";
+    }
+
+    @GetMapping("/token")
+    public String setToken(@RequestParam String email, Model model) {
+        if (userService.isUserExist(email).equals("1")) {
+            model.addAttribute("email", email);
+            return "token";
+        } else {
+            return "notExists";
+        }
+    }
+
+    @PostMapping("/token")
+    public String processSetToken(@RequestParam String email,
+                                  @RequestParam(name = "token") String token) {
+        userService.updateResetPasswordToken(token, email);
+        System.out.println(token);
+        System.out.println(email);
+        return "redirect:/reset?token=" + token;
+
     }
 }

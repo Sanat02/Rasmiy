@@ -128,7 +128,10 @@ public class UserService {
         return AccountType.JOB_SEEKER;
     }
 
-    private void updateResetPasswordToken(String token, String email) {
+    public void updateResetPasswordToken(String token, String email) {
+        log.info(token);
+        log.info(email);
+        log.info("UPDATE WORKS!");
         User user = userRepository.findUserByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
         user.setResetPasswordToken(token);
         userRepository.saveAndFlush(user);
@@ -149,9 +152,9 @@ public class UserService {
     public void makeResetPasswdLink(HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
         String email = request.getParameter("email");
         String token = UUID.randomUUID().toString();
-        updateResetPasswordToken(token, email);
-        String resetPasswordLink = Utility.getSiteUrl(request) + "/forgot?token=" + token;
-        emailService.sendEmail(email, resetPasswordLink);
+      //  updateResetPasswordToken(token, email);
+       // String resetPasswordLink = Utility.getSiteUrl(request) + "/reset?token=" + token;
+      //  emailService.sendEmail(email, resetPasswordLink);
     }
 
 }

@@ -60,24 +60,23 @@
 <body>
 <div class="container">
     <div class="text-center">
-        <h2>Password Reset</h2>
-        <p class="error-message"><@spring.message 'reset'/></p>
+        <h2>Set Token</h2>
+        <p class="error-message">Set Token</p>
     </div>
 
-    <form action="/reset?token=${token}" method="post">
+    <form action="/token?email=${email}" method="post">
         <#if _csrf??>
             <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}"
                    value="${(_csrf.token)!'csrf-token'}"/>
 
         </#if>
         <div class="form-group">
-            <label for="password" class="form-label">New Password:</label>
-            <input type="password" id="password" name="password" class="form-control"
-                   placeholder="Enter your new password" required autofocus/>
+            <label for="password" class="form-label">Token:</label>
+            <input type="password" id="token" name="token" class="form-control"
+                   placeholder="token" required autofocus/>
         </div>
-
         <div class="text-center">
-            <button type="submit" class="btn btn-primary">Reset Password</button>
+            <button type="submit" class="btn btn-primary">Set Token</button>
         </div>
     </form>
 </div>
