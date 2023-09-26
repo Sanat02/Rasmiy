@@ -10,6 +10,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -25,6 +28,7 @@ public class EditResumeController {
     private final EducationService educationService;
     private final JobExperienceService jobExperienceService;
     private final ContactsService contactsService;
+    private final Validator validator;
     private static final int PAGE_SIZE = 5;
 
     @GetMapping()
@@ -69,7 +73,8 @@ public class EditResumeController {
             @RequestParam(name = "email", required = false) String email,
             @RequestParam(name = "telegram", required = false) String telegram,
             @RequestParam(name = "linkedin", required = false) String linkedin,
-            @RequestParam(name = "facebook", required = false) String facebook
+            @RequestParam(name = "facebook", required = false) String facebook,
+            Model model
     ) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
@@ -79,65 +84,79 @@ public class EditResumeController {
                 .applicant(userDto)
                 .category(category)
                 .build();
-        int resumeId = resumeService.saveResume(resumeDto, auth);
-        boolean isEducationFilled = university != null && degree != null && startDate != null && endDate != null;
 
-        if (isEducationFilled) {
-            EducationDto educationDto = EducationDto.builder()
-                    .institutionName(university)
-                    .degree(degree)
-                    .startDate(startDate)
-                    .endDate(endDate)
-                    .build();
-            educationService.saveEducation(educationDto, resumeId);
-        }
-        boolean isJobExperienceFilled = position != null && startDateJob != null && endDateJob != null;
-        if (isJobExperienceFilled) {
-            JobExperienceDto jobExperienceDto = JobExperienceDto.builder()
-                    .position(position)
-                    .startDate(startDateJob)
-                    .endDate(endDateJob)
-                    .build();
-            jobExperienceService.saveJobExperience(jobExperienceDto, resumeId);
-        }
-        List<ContactDto> contacts = new ArrayList<>();
-        if (phone != null && !phone.isEmpty()) {
-            contacts.add(ContactDto.builder()
-                    .type("PHONE")
-                    .value(phone)
-                    .build());
-        }
-        if (email != null && !email.isEmpty()) {
-            contacts.add(ContactDto.builder()
-                    .type("EMAIL")
-                    .value(email)
-                    .build());
-        }
-        if (telegram != null && !telegram.isEmpty()) {
-            contacts.add(ContactDto.builder()
-                    .type("TELEGRAM")
-                    .value(telegram)
-                    .build());
-        }
-        if (linkedin != null && !linkedin.isEmpty()) {
-            contacts.add(ContactDto.builder()
-                    .type("LINKEDIN")
-                    .value(linkedin)
-                    .build());
-        }
-        if (facebook != null && !facebook.isEmpty()) {
-            contacts.add(ContactDto.builder()
-                    .type("FACEBOOK")
-                    .value(facebook)
-                    .build());
-
-        }
-        if (!contacts.isEmpty()) {
-            contactsService.saveContacts(contacts, resumeId);
-        }
+        DataBinder dataBinder = new DataBinder(resumeDto);
+        dataBinder.setValidator(validator);
+        dataBinder.validate();
 
 
-        return "redirect:/resumes/" + resumeId;
+        BindingResult bindingResult = dataBinder.getBindingResult();
+
+        if (!bindingResult.hasErrors()) {
+            int resumeId = resumeService.saveResume(resumeDto, auth);
+            boolean isEducationFilled = university != null && degree != null && startDate != null && endDate != null;
+
+            if (isEducationFilled) {
+                EducationDto educationDto = EducationDto.builder()
+                        .institutionName(university)
+                        .degree(degree)
+                        .startDate(startDate)
+                        .endDate(endDate)
+                        .build();
+                educationService.saveEducation(educationDto, resumeId);
+            }
+            boolean isJobExperienceFilled = position != null && startDateJob != null && endDateJob != null;
+            if (isJobExperienceFilled) {
+                JobExperienceDto jobExperienceDto = JobExperienceDto.builder()
+                        .position(position)
+                        .startDate(startDateJob)
+                        .endDate(endDateJob)
+                        .build();
+                jobExperienceService.saveJobExperience(jobExperienceDto, resumeId);
+            }
+            List<ContactDto> contacts = new ArrayList<>();
+            if (phone != null && !phone.isEmpty()) {
+                contacts.add(ContactDto.builder()
+                        .type("PHONE")
+                        .value(phone)
+                        .build());
+            }
+            if (email != null && !email.isEmpty()) {
+                contacts.add(ContactDto.builder()
+                        .type("EMAIL")
+                        .value(email)
+                        .build());
+            }
+            if (telegram != null && !telegram.isEmpty()) {
+                contacts.add(ContactDto.builder()
+                        .type("TELEGRAM")
+                        .value(telegram)
+                        .build());
+            }
+            if (linkedin != null && !linkedin.isEmpty()) {
+                contacts.add(ContactDto.builder()
+                        .type("LINKEDIN")
+                        .value(linkedin)
+                        .build());
+            }
+            if (facebook != null && !facebook.isEmpty()) {
+                contacts.add(ContactDto.builder()
+                        .type("FACEBOOK")
+                        .value(facebook)
+                        .build());
+
+            }
+            if (!contacts.isEmpty()) {
+                contactsService.saveContacts(contacts, resumeId);
+            }
+
+
+            return "redirect:/resumes/" + resumeId;
+        } else {
+            String errorMessages = getErrorMessages(bindingResult);
+            model.addAttribute("error",errorMessages);
+            return "editResume";
+        }
     }
 
     @GetMapping("/{resumeId}")
@@ -334,6 +353,14 @@ public class EditResumeController {
         }
         model.addAttribute("resume", resumeDto);
         return "seeResume";
+    }
+
+    private String getErrorMessages(BindingResult bindingResult) {
+        StringBuilder errorMessages = new StringBuilder();
+        bindingResult.getAllErrors().forEach(error -> {
+            errorMessages.append(error.getDefaultMessage()).append("; ");
+        });
+        return errorMessages.toString();
     }
 
 

@@ -23,12 +23,12 @@ public class UserDto {
     private AccountType accountType;
 
 
-    @Size(min = 10, max = 15)
+    @Size(min = 10, max = 15, message = "Phone number must be between 10 and 15 characters")
     private String phoneNumber;
 
     @NotBlank
     @Size(min = 4, max = 24, message = "Length must be >= 4 and <= 24")
-    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).+$", message = "Should contain at least one uppercase letter, one number")
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).+$", message = "Password should contain at least one uppercase letter, one number")
     private String password;
 
     private List<ResumeDto> resumes;

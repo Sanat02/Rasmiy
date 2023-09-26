@@ -17,6 +17,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -26,6 +29,7 @@ public class EditJobResumeController {
     private final UserService userService;
     private final JobResumeService jobResumeService;
     private final WhoInterestedService whoInterestedService;
+    private final Validator validator;
     private static final int PAGE_SIZE = 5;
 
     @GetMapping()
@@ -60,7 +64,8 @@ public class EditJobResumeController {
             @RequestParam(name = "expected_salary") int expectedSalary,
             @RequestParam(name = "vacancy-description") String description,
             @RequestParam(name = "from_year") int startDate,
-            @RequestParam(name = "till_year") int endDate
+            @RequestParam(name = "till_year") int endDate,
+            Model model
     ) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDto userDto = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).orElse(null));
@@ -72,9 +77,21 @@ public class EditJobResumeController {
                 .experience(startDate)
                 .category(category)
                 .build();
+        DataBinder dataBinder = new DataBinder(jobResumeDto);
+        dataBinder.setValidator(validator);
+        dataBinder.validate();
 
-        int jobResumeId = jobResumeService.saveJobResume(jobResumeDto);
-        return "redirect:/jobresumes/" + jobResumeId;
+
+        BindingResult bindingResult = dataBinder.getBindingResult();
+        if (!bindingResult.hasErrors()) {
+
+            int jobResumeId = jobResumeService.saveJobResume(jobResumeDto);
+            return "redirect:/jobresumes/" + jobResumeId;
+        } else {
+            String errorMessages = getErrorMessages(bindingResult);
+            model.addAttribute("error", errorMessages);
+            return "editVacancy";
+        }
     }
 
     @GetMapping("/{jobResumeId}")
@@ -169,4 +186,13 @@ public class EditJobResumeController {
         jobResumeService.updateJobResume(jobResumeDto);
         return "redirect:/jobresumes/" + jobResumeId;
     }
+
+    private String getErrorMessages(BindingResult bindingResult) {
+        StringBuilder errorMessages = new StringBuilder();
+        bindingResult.getAllErrors().forEach(error -> {
+            errorMessages.append(error.getDefaultMessage()).append("; ");
+        });
+        return errorMessages.toString();
+    }
+
 }

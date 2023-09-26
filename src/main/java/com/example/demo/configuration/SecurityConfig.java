@@ -29,29 +29,6 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-//    private final DataSource dataSource;
-
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        String fetchUserQuery = "select email, password ,enabled \n " +
-//                "from users \n" +
-//                "where email = ?;";
-//
-//        String fetchRolesQuery = "select email, role  \n " +
-//                "from users u, \n" +
-//                "roles r \n" +
-//                "where u.email = ? \n" +
-//                "and u.role_id=r.id;";
-//        auth.jdbcAuthentication()
-//                .dataSource(dataSource)
-//                .usersByUsernameQuery(fetchUserQuery)
-//                .authoritiesByUsernameQuery(fetchRolesQuery)
-//                .passwordEncoder(new BCryptPasswordEncoder());
-//        ;
-//
-//
-//    }
-
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

@@ -149,12 +149,10 @@ public class UserService {
         userRepository.saveAndFlush(u);
     }
 
-    public void makeResetPasswdLink(HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
-        String email = request.getParameter("email");
-        String token = UUID.randomUUID().toString();
-      //  updateResetPasswordToken(token, email);
-       // String resetPasswordLink = Utility.getSiteUrl(request) + "/reset?token=" + token;
-      //  emailService.sendEmail(email, resetPasswordLink);
-    }
+//    public void makeResetPasswdLink(HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
+//        String email = request.getParameter("email");
+//        String token = UUID.randomUUID().toString();
+//
+//    }
 
 }

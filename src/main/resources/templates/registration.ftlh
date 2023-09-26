@@ -138,6 +138,9 @@
 <body>
 <div class="container">
     <h2><@spring.message 'navbar.user.signup'/></h2>
+    <#if error??>
+        <div>${error}</div>
+    </#if>
     <form action="/register" method="post">
         <#if _csrf??>
             <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}"

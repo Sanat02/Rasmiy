@@ -30,7 +30,7 @@ public class ListVacancyController {
     private final JobResumeService jobResumeService;
     private final JobsListService jobsListService;
     private final UserService userService;
-   
+
 
     private static final int PAGE_SIZE = 5;
 

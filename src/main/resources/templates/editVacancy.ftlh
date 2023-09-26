@@ -58,6 +58,7 @@
             color: #6c757d;
             pointer-events: none;
         }
+
         .right-buttons {
             display: flex;
             align-items: center;
@@ -169,9 +170,10 @@
         #vacancy-description {
             height: 220px;
         }
-        #lk{
+
+        #lk {
             background-color: greenyellow;
-            border-color:greenyellow; ;
+            border-color: greenyellow;;
         }
     </style>
 </head>
@@ -186,7 +188,7 @@
             <a class="nav-link" href="/resumes"><@spring.message 'navbar.navi.resumes'/></a>
         </div>
         <div class="right-buttons">
-            <div class="dropdown" >
+            <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" id="lk" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                     <i class="flag-united-kingdom flag m-0"></i>
@@ -202,6 +204,8 @@
     </div>
 </nav>
 <div class="container">
+    <#if error??>
+        <div>${error}</div></#if>
     <form action="/jobresumes/add" method="post">
 
         <#if _csrf??>
@@ -231,7 +235,7 @@
 
 
         <h1><@spring.message 'required.experience'/></h1>
-        <label for="from_year"><@spring.message 'frome'/></label>
+        <label for="from_year"><@spring.message 'from'/></label>
         <input type="number" id="from_year" name="from_year" placeholder="Enter the start" required min="0">
 
         <label for="till_year"><@spring.message 'till'/></label>
@@ -244,7 +248,7 @@
 
 </div>
 <script>
-    document.getElementById('logout').addEventListener('click',()=>{
+    document.getElementById('logout').addEventListener('click', () => {
         localStorage.removeItem('user')
     })
 </script>

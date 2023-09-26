@@ -247,6 +247,7 @@
 </nav>
 
 <div class="container">
+    <#if error??><div>${error}</div></#if>
     <form action="/resumes/add" method="post" id="resumeForm">
         <#if _csrf??>
             <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}"
