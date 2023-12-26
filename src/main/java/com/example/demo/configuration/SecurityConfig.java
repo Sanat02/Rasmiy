@@ -75,6 +75,7 @@ public class SecurityConfig {
                                 .requestMatchers(AntPathRequestMatcher.antMatcher("/profile/**")).authenticated()
                                 .requestMatchers(AntPathRequestMatcher.antMatcher("/images/**")).authenticated()
                                 .requestMatchers(AntPathRequestMatcher.antMatcher("/click/**")).authenticated()
+                                .requestMatchers(AntPathRequestMatcher.antMatcher("/click/jobresumes/emp")).hasAuthority("EMPLOYER")
                                 .anyRequest().permitAll()
 
                 );

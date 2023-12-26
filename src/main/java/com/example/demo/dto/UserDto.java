@@ -27,7 +27,7 @@ public class UserDto {
     private String phoneNumber;
 
     @NotBlank
-    @Size(min = 4, max = 24, message = "Length must be >= 4 and <= 24")
+    @Size(min = 6, max = 24, message = "Length must be >= 4 and <= 24")
     @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).+$", message = "Password should contain at least one uppercase letter, one number")
     private String password;
 

@@ -146,6 +146,11 @@ public class JobResumeService {
         return jobResumeDtos;
     }
 
+    public List<JobResumeDto> getJobsBycategoryId(int categoryId){
+        List<JobResume> jobResumes=jobResumeRepository.findJobResumesByCategory_Id(categoryId);
+        return jobResumes.stream().map(e->mapToJobResumeDto(e)).collect(toList());
+    }
+
     public void sortJobResumeByDate() {
 
     }

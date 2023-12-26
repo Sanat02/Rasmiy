@@ -49,4 +49,9 @@ public class WhoInterestedService {
     }
 
 
+    public List<WhoInterested> getClickedByJobResumeId(int jobResumeId){
+        return whoInterestedRepository.findWhoInterestedByJobResumeId(jobResumeId);
+    }
+
+
 }

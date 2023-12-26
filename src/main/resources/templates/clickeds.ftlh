@@ -83,42 +83,90 @@
         .right-buttons .btn-sign-up:hover {
             background-color: #0056b3;
         }
-        #lk{
+
+        #lk {
             background-color: greenyellow;
-            border-color:greenyellow; ;
-        }
-        .categories-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 35px;
-            max-width: 900px;
-            margin: 75px auto;
+            border-color: greenyellow;;
         }
 
-        .category {
+        .vacancies-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust width as needed */
+            gap: 30px; /* Adjust the gap between vacancies */
+            max-width: 1200px; /* Adjust the maximum width */
+            margin: 50px auto; /* Center the vacancies */
+        }
+
+        .vacancy {
             padding: 20px;
             border-radius: 8px;
-            background-color: #f0f0f0;
-            text-align: center;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            color: #0e0620;
+            background-color: #f9f9f9; /* Change background color */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Optional: Add a box shadow for depth */
+        }
+
+        .vacancy h3 {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .vacancy p {
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .user-details {
+            flex: 1;
+        }
+
+        .user-details h3 {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .user-details p {
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+
+        .action-buttons {
+            margin-top: 10px;
+        }
+
+        .accept-button,
+        .decline-button {
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin-right: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
             cursor: pointer;
-
-        }
-        .category-link {
-            display: inline-block;
-            text-decoration: none;
-        }
-        .category:hover {
-            border: 2px solid greenyellow;
+            transition: background-color 0.3s ease;
         }
 
-
-        @media screen and (max-width: 768px) {
-            .categories-container {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            }
+        .accept-button:hover,
+        .decline-button:hover {
+            background-color: #45a049;
         }
+
+        .no-vacancies-message {
+            font-size: 1.2em;
+            text-align: center;
+            margin: 50px auto;
+            color: #555;
+        }
+
 
     </style>
 </head>
@@ -127,20 +175,16 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="#"><@spring.message 'navbar.logo'/></a>
         <div class="navbar-links">
-            <a class="nav-link active" aria-current="page" href="#"><@spring.message 'navbar.navi.home'/></a>
+            <a class="nav-link " aria-current="page" href="/"><@spring.message 'navbar.navi.home'/></a>
             <#if username??>
-                <a class="nav-link" href="/profile"><@spring.message 'navbar.navi.profile'/></a>
+                <a class="nav-link active" href="/profile"><@spring.message 'navbar.navi.profile'/></a>
             </#if>
             <a class="nav-link" href="/vacancies"><@spring.message 'navbar.navi.vacancies'/></a>
-            <#if username?? && type == "EMPLOYER">
-                <a class="nav-link" href="/resumes"><@spring.message 'navbar.navi.resumes'/></a>
-            </#if>
-            <#if username?? && type == "JOB_SEEKER">
-                <a class="nav-link" href="/jobresumes"><@spring.message 'navbar.navi.jobs'/></a>
-            </#if>
+            <a class="nav-link" href="/resumes"><@spring.message 'navbar.navi.resumes'/></a>
+
         </div>
         <div class="right-buttons">
-            <div class="dropdown" >
+            <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" id="lk" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                     <i class="flag-united-kingdom flag m-0"></i>
@@ -151,25 +195,33 @@
                     <li><a class="dropdown-item" href="?lang=ru">Русский</a></li>
                 </ul>
             </div>
-            <#if username??>
-                <a class="btn btn-primary btn-sign-in" href="/logout" id="logout"><@spring.message 'navbar.user.logout'/></a>
-            <#else>
-                <a class="btn btn-primary btn-sign-in" href="/login"><@spring.message 'navbar.user.signin'/></a>
-                <a class="btn btn-success btn-sign-up" href="/register"><@spring.message 'navbar.user.signup'/></a>
 
-            </#if>
+            <a class="btn btn-primary btn-sign-in" href="/logout"
+               id="logout"><@spring.message 'navbar.user.logout'/></a>
         </div>
     </div>
 </nav>
 <div class="container">
 
-    <div class="categories-container">
-        <a href="category/1" class="category-link"> <div class="category">IT</div></a>
-        <a href="category/2" class="category-link"><div class="category"><@spring.message 'marketing'/></div></a>
-        <a href="category/3" class="category-link"><div class="category"><@spring.message 'finance'/></div></a>
-        <a href="category/4" class="category-link"><div class="category"><@spring.message 'education'/></div></a>
-        <a href="category/5" class="category-link"><div class="category"><@spring.message 'human.resources'/></div></a>
+    <div class="user-info">
+        <#if whoInterested?size == 0>
+            <p class="no-vacancies-message">No clicks</p>
+        <#else>
+            <#list whoInterested as user>
+                <div class="user-details">
+                    <h3>Interested user:</h3>
+                    <p>ID: ${user.id}</p>
+                    <p>Date: ${user.date}</p>
+
+                    <div class="action-buttons">
+                        <button class="accept-button">Accept</button>
+                        <button class="decline-button">Decline</button>
+                    </div>
+                </div>
+            </#list>
+        </#if>
     </div>
+
 
     <script>
         document.getElementById('logout').addEventListener('click', () => {

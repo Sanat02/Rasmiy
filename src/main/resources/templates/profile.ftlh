@@ -364,7 +364,7 @@
                         <div><@spring.message 'create'/><br><@spring.message 'resume'/></div>
                     </div>
                 </a>
-                <a class="nav-link active" href="#">
+                <a class="nav-link active" href="/click/jobresumes/emp">
                     <div class="clicks"><@spring.message 'text.clicks'/></div>
                 </a>
             </#if>
