@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: 050-create-documents-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: documents
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: document_name_kyrgyz
+                  type: varchar(255)
+              - column:
+                  name: document_name_russian
+                  type: varchar(255)
+              - column:
+                  name: code
+                  type: varchar(255)

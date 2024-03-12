@@ -1,0 +1,102 @@
+databaseChangeLog:
+  - changeSet:
+      id: 037-create-barysh-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: Barysh
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: ending
+                  type: varchar(255)
+              - column:
+                  name: affix
+                  type: varchar(255)
+  - changeSet:
+      id: 037-create-tabysh-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: Tabysh
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: ending
+                  type: varchar(255)
+              - column:
+                  name: affix
+                  type: varchar(255)
+  - changeSet:
+      id: 037-create-ilik-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: Ilik
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: ending
+                  type: varchar(255)
+              - column:
+                  name: affix
+                  type: varchar(255)
+  - changeSet:
+      id: 037-create-Jatysh-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: Jatysh
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: ending
+                  type: varchar(255)
+              - column:
+                  name: affix
+                  type: varchar(255)
+  - changeSet:
+      id: 037-create-chygysh-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: Chygysh
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: ending
+                  type: varchar(255)
+              - column:
+                  name: affix
+                  type: varchar(255)
+

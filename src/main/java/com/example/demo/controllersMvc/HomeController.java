@@ -31,20 +31,7 @@ public class HomeController {
 
     @GetMapping
     public String getHomePage(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
-        authorities.forEach(authority -> log.info("Authority: " + authority.getAuthority()));
-
-        if (auth.getName().equals("anonymousUser")) {
-            model.addAttribute("username", null);
-        } else {
-            model.addAttribute("username", auth.getName());
-            AccountType accountType = userService.mapToUserDto(userService.getUserByEmail(auth.getName()).
-                    orElse(null)).getAccountType();
-            model.addAttribute("type", accountType);
-
-        }
-        return "home";
+        return "main";
     }
 
     @GetMapping("/forgot")

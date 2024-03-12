@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: insertDataChaygyshG
+      author: Sanat
+      changes:
+        - sql:
+            sql: |
+              insert into ChygyshG(ending, affix)
+              VALUES (
+                'а', 
+                'дан'
+              ),
+              (
+                'о', 
+                'дон'
+              ),
+              (
+                'ө', 
+                'дөн'
+              ),
+              (
+                'э', 
+                'ден'
+              ),
+              (
+                'ы', 
+                'дан'
+              ),
+              (
+                'и', 
+                'ден'
+              ),
+              (
+                'у', 
+                'дан'
+              ),
+              (
+                'ү', 
+                'дөн'
+              ),
+              (
+                'е', 
+                'ден'
+              ),
+              (
+                'ю', 
+                'дан'
+              ),
+              (
+                'я', 
+                'дан'
+              )

@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 054-create-sub_document-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: sub_document
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: type_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_sub_doc_type_id
+                    references: document_type(id)
+              - column:
+                  name: document_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_doc_id
+                    references: documents(id)
+              - column:
+                  name: sub_name_kg
+                  type: varchar(255)
+              - column:
+                  name: sub_name_ru
+                  type: varchar(255)

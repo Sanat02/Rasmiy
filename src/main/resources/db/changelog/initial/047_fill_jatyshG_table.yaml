@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: insertDataJatyshG
+      author: Sanat
+      changes:
+        - sql:
+            sql: |
+              insert into JatyshG(ending, affix)
+              VALUES (
+                'а', 
+                'да'
+              ),
+              (
+                'о', 
+                'до'
+              ),
+              (
+                'ө', 
+                'дө'
+              ),
+              (
+                'э', 
+                'де'
+              ),
+              (
+                'ы', 
+                'да'
+              ),
+              (
+                'и', 
+                'де'
+              ),
+              (
+                'у', 
+                'да'
+              ),
+              (
+                'ү', 
+                'дө'
+              ),
+              (
+                'е', 
+                'де'
+              ),
+              (
+                'ю', 
+                'да'
+              ),
+              (
+                'я', 
+                'да'
+              )

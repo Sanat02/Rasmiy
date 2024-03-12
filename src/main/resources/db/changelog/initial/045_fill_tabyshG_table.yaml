@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: insertDataTabyshG
+      author: Sanat
+      changes:
+        - sql:
+            sql: |
+              insert into TabyshG(ending, affix)
+              VALUES (
+                'а', 
+                'ны'
+              ),
+              (
+                'о', 
+                'ну'
+              ),
+              (
+                'ө', 
+                'нү'
+              ),
+              (
+                'э', 
+                'ни'
+              ),
+              (
+                'ы', 
+                'ны'
+              ),
+              (
+                'и', 
+                'ни'
+              ),
+              (
+                'у', 
+                'ну'
+              ),
+              (
+                'ү', 
+                'нү'
+              ),
+              (
+                'е', 
+                'ни'
+              ),
+              (
+                'ю', 
+                'ну'
+              ),
+              (
+                'я', 
+                'ны'
+              )

@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: insertDocumentsTable
+      author: Sanat
+      changes:
+        - sql:
+            sql: |
+              insert into document_type(document_type, type_name_kg, type_name_ru)
+              VALUES (
+                'statement', 
+                'Арыз', 
+                'Заявление'
+              ),
+              (
+                'explanatory', 
+                'Түшүнүк кат', 
+                'Объснительная'
+              ),
+              (
+                'auth_letter', 
+                'Ишеним кат', 
+                'Доверительная'
+              ),
+              (
+                'resume', 
+                'Резюме', 
+                'Резюме'
+              ),
+              (
+                'receipt',
+                'Тил кат',
+                'Расписка'
+              )

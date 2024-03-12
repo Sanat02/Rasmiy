@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 056-create-universities-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: universities
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: university_name_kg
+                  type: varchar(400)
+              - column:
+                  name: university_name_ru
+                  type: varchar(400)
+              - column:
+                  name: affixed_university_i
+                  type: varchar(400)
+              - column:
+                  name: affixed_university_b
+                  type: varchar(400)
+              - column:
+                  name: affixed_university_t
+                  type: varchar(400)
+              - column:
+                  name: affixed_university_j
+                  type: varchar(400)
+              - column:
+                  name: affixed_university_c
+                  type: varchar(400)

@@ -63,4 +63,44 @@ databaseChangeLog:
       file: db/changelog/initial/034_add_constraintfk_vacancy.yaml
   - include:
       file: db/changelog/initial/036_add_token_reset_password.yaml
+  - include:
+      file: db/changelog/initial/037_create_sklonenie_table.yaml
+  - include:
+      file: db/changelog/initial/039_fill_barysh_table.yaml
+  - include:
+      file: db/changelog/initial/040_creae_sklonenie_glasnye.yaml
+  - include:
+      file: db/changelog/initial/041_fill_baryshG_table.yaml
+  - include:
+      file: db/changelog/initial/042_fill_ilik_table.yaml
+  - include:
+      file: db/changelog/initial/043_fili_ilikG_table.yaml
+  - include:
+      file: db/changelog/initial/044_fill_tabysh_table.yaml
+  - include:
+      file: db/changelog/initial/045_fill_tabyshG_table.yaml
+  - include:
+      file: db/changelog/initial/046_fill_jatysh_table.yaml
+  - include:
+      file: db/changelog/initial/047_fill_jatyshG_table.yaml
+  - include:
+      file: db/changelog/initial/048_fill_chygysh_table.yaml
+  - include:
+      file: db/changelog/initial/049_fill_chygyshG_table.yaml
+  - include:
+      file: db/changelog/initial/050_create_documents_table.yaml
+  - include:
+      file: db/changelog/initial/051_fill_documents_table.yaml
+  - include:
+      file: db/changelog/initial/052_create_document_type_table.yaml
+  - include:
+      file: db/changelog/initial/053_fill_document_type_table.yaml
+  - include:
+      file: db/changelog/initial/054_create_sub_document_table.yaml
+  - include:
+      file: db/changelog/initial/055_fill_sub_document_table.yaml
+  - include:
+      file: db/changelog/initial/056_create_universities_table.yaml
+  - include:
+      file: db/changelog/initial/057_fill_universities_table.yaml
 

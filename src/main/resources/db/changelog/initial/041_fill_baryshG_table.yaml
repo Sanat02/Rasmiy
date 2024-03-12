@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: insertDataBaryshG
+      author: Sanat
+      changes:
+        - sql:
+            sql: |
+              insert into baryshG(ending, affix)
+              VALUES (
+                'а', 
+                'га'
+              ),
+              (
+                'о', 
+                'го'
+              ),
+              (
+                'ө', 
+                'гө'
+              ),
+              (
+                'э', 
+                'ге'
+              ),
+              (
+                'ы', 
+                'га'
+              ),
+              (
+                'и', 
+                'ге'
+              ),
+              (
+                'у', 
+                'га'
+              ),
+              (
+                'ү', 
+                'гө'
+              ),
+              (
+                'е', 
+                'ге'
+              ),
+              (
+                'ю', 
+                'га'
+              ),
+              (
+                'я', 
+                'га'
+              )

@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: insertDocumentsTable
+      author: Sanat
+      changes:
+        - sql:
+            sql: |
+              insert into documents(document_name_kyrgyz, document_name_russian, code)
+              VALUES (
+                'Жеке', 
+                'Личные', 
+                'code001'
+              ),
+              (
+                'Билим берүү', 
+                'Образование', 
+                'code002'
+              ),
+              (
+                'Үй-бүлө', 
+                'Семья', 
+                'code003'
+              ),
+              (
+                'Медицина', 
+                'Медицина', 
+                'code004'
+              ),
+              (
+                'Жумуш', 
+                'Работа', 
+                'code005'
+              ),
+              (
+                'Транспорт', 
+                'Транспорт', 
+                'code006'
+              )

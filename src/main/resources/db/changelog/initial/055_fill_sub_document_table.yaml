@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: insertSubDocuments
+      author: Sanat
+      changes:
+        - sql:
+            comment: Insert data into sub_document
+            sql: |
+              insert into sub_document(type_id, document_id, sub_name_kg, sub_name_ru)
+              values ( (select id from document_type where document_type = 'statement'),(select id from documents where code = 'code002'),'Калыбына келтирүү арызы','Заявление на восстановление'),
+              ( (select id from document_type where document_type = 'statement'),(select id from documents where code = 'code002'),'Чегерүүгө арыз','Заявление на отчисление'),
+              ( (select id from document_type where document_type = 'statement'),(select id from documents where code = 'code002'),'Зачеттук жуманы узартууга арыз','Заявление на продлении зачетной недели'),
+              ( (select id from document_type where document_type = 'statement'),(select id from documents where code = 'code002'),'Окууга эркин баруу арызы','Заявление на свободное посещение'),
+              ( (select id from document_type where document_type = 'statement'),(select id from documents where code = 'code002'),'Зачеттук китепчени калыбына келтирүү жөнүндө арыз','Заявление о восстановлении зачетной книжики'),
+              ( (select id from document_type where document_type = 'statement'),(select id from documents where code = 'code002'),'Башка ЖОЖго которуу жөнүндө арыз','Заявление о переводе в другой вуз'),
+              ( (select id from document_type where document_type = 'statement'),(select id from documents where code = 'code002'),'Башка факультетке которуу жөнүндө арыз','Заявление о переводе в другой факультет'),
+              ( (select id from document_type where document_type = 'statement'),(select id from documents where code = 'code002'),'Башка ЖОЖдон которулуу жөнүндө арыз','Заявление  переводе из другого вуза'),
+              ( (select id from document_type where document_type = 'statement'),(select id from documents where code = 'code002'),'Аты-жөнүн өзгөртүү жөнүндө арыз','Заявление о смене фамилии'),
+              ( (select id from document_type where document_type = 'explanatory'),(select id from documents where code = 'code002'),'Окууга келбегенге түшүнүк кат','Объяснительная за не посещение');
+

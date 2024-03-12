@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: 052-create-document-type-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: document_type
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: document_type
+                  type: varchar(255)
+              - column:
+                  name: type_name_kg
+                  type: varchar(255)
+              - column:
+                  name: type_name_ru
+                  type: varchar(255)

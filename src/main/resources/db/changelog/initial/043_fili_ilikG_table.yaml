@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: insertDataIlikG
+      author: Sanat
+      changes:
+        - sql:
+            sql: |
+              insert into IlikG(ending, affix)
+              VALUES (
+                'а', 
+                'нын'
+              ),
+              (
+                'о', 
+                'нун'
+              ),
+              (
+                'ө', 
+                'нүн'
+              ),
+              (
+                'э', 
+                'нин'
+              ),
+              (
+                'ы', 
+                'нын'
+              ),
+              (
+                'и', 
+                'нин'
+              ),
+              (
+                'у', 
+                'нун'
+              ),
+              (
+                'ү', 
+                'нүн'
+              ),
+              (
+                'е', 
+                'нин'
+              ),
+              (
+                'ю', 
+                'нун'
+              ),
+              (
+                'я', 
+                'нын'
+              )
