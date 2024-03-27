@@ -1,9 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.DocumentDto;
-import com.example.demo.dto.JobResumeDto;
 import com.example.demo.model.Document;
-import com.example.demo.model.JobResume;
 import com.example.demo.repository.DocumentRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,10 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.ProfileImageDto;
 import com.example.demo.enums.SklonenieType;
 import com.example.demo.service.AffixService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

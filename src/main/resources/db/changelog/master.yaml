@@ -103,4 +103,18 @@ databaseChangeLog:
       file: db/changelog/initial/056_create_universities_table.yaml
   - include:
       file: db/changelog/initial/057_fill_universities_table.yaml
+  - include:
+      file: db/changelog/initial/058_create_reasons_recovery_table.yaml
+  - include:
+      file: db/changelog/initial/059_fill_reasons_table.yaml
+  - include:
+      file: db/changelog/initial/060_create_statements_table.yaml
+  - include:
+      file: db/changelog/initial/061_create_docType_table.yaml
+  - include:
+      file: db/changelog/initial/062_fill_DocType_table.yaml
+  - include:
+      file: db/changelog/initial/063_academicReason_table.yaml
+  - include:
+      file: db/changelog/initial/064_fill_academinReason_table.yaml
 

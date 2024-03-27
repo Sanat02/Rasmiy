@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: 061-doc-type-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: doc_type
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: doc_name_kg
+                  type: varchar(1000)
+              - column:
+                  name: doc_name_ru
+                  type: varchar(400)
+              - column:
+                  name: affixed_text
+                  type: varchar(1000)

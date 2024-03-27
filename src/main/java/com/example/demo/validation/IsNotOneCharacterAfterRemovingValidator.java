@@ -9,6 +9,9 @@ public class IsNotOneCharacterAfterRemovingValidator implements ConstraintValida
         return notStayOneCharacterAfterRemoving(s);
     }
     private boolean notStayOneCharacterAfterRemoving(String text) {
+        if (text == null) {
+            return true; // Return true if the value is null
+        }
         int flag = 0;
         if (text.endsWith("ь") || text.endsWith("ъ")) {
             flag = 1;

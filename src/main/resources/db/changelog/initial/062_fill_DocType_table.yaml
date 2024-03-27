@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: insertDocType_table
+      author: Sanat
+      changes:
+        - sql:
+            comment: Insert data into doctype
+            sql: |
+              insert into doc_type(doc_name_kg, doc_name_ru,affixed_text)
+              values ('Зачеттук китепче','Зачетная книжка','Зачеттук китепчемди'),
+               ('Студенттик билет','Студенческий билет','Студенттик билетимди')

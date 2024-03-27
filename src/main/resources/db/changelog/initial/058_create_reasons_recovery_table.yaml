@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 058-create-reasons-table
+      author: Sanat
+      changes:
+        - createTable:
+            tableName: reasons
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: reason_name_kg
+                  type: varchar(400)
+              - column:
+                  name: reason_name_ru
+                  type: varchar(400)

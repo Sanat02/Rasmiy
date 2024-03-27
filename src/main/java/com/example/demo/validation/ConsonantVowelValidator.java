@@ -13,6 +13,9 @@ public class ConsonantVowelValidator implements ConstraintValidator<ValidateCons
     }
 
     private boolean isNotAllVowellOrConsonant(String text) {
+        if (text == null) {
+            return true; // Return true if the value is null
+        }
         int vowelsCount = 0;
         int consonantCount = 0;
         int iodCount = 0;

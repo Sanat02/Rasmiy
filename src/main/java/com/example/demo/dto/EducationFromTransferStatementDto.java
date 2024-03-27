@@ -1,7 +1,6 @@
 package com.example.demo.dto;
 
 import com.example.demo.validation.ValidateConsonantVowel;
-import com.example.demo.validation.ValidateIsNotOneCharacter;
 import com.example.demo.validation.ValidateIsNotOneCharacterAfterRemoving;
 import com.example.demo.validation.ValidateLanguage;
 import jakarta.validation.constraints.NotBlank;
@@ -25,7 +24,6 @@ public class EducationFromTransferStatementDto {
     @Pattern(regexp = "^[А-Яа-яӨөҮүҢң\\s]*$", message = "Field should contain only one word")
     @ValidateLanguage(message = "Rector letters should be only kyrgyz/russian!")
     @ValidateConsonantVowel(message = "Your word contains only consonants or vowels")
-    @ValidateIsNotOneCharacter(message="The word should at least contain 2 characters")
     @ValidateIsNotOneCharacterAfterRemoving(message = "The word that contains 2 character should not end with ь or ъ")
     @NotBlank(message = "Rector shouldn't be null or empty!")
     private String rectorF;
@@ -33,7 +31,6 @@ public class EducationFromTransferStatementDto {
     @Pattern(regexp = "^[А-Яа-яӨөҮүҢң\\s]*$", message = "Field should contain only one word")
     @ValidateLanguage(message = "Rector letters should be only kyrgyz/russian!")
     @ValidateConsonantVowel(message = "Your word contains only consonants or vowels")
-    @ValidateIsNotOneCharacter(message="The word should at least contain 2 characters")
     @ValidateIsNotOneCharacterAfterRemoving(message = "The word that contains 2 character should not end with ь or ъ")
     @NotBlank(message = "Rector shouldn't be null or empty!")
     private String rectorI;
@@ -41,7 +38,6 @@ public class EducationFromTransferStatementDto {
     @Pattern(regexp = "^[А-Яа-яӨөҮүҢң\\s]*$", message = "Field should contain only one word")
     @ValidateLanguage(message = "Rector letters should be only kyrgyz/russian!")
     @ValidateConsonantVowel(message = "Your word contains only consonants or vowels")
-    @ValidateIsNotOneCharacter(message="The word should at least contain 2 characters")
     @ValidateIsNotOneCharacterAfterRemoving(message = "The word that contains 2 character should not end with ь or ъ")
     @NotBlank(message = "Rector shouldn't be null or empty!")
     private String rectorO;
@@ -62,7 +58,6 @@ public class EducationFromTransferStatementDto {
     @Pattern(regexp = "^[А-Яа-яӨөҮүҢң\\s]*$", message = "Field should contain only one word")
     @ValidateLanguage(message = "FIO letters should be only kyrgyz/russian!")
     @ValidateConsonantVowel(message = "Your word contains only consonants or vowels")
-    @ValidateIsNotOneCharacter(message="The word should at least contain 2 characters")
     @ValidateIsNotOneCharacterAfterRemoving(message = "The word that contains 2 character should not end with ь or ъ")
     @NotBlank(message = "F shouldn't be null or empty!")
     private String F;
@@ -70,7 +65,6 @@ public class EducationFromTransferStatementDto {
     @Pattern(regexp = "^[А-Яа-яӨөҮүҢң\\s]*$", message = "Field should contain only one word")
     @ValidateLanguage(message = "FIO letters should be only kyrgyz/russian!")
     @ValidateConsonantVowel(message = "Your word contains only consonants or vowels")
-    @ValidateIsNotOneCharacter(message="The word should at least contain 2 characters")
     @ValidateIsNotOneCharacterAfterRemoving(message = "The word that contains 2 character should not end with ь or ъ")
     @NotBlank(message = "FIO shouldn't be null or empty!")
     private String I;
@@ -79,7 +73,6 @@ public class EducationFromTransferStatementDto {
     @Pattern(regexp = "^[А-Яа-яЁё]+$", message = "Field should contain only one word")
     @ValidateLanguage(message = "FIO letters should be only kyrgyz/russian!")
     @ValidateConsonantVowel(message = "Your word contains only consonants or vowels")
-    @ValidateIsNotOneCharacter(message="The word should at least contain 2 characters")
     @ValidateIsNotOneCharacterAfterRemoving(message = "The word that contains 2 character should not end with ь or ъ")
     private String O;
 
@@ -95,7 +88,6 @@ public class EducationFromTransferStatementDto {
     @Pattern(regexp = "^[А-Яа-яӨөҮүҢң\\s]*$", message = "Field should contain only one word")
     @ValidateLanguage(message = "FIO letters should be only kyrgyz/russian!")
     @ValidateConsonantVowel(message = "Your word contains only consonants or vowels")
-    @ValidateIsNotOneCharacter(message="The word should at least contain 2 characters")
     @ValidateIsNotOneCharacterAfterRemoving(message = "The word that contains 2 character should not end with ь or ъ")
     @NotBlank(message = "F shouldn't be null or empty!")
     private String groupFrom;
@@ -104,7 +96,6 @@ public class EducationFromTransferStatementDto {
     @Pattern(regexp = "^[А-Яа-яӨөҮүҢң\\s]*$", message = "Field should contain only one word")
     @ValidateLanguage(message = "FIO letters should be only kyrgyz/russian!")
     @ValidateConsonantVowel(message = "Your word contains only consonants or vowels")
-    @ValidateIsNotOneCharacter(message="The word should at least contain 2 characters")
     @ValidateIsNotOneCharacterAfterRemoving(message = "The word that contains 2 character should not end with ь or ъ")
     @NotBlank(message = "F shouldn't be null or empty!")
     private String groupTo;

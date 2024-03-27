@@ -1,10 +1,11 @@
 package com.example.demo.dto;
 
 import com.example.demo.validation.ValidateConsonantVowel;
-import com.example.demo.validation.ValidateIsNotOneCharacter;
 import com.example.demo.validation.ValidateIsNotOneCharacterAfterRemoving;
 import com.example.demo.validation.ValidateLanguage;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
 import lombok.Data;
@@ -14,14 +15,13 @@ import java.time.LocalDate;
 @Data
 @Builder
 public class EducationExtensionCrWeekStatementDto {
-    @ValidateLanguage(message = "University letters should be only kyrgyz/russian!")
-    @NotBlank(message = "University shouldn't be null or empty!")
-    private String university;   // I can input
+    @NotNull(message = "University ID shouldn't be null!")
+    @Min(value = 1, message = "University ID should be greater than 0")
+    private int universityId;
 
     @Pattern(regexp = "^[А-Яа-яӨөҮүҢң\\s]*$", message = "Field should contain only one word")
     @ValidateLanguage(message = "Rector letters should be only kyrgyz/russian!")
     @ValidateConsonantVowel(message = "Your word contains only consonants or vowels")
-    @ValidateIsNotOneCharacter(message="The word should at least contain 2 characters")
     @ValidateIsNotOneCharacterAfterRemoving(message = "The word that contains 2 character should not end with ь or ъ")
     @NotBlank(message = "Rector shouldn't be null or empty!")
     private String rectorF;
@@ -29,7 +29,6 @@ public class EducationExtensionCrWeekStatementDto {
     @Pattern(regexp = "^[А-Яа-яӨөҮүҢң\\s]*$", message = "Field should contain only one word")
     @ValidateLanguage(message = "Rector letters should be only kyrgyz/russian!")
     @ValidateConsonantVowel(message = "Your word contains only consonants or vowels")
-    @ValidateIsNotOneCharacter(message="The word should at least contain 2 characters")
     @ValidateIsNotOneCharacterAfterRemoving(message = "The word that contains 2 character should not end with ь or ъ")
     @NotBlank(message = "Rector shouldn't be null or empty!")
     private String rectorI;
@@ -37,7 +36,6 @@ public class EducationExtensionCrWeekStatementDto {
     @Pattern(regexp = "^[А-Яа-яӨөҮүҢң\\s]*$", message = "Field should contain only one word")
     @ValidateLanguage(message = "Rector letters should be only kyrgyz/russian!")
     @ValidateConsonantVowel(message = "Your word contains only consonants or vowels")
-    @ValidateIsNotOneCharacter(message="The word should at least contain 2 characters")
     @ValidateIsNotOneCharacterAfterRemoving(message = "The word that contains 2 character should not end with ь or ъ")
     @NotBlank(message = "Rector shouldn't be null or empty!")
     private String rectorO;
@@ -52,7 +50,6 @@ public class EducationExtensionCrWeekStatementDto {
     @Pattern(regexp = "^[А-Яа-яӨөҮүҢң\\s]*$", message = "Field should contain only one word")
     @ValidateLanguage(message = "FIO letters should be only kyrgyz/russian!")
     @ValidateConsonantVowel(message = "Your word contains only consonants or vowels")
-    @ValidateIsNotOneCharacter(message="The word should at least contain 2 characters")
     @ValidateIsNotOneCharacterAfterRemoving(message = "The word that contains 2 character should not end with ь or ъ")
     @NotBlank(message = "F shouldn't be null or empty!")
     private String F;
@@ -60,7 +57,6 @@ public class EducationExtensionCrWeekStatementDto {
     @Pattern(regexp = "^[А-Яа-яӨөҮүҢң\\s]*$", message = "Field should contain only one word")
     @ValidateLanguage(message = "FIO letters should be only kyrgyz/russian!")
     @ValidateConsonantVowel(message = "Your word contains only consonants or vowels")
-    @ValidateIsNotOneCharacter(message="The word should at least contain 2 characters")
     @ValidateIsNotOneCharacterAfterRemoving(message = "The word that contains 2 character should not end with ь or ъ")
     @NotBlank(message = "FIO shouldn't be null or empty!")
     private String I;
@@ -69,7 +65,6 @@ public class EducationExtensionCrWeekStatementDto {
     @Pattern(regexp = "^[А-Яа-яЁё]+$", message = "Field should contain only one word")
     @ValidateLanguage(message = "FIO letters should be only kyrgyz/russian!")
     @ValidateConsonantVowel(message = "Your word contains only consonants or vowels")
-    @ValidateIsNotOneCharacter(message="The word should at least contain 2 characters")
     @ValidateIsNotOneCharacterAfterRemoving(message = "The word that contains 2 character should not end with ь or ъ")
     private String O;
 
@@ -78,10 +73,21 @@ public class EducationExtensionCrWeekStatementDto {
     @NotBlank(message = "Faculty shouldn't be null or empty!")
     private String faculty; // I can input
 
+
+    @Pattern(regexp = "^[А-Яа-яӨөҮүҢң\\s]*$", message = "Field should contain only one word")
+    @ValidateLanguage(message = "FIO letters should be only kyrgyz/russian!")
+    @ValidateConsonantVowel(message = "Your word contains only consonants or vowels")
+    @ValidateIsNotOneCharacterAfterRemoving(message = "The word that contains 2 character should not end with ь or ъ")
+    @NotBlank(message = "F shouldn't be null or empty!")
+    private String group;
+
+
     @ValidateLanguage(message = "lesson letters should be only kyrgyz/russian!")
     @NotBlank(message = "F shouldn't be null or empty!")
     private String lesson;
 
+
+    @NotNull(message = "Extension week shouldn't be null")
     private LocalDate extensionDate;
 
 
