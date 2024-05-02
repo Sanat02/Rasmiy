@@ -72,7 +72,7 @@
                 </div>
                 <div class="col-md-6 py-5 wow zoomIn">
                     <div class="img-fluid text-center">
-                        <img src="https://grs.gov.kg/uploads/state_symbols/gerb_standart.png" alt=""
+                        <img src="https://scontent.ffru1-4.fna.fbcdn.net/v/t1.6435-9/82611117_2607660616017550_4333850562643623936_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ubTujEQrAVwAb7GSil8&_nc_ht=scontent.ffru1-4.fna&oh=00_AfAdAUDr-uCYZ-gfIJhdcz6vnpWXqPfLa9RhSLA_1h472g&oe=66528FCE  " alt=""
                              style="width: 350px;">
                     </div>
                 </div>

@@ -16,6 +16,9 @@ public class ConsonantVowelValidator implements ConstraintValidator<ValidateCons
         if (text == null) {
             return true; // Return true if the value is null
         }
+        if(text.isEmpty()){
+            return true;
+        }
         int vowelsCount = 0;
         int consonantCount = 0;
         int iodCount = 0;

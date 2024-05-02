@@ -24,7 +24,6 @@ public class DashBoardController {
     @GetMapping()
     public String getDocuments(Model model) {
        model.addAttribute("Documents",documentService.getAllDocuments());
-       String lung="";
         Locale currentLocale = LocaleContextHolder.getLocale();
 
         // Get language code

@@ -84,8 +84,7 @@ public class EducationWithdrawalStatementDto {
 
 
     @NotNull(message = "University ID shouldn't be null!")
-    @NotBlank(message = "Reason shouldn't be null or empty!")
-    private String reason; // I can input
+    private int reason; // I can input
 
     private LocalDate filledDate;
 }

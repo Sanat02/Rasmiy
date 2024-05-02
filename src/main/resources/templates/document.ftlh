@@ -17,8 +17,92 @@
 </head>
 <body>
 <style>
-    .document-row:hover {
+    .containerg {
+        max-width: 850px;
+        height: 700px;
+        margin: 20px auto;
+        margin-top: 50px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .headerg {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .headerg h1 {
+        margin: 0;
+        font-size: 24px;
+        margin-left: 40px;
+    }
+
+    .buttons {
+        display: flex;
+        align-items: center;
+        margin-left: 800px;
+        margin-top: 40px;
+    }
+
+    .button {
+        padding: 8px 16px;
+        margin-left: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
         cursor: pointer;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .button:hover {
+        background-color: #0056b3;
+    }
+
+
+
+    .document-info {
+        width: 300px;
+        margin-left: 500px;
+        margin-top: 50px;
+        margin-bottom: 100px;
+    }
+
+    .document-info p {
+        margin: 0;
+    }
+
+    .document-info p:last-child {
+        margin-bottom: 20px;
+    }
+
+
+
+    .footer p {
+        margin: 0;
+    }
+    .footer{
+        margin-left: 540px;
+        margin-top: 30px;
+    }
+
+    .statement{
+        margin-left: 50px;
+        width: 700px;
+
+
+    }
+    .st{
+        margin-left: 240px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        font-size: 20px;
     }
 </style>
 <div
@@ -366,97 +450,27 @@
             </div>
         </header>
         <main class="h-full pb-16 overflow-y-auto">
-            <div class="container grid px-6 mx-auto">
-                <h2
-                        class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
-                >
-                    <#if lang=="en">
-                        ${document.document_name_kyrgyz}
-                    <#else >
-                        ${document.document_name_russian}
-                    </#if>
-                </h2>
-                <!-- CTA -->
-                <a
-                        class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
-                >
-                    <div class="flex items-center">
-                        <svg
-                                class="w-5 h-5 mr-2"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                        >
-                            <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                            ></path>
-                        </svg>
-                        <span> <@spring.message 'documents.header'/></span>
-                    </div>
-
-                </a>
-
-                <!-- With avatar -->
-                <h4
-                        class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
-                >
-                    <@spring.message 'documents'/>
-                </h4>
-                <#if SubDocs?size == 0>
-                    <p class="font-semibold text-purple-100">No documents</p>
-                <#else>
-                    <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
-                        <div class="w-full overflow-x-auto">
-                            <table class="w-full whitespace-no-wrap">
-                                <thead>
-                                <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                                    <th class="px-4 py-3"> <@spring.message 'documents'/></th>
-                                    <th class="px-4 py-3">Тип</th>
-                                    <th class="px-4 py-3">Status</th>
-                                </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                                <#list SubDocs as SubDoc>
-                                    <tr class="document-row">
-                                        <td class="px-4 py-3">
-                                            <div class="flex items-center text-sm">
-                                                <!-- Avatar with inset shadow -->
-                                                <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                                    <img class="object-cover w-full h-full rounded-full"
-                                                         src="https://cdn-icons-png.flaticon.com/512/3301/3301750.png"
-                                                         alt="" loading="lazy"/>
-                                                    <div class="absolute inset-0 rounded-full shadow-inner"
-                                                         aria-hidden="true"></div>
-                                                </div>
-                                                <div>
-                                                    <#if lang=="en">
-                                                        <p class="font-semibold">${SubDoc.subNameKg}</p>
-                                                    <#else>
-                                                        <p class="font-semibold">${SubDoc.subNameRu}</p>
-                                                    </#if>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">
-                                            <#if lang=="en">
-                                                ${SubDoc.typeNameKg}
-                                            <#else>
-                                                ${SubDoc.typeNameRu}
-                                            </#if>
-                                        </td>
-                                        <td class="px-4 py-3 text-xs">
-                            <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                Approved
-                            </span>
-                                        </td>
-                                    </tr>
-                                </#list>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </#if>
+            <div class="headerg">
+                <div class="buttons">
+                    <button class="button" onclick="downloadPDF()">Download PDF</button>
+                    <button class="button" onclick="shareWhatsApp()">Share with WhatsApp</button>
+                </div>
+            </div>
+            <div class="containerg">
+                <div class="document-info">
+                    ${statement.header}
+                </div>
+                <div class="statement">
+                    <h1 class="st"> ${statement.title}</h1>
+                    <p> ${statement.mainText}</p>
+                </div>
+                <div class="footer">
+                    <p>${statement.filledDate}</p>
+                    <p>Кол тамгасы: <span>__________</span></p>
+                </div>
 
             </div>
+
         </main>
     </div>
 </div>

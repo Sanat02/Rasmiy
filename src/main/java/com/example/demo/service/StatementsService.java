@@ -7,6 +7,7 @@ import com.example.demo.dto.EducationWithdrawalStatementDto;
 import com.example.demo.enums.SklonenieType;
 import com.example.demo.model.Statement;
 import com.example.demo.repository.DocTypeRepository;
+import com.example.demo.repository.ReasonRepository;
 import com.example.demo.repository.StatementRepository;
 import com.example.demo.repository.UniversityRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ public class StatementsService {
     private final UniversityRepository universityRepository;
     private final StatementRepository statementRepository;
     private final DocTypeRepository docTypeRepository;
+    private final ReasonRepository reasonRepository;
 
     public Statement createEducationRecoveryStatement(EducationRecoveryStatementDto educationRecoveryStatementDto) {
         String title = "Арыз";
@@ -39,7 +41,7 @@ public class StatementsService {
             studentFioCh = studentFioCh + educationRecoveryStatementDto.getF() +
                     " " + affixService.addAffix(educationRecoveryStatementDto.getRectorI(), SklonenieType.CHYGYSH);
         } else {
-            studentFioCh = studentFioCh + educationRecoveryStatementDto.getF() + " " + educationRecoveryStatementDto.getRectorI()
+            studentFioCh = studentFioCh + educationRecoveryStatementDto.getF() + " " + educationRecoveryStatementDto.getI()
                     + " " + affixService.addAffix(educationRecoveryStatementDto.getO(), SklonenieType.CHYGYSH);
         }
         String faculty = educationRecoveryStatementDto.getFaculty() + " факультетинин";
@@ -82,7 +84,7 @@ public class StatementsService {
         }
         String faculty = educationWithdrawalStatementDto.getFaculty() + " факультетинин";
         String desiredCourse = course + "-курсунун";
-        String reason = educationWithdrawalStatementDto.getReason();
+        String reason = reasonRepository.findById(educationWithdrawalStatementDto.getReason()).orElse(null).getReasonNameKg();
         String date = "Толтурулган күнү:" + educationWithdrawalStatementDto.getFilledDate();
         String group = educationWithdrawalStatementDto.getGroup() + " группасынын студенти";
         String groupCh = educationWithdrawalStatementDto.getGroup() + " группасынан";
@@ -173,6 +175,9 @@ public class StatementsService {
                 .filledDate(date)
                 .build());
 
+    }
+    public Statement getStatementById(int id){
+        return statementRepository.findById(id).orElseThrow();
     }
 
 

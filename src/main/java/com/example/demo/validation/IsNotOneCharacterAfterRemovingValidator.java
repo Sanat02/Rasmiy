@@ -12,6 +12,9 @@ public class IsNotOneCharacterAfterRemovingValidator implements ConstraintValida
         if (text == null) {
             return true; // Return true if the value is null
         }
+        if(text.isEmpty()){
+            return true;
+        }
         int flag = 0;
         if (text.endsWith("ь") || text.endsWith("ъ")) {
             flag = 1;
