@@ -1,6 +1,7 @@
 package com.example.demo.controllersMvc;
 
 import com.example.demo.dto.EducationRecoveryStatementDto;
+import com.example.demo.dto.EducationWithdrawalStatementDto;
 import com.example.demo.model.Statement;
 import com.example.demo.repository.ReasonRepository;
 import com.example.demo.repository.UniversityRepository;
@@ -30,6 +31,16 @@ public class FormController {
     private final ReasonRepository reasonRepository;
     private final StatementsService statementsService;
 
+    @GetMapping("/education/st/{id}")
+    public String getSt(@PathVariable int id) {
+        if (id == 1) {
+            return "redirect:/form/education/recovery";
+        } else {
+            return "redirect:/form/education/withdrawal";
+        }
+    }
+
+
     @GetMapping("/education/recovery")
     public String getFormPage(Model model) {
         model.addAttribute("universities", universityRepository.findAll());
@@ -41,6 +52,43 @@ public class FormController {
         model.addAttribute("lang", languageCode);
         return "forms";
     }
+
+    @GetMapping("/education/withdrawal")
+    public String getFormPageWithdrawal(Model model) {
+        model.addAttribute("universities", universityRepository.findAll());
+        model.addAttribute("reasons", reasonRepository.findAll());
+        Locale currentLocale = LocaleContextHolder.getLocale();
+        String languageCode = currentLocale.getLanguage();
+        System.out.println(languageCode);
+
+        model.addAttribute("lang", languageCode);
+        return "forms2";
+    }
+
+    @PostMapping("/education/withdrawal")
+    public String generateRecovery(@Valid EducationWithdrawalStatementDto educationWithdrawalStatementDto, BindingResult result, Model model) {
+        // If there are validation errors, send error messages for each field back to the form page
+        model.addAttribute("universities", universityRepository.findAll());
+        model.addAttribute("reasons", reasonRepository.findAll());
+        model.addAttribute("lang", LocaleContextHolder.getLocale().getLanguage());
+        if (result.hasErrors()) {
+
+            // Create a map to hold field error messages
+            Map<String, String> fieldErrors = new HashMap<>();
+            for (FieldError error : result.getFieldErrors()) {
+                fieldErrors.put(error.getField(), error.getDefaultMessage());
+            }
+            model.addAttribute("fieldErrors", fieldErrors);
+
+            return "forms";
+        }
+
+        // If there are no validation errors, proceed with the service logic
+        //add id
+        Statement statement = statementsService.createEducationWithdrawalStatement(educationWithdrawalStatementDto);
+        return "redirect:/form/success/" + statement.getId();
+    }
+
 
     @PostMapping("/education/recovery")
     public String generateRecovery(@Valid EducationRecoveryStatementDto educationRecoveryStatementDto, BindingResult result, Model model) {
@@ -62,13 +110,13 @@ public class FormController {
 
         // If there are no validation errors, proceed with the service logic
         //add id
-        Statement statement=statementsService.createEducationRecoveryStatement(educationRecoveryStatementDto);
-        return "redirect:/form/success/"+statement.getId();
+        Statement statement = statementsService.createEducationRecoveryStatement(educationRecoveryStatementDto);
+        return "redirect:/form/success/" + statement.getId();
     }
 
     @GetMapping("/success/{reportId}")
-    public String getReport(Model model,@PathVariable int reportId){
-        model.addAttribute("statement",statementsService.getStatementById(reportId));
+    public String getReport(Model model, @PathVariable int reportId) {
+        model.addAttribute("statement", statementsService.getStatementById(reportId));
         return "document";
     }
 

@@ -416,7 +416,7 @@
                                 </thead>
                                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                                 <#list SubDocs as SubDoc>
-                                    <tr class="document-row">
+                                    <tr class="document-row" data-subdoc-id="${SubDoc.getId()}">
                                         <td class="px-4 py-3">
                                             <div class="flex items-center text-sm">
                                                 <!-- Avatar with inset shadow -->
@@ -461,11 +461,11 @@
     </div>
 </div>
 <script>
-    // Add event listeners to each row
     const rows = document.querySelectorAll('.document-row');
     rows.forEach(row => {
+        const subDocId = row.getAttribute('data-subdoc-id');
         row.addEventListener('click', function () {
-            window.location.href = "/form/education/recovery";
+            window.location.href = `/form/education/st/`+subDocId;
         });
     });
 </script>
