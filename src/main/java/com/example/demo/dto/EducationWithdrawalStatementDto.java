@@ -44,7 +44,7 @@ public class EducationWithdrawalStatementDto {
 
     @NotNull(message = "{validate.notNull}")
     @NotBlank(message = "{validate.notNull}")
-    @ValidateLanguage(message = "{validate.language}")
+   // @ValidateLanguage(message = "{validate.language}")
     private String group;
 
 
@@ -69,13 +69,13 @@ public class EducationWithdrawalStatementDto {
 
     @NotNull(message = "{validate.notNull}")
     @NotBlank(message = "{validate.notNull}")
-    //@ValidateLanguage(message = "{validate.language}")
+   // @ValidateLanguage(message = "{validate.language}")
     private String faculty; // I can input
 
 
     @NotNull(message = "{validate.notNull}")
     @NotBlank(message = "{validate.notNull}")
-    private int reason; // I can input
+    private String reason; // I can input
 
     private LocalDate filledDate;
 }

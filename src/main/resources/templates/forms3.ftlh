@@ -17,6 +17,12 @@
     <script src="../../static/js/init-alpine.js"></script>
     <!-- You need focus-trap.js to make the modal accessible -->
     <script src="../../static/js/focus-trap.js" defer></script>
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <!-- Flatpickr JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 </head>
 <body>
 <style>
@@ -370,7 +376,7 @@
                 <h2
                         class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
                 >
-                    <@spring.message 'withdrawalStatement'/>
+                    <@spring.message 'extensionStatement'/>
                 </h2>
                 <button
                         id="modal"
@@ -415,7 +421,7 @@
                             </button>
                         </header>
 
-                        <img src="../../static/img/withdrawal.png" alt="Image description" class="mt-4 w-full rounded-lg">
+                        <img src="../../static/img/extension.png" alt="Image description" class="mt-4 w-full rounded-lg">
                         <footer
                                 class="flex flex-col items-center justify-end px-6 py-3 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row bg-gray-50 dark:bg-gray-800"
                         >
@@ -436,7 +442,7 @@
                 >
                     <@spring.message 'genDocument'/>
                 </h4>
-                <form action="/form/education/withdrawal" method="post">
+                <form action="/form/education/extension" method="post">
                     <div
                             class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
                     >
@@ -590,7 +596,7 @@
                                 <#if fieldErrors?has_content && fieldErrors["rectorO"]??>
                                     <!-- Display the error message(s) for the 'F' field -->
                                     <span class="error-message text-xs text-red-600 dark:text-red-400">
-            ${fieldErrors["rectorI"]}
+            ${fieldErrors["rectorO"]}
         </span><br>
                                 </#if>
                             </label>
@@ -626,24 +632,37 @@
                             </label>
 
 
-                            <label class="block mt-4 text-sm" id="formB">
-                <span class="text-gray-700 dark:text-gray-400">
-                  <@spring.message 'formRecoveryReason'/>
-                </span>
-                                <select
-                                        name="reason"
-                                        class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                                >
-                                    <#list reasons as reason>
-                                        <#if lang=="en">
-                                            <option value="${reason.reasonNameKg}">${reason.reasonNameKg}</option>
-                                        <#else >
-                                            <option value="${reason.reasonNameKg}">${reason.reasonNameRu}</option>
-                                        </#if>
-
-                                    </#list>
-                                </select>
+                            <label class="block text-sm" id="formB">
+                                <span class="text-gray-700 dark:text-gray-400"><@spring.message 'selectLesson'/></span>
+                                <input
+                                        name="lesson"
+                                        class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                        placeholder="Математика"
+                                />
+                                <#if fieldErrors?has_content && fieldErrors["lesson"]??>
+                                    <!-- Display the error message(s) for the 'F' field -->
+                                    <span class="error-message text-xs text-red-600 dark:text-red-400">
+            ${fieldErrors["lesson"]}
+        </span><br>
+                                </#if>
                             </label>
+
+                            <label class="block text-sm" id="formB">
+                                <span class="text-gray-700 dark:text-gray-400"><@spring.message 'selectExtension'/></span>
+                                <input
+                                        id="datePickerField"
+                                        name="extensionDate"
+                                        class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                        placeholder="20.05.02"
+                                />
+                                <#if fieldErrors?has_content && fieldErrors["extensionDate"]??>
+                                    <!-- Display the error message(s) for the 'extensionDate' field -->
+                                    <span class="error-message text-xs text-red-600 dark:text-red-400">
+            ${fieldErrors["extensionDate"]}
+        </span><br>
+                                </#if>
+                            </label>
+
                         </div>
                         <button type="submit"
                                 class="bg-purple-600 hover:bg-purple-800 text-white font-bold py-2 px-4 rounded">
@@ -656,6 +675,19 @@
         </main>
     </div>
 </div>
+<script>
+    // Initialize Flatpickr
+    flatpickr("#datePickerField", {
+        dateFormat: "Y-m-d", // Format the date as YYYY-MM-DD
+        enableTime: false, // Disable time selection
+        altInput: true, // Enable a secondary input field for better UX
+        altFormat: "F j, Y", // Format the secondary input field's date (e.g., January 1, 2024)
+        locale: {
+            // Define locale settings (optional)
+            firstDayOfWeek: 1, // Start the week on Monday
+        },
+    });
 </script>
+
 </body>
 </html>

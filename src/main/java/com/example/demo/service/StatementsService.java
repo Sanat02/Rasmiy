@@ -79,12 +79,12 @@ public class StatementsService {
             studentFioCh = studentFioCh + educationWithdrawalStatementDto.getF() +
                     " " + affixService.addAffix(educationWithdrawalStatementDto.getRectorI(), SklonenieType.CHYGYSH);
         } else {
-            studentFioCh = studentFioCh + educationWithdrawalStatementDto.getF() + " " + educationWithdrawalStatementDto.getRectorI()
+            studentFioCh = studentFioCh + educationWithdrawalStatementDto.getF() + " " + educationWithdrawalStatementDto.getI()
                     + " " + affixService.addAffix(educationWithdrawalStatementDto.getO(), SklonenieType.CHYGYSH);
         }
         String faculty = educationWithdrawalStatementDto.getFaculty() + " факультетинин";
         String desiredCourse = course + "-курсунун";
-        String reason = reasonRepository.findById(educationWithdrawalStatementDto.getReason()).orElse(null).getReasonNameKg();
+        String reason = educationWithdrawalStatementDto.getReason();
         String date = "Толтурулган күнү:" + educationWithdrawalStatementDto.getFilledDate();
         String group = educationWithdrawalStatementDto.getGroup() + " группасынын студенти";
         String groupCh = educationWithdrawalStatementDto.getGroup() + " группасынан";
@@ -119,7 +119,7 @@ public class StatementsService {
             studentFioCh = studentFioCh + educationExtensionCrWeekStatementDto.getF() +
                     " " + affixService.addAffix(educationExtensionCrWeekStatementDto.getRectorI(), SklonenieType.CHYGYSH);
         } else {
-            studentFioCh = studentFioCh + educationExtensionCrWeekStatementDto.getF() + " " + educationExtensionCrWeekStatementDto.getRectorI()
+            studentFioCh = studentFioCh + educationExtensionCrWeekStatementDto.getF() + " " + educationExtensionCrWeekStatementDto.getI()
                     + " " + affixService.addAffix(educationExtensionCrWeekStatementDto.getO(), SklonenieType.CHYGYSH);
         }
         String faculty = educationExtensionCrWeekStatementDto.getFaculty() + " факультетинин";
@@ -164,7 +164,7 @@ public class StatementsService {
         String faculty = educationRestorationDocDto.getFaculty() + " факультетинин";
         String date = "Толтурулган күнү:" + educationRestorationDocDto.getFilledDate();
         String group = educationRestorationDocDto.getGroup() + " группасынын студенти";
-        String affixedDocType=docTypeRepository.findById(educationRestorationDocDto.getDocumentType()).orElse(null).getAffixed_text();
+        String affixedDocType=educationRestorationDocDto.getDocumentType();
 
         header = universityIlikText + " ректору " + rectorFioB + " ушул эле ЖОЖдун " + course + "-курсунун " + faculty + " " + group + " " + studentFioCh;
         mainText = affixedDocType+" жоготуп алганыма байланыштуу мага  калыбына келтирүүнү өтүнөм.";
