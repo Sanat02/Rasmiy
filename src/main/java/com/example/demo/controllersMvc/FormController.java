@@ -1,10 +1,8 @@
 package com.example.demo.controllersMvc;
 
-import com.example.demo.dto.EducationExtensionCrWeekStatementDto;
-import com.example.demo.dto.EducationRecoveryStatementDto;
-import com.example.demo.dto.EducationRestorationDocDto;
-import com.example.demo.dto.EducationWithdrawalStatementDto;
+import com.example.demo.dto.*;
 import com.example.demo.model.Statement;
+import com.example.demo.repository.AcademicReasonRepository;
 import com.example.demo.repository.ReasonRepository;
 import com.example.demo.repository.UniversityRepository;
 import com.example.demo.service.StatementsService;
@@ -33,6 +31,7 @@ public class FormController {
     private final UniversityRepository universityRepository;
     private final ReasonRepository reasonRepository;
     private final StatementsService statementsService;
+    private final AcademicReasonRepository academicReasonRepository;
 
     @GetMapping("/education/st/{id}")
     public String getSt(@PathVariable int id) {
@@ -42,6 +41,10 @@ public class FormController {
             return "redirect:/form/education/withdrawal";
         } else if (id == 3) {
             return "redirect:/form/education/extension";
+        } else if (id == 4) {
+            return "redirect:/form/education/academicLeave";
+        } else if (id == 9) {
+            return "redirect:/form/education/changedFio";
         } else {
             return "redirect:/form/education/restoration"; //5
         }
@@ -190,12 +193,82 @@ public class FormController {
             }
             model.addAttribute("fieldErrors", fieldErrors);
             System.out.println(fieldErrors);
-            return "forms2";
+            return "forms4";
         }
 
         // If there are no validation errors, proceed with the service logic
         //add id
         Statement statement = statementsService.createEducationRestorationDocument(educationRestorationDocDto);
+        return "redirect:/form/success/" + statement.getId();
+    }
+
+    @GetMapping("/education/changedFio")
+    public String getFormPageFioChanged(Model model) {
+        model.addAttribute("universities", universityRepository.findAll());
+        Locale currentLocale = LocaleContextHolder.getLocale();
+        String languageCode = currentLocale.getLanguage();
+        System.out.println(languageCode);
+
+        model.addAttribute("lang", languageCode);
+        return "forms5";
+    }
+
+    @PostMapping("/education/changedFio")
+    public String getFormPageFioChanged(@Valid EducationFIOChangedStatementDto fioChangedStatementDto, BindingResult result, Model model) {
+        // If there are validation errors, send error messages for each field back to the form page
+        fioChangedStatementDto.setFilledDate(LocalDate.now());
+        model.addAttribute("universities", universityRepository.findAll());
+        model.addAttribute("lang", LocaleContextHolder.getLocale().getLanguage());
+        if (result.hasErrors()) {
+            // Create a map to hold field error messages
+            Map<String, String> fieldErrors = new HashMap<>();
+            for (FieldError error : result.getFieldErrors()) {
+                fieldErrors.put(error.getField(), error.getDefaultMessage());
+            }
+            model.addAttribute("fieldErrors", fieldErrors);
+            System.out.println(fieldErrors);
+            return "forms5";
+        }
+
+        // If there are no validation errors, proceed with the service logic
+        //add id
+        Statement statement = statementsService.createEducationFioChangedStatement(fioChangedStatementDto);
+        return "redirect:/form/success/" + statement.getId();
+    }
+
+    @GetMapping("/education/academicLeave")
+    public String getFormPageAcademicLeave(Model model) {
+        model.addAttribute("universities", universityRepository.findAll());
+        model.addAttribute("reasons", academicReasonRepository.findAll());
+        Locale currentLocale = LocaleContextHolder.getLocale();
+        String languageCode = currentLocale.getLanguage();
+        System.out.println(languageCode);
+
+        model.addAttribute("lang", languageCode);
+        return "forms7";
+    }
+
+    @PostMapping("/education/academicLeave")
+    public String getFormPageAcademicLeave(@Valid EducationAcademicLeaveStatementDto educationAcademicLeaveStatementDto, BindingResult result, Model model) {
+        // If there are validation errors, send error messages for each field back to the form page
+        educationAcademicLeaveStatementDto.setFilledDate(LocalDate.now());
+        model.addAttribute("universities", universityRepository.findAll());
+        model.addAttribute("reasons", academicReasonRepository.findAll());
+        model.addAttribute("lang", LocaleContextHolder.getLocale().getLanguage());
+        if (result.hasErrors()) {
+            // Create a map to hold field error messages
+            Map<String, String> fieldErrors = new HashMap<>();
+            for (FieldError error : result.getFieldErrors()) {
+                fieldErrors.put(error.getField(), error.getDefaultMessage());
+            }
+            model.addAttribute("fieldErrors", fieldErrors);
+            System.out.println(fieldErrors);
+            return "forms7";
+        }
+
+        // If there are no validation errors, proceed with the service logic
+        //add id
+        Statement statement = statementsService.createEducationAcademicStatetment(educationAcademicLeaveStatementDto);
         return "redirect:/form/success/" + statement.getId();
     }
 

@@ -21,23 +21,23 @@ public class AffixService {
         text=text.trim();
         text=text.toLowerCase();
         String result = "";
-        if (!isOneWord(text)) {
-            return "You can put only one word to a gap";
-        }
-        if (!notStayOneCharacterAfterRemoving(text)) {
-            return "The word that contains 2 character should not end with ь or ъ";
-        }
-        if (text.endsWith("ь") || text.endsWith("ъ")) {
-            text = text.substring(0, text.length() - 1);
-
-
-        }
-        if (!isNotOneCharacter(text)) {
-            return "The word should at least contain 2 characters";
-        }
-        if (!isNotAllVowellOrConsonant(text)) {
-            return "Yor word contains only consonants or vowels!";
-        }
+//        if (!isOneWord(text)) {
+//            return "You can put only one word to a gap";
+//        }
+//        if (!notStayOneCharacterAfterRemoving(text)) {
+//            return "The word that contains 2 character should not end with ь or ъ";
+//        }
+//        if (text.endsWith("ь") || text.endsWith("ъ")) {
+//            text = text.substring(0, text.length() - 1);
+//
+//
+//        }
+//        if (!isNotOneCharacter(text)) {
+//            return "The word should at least contain 2 characters";
+//        }
+//        if (!isNotAllVowellOrConsonant(text)) {
+//            return "Yor word contains only consonants or vowels!";
+//        }
         String ending=getEnding(text);
         String affixedText="";
         System.out.println(ending);

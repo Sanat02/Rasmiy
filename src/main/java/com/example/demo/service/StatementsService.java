@@ -1,9 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.EducationExtensionCrWeekStatementDto;
-import com.example.demo.dto.EducationRecoveryStatementDto;
-import com.example.demo.dto.EducationRestorationDocDto;
-import com.example.demo.dto.EducationWithdrawalStatementDto;
+import com.example.demo.dto.*;
 import com.example.demo.enums.SklonenieType;
 import com.example.demo.model.Statement;
 import com.example.demo.repository.DocTypeRepository;
@@ -178,6 +175,101 @@ public class StatementsService {
     }
     public Statement getStatementById(int id){
         return statementRepository.findById(id).orElseThrow();
+    }
+
+    public Statement createEducationFioChangedStatement(EducationFIOChangedStatementDto educationFIOChangedStatementDto) {
+        String title = "Арыз";
+        String header = "";
+        String mainText = "";
+        String universityIlikText = universityRepository.findById(educationFIOChangedStatementDto.getUniversityId()).orElseThrow().getAffixedUniversityI();
+        String rectorFioB = "";
+        if (educationFIOChangedStatementDto.getRectorO().isEmpty()) {
+            rectorFioB = rectorFioB + educationFIOChangedStatementDto.getRectorF() +
+                    " " + affixService.addAffix(educationFIOChangedStatementDto.getRectorI(), SklonenieType.BARYSH);
+        } else {
+            rectorFioB = rectorFioB + educationFIOChangedStatementDto.getRectorF() + " " + educationFIOChangedStatementDto.getRectorI()
+                    + " " + affixService.addAffix(educationFIOChangedStatementDto.getRectorO(), SklonenieType.BARYSH);
+        }
+        String course = educationFIOChangedStatementDto.getCourse();
+        String studentFioCh = "";
+        if (educationFIOChangedStatementDto.getO().isEmpty()) {
+            studentFioCh = studentFioCh + educationFIOChangedStatementDto.getF() +
+                    " " + affixService.addAffix(educationFIOChangedStatementDto.getRectorI(), SklonenieType.CHYGYSH);
+        } else {
+            studentFioCh = studentFioCh + educationFIOChangedStatementDto.getF() + " " + educationFIOChangedStatementDto.getI()
+                    + " " + affixService.addAffix(educationFIOChangedStatementDto.getO(), SklonenieType.CHYGYSH);
+        }
+        String studentFioT="";
+        if (educationFIOChangedStatementDto.getO().isEmpty()) {
+            studentFioT = studentFioT + educationFIOChangedStatementDto.getF() +
+                    " " + affixService.addAffix(educationFIOChangedStatementDto.getI(), SklonenieType.TABYSH);
+        } else {
+            studentFioT = studentFioT + educationFIOChangedStatementDto.getF() + " " + educationFIOChangedStatementDto.getI()
+                    + " " + affixService.addAffix(educationFIOChangedStatementDto.getO(), SklonenieType.TABYSH);
+        }
+
+        String newFioB="";
+        if (educationFIOChangedStatementDto.getNewO().isEmpty()) {
+            newFioB = newFioB+ educationFIOChangedStatementDto.getNewF() +
+                    " " + affixService.addAffix(educationFIOChangedStatementDto.getNewI(), SklonenieType.BARYSH);
+        } else {
+            newFioB = newFioB + educationFIOChangedStatementDto.getNewF() + " " + educationFIOChangedStatementDto.getNewI()
+                    + " " + affixService.addAffix(educationFIOChangedStatementDto.getNewO(), SklonenieType.BARYSH);
+        }
+
+        String faculty = educationFIOChangedStatementDto.getFaculty() + " факультетинин";
+        String date = "Толтурулган күнү:" + educationFIOChangedStatementDto.getFilledDate();
+        String group = educationFIOChangedStatementDto.getGroup() + " группасынын студенти";
+
+
+        header = universityIlikText + " ректору " + rectorFioB + " ушул эле ЖОЖдун " + course + "-курсунун " + faculty + " " + group + " " + studentFioCh;
+        mainText = "Паспортумду алмаштырганыма байланыштуу буга чейинки аты-жөнүм "+studentFioT+" жаңы аты-жөнүм "+newFioB+" өзгөртүүнү суранам.Паспорттун жаңы көчүрмөсү тиркелди.";
+        return statementRepository.save(Statement.builder()
+                .header(header)
+                .title(title)
+                .mainText(mainText)
+                .filledDate(date)
+                .build());
+
+    }
+
+    public Statement createEducationAcademicStatetment(EducationAcademicLeaveStatementDto educationAcademicLeaveStatementDto) {
+        String title = "Арыз";
+        String header = "";
+        String mainText = "";
+        String universityIlikText = universityRepository.findById(educationAcademicLeaveStatementDto.getUniversityId()).orElseThrow().getAffixedUniversityI();
+        String rectorFioB = "";
+        if (educationAcademicLeaveStatementDto.getRectorO().isEmpty()) {
+            rectorFioB = rectorFioB + educationAcademicLeaveStatementDto.getRectorF() +
+                    " " + affixService.addAffix(educationAcademicLeaveStatementDto.getRectorI(), SklonenieType.BARYSH);
+        } else {
+            rectorFioB = rectorFioB + educationAcademicLeaveStatementDto.getRectorF() + " " + educationAcademicLeaveStatementDto.getRectorI()
+                    + " " + affixService.addAffix(educationAcademicLeaveStatementDto.getRectorO(), SklonenieType.BARYSH);
+        }
+        String course =educationAcademicLeaveStatementDto.getCourse();
+        String studentFioCh = "";
+        if (educationAcademicLeaveStatementDto.getO().isEmpty()) {
+            studentFioCh = studentFioCh + educationAcademicLeaveStatementDto.getF() +
+                    " " + affixService.addAffix(educationAcademicLeaveStatementDto.getRectorI(), SklonenieType.CHYGYSH);
+        } else {
+            studentFioCh = studentFioCh + educationAcademicLeaveStatementDto.getF() + " " + educationAcademicLeaveStatementDto.getI()
+                    + " " + affixService.addAffix(educationAcademicLeaveStatementDto.getO(), SklonenieType.CHYGYSH);
+        }
+        String faculty = educationAcademicLeaveStatementDto.getFaculty() + " факультетинин";
+        String date = "Толтурулган күнү:" + educationAcademicLeaveStatementDto.getFilledDate();
+        String group = educationAcademicLeaveStatementDto.getGroup() + " группасынын студенти";
+
+
+        header = universityIlikText + " ректору " + rectorFioB + " ушул эле ЖОЖдун " + course + "-курсунун " + faculty + " " + group + " " + studentFioCh;
+        mainText = educationAcademicLeaveStatementDto.getReason()+" лекцияларга эркин катышууга уруксат берүүңүздү өтүнөм.\n" +
+                "Керектүү документтердин көчүрмөсү тиркелди.";
+        return statementRepository.save(Statement.builder()
+                .header(header)
+                .title(title)
+                .mainText(mainText)
+                .filledDate(date)
+                .build());
+
     }
 
 
