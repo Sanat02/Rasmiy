@@ -272,5 +272,84 @@ public class StatementsService {
 
     }
 
+    public Statement createTransferFacultyStatement(EducationTransferFacultyStatement educationTransferFacultyStatement) {
+        String title = "Арыз";
+        String header = "";
+        String mainText = "";
+        String universityIlikText = universityRepository.findById(educationTransferFacultyStatement.getUniversityId()).orElseThrow().getAffixedUniversityI();
+        String rectorFioB = "";
+        if (educationTransferFacultyStatement.getRectorO().isEmpty()) {
+            rectorFioB = rectorFioB + educationTransferFacultyStatement.getRectorF() +
+                    " " + affixService.addAffix(educationTransferFacultyStatement.getRectorI(), SklonenieType.BARYSH);
+        } else {
+            rectorFioB = rectorFioB + educationTransferFacultyStatement.getRectorF() + " " + educationTransferFacultyStatement.getRectorI()
+                    + " " + affixService.addAffix(educationTransferFacultyStatement.getRectorO(), SklonenieType.BARYSH);
+        }
+        String course =educationTransferFacultyStatement.getCourse();
+        String studentFioCh = "";
+        if (educationTransferFacultyStatement.getO().isEmpty()) {
+            studentFioCh = studentFioCh + educationTransferFacultyStatement.getF() +
+                    " " + affixService.addAffix(educationTransferFacultyStatement.getRectorI(), SklonenieType.CHYGYSH);
+        } else {
+            studentFioCh = studentFioCh + educationTransferFacultyStatement.getF() + " " + educationTransferFacultyStatement.getI()
+                    + " " + affixService.addAffix(educationTransferFacultyStatement.getO(), SklonenieType.CHYGYSH);
+        }
+        String faculty = educationTransferFacultyStatement.getFaculty() + " факультетинин";
+        String date = "Толтурулган күнү:" +educationTransferFacultyStatement.getFilledDate();
+        String group = educationTransferFacultyStatement.getGroup() + " группасынын студенти";
+
+
+        header = universityIlikText + " ректору " + rectorFioB + " ушул эле ЖОЖдун " + course + "-курсунун " + faculty + " " + group + " " + studentFioCh;
+        mainText = "Мени "+educationTransferFacultyStatement.getTransferFaculty()+" факультетине "+course+" -курска "+
+                educationTransferFacultyStatement.getTransferDepartment()+" багыттамасына которууну өтүнөм.";
+        return statementRepository.save(Statement.builder()
+                .header(header)
+                .title(title)
+                .mainText(mainText)
+                .filledDate(date)
+                .build());
+
+    }
+    public Statement createTransferUniversityStatement(EducationFromTransferStatementDto educationFromTransferStatementDto) {
+        String title = "Арыз";
+        String header = "";
+        String mainText = "";
+        String universityIlikText = universityRepository.findById(educationFromTransferStatementDto.getUniversityTo()).orElseThrow().getAffixedUniversityI();
+        String rectorFioB = "";
+        if (educationFromTransferStatementDto.getRectorO().isEmpty()) {
+            rectorFioB = rectorFioB + educationFromTransferStatementDto.getRectorF() +
+                    " " + affixService.addAffix(educationFromTransferStatementDto.getRectorI(), SklonenieType.BARYSH);
+        } else {
+            rectorFioB = rectorFioB + educationFromTransferStatementDto.getRectorF() + " " + educationFromTransferStatementDto.getRectorI()
+                    + " " + affixService.addAffix(educationFromTransferStatementDto.getRectorO(), SklonenieType.BARYSH);
+        }
+        String course =educationFromTransferStatementDto.getCourse();
+        String studentFioCh = "";
+        if (educationFromTransferStatementDto.getO().isEmpty()) {
+            studentFioCh = studentFioCh + educationFromTransferStatementDto.getF() +
+                    " " + affixService.addAffix(educationFromTransferStatementDto.getRectorI(), SklonenieType.CHYGYSH);
+        } else {
+            studentFioCh = studentFioCh + educationFromTransferStatementDto.getF() + " " + educationFromTransferStatementDto.getI()
+                    + " " + affixService.addAffix(educationFromTransferStatementDto.getO(), SklonenieType.CHYGYSH);
+        }
+        String faculty = educationFromTransferStatementDto.getFacultyFrom() + " факультетинин";
+        String date = "Толтурулган күнү:" +educationFromTransferStatementDto.getFilledDate();
+        String group = educationFromTransferStatementDto.getGroupFrom() + " группасынын студенти";
+
+        String fromUniversity=universityRepository.findById(educationFromTransferStatementDto.getUniversityFrom()).orElseThrow().getAffixedUniversityI();
+       //String toFaculty
+
+        header = universityIlikText + " ректору " + rectorFioB + " "+fromUniversity+" " + course + "-курсунун " + faculty + " " + group + " " + studentFioCh;
+        mainText = "Мени "+universityIlikText+" "+educationFromTransferStatementDto.getFacultyTo()+" факультетинин "+
+                educationFromTransferStatementDto.getGroupTo()+" бөлүмүнө которуу тартибинде кабыл алууңузду өтүнөм.";
+        return statementRepository.save(Statement.builder()
+                .header(header)
+                .title(title)
+                .mainText(mainText)
+                .filledDate(date)
+                .build());
+
+    }
+
 
 }

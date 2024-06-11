@@ -35,6 +35,7 @@ public class FormController {
 
     @GetMapping("/education/st/{id}")
     public String getSt(@PathVariable int id) {
+        System.out.println("ID" + id);
         if (id == 1) {
             return "redirect:/form/education/recovery";
         } else if (id == 2) {
@@ -43,11 +44,18 @@ public class FormController {
             return "redirect:/form/education/extension";
         } else if (id == 4) {
             return "redirect:/form/education/academicLeave";
+        } else if (id == 5) {
+            return "redirect:/form/education/restoration";
+        } else if (id == 6) {
+            return "redirect:/form/education/transferUniversity";
+        } else if (id == 7) {
+            return "redirect:/form/education/transferFaculty";
         } else if (id == 9) {
             return "redirect:/form/education/changedFio";
         } else {
-            return "redirect:/form/education/restoration"; //5
+            return "redirect:/NOTFOUND/"+id;
         }
+
     }
 
 
@@ -269,6 +277,79 @@ public class FormController {
         // If there are no validation errors, proceed with the service logic
         //add id
         Statement statement = statementsService.createEducationAcademicStatetment(educationAcademicLeaveStatementDto);
+        return "redirect:/form/success/" + statement.getId();
+    }
+
+    ///////
+    @GetMapping("/education/transferFaculty")
+    public String getFormPageTransferFaculty(Model model) {
+        model.addAttribute("universities", universityRepository.findAll());
+        //model.addAttribute("reasons", academicReasonRepository.findAll());
+        Locale currentLocale = LocaleContextHolder.getLocale();
+        String languageCode = currentLocale.getLanguage();
+        System.out.println(languageCode);
+
+        model.addAttribute("lang", languageCode);
+        return "forms8";
+    }
+
+    @PostMapping("/education/transferFaculty")
+    public String getFormPageTransferFaculty(@Valid EducationTransferFacultyStatement educationTransferFacultyStatement, BindingResult result, Model model) {
+        // If there are validation errors, send error messages for each field back to the form page
+        educationTransferFacultyStatement.setFilledDate(LocalDate.now());
+        model.addAttribute("universities", universityRepository.findAll());
+        model.addAttribute("reasons", academicReasonRepository.findAll());
+        model.addAttribute("lang", LocaleContextHolder.getLocale().getLanguage());
+        if (result.hasErrors()) {
+            // Create a map to hold field error messages
+            Map<String, String> fieldErrors = new HashMap<>();
+            for (FieldError error : result.getFieldErrors()) {
+                fieldErrors.put(error.getField(), error.getDefaultMessage());
+            }
+            model.addAttribute("fieldErrors", fieldErrors);
+            System.out.println(fieldErrors);
+            return "forms8";
+        }
+
+        // If there are no validation errors, proceed with the service logic
+        //add id
+        Statement statement = statementsService.createTransferFacultyStatement(educationTransferFacultyStatement);
+        return "redirect:/form/success/" + statement.getId();
+    }
+
+    @GetMapping("/education/transferUniversity")
+    public String getFormPageTransferUniversity(Model model) {
+        model.addAttribute("universities", universityRepository.findAll());
+        //model.addAttribute("reasons", academicReasonRepository.findAll());
+        Locale currentLocale = LocaleContextHolder.getLocale();
+        String languageCode = currentLocale.getLanguage();
+        System.out.println(languageCode);
+
+        model.addAttribute("lang", languageCode);
+        return "forms9";
+    }
+
+    @PostMapping("/education/transferUniversity")
+    public String getFormPageTransferUniversity(@Valid EducationFromTransferStatementDto educationFromTransferStatementDto, BindingResult result, Model model) {
+        // If there are validation errors, send error messages for each field back to the form page
+        educationFromTransferStatementDto.setFilledDate(LocalDate.now());
+        model.addAttribute("universities", universityRepository.findAll());
+        model.addAttribute("reasons", academicReasonRepository.findAll());
+        model.addAttribute("lang", LocaleContextHolder.getLocale().getLanguage());
+        if (result.hasErrors()) {
+            // Create a map to hold field error messages
+            Map<String, String> fieldErrors = new HashMap<>();
+            for (FieldError error : result.getFieldErrors()) {
+                fieldErrors.put(error.getField(), error.getDefaultMessage());
+            }
+            model.addAttribute("fieldErrors", fieldErrors);
+            System.out.println(fieldErrors);
+            return "forms9";
+        }
+
+        // If there are no validation errors, proceed with the service logic
+        //add id
+        Statement statement = statementsService.createTransferUniversityStatement(educationFromTransferStatementDto);
         return "redirect:/form/success/" + statement.getId();
     }
 

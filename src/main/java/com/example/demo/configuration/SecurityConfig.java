@@ -39,13 +39,17 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/vacancies")
+                        .defaultSuccessUrl("/dashboard")
                         .permitAll())
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .logoutSuccessUrl("/")
                         .permitAll())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/resources/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/dashboard/**")).authenticated()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/form/**")).authenticated()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/statement/**")).authenticated()
                                 .anyRequest().permitAll()
 
                 );

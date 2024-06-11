@@ -25,3 +25,12 @@ databaseChangeLog:
               - column:
                   name: filled_date
                   type: varchar(400)
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_statement_user_id
+                    references: users(id)
+                    onDelete: CASCADE
+                    onUpdate: CASCADE

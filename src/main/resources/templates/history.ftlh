@@ -17,102 +17,63 @@
 </head>
 <body>
 <style>
-    .containerg {
-        width: 210mm;
-        height: 200mm;
-        margin: 20px auto;
+    .main-div {
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        width: 80%;
+        max-width: 600px;
         padding: 20px;
-
+        overflow-y: auto;
+        max-height: 80vh;
+        margin: 20px auto;
     }
-
-    .headerg {
+    .pdf-history-title {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    .pdf-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 20px;
+        background-color: #fafafa;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
     }
-
-    .headerg h1 {
-        font-size: 24px;
-        margin-left: 200px;
-        margin-top: 20px;
+    .pdf-item:hover {
+        background-color: #e0e0e0;
     }
-
-    .buttons {
+    .pdf-details {
+        flex-grow: 1;
+        margin-right: 10px;
+    }
+    .pdf-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #555;
+    }
+    .pdf-date {
+        font-size: 14px;
+        color: #888;
+    }
+    .pdf-actions {
         display: flex;
         align-items: center;
-        margin-left: 800px;
-        margin-top: 40px;
     }
-
-    .button {
-        padding: 8px 16px;
+    .pdf-action {
         margin-left: 10px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
         text-decoration: none;
-        font-size: 14px;
+        color: #007bff;
+        font-size: 16px;
+        transition: color 0.3s;
     }
-
-    .button:hover {
-        background-color: #0056b3;
-    }
-    .download{
-        padding: 8px 16px;
-        margin-left: 10px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        text-decoration: none;
-        font-size: 14px;
-    }
-    .download:hover{
-        background-color: #0056b3;
-    }
-
-
-
-    .document-info {
-        width: 300px;
-        margin-left: 420px;
-        margin-top: 50px;
-        margin-bottom: 100px;
-    }
-
-    .document-info p {
-        margin: 0;
-    }
-
-    .document-info p:last-child {
-        margin-bottom: 20px;
-    }
-
-
-
-    .footer p {
-        margin: 0;
-    }
-    .footer{
-        margin-left: 500px;
-        margin-top: 70px;
-    }
-
-    .statement{
-        margin-left: 50px;
-        width: 700px;
-
-
-    }
-    .st{
-        margin-left: 240px;
-        margin-bottom: 20px;
-        font-weight: bold;
-        font-size: 20px;
+    .pdf-action:hover {
+        color: #0056b3;
     }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -461,44 +422,33 @@
             </div>
         </header>
         <main class="h-full pb-16 overflow-y-auto">
-            <div class="headerg">
-                <div class="buttons">
-                    <button class="download" onclick="downloadPDF()">Download PDF</button>
+            <div class="main-div">
+                <div class="pdf-history-title">PDF History</div>
+                <div class="pdf-item">
+                    <div class="pdf-details">
+                        <div class="pdf-title">Document1.pdf</div>
+                        <div class="pdf-date">Uploaded on: 2024-06-01</div>
+                    </div>
+                    <div class="pdf-actions">
+                        <a href="#" class="pdf-action">View</a>
+                        <a href="#" class="pdf-action">Download</a>
+                    </div>
                 </div>
-            </div>
-            <div class="containerg">
-                <div class="document-info">
-                    ${statement.header}
+                <div class="pdf-item">
+                    <div class="pdf-details">
+                        <div class="pdf-title">Document2.pdf</div>
+                        <div class="pdf-date">Uploaded on: 2024-06-03</div>
+                    </div>
+                    <div class="pdf-actions">
+                        <a href="#" class="pdf-action">View</a>
+                        <a href="#" class="pdf-action">Download</a>
+                    </div>
                 </div>
-                <div class="statement">
-                    <h1 class="st"> ${statement.title}</h1>
-                    <p> ${statement.mainText}</p>
                 </div>
-                <div class="footer">
-                    <p>${statement.filledDate}</p>
-                    <p>Кол тамгасы: <span>__________</span></p>
-                </div>
-
-            </div>
-
         </main>
     </div>
 </div>
-<script>
-    let div=document.querySelector(".containerg");
-    let btn=document.querySelector(".download");
-    btn.addEventListener('click',()=>{
-        html2pdf().from(div).save()
-    })
-</script>
-<script>
-    // Add event listeners to each row
-    const rows = document.querySelectorAll('.document-row');
-    rows.forEach(row => {
-        row.addEventListener('click', function () {
-            window.location.href = "/form/education/recovery";
-        });
-    });
+
 </script>
 </body>
 </html>
