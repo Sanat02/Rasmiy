@@ -60,7 +60,7 @@
         }
 
         input[type="submit"] {
-            background-color: greenyellow;
+            background-color: #6C55F9;
             color: #fff;
             padding: 10px 20px;
             border: none;
@@ -71,7 +71,7 @@
         }
 
         input[type="submit"]:hover {
-            background-color: greenyellow;
+            background-color: #6C55F9;
         }
 
         .register-option {
@@ -81,7 +81,7 @@
         }
 
         .register-option a {
-            color: greenyellow;
+            color: #6C55F9;
             text-decoration: none;
         }
 
@@ -154,9 +154,6 @@
 
     <div class="register-option">
         <@spring.message 'no.account'/> <a href="/register"><@spring.message 'navbar.user.signup'/></a>
-    </div>
-    <div class="register-option">
-        <@spring.message 'forgot'/> <a href="/forgot"><@spring.message 'reset'/></a>
     </div>
 
 </div>

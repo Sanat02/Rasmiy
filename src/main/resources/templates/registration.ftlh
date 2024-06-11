@@ -61,7 +61,7 @@
         }
 
         input[type="submit"] {
-            background-color: greenyellow;
+            background-color: #6C55F9;
             color: #fff;
             padding: 10px 20px;
             border: none;
@@ -72,17 +72,17 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #00a86b;
+            background-color: #6C55F9;
         }
 
         .login-option {
             margin-top: 20px;
             font-size: 14px;
-            color: #333;
+            color: #6C55F9;
         }
 
         .login-option a {
-            color: #00a86b;
+            color: #6C55F9;
             text-decoration: none;
         }
 
