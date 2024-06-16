@@ -441,7 +441,7 @@ public class StatementsService {
                 result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
             }
             studentFioCh = studentFioCh + educationTransferFacultyStatement.getF() +
-                    " " +result;
+                    " " + result;
         } else {
             String result = affixService.addAffix(educationTransferFacultyStatement.getO(), SklonenieType.CHYGYSH);
             if (!result.isEmpty()) {
@@ -484,7 +484,7 @@ public class StatementsService {
             rectorFioB = rectorFioB + educationFromTransferStatementDto.getRectorF() +
                     " " + result;
         } else {
-            String result =  affixService.addAffix(educationFromTransferStatementDto.getRectorO(), SklonenieType.BARYSH);
+            String result = affixService.addAffix(educationFromTransferStatementDto.getRectorO(), SklonenieType.BARYSH);
             if (!result.isEmpty()) {
                 result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
             }
@@ -501,7 +501,7 @@ public class StatementsService {
             studentFioCh = studentFioCh + educationFromTransferStatementDto.getF() +
                     " " + result;
         } else {
-            String result =  affixService.addAffix(educationFromTransferStatementDto.getO(), SklonenieType.CHYGYSH);
+            String result = affixService.addAffix(educationFromTransferStatementDto.getO(), SklonenieType.CHYGYSH);
             if (!result.isEmpty()) {
                 result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
             }
