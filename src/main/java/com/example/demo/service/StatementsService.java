@@ -3,12 +3,17 @@ package com.example.demo.service;
 import com.example.demo.dto.*;
 import com.example.demo.enums.SklonenieType;
 import com.example.demo.model.Statement;
+import com.example.demo.model.User;
 import com.example.demo.repository.DocTypeRepository;
 import com.example.demo.repository.ReasonRepository;
 import com.example.demo.repository.StatementRepository;
 import com.example.demo.repository.UniversityRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +23,7 @@ public class StatementsService {
     private final StatementRepository statementRepository;
     private final DocTypeRepository docTypeRepository;
     private final ReasonRepository reasonRepository;
+    private final UserService userService;
 
     public Statement createEducationRecoveryStatement(EducationRecoveryStatementDto educationRecoveryStatementDto) {
         String title = "Арыз";
@@ -26,33 +32,55 @@ public class StatementsService {
         String universityIlikText = universityRepository.findById(educationRecoveryStatementDto.getUniversityId()).orElseThrow().getAffixedUniversityI();
         String rectorFioB = "";
         if (educationRecoveryStatementDto.getRectorO().isEmpty()) {
+            String result = affixService.addAffix(educationRecoveryStatementDto.getRectorI(), SklonenieType.BARYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
+
             rectorFioB = rectorFioB + educationRecoveryStatementDto.getRectorF() +
-                    " " + affixService.addAffix(educationRecoveryStatementDto.getRectorI(), SklonenieType.BARYSH);
+                    " " + result;
         } else {
+            String result = affixService.addAffix(educationRecoveryStatementDto.getRectorO(), SklonenieType.BARYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             rectorFioB = rectorFioB + educationRecoveryStatementDto.getRectorF() + " " + educationRecoveryStatementDto.getRectorI()
-                    + " " + affixService.addAffix(educationRecoveryStatementDto.getRectorO(), SklonenieType.BARYSH);
+                    + " " + result;
         }
         String course = educationRecoveryStatementDto.getCourse();
         String studentFioCh = "";
         if (educationRecoveryStatementDto.getO().isEmpty()) {
+            String result = affixService.addAffix(educationRecoveryStatementDto.getRectorI(), SklonenieType.CHYGYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             studentFioCh = studentFioCh + educationRecoveryStatementDto.getF() +
-                    " " + affixService.addAffix(educationRecoveryStatementDto.getRectorI(), SklonenieType.CHYGYSH);
+                    " " + result;
         } else {
+            String result = affixService.addAffix(educationRecoveryStatementDto.getO(), SklonenieType.CHYGYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             studentFioCh = studentFioCh + educationRecoveryStatementDto.getF() + " " + educationRecoveryStatementDto.getI()
-                    + " " + affixService.addAffix(educationRecoveryStatementDto.getO(), SklonenieType.CHYGYSH);
+                    + " " + result;
         }
         String faculty = educationRecoveryStatementDto.getFaculty() + " факультетинин";
         String desiredCourse = course + "-курсуна";
         String reason = educationRecoveryStatementDto.getReason();
         String date = "Толтурулган күнү:" + educationRecoveryStatementDto.getFilledDate();
 
+        String editedReason = Character.toUpperCase(reason.charAt(0)) + reason.substring(1);
+
         header = universityIlikText + " ректору " + rectorFioB + " ушул эле ЖОЖдун " + course + "-курсунан четтилген студенти " + studentFioCh;
-        mainText = "Мени " + faculty + " " + desiredCourse + " студенттердин катарына кошуп коюңузду өтүнөм." + reason + " окуудан четтетилгем.";
+        mainText = "Мени " + faculty + " " + desiredCourse + " студенттердин катарына кошуп коюңузду өтүнөм." + editedReason + " окуудан четтетилгем.";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getUserByEmail(auth.getName()).orElseThrow();
         return statementRepository.save(Statement.builder()
                 .header(header)
                 .title(title)
                 .mainText(mainText)
                 .filledDate(date)
+                .user(user)
                 .build());
 
     }
@@ -64,20 +92,36 @@ public class StatementsService {
         String universityIlikText = universityRepository.findById(educationWithdrawalStatementDto.getUniversityId()).orElseThrow().getAffixedUniversityI();
         String rectorFioB = "";
         if (educationWithdrawalStatementDto.getRectorO().isEmpty()) {
+            String result = affixService.addAffix(educationWithdrawalStatementDto.getRectorI(), SklonenieType.BARYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             rectorFioB = rectorFioB + educationWithdrawalStatementDto.getRectorF() +
-                    " " + affixService.addAffix(educationWithdrawalStatementDto.getRectorI(), SklonenieType.BARYSH);
+                    " " + result;
         } else {
+            String result = affixService.addAffix(educationWithdrawalStatementDto.getRectorO(), SklonenieType.BARYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             rectorFioB = rectorFioB + educationWithdrawalStatementDto.getRectorF() + " " + educationWithdrawalStatementDto.getRectorI()
-                    + " " + affixService.addAffix(educationWithdrawalStatementDto.getRectorO(), SklonenieType.BARYSH);
+                    + " " + result;
         }
         String course = educationWithdrawalStatementDto.getCourse();
         String studentFioCh = "";
         if (educationWithdrawalStatementDto.getO().isEmpty()) {
+            String result = affixService.addAffix(educationWithdrawalStatementDto.getRectorI(), SklonenieType.CHYGYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             studentFioCh = studentFioCh + educationWithdrawalStatementDto.getF() +
-                    " " + affixService.addAffix(educationWithdrawalStatementDto.getRectorI(), SklonenieType.CHYGYSH);
+                    " " + result;
         } else {
+            String result = affixService.addAffix(educationWithdrawalStatementDto.getO(), SklonenieType.CHYGYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             studentFioCh = studentFioCh + educationWithdrawalStatementDto.getF() + " " + educationWithdrawalStatementDto.getI()
-                    + " " + affixService.addAffix(educationWithdrawalStatementDto.getO(), SklonenieType.CHYGYSH);
+                    + " " + result;
         }
         String faculty = educationWithdrawalStatementDto.getFaculty() + " факультетинин";
         String desiredCourse = course + "-курсунун";
@@ -88,10 +132,13 @@ public class StatementsService {
 
         header = universityIlikText + " ректору " + rectorFioB + " ушул эле ЖОЖдун " + course + "-курсунун " + faculty + " " + group + " " + studentFioCh;
         mainText = "Мени " + universityIlikText + " " + desiredCourse + " " + faculty + " " + groupCh + " " + reason + " өз каалоом менен чыгырап жиберүүңүздү өтүнөм.";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getUserByEmail(auth.getName()).orElseThrow();
         return statementRepository.save(Statement.builder()
                 .header(header)
                 .title(title)
                 .mainText(mainText)
+                .user(user)
                 .filledDate(date)
                 .build());
 
@@ -104,20 +151,36 @@ public class StatementsService {
         String universityIlikText = universityRepository.findById(educationExtensionCrWeekStatementDto.getUniversityId()).orElseThrow().getAffixedUniversityI();
         String rectorFioB = "";
         if (educationExtensionCrWeekStatementDto.getRectorO().isEmpty()) {
+            String result = affixService.addAffix(educationExtensionCrWeekStatementDto.getRectorI(), SklonenieType.BARYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             rectorFioB = rectorFioB + educationExtensionCrWeekStatementDto.getRectorF() +
-                    " " + affixService.addAffix(educationExtensionCrWeekStatementDto.getRectorI(), SklonenieType.BARYSH);
+                    " " + result;
         } else {
+            String result = affixService.addAffix(educationExtensionCrWeekStatementDto.getRectorO(), SklonenieType.BARYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             rectorFioB = rectorFioB + educationExtensionCrWeekStatementDto.getRectorF() + " " + educationExtensionCrWeekStatementDto.getRectorI()
-                    + " " + affixService.addAffix(educationExtensionCrWeekStatementDto.getRectorO(), SklonenieType.BARYSH);
+                    + " " + result;
         }
         String course = educationExtensionCrWeekStatementDto.getCourse();
         String studentFioCh = "";
         if (educationExtensionCrWeekStatementDto.getO().isEmpty()) {
+            String result = affixService.addAffix(educationExtensionCrWeekStatementDto.getRectorI(), SklonenieType.CHYGYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             studentFioCh = studentFioCh + educationExtensionCrWeekStatementDto.getF() +
-                    " " + affixService.addAffix(educationExtensionCrWeekStatementDto.getRectorI(), SklonenieType.CHYGYSH);
+                    " " + result;
         } else {
+            String result = affixService.addAffix(educationExtensionCrWeekStatementDto.getO(), SklonenieType.CHYGYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             studentFioCh = studentFioCh + educationExtensionCrWeekStatementDto.getF() + " " + educationExtensionCrWeekStatementDto.getI()
-                    + " " + affixService.addAffix(educationExtensionCrWeekStatementDto.getO(), SklonenieType.CHYGYSH);
+                    + " " + result;
         }
         String faculty = educationExtensionCrWeekStatementDto.getFaculty() + " факультетинин";
         String date = "Толтурулган күнү:" + educationExtensionCrWeekStatementDto.getFilledDate();
@@ -127,10 +190,13 @@ public class StatementsService {
         header = universityIlikText + " ректору " + rectorFioB + " ушул эле ЖОЖдун " + course + "-курсунун " + faculty + " " + group + " " + studentFioCh;
         mainText = educationExtensionCrWeekStatementDto.getLesson() + " сабагынан зачет албай калганыма байланыштуу зачеттук жумамды " +
                 educationExtensionCrWeekStatementDto.getExtensionDate() + " чейин узартууну суранамын.Эгерде мен көрсөтүлгөн убакытка чейин тапшырып бүтпөсөм окуудан четтетилүүгө макулмун.";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getUserByEmail(auth.getName()).orElseThrow();
         return statementRepository.save(Statement.builder()
                 .header(header)
                 .title(title)
                 .mainText(mainText)
+                .user(user)
                 .filledDate(date)
                 .build());
 
@@ -143,37 +209,57 @@ public class StatementsService {
         String universityIlikText = universityRepository.findById(educationRestorationDocDto.getUniversityId()).orElseThrow().getAffixedUniversityI();
         String rectorFioB = "";
         if (educationRestorationDocDto.getRectorO().isEmpty()) {
+            String result = affixService.addAffix(educationRestorationDocDto.getRectorI(), SklonenieType.BARYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             rectorFioB = rectorFioB + educationRestorationDocDto.getRectorF() +
-                    " " + affixService.addAffix(educationRestorationDocDto.getRectorI(), SklonenieType.BARYSH);
+                    " " + result;
         } else {
+            String result = affixService.addAffix(educationRestorationDocDto.getRectorO(), SklonenieType.BARYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             rectorFioB = rectorFioB + educationRestorationDocDto.getRectorF() + " " + educationRestorationDocDto.getRectorI()
-                    + " " + affixService.addAffix(educationRestorationDocDto.getRectorO(), SklonenieType.BARYSH);
+                    + " " + result;
         }
         String course = educationRestorationDocDto.getCourse();
         String studentFioCh = "";
         if (educationRestorationDocDto.getO().isEmpty()) {
+            String result = affixService.addAffix(educationRestorationDocDto.getRectorI(), SklonenieType.CHYGYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             studentFioCh = studentFioCh + educationRestorationDocDto.getF() +
-                    " " + affixService.addAffix(educationRestorationDocDto.getRectorI(), SklonenieType.CHYGYSH);
+                    " " + result;
         } else {
-            studentFioCh = studentFioCh + educationRestorationDocDto.getF() + " " + educationRestorationDocDto.getRectorI()
-                    + " " + affixService.addAffix(educationRestorationDocDto.getO(), SklonenieType.CHYGYSH);
+            String result = affixService.addAffix(educationRestorationDocDto.getO(), SklonenieType.CHYGYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
+            studentFioCh = studentFioCh + educationRestorationDocDto.getF() + " " + educationRestorationDocDto.getI()
+                    + " " + result;
         }
         String faculty = educationRestorationDocDto.getFaculty() + " факультетинин";
         String date = "Толтурулган күнү:" + educationRestorationDocDto.getFilledDate();
         String group = educationRestorationDocDto.getGroup() + " группасынын студенти";
-        String affixedDocType=educationRestorationDocDto.getDocumentType();
+        String affixedDocType = educationRestorationDocDto.getDocumentType();
 
         header = universityIlikText + " ректору " + rectorFioB + " ушул эле ЖОЖдун " + course + "-курсунун " + faculty + " " + group + " " + studentFioCh;
-        mainText = affixedDocType+" жоготуп алганыма байланыштуу мага  калыбына келтирүүнү өтүнөм.";
+        mainText = affixedDocType + " жоготуп алганыма байланыштуу мага  калыбына келтирүүнү өтүнөм.";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getUserByEmail(auth.getName()).orElseThrow();
         return statementRepository.save(Statement.builder()
                 .header(header)
                 .title(title)
                 .mainText(mainText)
+                .user(user)
                 .filledDate(date)
                 .build());
 
     }
-    public Statement getStatementById(int id){
+
+    public Statement getStatementById(int id) {
         return statementRepository.findById(id).orElseThrow();
     }
 
@@ -184,37 +270,69 @@ public class StatementsService {
         String universityIlikText = universityRepository.findById(educationFIOChangedStatementDto.getUniversityId()).orElseThrow().getAffixedUniversityI();
         String rectorFioB = "";
         if (educationFIOChangedStatementDto.getRectorO().isEmpty()) {
+            String result = affixService.addAffix(educationFIOChangedStatementDto.getRectorI(), SklonenieType.BARYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             rectorFioB = rectorFioB + educationFIOChangedStatementDto.getRectorF() +
-                    " " + affixService.addAffix(educationFIOChangedStatementDto.getRectorI(), SklonenieType.BARYSH);
+                    " " + result;
         } else {
+            String result = affixService.addAffix(educationFIOChangedStatementDto.getRectorO(), SklonenieType.BARYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             rectorFioB = rectorFioB + educationFIOChangedStatementDto.getRectorF() + " " + educationFIOChangedStatementDto.getRectorI()
-                    + " " + affixService.addAffix(educationFIOChangedStatementDto.getRectorO(), SklonenieType.BARYSH);
+                    + " " + result;
         }
         String course = educationFIOChangedStatementDto.getCourse();
         String studentFioCh = "";
         if (educationFIOChangedStatementDto.getO().isEmpty()) {
+            String result = affixService.addAffix(educationFIOChangedStatementDto.getRectorI(), SklonenieType.CHYGYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             studentFioCh = studentFioCh + educationFIOChangedStatementDto.getF() +
-                    " " + affixService.addAffix(educationFIOChangedStatementDto.getRectorI(), SklonenieType.CHYGYSH);
+                    " " + result;
         } else {
+            String result = affixService.addAffix(educationFIOChangedStatementDto.getO(), SklonenieType.CHYGYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             studentFioCh = studentFioCh + educationFIOChangedStatementDto.getF() + " " + educationFIOChangedStatementDto.getI()
-                    + " " + affixService.addAffix(educationFIOChangedStatementDto.getO(), SklonenieType.CHYGYSH);
+                    + " " + result;
         }
-        String studentFioT="";
+        String studentFioT = "";
         if (educationFIOChangedStatementDto.getO().isEmpty()) {
+            String result = affixService.addAffix(educationFIOChangedStatementDto.getI(), SklonenieType.TABYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             studentFioT = studentFioT + educationFIOChangedStatementDto.getF() +
-                    " " + affixService.addAffix(educationFIOChangedStatementDto.getI(), SklonenieType.TABYSH);
+                    " " + result;
         } else {
+            String result = affixService.addAffix(educationFIOChangedStatementDto.getO(), SklonenieType.TABYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             studentFioT = studentFioT + educationFIOChangedStatementDto.getF() + " " + educationFIOChangedStatementDto.getI()
-                    + " " + affixService.addAffix(educationFIOChangedStatementDto.getO(), SklonenieType.TABYSH);
+                    + " " + result;
         }
 
-        String newFioB="";
+        String newFioB = "";
         if (educationFIOChangedStatementDto.getNewO().isEmpty()) {
-            newFioB = newFioB+ educationFIOChangedStatementDto.getNewF() +
-                    " " + affixService.addAffix(educationFIOChangedStatementDto.getNewI(), SklonenieType.BARYSH);
+            String result = affixService.addAffix(educationFIOChangedStatementDto.getNewI(), SklonenieType.BARYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
+            newFioB = newFioB + educationFIOChangedStatementDto.getNewF() +
+                    " " + result;
         } else {
+            String result = affixService.addAffix(educationFIOChangedStatementDto.getNewO(), SklonenieType.BARYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             newFioB = newFioB + educationFIOChangedStatementDto.getNewF() + " " + educationFIOChangedStatementDto.getNewI()
-                    + " " + affixService.addAffix(educationFIOChangedStatementDto.getNewO(), SklonenieType.BARYSH);
+                    + " " + result;
         }
 
         String faculty = educationFIOChangedStatementDto.getFaculty() + " факультетинин";
@@ -223,11 +341,14 @@ public class StatementsService {
 
 
         header = universityIlikText + " ректору " + rectorFioB + " ушул эле ЖОЖдун " + course + "-курсунун " + faculty + " " + group + " " + studentFioCh;
-        mainText = "Паспортумду алмаштырганыма байланыштуу буга чейинки аты-жөнүм "+studentFioT+" жаңы аты-жөнүм "+newFioB+" өзгөртүүнү суранам.Паспорттун жаңы көчүрмөсү тиркелди.";
+        mainText = "Паспортумду алмаштырганыма байланыштуу буга чейинки аты-жөнүм " + studentFioT + " жаңы аты-жөнүм " + newFioB + " өзгөртүүнү суранам.Паспорттун жаңы көчүрмөсү тиркелди.";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getUserByEmail(auth.getName()).orElseThrow();
         return statementRepository.save(Statement.builder()
                 .header(header)
                 .title(title)
                 .mainText(mainText)
+                .user(user)
                 .filledDate(date)
                 .build());
 
@@ -240,20 +361,36 @@ public class StatementsService {
         String universityIlikText = universityRepository.findById(educationAcademicLeaveStatementDto.getUniversityId()).orElseThrow().getAffixedUniversityI();
         String rectorFioB = "";
         if (educationAcademicLeaveStatementDto.getRectorO().isEmpty()) {
+            String result = affixService.addAffix(educationAcademicLeaveStatementDto.getRectorI(), SklonenieType.BARYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             rectorFioB = rectorFioB + educationAcademicLeaveStatementDto.getRectorF() +
-                    " " + affixService.addAffix(educationAcademicLeaveStatementDto.getRectorI(), SklonenieType.BARYSH);
+                    " " + result;
         } else {
+            String result = affixService.addAffix(educationAcademicLeaveStatementDto.getRectorO(), SklonenieType.BARYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             rectorFioB = rectorFioB + educationAcademicLeaveStatementDto.getRectorF() + " " + educationAcademicLeaveStatementDto.getRectorI()
-                    + " " + affixService.addAffix(educationAcademicLeaveStatementDto.getRectorO(), SklonenieType.BARYSH);
+                    + " " + result;
         }
-        String course =educationAcademicLeaveStatementDto.getCourse();
+        String course = educationAcademicLeaveStatementDto.getCourse();
         String studentFioCh = "";
         if (educationAcademicLeaveStatementDto.getO().isEmpty()) {
+            String result = affixService.addAffix(educationAcademicLeaveStatementDto.getRectorI(), SklonenieType.CHYGYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             studentFioCh = studentFioCh + educationAcademicLeaveStatementDto.getF() +
-                    " " + affixService.addAffix(educationAcademicLeaveStatementDto.getRectorI(), SklonenieType.CHYGYSH);
+                    " " + result;
         } else {
+            String result = affixService.addAffix(educationAcademicLeaveStatementDto.getO(), SklonenieType.CHYGYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             studentFioCh = studentFioCh + educationAcademicLeaveStatementDto.getF() + " " + educationAcademicLeaveStatementDto.getI()
-                    + " " + affixService.addAffix(educationAcademicLeaveStatementDto.getO(), SklonenieType.CHYGYSH);
+                    + " " + result;
         }
         String faculty = educationAcademicLeaveStatementDto.getFaculty() + " факультетинин";
         String date = "Толтурулган күнү:" + educationAcademicLeaveStatementDto.getFilledDate();
@@ -261,12 +398,15 @@ public class StatementsService {
 
 
         header = universityIlikText + " ректору " + rectorFioB + " ушул эле ЖОЖдун " + course + "-курсунун " + faculty + " " + group + " " + studentFioCh;
-        mainText = educationAcademicLeaveStatementDto.getReason()+" лекцияларга эркин катышууга уруксат берүүңүздү өтүнөм.\n" +
+        mainText = educationAcademicLeaveStatementDto.getReason() + " лекцияларга эркин катышууга уруксат берүүңүздү өтүнөм.\n" +
                 "Керектүү документтердин көчүрмөсү тиркелди.";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getUserByEmail(auth.getName()).orElseThrow();
         return statementRepository.save(Statement.builder()
                 .header(header)
                 .title(title)
                 .mainText(mainText)
+                .user(user)
                 .filledDate(date)
                 .build());
 
@@ -279,37 +419,57 @@ public class StatementsService {
         String universityIlikText = universityRepository.findById(educationTransferFacultyStatement.getUniversityId()).orElseThrow().getAffixedUniversityI();
         String rectorFioB = "";
         if (educationTransferFacultyStatement.getRectorO().isEmpty()) {
+            String result = affixService.addAffix(educationTransferFacultyStatement.getRectorI(), SklonenieType.BARYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             rectorFioB = rectorFioB + educationTransferFacultyStatement.getRectorF() +
-                    " " + affixService.addAffix(educationTransferFacultyStatement.getRectorI(), SklonenieType.BARYSH);
+                    " " + result;
         } else {
+            String result = affixService.addAffix(educationTransferFacultyStatement.getRectorO(), SklonenieType.BARYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             rectorFioB = rectorFioB + educationTransferFacultyStatement.getRectorF() + " " + educationTransferFacultyStatement.getRectorI()
-                    + " " + affixService.addAffix(educationTransferFacultyStatement.getRectorO(), SklonenieType.BARYSH);
+                    + " " + result;
         }
-        String course =educationTransferFacultyStatement.getCourse();
+        String course = educationTransferFacultyStatement.getCourse();
         String studentFioCh = "";
         if (educationTransferFacultyStatement.getO().isEmpty()) {
+            String result = affixService.addAffix(educationTransferFacultyStatement.getRectorI(), SklonenieType.CHYGYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             studentFioCh = studentFioCh + educationTransferFacultyStatement.getF() +
-                    " " + affixService.addAffix(educationTransferFacultyStatement.getRectorI(), SklonenieType.CHYGYSH);
+                    " " +result;
         } else {
+            String result = affixService.addAffix(educationTransferFacultyStatement.getO(), SklonenieType.CHYGYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             studentFioCh = studentFioCh + educationTransferFacultyStatement.getF() + " " + educationTransferFacultyStatement.getI()
-                    + " " + affixService.addAffix(educationTransferFacultyStatement.getO(), SklonenieType.CHYGYSH);
+                    + " " + result;
         }
         String faculty = educationTransferFacultyStatement.getFaculty() + " факультетинин";
-        String date = "Толтурулган күнү:" +educationTransferFacultyStatement.getFilledDate();
+        String date = "Толтурулган күнү:" + educationTransferFacultyStatement.getFilledDate();
         String group = educationTransferFacultyStatement.getGroup() + " группасынын студенти";
 
 
         header = universityIlikText + " ректору " + rectorFioB + " ушул эле ЖОЖдун " + course + "-курсунун " + faculty + " " + group + " " + studentFioCh;
-        mainText = "Мени "+educationTransferFacultyStatement.getTransferFaculty()+" факультетине "+course+" -курска "+
-                educationTransferFacultyStatement.getTransferDepartment()+" багыттамасына которууну өтүнөм.";
+        mainText = "Мени " + educationTransferFacultyStatement.getTransferFaculty() + " факультетине " + course + " -курска " +
+                educationTransferFacultyStatement.getTransferDepartment() + " багыттамасына которууну өтүнөм.";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getUserByEmail(auth.getName()).orElseThrow();
         return statementRepository.save(Statement.builder()
                 .header(header)
                 .title(title)
                 .mainText(mainText)
+                .user(user)
                 .filledDate(date)
                 .build());
 
     }
+
     public Statement createTransferUniversityStatement(EducationFromTransferStatementDto educationFromTransferStatementDto) {
         String title = "Арыз";
         String header = "";
@@ -317,38 +477,64 @@ public class StatementsService {
         String universityIlikText = universityRepository.findById(educationFromTransferStatementDto.getUniversityTo()).orElseThrow().getAffixedUniversityI();
         String rectorFioB = "";
         if (educationFromTransferStatementDto.getRectorO().isEmpty()) {
+            String result = affixService.addAffix(educationFromTransferStatementDto.getRectorI(), SklonenieType.BARYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             rectorFioB = rectorFioB + educationFromTransferStatementDto.getRectorF() +
-                    " " + affixService.addAffix(educationFromTransferStatementDto.getRectorI(), SklonenieType.BARYSH);
+                    " " + result;
         } else {
+            String result =  affixService.addAffix(educationFromTransferStatementDto.getRectorO(), SklonenieType.BARYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             rectorFioB = rectorFioB + educationFromTransferStatementDto.getRectorF() + " " + educationFromTransferStatementDto.getRectorI()
-                    + " " + affixService.addAffix(educationFromTransferStatementDto.getRectorO(), SklonenieType.BARYSH);
+                    + " " + result;
         }
-        String course =educationFromTransferStatementDto.getCourse();
+        String course = educationFromTransferStatementDto.getCourse();
         String studentFioCh = "";
         if (educationFromTransferStatementDto.getO().isEmpty()) {
+            String result = affixService.addAffix(educationFromTransferStatementDto.getRectorI(), SklonenieType.CHYGYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             studentFioCh = studentFioCh + educationFromTransferStatementDto.getF() +
-                    " " + affixService.addAffix(educationFromTransferStatementDto.getRectorI(), SklonenieType.CHYGYSH);
+                    " " + result;
         } else {
+            String result =  affixService.addAffix(educationFromTransferStatementDto.getO(), SklonenieType.CHYGYSH);
+            if (!result.isEmpty()) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
             studentFioCh = studentFioCh + educationFromTransferStatementDto.getF() + " " + educationFromTransferStatementDto.getI()
-                    + " " + affixService.addAffix(educationFromTransferStatementDto.getO(), SklonenieType.CHYGYSH);
+                    + " " + result;
         }
         String faculty = educationFromTransferStatementDto.getFacultyFrom() + " факультетинин";
-        String date = "Толтурулган күнү:" +educationFromTransferStatementDto.getFilledDate();
+        String date = "Толтурулган күнү:" + educationFromTransferStatementDto.getFilledDate();
         String group = educationFromTransferStatementDto.getGroupFrom() + " группасынын студенти";
 
-        String fromUniversity=universityRepository.findById(educationFromTransferStatementDto.getUniversityFrom()).orElseThrow().getAffixedUniversityI();
-       //String toFaculty
+        String fromUniversity = universityRepository.findById(educationFromTransferStatementDto.getUniversityFrom()).orElseThrow().getAffixedUniversityI();
+        //String toFaculty
 
-        header = universityIlikText + " ректору " + rectorFioB + " "+fromUniversity+" " + course + "-курсунун " + faculty + " " + group + " " + studentFioCh;
-        mainText = "Мени "+universityIlikText+" "+educationFromTransferStatementDto.getFacultyTo()+" факультетинин "+
-                educationFromTransferStatementDto.getGroupTo()+" бөлүмүнө которуу тартибинде кабыл алууңузду өтүнөм.";
+        header = universityIlikText + " ректору " + rectorFioB + " " + fromUniversity + " " + course + "-курсунун " + faculty + " " + group + " " + studentFioCh;
+        mainText = "Мени " + universityIlikText + " " + educationFromTransferStatementDto.getFacultyTo() + " факультетинин " +
+                educationFromTransferStatementDto.getGroupTo() + " бөлүмүнө которуу тартибинде кабыл алууңузду өтүнөм.";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getUserByEmail(auth.getName()).orElseThrow();
         return statementRepository.save(Statement.builder()
                 .header(header)
                 .title(title)
                 .mainText(mainText)
+                .user(user)
                 .filledDate(date)
                 .build());
 
+    }
+
+    public List<Statement> getStatementsByUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getUserByEmail(auth.getName()).orElseThrow();
+        List<Statement> statements = statementRepository.getStatementsByUserId(user.getId());
+        return statements;
     }
 
 

@@ -28,6 +28,7 @@
         max-height: 80vh;
         margin: 20px auto;
     }
+
     .pdf-history-title {
         text-align: center;
         font-size: 24px;
@@ -35,6 +36,7 @@
         margin-bottom: 20px;
         color: #333;
     }
+
     .pdf-item {
         display: flex;
         justify-content: space-between;
@@ -45,26 +47,32 @@
         border-radius: 5px;
         transition: background-color 0.3s;
     }
+
     .pdf-item:hover {
         background-color: #e0e0e0;
     }
+
     .pdf-details {
         flex-grow: 1;
         margin-right: 10px;
     }
+
     .pdf-title {
         font-size: 18px;
         font-weight: bold;
         color: #555;
     }
+
     .pdf-date {
         font-size: 14px;
         color: #888;
     }
+
     .pdf-actions {
         display: flex;
         align-items: center;
     }
+
     .pdf-action {
         margin-left: 10px;
         text-decoration: none;
@@ -72,11 +80,14 @@
         font-size: 16px;
         transition: color 0.3s;
     }
+
     .pdf-action:hover {
         color: #0056b3;
     }
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <div
         class="flex h-screen bg-gray-50 dark:bg-gray-900"
         :class="{ 'overflow-hidden': isSideMenuOpen}"
@@ -95,7 +106,7 @@
                 <li class="relative px-6 py-3">
                     <a
                             class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            href="index.html"
+                            href="/dashboard"
                     >
                         <svg
                                 class="w-5 h-5"
@@ -169,7 +180,7 @@
                 <li class="relative px-6 py-3">
                     <a
                             class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            href="index.html"
+                            href="/dashboard"
                     >
                         <svg
                                 class="w-5 h-5"
@@ -343,27 +354,20 @@
         <main class="h-full pb-16 overflow-y-auto">
             <div class="main-div">
                 <div class="pdf-history-title">PDF History</div>
-                <div class="pdf-item">
-                    <div class="pdf-details">
-                        <div class="pdf-title">Document1.pdf</div>
-                        <div class="pdf-date">Uploaded on: 2024-06-01</div>
+
+                <#list statements as statement>
+                    <div class="pdf-item">
+                        <div class="pdf-details">
+                            <div class="pdf-title">Title:${statement.title}</div>
+                            <div class="pdf-date">Uploaded on: ${statement.filledDate}</div>
+                        </div>
+                        <div class="pdf-actions">
+                            <a href="/form/success/${statement.getId()}" class="pdf-action">View</a>
+                        </div>
                     </div>
-                    <div class="pdf-actions">
-                        <a href="#" class="pdf-action">View</a>
-                        <a href="#" class="pdf-action">Download</a>
-                    </div>
-                </div>
-                <div class="pdf-item">
-                    <div class="pdf-details">
-                        <div class="pdf-title">Document2.pdf</div>
-                        <div class="pdf-date">Uploaded on: 2024-06-03</div>
-                    </div>
-                    <div class="pdf-actions">
-                        <a href="#" class="pdf-action">View</a>
-                        <a href="#" class="pdf-action">Download</a>
-                    </div>
-                </div>
-                </div>
+                </#list>
+
+            </div>
         </main>
     </div>
 </div>

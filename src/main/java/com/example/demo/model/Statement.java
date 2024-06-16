@@ -20,4 +20,8 @@ public class Statement {
     private String title;
     private String mainText;
     private String filledDate;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 }

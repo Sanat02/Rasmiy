@@ -1,6 +1,7 @@
 package com.example.demo.controllersMvc;
 
 import com.example.demo.service.DocumentService;
+import com.example.demo.service.StatementsService;
 import com.example.demo.service.SubDocumentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +24,7 @@ import java.util.Locale;
 public class DashBoardController {
     private final DocumentService documentService;
     private final SubDocumentService subDocumentService;
+    private final StatementsService statementsService;
 
     @GetMapping()
     public String getDocuments(Model model) {
@@ -58,6 +60,7 @@ public class DashBoardController {
         String languageCode = currentLocale.getLanguage();
 
         model.addAttribute("lang", languageCode);
+        model.addAttribute("statements",statementsService.getStatementsByUser());
         return "history";
     }
 }

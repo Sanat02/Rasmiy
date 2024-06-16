@@ -28,6 +28,8 @@ public class User implements UserDetails {
     private String phoneNumber;
     private Boolean enabled;
     private String resetPasswordToken;
+    @OneToMany(fetch=FetchType.LAZY,mappedBy = "user")
+    List<Statement> statements;
 
 
     @ManyToOne(fetch = FetchType.EAGER)
