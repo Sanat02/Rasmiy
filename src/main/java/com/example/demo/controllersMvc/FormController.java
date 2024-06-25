@@ -52,8 +52,10 @@ public class FormController {
             return "redirect:/form/education/transferFaculty";
         } else if (id == 9) {
             return "redirect:/form/education/changedFio";
+        } else if (id == 10) {
+            return "redirect:/form/education/restoration";
         } else {
-            return "redirect:/NOTFOUND/"+id;
+            return "redirect:/form/education/transferUniversity";
         }
 
     }
@@ -351,6 +353,12 @@ public class FormController {
         //add id
         Statement statement = statementsService.createTransferUniversityStatement(educationFromTransferStatementDto);
         return "redirect:/form/success/" + statement.getId();
+    }
+
+    @GetMapping ("/education/delete/{id}")
+    public String getFormPageTransferUniversity(@PathVariable int id) {
+        statementsService.delete(id);
+        return "redirect:/dashboard/history";
     }
 
 }

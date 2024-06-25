@@ -408,6 +408,7 @@
                         </div>
                         <div class="pdf-actions">
                             <a href="/form/success/${statement.getId()}" class="pdf-action">View</a>
+                            <a href="/form/education/delete/${statement.getId()}" class="pdf-action"> DELETE</a>
                         </div>
                     </div>
                 </#list>

@@ -538,4 +538,9 @@ public class StatementsService {
     }
 
 
+    public void delete(int id) {
+        statementRepository.deleteById(id);
+    }
+
+
 }
