@@ -398,17 +398,17 @@
         </header>
         <main class="h-full pb-16 overflow-y-auto">
             <div class="main-div">
-                <div class="pdf-history-title">PDF History</div>
+                <div class="pdf-history-title"><@spring.message 'pdfHistory'/></div>
 
                 <#list statements as statement>
                     <div class="pdf-item">
                         <div class="pdf-details">
-                            <div class="pdf-title">Title:${statement.title}</div>
-                            <div class="pdf-date">Uploaded on: ${statement.filledDate}</div>
+                            <div class="pdf-title"><@spring.message 'title'/>:${statement.title}</div>
+                            <div class="pdf-date"><@spring.message 'uploaded'/>: ${statement.filledDate}</div>
                         </div>
                         <div class="pdf-actions">
-                            <a href="/form/success/${statement.getId()}" class="pdf-action">View</a>
-                            <a href="/form/education/delete/${statement.getId()}" class="pdf-action"> DELETE</a>
+                            <a href="/form/success/${statement.getId()}" class="pdf-action"><@spring.message 'view'/></a>
+                            <a href="/form/education/delete/${statement.getId()}" class="pdf-action"> <@spring.message 'delete'/></a>
                         </div>
                     </div>
                 </#list>
